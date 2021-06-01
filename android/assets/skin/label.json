@@ -1,0 +1,45 @@
+{
+"com.badlogic.gdx.graphics.Color": {
+	"RGBA_255_255_255_255": {
+		"r": 1,
+		"g": 1,
+		"b": 1,
+		"a": 1
+	}
+},
+"com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator": {
+	"font1": {
+		"font": "Roboto-Black.ttf",
+		"size": 16,
+		"mono": false,
+		"color": "RGBA_255_255_255_255",
+		"gamma": 1.8,
+		"renderCount": 2,
+		"borderWidth": 0,
+		"borderStraight": false,
+		"borderGamma": 1.8,
+		"shadowOffsetX": 0,
+		"shadowOffsetY": 0,
+		"spaceX": 0,
+		"spaceY": 0,
+		"kerning": true,
+		"flip": false,
+		"genMipMaps": false,
+		"incremental": false,
+		"hinting": "AutoMedium",
+		"minFilter": "Linear",
+		"magFilter": "Nearest",
+		"characters": "0123456789"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+	"default": {
+		"font": "font1"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle": {
+	"default": {
+		"label": "default"
+	}
+}
+}
