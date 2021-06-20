@@ -37,7 +37,7 @@ AddActors add;
     @Override
     public void Death() {
    add.player.Muerto = true;
-   AddResources.ScreenWhite = true;
+  // AddResources.ScreenWhite = true;
     }
 
     @Override

@@ -102,13 +102,15 @@ public abstract class InteractiveTileObjectEnemies extends Actor implements Disp
         shape.setAsBox((bounds.getWidth()/2)/Pixels,(bounds.getHeight()/2)/Pixels);
         fdef.shape = shape;
         fixture = body.createFixture(fdef);
+        fixture.setSensor(true);
         fixture2 = body.createFixture(fdef);
+        fixture.setSensor(true);
         fixture2.setUserData("Enemigo");
         EdgeShape LineaDeMuerte = new EdgeShape();
         LineaDeMuerte.set(new Vector2(bounds.getX(),bounds.getY()),new Vector2(bounds.getX()+bounds.getWidth(),bounds.getY()+bounds.getHeight()));
         fdef.shape = LineaDeMuerte;
         this.iterator = iterator;
-        body.createFixture(fdef).setUserData("spike");
+        //body.createFixture(fdef).setUserData("spike");
         shape.dispose();
         enemigo = new Rectangle();
         ////
@@ -298,7 +300,7 @@ if(iterator2 ==  0)
 
                 if(AddActors.player.Espadazo)
                 {
-                    AddResources.ScreenWhite = true;
+                   // AddResources.ScreenWhite = true;
                     body.setActive(false);
 
                 }

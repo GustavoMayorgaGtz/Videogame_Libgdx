@@ -95,7 +95,11 @@ public class Menu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderer.render();
         addR.addRender(delta);
-    }
+        if(Gdx.input.isTouched(2))
+        {
+            game.setScreen(new Nivel1Progresion(game));
+        }
+                }
 
 
     @Override

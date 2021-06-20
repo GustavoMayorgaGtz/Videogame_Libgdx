@@ -12,6 +12,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.actors.Agarradera;
+import com.mygdx.game.actors.ArbolAzul;
+import com.mygdx.game.actors.ArbolRosa;
 import com.mygdx.game.actors.ArbolVerde;
 import com.mygdx.game.actors.Button1;
 import com.mygdx.game.actors.Button2;
@@ -42,6 +44,8 @@ public class AddActors {
     public static Sierra4 s4;
     public static Sierra5 s5;
     public static ArbolVerde arbolV;
+    public static ArbolRosa arbolR;
+    public static ArbolAzul arbolA;
 
     int index = 0;
 
@@ -106,8 +110,31 @@ public class AddActors {
         Texture EspadazoIzqTexture = game.getManager().get("PersonajeEspadazoIzquierdo.png");
         Texture PersonajeKill = game.getManager().get("PersonajeKill.png");
         Texture Dormir = game.getManager().get("mimido.png");
+        Texture sword = game.getManager().get("EspadazoEffect.png");
         try {
             /////Cosas hechas para los niveles de progresion
+            Texture arbolVerde = game.getManager().get("HojaVerdeCartel.png");
+
+            for (MapObject object : map.getLayers().get(51).getObjects().getByType(RectangleMapObject.class)) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                arbolV= new ArbolVerde(world,arbolVerde,rect.x,rect.y);
+            }
+            stage.addActor(arbolV);
+
+            Texture arbolRosa = game.getManager().get("HojaRosaCartel.png");
+
+            for (MapObject object : map.getLayers().get(52).getObjects().getByType(RectangleMapObject.class)) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                arbolR= new ArbolRosa(world,arbolRosa,rect.x,rect.y);
+            }
+            stage.addActor(arbolR);
+            Texture arbolAzul= game.getManager().get("HojaAzulCartel.png");
+
+            for (MapObject object : map.getLayers().get(53).getObjects().getByType(RectangleMapObject.class)) {
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                arbolA= new ArbolAzul(world,arbolAzul,rect.x,rect.y);
+            }
+            stage.addActor(arbolA);
 
 
             Texture animation = game.getManager().get("Tienda.png");
@@ -121,7 +148,7 @@ public class AddActors {
             }
             for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                player = new Jugador(world, dere, izq, SaltoDere, SaltoIzq, StaticRight, StaticLeft, EspadazoDereTexture, EspadazoIzqTexture, PersonajeKill, Dormir, rect.x, rect.y);//300 , 400
+                player = new Jugador(world, dere, izq, SaltoDere, SaltoIzq, StaticRight, StaticLeft, EspadazoDereTexture, EspadazoIzqTexture, PersonajeKill, Dormir,sword, rect.x, rect.y);//300 , 400
 
             }
             stage.addActor(player);
@@ -348,7 +375,7 @@ public class AddActors {
 
                 stage.addActor(enemy3);
             }
-            Texture Enemy1Left = game.getManager().get("EnemigoRight.png");
+            Texture Enemy1Left = game.getManager().get("EnemigoRight2.png");
             Texture Enemy1Right = game.getManager().get("EnemigoLeft.png");
             Texture Enemy2Left = game.getManager().get("Enemigo2Left.png");
             Texture Enemy2Right = game.getManager().get("Enemigo2Right.png");
@@ -577,13 +604,7 @@ public class AddActors {
                 stage.addActor(cam);
             }
 
-            Texture arbolVerde = game.getManager().get("HojaVerdeCartel.png");
 
-            for (MapObject object : map.getLayers().get(51).getObjects().getByType(RectangleMapObject.class)) {
-                Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                arbolV= new ArbolVerde(world,arbolVerde,rect.x,rect.y);
-            }
-                stage.addActor(arbolV);
 
 
 
@@ -633,12 +654,8 @@ public class AddActors {
         s3.detach();
         s4.detach();
         s5.detach();
+        arbolV.dispose();
+        arbolR.dispose();
 
-    /*    pm1.detach();
-        pm2.detach();
-        pm3.detach();
-        pm4.detach();
-        pm5.detach();
-*/
     }
 }

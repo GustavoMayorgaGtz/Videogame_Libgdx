@@ -3,10 +3,9 @@ package com.mygdx.game.actors;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -16,13 +15,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.tiled.AddResources;
-
-import java.awt.Frame;
 
 import static com.mygdx.game.MyGdxGame.Pixels;
 
-public class ArbolVerde extends Actor implements Disposable{
+public class ArbolRosa extends Actor implements Disposable{
     private Body body;
     private Texture texture;
     private World world;
@@ -30,11 +26,13 @@ public class ArbolVerde extends Actor implements Disposable{
     private BodyDef def;
     public static Rectangle rectangle;
 
-    private BodyDef def1,def2;
-    private Body body1,body2;
-    private Fixture fixture1, fixture2;
+    private BodyDef def1,def2,def3;
+    private Body body1,body2,body3;
+    private Fixture fixture1, fixture2,fixture3;
     /**********Animation************/
     float timeA2;
+    float timeA3;
+
     Animation<TextureRegion> animation1;
     int c1 = 1, r1 = 4;
     float time1;
@@ -44,16 +42,20 @@ public class ArbolVerde extends Actor implements Disposable{
     int c2 = 1, r2 = 4;
     float time2;
     Texture animationTexture2;
+
+
+    Animation<TextureRegion> animation3;
+    int c3 = 1, r3 = 4;
+    float time3;
+    Texture animationTexture3;
     /******************************/
 
-    Texture HojaRosa;
-    Rectangle HojaRosaRec;
-    int iteratorRosa = 0;
-    public ArbolVerde(World world, Texture texture, float x, float y)
+    Texture HojaAzul;
+    Rectangle HojaAzulRec;
+    int iteratorAzul = 0;
+    public ArbolRosa(World world, Texture texture, float x, float y)
     {
         this.world = world;
-
-
         this.texture = texture;
 
         def = new BodyDef();
@@ -65,7 +67,7 @@ public class ArbolVerde extends Actor implements Disposable{
         PolygonShape box = new PolygonShape();
         box.setAsBox(12/Pixels,12/Pixels);
         fixture = body.createFixture(box,20);
-        fixture.setUserData("ArbolVerde");
+        fixture.setUserData("ArbolRosa");
         fixture.setSensor(true);
         box.dispose();
         setSize(24/Pixels,24/Pixels);
@@ -79,7 +81,7 @@ public class ArbolVerde extends Actor implements Disposable{
         body1 = world.createBody(def1);
         body1.setGravityScale(0);
         PolygonShape box1 = new PolygonShape();
-        box1.setAsBox(.5f,2/Pixels);
+        box1.setAsBox(.5f,.5f/Pixels);
         fixture1 = body1.createFixture(box1,0);
         fixture1.setUserData("PisoBase");
         box1.dispose();
@@ -91,13 +93,25 @@ public class ArbolVerde extends Actor implements Disposable{
         body2 = world.createBody(def2);
         body2.setGravityScale(0);
         PolygonShape box2 = new PolygonShape();
-        box2.setAsBox(.5f,2/Pixels);
+        box2.setAsBox(.5f,.5f/Pixels);
         fixture2 = body2.createFixture(box2,0);
         fixture2.setUserData("PisoBase");
         box2.dispose();
 
+        def3 = new BodyDef();
+        def3.position.set((x-10)/Pixels,(y+90)/Pixels);
+        def3.type = BodyDef.BodyType.KinematicBody;
+
+        body3 = world.createBody(def3);
+        body3.setGravityScale(0);
+        PolygonShape box3 = new PolygonShape();
+        box3.setAsBox(.5f,.5f/Pixels);
+        fixture3 = body3.createFixture(box3,0);
+        fixture3.setUserData("PisoBase");
+        box3.dispose();
+
         /******Animation***********/
-        animationTexture1 = new Texture("AnimationArbolV(1).png");
+        animationTexture1 = new Texture("AnimationArbolR(1).png");
         TextureRegion[][]TmpAnimation1 = TextureRegion.split(animationTexture1,animationTexture1.getWidth()/c1,animationTexture1.getHeight()/r1);
         TextureRegion[] FramesAnimation1 = new TextureRegion[c1 * r1];
         int index1 = 0;
@@ -111,7 +125,7 @@ public class ArbolVerde extends Actor implements Disposable{
         animation1 = new Animation<TextureRegion>(0.2f,FramesAnimation1);
         /**************************/
         /******Animation***********/
-        animationTexture2 = new Texture("AnimationArbolV(2).png");
+        animationTexture2 = new Texture("AnimationArbolR(2).png");
         TextureRegion[][]TmpAnimation2 = TextureRegion.split(animationTexture2,animationTexture2.getWidth()/c2,animationTexture2.getHeight()/r2);
         TextureRegion[] FramesAnimation2 = new TextureRegion[c2 * r2];
         int index2 = 0;
@@ -124,54 +138,68 @@ public class ArbolVerde extends Actor implements Disposable{
         }
         animation2 = new Animation<TextureRegion>(0.2f,FramesAnimation2);
         /**************************/
-        HojaRosa = new Texture("HojaRosa.png");
-        HojaRosaRec = new Rectangle();
+        /******Animation***********/
+        animationTexture3 = new Texture("AnimationArbolR(3).png");
+        TextureRegion[][]TmpAnimation3 = TextureRegion.split(animationTexture3,animationTexture3.getWidth()/c3,animationTexture3.getHeight()/r3);
+        TextureRegion[] FramesAnimation3 = new TextureRegion[c3 * r3];
+        int index3 = 0;
+        for(int i = 0; i < r3; i++)
+        {
+            for(int j = 0; j < c3; j++)
+            {
+                FramesAnimation3[index3++]=TmpAnimation3[i][j];
+            }
+        }
+        animation3 = new Animation<TextureRegion>(0.2f,FramesAnimation3);
+        /**************************/
+        HojaAzul = new Texture("HojaAzul.png");
+        HojaAzulRec = new Rectangle();
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         setPosition(body.getPosition().x-(12/Pixels),body.getPosition().y);
-        if(iteratorRosa == 0 &&   MyGdxGame.HojaRosa.getInteger("HojaRosa") < 1){
-            batch.draw(HojaRosa, getX() - 3, getY() + 5, 25 / Pixels, 25 / Pixels);
-            HojaRosaRec.set(getX() - 3, getY() + 5, 25 / Pixels, 25 / Pixels);
-            if (HojaRosaRec.overlaps(Jugador.jugador)) {
-                MyGdxGame.HojaRosa.putInteger("HojaRosa", 1);
-                MyGdxGame.HojaRosa.flush();
-                iteratorRosa++;
+        if(iteratorAzul == 0&&   MyGdxGame.HojaAzul.getInteger("HojaAzul") < 1) {
+            batch.draw(HojaAzul, getX() + 3, getY() + 6, 25 / Pixels, 25 / Pixels);
+            HojaAzulRec.set(getX() + 3, getY() + 6, 25 / Pixels, 25 / Pixels);
+            if (HojaAzulRec.overlaps(Jugador.jugador)) {
+                MyGdxGame.HojaAzul.putInteger("HojaAzul", 1);
+                MyGdxGame.HojaAzul.flush();
+                iteratorAzul++;
             }
 
         }
         batch.draw(texture, getX(),getY(),getWidth(),getHeight());
-        if(MyGdxGame.HojaVerde.getInteger("HojaVerdeA1") != 2) {
+        if(MyGdxGame.HojaRosa.getInteger("HojaRosaA1") != 3) {
             rectangle.set(getX(), getY(), getWidth(), getHeight());
         }
-        if(rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaVerde.getInteger("HojaVerde")==1)
+        if(rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaRosa.getInteger("HojaRosa")==1)
         {
 
             if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
-                MyGdxGame.HojaVerde.putInteger("HojaVerdeA1",1);
-                MyGdxGame.HojaVerde.flush();
-                MyGdxGame.HojaVerde.putInteger("HojaVerde",2);
-                MyGdxGame.HojaVerde.flush();
+                MyGdxGame.HojaRosa.putInteger("HojaRosaA1",1);
+                MyGdxGame.HojaRosa.flush();
+                MyGdxGame.HojaRosa.putInteger("HojaRosa",2);
+                MyGdxGame.HojaRosa.flush();
             }
         }
-        if(rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaVerde.getInteger("HojaVerde")==1||rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaVerde.getInteger("HojaVerde")==2)
+        if(rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaRosa.getInteger("HojaRosa")==1||rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaRosa.getInteger("HojaRosa")==2||rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaRosa.getInteger("HojaRosa")==3)
         {
-            Jugador.istouchTienda2 = true;
+            Jugador.istouchTienda3 = true;
         }else
         {
-            Jugador.istouchTienda2 = false;
+
+            Jugador.istouchTienda3 = false;
         }
 
 /*******animation2**********/
-        Gdx.app.log("Time Game",""+MyGdxGame.HojaVerde.getInteger("HojaVerde"));
+
 if(timeA2 >= 3) {
-    if (rectangle.overlaps(Jugador.jugador) && MyGdxGame.HojaVerde.getInteger("HojaVerdeA1") == 1 && MyGdxGame.Fertilizantes.getInteger("Fertilizantes") >= 9) {
-        Gdx.app.log("Tgoooooooooooooooooooooooooooooooooooooooooooooooooooooooooool",""+timeA2);
+    if (rectangle.overlaps(Jugador.jugador) && MyGdxGame.HojaRosa.getInteger("HojaRosaA1") == 1 && MyGdxGame.Fertilizantes.getInteger("Fertilizantes") >= 9) {
 
         if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
-            MyGdxGame.HojaVerde.putInteger("HojaVerdeA1", 2);
-            MyGdxGame.HojaVerde.flush();
+            MyGdxGame.HojaRosa.putInteger("HojaRosaA1", 2);
+            MyGdxGame.HojaRosa.flush();
             int fertilizantes = MyGdxGame.Fertilizantes.getInteger("Fertilizantes");
             fertilizantes -= 9;
             MyGdxGame.Fertilizantes.putInteger("Fertilizantes", fertilizantes);
@@ -181,14 +209,36 @@ if(timeA2 >= 3) {
     }
 }
         /****************/
+        if(timeA3 >= 3) {
+            if (rectangle.overlaps(Jugador.jugador) && MyGdxGame.HojaRosa.getInteger("HojaRosaA1") == 2 && MyGdxGame.Fertilizantes.getInteger("Fertilizantes") >= 9) {
+
+                if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
+                    MyGdxGame.HojaRosa.putInteger("HojaRosaA1", 3);
+                    MyGdxGame.HojaRosa.flush();
+                    int fertilizantes = MyGdxGame.Fertilizantes.getInteger("Fertilizantes");
+                    fertilizantes -= 9;
+                    MyGdxGame.Fertilizantes.putInteger("Fertilizantes", fertilizantes);
+                    MyGdxGame.Fertilizantes.flush();
+                }
+            }
+        }
+        /****************/
+
+        if(ArbolRosa.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaRosa.getInteger("HojaRosa")==1||ArbolRosa.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaRosa.getInteger("HojaRosa")==2||ArbolRosa.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaRosa.getInteger("HojaRosa")==3)
+        {
+Jugador.istouchTienda3 = true;
+        }else
+        {
+            Jugador.istouchTienda3 = false;
+        }
+
         animaciones(batch);
 
     }
 
     public void animaciones(Batch batch)
     {
-
-        switch (MyGdxGame.HojaVerde.getInteger("HojaVerdeA1"))
+        switch (MyGdxGame.HojaRosa.getInteger("HojaRosaA1"))
         {
             case  1:
             {
@@ -204,9 +254,21 @@ if(timeA2 >= 3) {
             }
             case 2:
             {
-                rectangle.set(0,0,0,0);
+
                 time2 += Gdx.graphics.getDeltaTime();
                 TextureRegion current = animation2.getKeyFrame(time2 ,false);
+                batch.draw(current,getX()-5f,getY(),10,16);
+                if(animation2.isAnimationFinished(time2))
+                {
+                    timeA3 += 1*Gdx.graphics.getDeltaTime();
+                }
+                break;
+            }
+            case 3:
+            {
+                rectangle.set(0,0,0,0);
+                time3 += Gdx.graphics.getDeltaTime();
+                TextureRegion current = animation3.getKeyFrame(time3 ,false);
                 batch.draw(current,getX()-5f,getY(),10,16);
                 break;
             }
@@ -216,7 +278,7 @@ if(timeA2 >= 3) {
 
     @Override
     public void act(float delta) {
-        if(MyGdxGame.HojaVerde.getInteger("HojaVerdeA1") == 2) {
+        if(MyGdxGame.HojaRosa.getInteger("HojaRosaA1") == 2) {
             if (body1.getPosition().y <= Jugador.body.getPosition().y - (8 / Pixels)) {
                 body1.setActive(true);
             } else {
@@ -228,10 +290,29 @@ if(timeA2 >= 3) {
             } else {
                 body2.setActive(false);
             }
-        }else
-        {
+        }else if(MyGdxGame.HojaRosa.getInteger("HojaRosaA1") == 3) {
+            if (body1.getPosition().y <= Jugador.body.getPosition().y - (8 / Pixels)) {
+                body1.setActive(true);
+            } else {
+                body1.setActive(false);
+            }
+
+            if (body2.getPosition().y <= Jugador.body.getPosition().y - (8 / Pixels)) {
+                body2.setActive(true);
+            } else {
+                body2.setActive(false);
+            }
+
+            if (body3.getPosition().y <= Jugador.body.getPosition().y - (8 / Pixels)) {
+                body3.setActive(true);
+            } else {
+                body3.setActive(false);
+            }
+        }else {
             body1.setActive(false);
             body2.setActive(false);
+            body3.setActive(false);
+
         }
     }
 
@@ -239,12 +320,16 @@ if(timeA2 >= 3) {
     public void dispose() {
         animationTexture1.dispose();
         animationTexture2.dispose();
-       body.destroyFixture(fixture);
-       world.destroyBody(body);
+        animationTexture3.dispose();
+        body.destroyFixture(fixture);
+        world.destroyBody(body);
         body1.destroyFixture(fixture1);
         world.destroyBody(body1);
         body2.destroyFixture(fixture2);
         world.destroyBody(body2);
-        HojaRosa.dispose();
+        body3.destroyFixture(fixture3);
+        world.destroyBody(body3);
+        HojaAzul.dispose();
+
     }
 }

@@ -150,7 +150,7 @@ public abstract class InteractiveTileObjectEnemigoVolador extends Actor implemen
 
                 if(AddActors.player.Espadazo)
                 {
-                    AddResources.ScreenWhite = true;
+                  //  AddResources.ScreenWhite = true;
                     body.setActive(false);
 
                 }

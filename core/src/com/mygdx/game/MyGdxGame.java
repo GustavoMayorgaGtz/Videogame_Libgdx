@@ -23,6 +23,8 @@ public class MyGdxGame extends Game{
     public static Preferences Fertilizantes;
     public static Preferences Cinematica;
     public static Preferences HojaVerde;
+    public static Preferences HojaRosa;
+    public static Preferences HojaAzul;
     public static boolean ApagarMusica = false;
 
 	MyGdxGame game;
@@ -36,8 +38,15 @@ public class MyGdxGame extends Game{
 		coins = Gdx.app.getPreferences("Coins");
 		Fertilizantes = Gdx.app.getPreferences("Fertilizantes");
 		HojaVerde = Gdx.app.getPreferences("HojaVerde");
+		HojaRosa = Gdx.app.getPreferences("HojaRosa");
+		HojaAzul = Gdx.app.getPreferences("HojaAzul");
+		HojaAzul = Gdx.app.getPreferences("HojaAzulA1");
+		HojaAzul = Gdx.app.getPreferences("HojaAzulA2");
+		HojaRosa = Gdx.app.getPreferences("HojaRosaA1");
+		HojaRosa = Gdx.app.getPreferences("HojaRosaA2");
 		HojaVerde = Gdx.app.getPreferences("HojaVerdeA1");
 		HojaVerde = Gdx.app.getPreferences("HojaVerdeA2");
+
 		manager = new AssetManager();
 
 Gdx.app.getGraphics().getFramesPerSecond();
@@ -105,6 +114,9 @@ Gdx.app.getGraphics().getFramesPerSecond();
 		manager.load("Tienda.png", Texture.class);
 		manager.load("Fertilizante.png", Texture.class);
 		manager.load("HojaVerdeCartel.png", Texture.class);
+		manager.load("HojaRosaCartel.png", Texture.class);
+		manager.load("HojaAzulCartel.png", Texture.class);
+		manager.load("EspadazoEffect.png",Texture.class);
 
 		manager.finishLoading();
 		this.setScreen(new Intro(this));

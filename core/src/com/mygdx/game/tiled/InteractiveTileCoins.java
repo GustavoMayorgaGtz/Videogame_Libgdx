@@ -92,7 +92,7 @@ public abstract class InteractiveTileCoins extends Actor implements Disposable {
             if(iterator == 0)
             {
 
-                coin.play(0.01f);
+                coin.play(0.08f);
                 MyGdxGame.CoinObjects++;
            //     MyGdxGame.coins.putInteger("Coins",1);
                 iterator++;

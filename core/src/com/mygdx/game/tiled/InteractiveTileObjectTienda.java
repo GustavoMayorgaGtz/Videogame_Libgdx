@@ -175,9 +175,19 @@ if(pan < -.8f)
          volumen = 0;
              sound.setVolume(volumen);
          }
-
+if(Jugador.muerteimpulso)
+{
+    sound.stop();
+    sound.dispose();
+}
 
      }
+
+    @Override
+    protected void finalize() throws Throwable {
+
+
+    }
 
     @Override
     public void dispose() {
@@ -187,6 +197,7 @@ if(pan < -.8f)
         body.destroyFixture(fixture2);
         world.destroyBody(body);
         pop.dispose();
+        sound.dispose();
     }
 
 }

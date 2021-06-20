@@ -158,7 +158,7 @@ TextureRegion current = a.getKeyFrame(time,true);
                  posicionY -= 250 *Gdx.graphics.getDeltaTime();
              }else
              {
-                 game.setScreen(new Nivel1Progresion(game));
+                 game.setScreen(new Menu(game));
                  posicionY = 160;
                  isScreenUp = false;
              }

@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
@@ -30,6 +31,7 @@ import com.mygdx.game.Casa;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Nivel0;
 import com.mygdx.game.Nivel1;
+import com.mygdx.game.Nivel1Progresion;
 import com.mygdx.game.Nivel2;
 import com.mygdx.game.Nivel5;
 import com.mygdx.game.Nivel6;
@@ -61,6 +63,7 @@ public class Jugador extends Actor {
     Texture dere,izq;
     BodyDef def;
     //
+    Animation<TextureRegion> EspadazoEffect;
     Animation<TextureRegion> estaticoDerecha;
     Animation<TextureRegion> estaticoIzquierda;
     Animation<TextureRegion> caminarDerecha;
@@ -78,12 +81,13 @@ public class Jugador extends Actor {
     Texture EspadazoDerecho;
     Texture EspadazoIzquierdo;
     Texture SaltoDere,SaltoIzq,StaticDere1,StaticIzq;
+    Texture Sword;
   boolean dormirtime;
 
 
     Sound espadazoSound;
     Sound sound;
-
+    float gravity;
     int iteratorMusicWalk = 0;
 
     int c = 3, r = 4;//caminar dere
@@ -97,12 +101,14 @@ public class Jugador extends Actor {
     int c9 = 1,r9 = 5;
     int c10 = 2, r10 = 1;
     int c11 = 2, r11 = 1;
+    int c12 = 1, r12 = 6;
     int iterator;
 
     float time;
   public static float time1;
   public static float time3;
     float time4 = 0;
+    float timeEspadazoEffect;
     //
     public static boolean dereD,izqD;//se mandan a la clase parajo
     boolean derecha = true, izquierda = false;
@@ -118,11 +124,13 @@ public class Jugador extends Actor {
     public static boolean SaltoUp = false;
     boolean active1 = false, active2 = false;
     boolean impulsoEspadaDere = false, impulsoEspadaIzq  = false;
-   public static boolean SpeedButton;
-   public static boolean AttackButton;
+    public static boolean SpeedButton;
+    public static boolean AttackButton;
 
-public static boolean istouchTienda;
+    public static boolean istouchTienda;
     public static boolean istouchTienda2;
+    public static boolean istouchTienda3;
+    public static boolean istouchTienda4;
 Texture BotonA;
 
     private Vector2 velocidades;
@@ -173,9 +181,12 @@ public static boolean isTouchPlataformaMov2;
     Texture fondo;
     public static Sprite fondoMenu;
 
+ShaderProgram shader;
+    ShaderProgram shader2;
+
 
     
-    public Jugador(World world,Texture dere,Texture izq,Texture SaltoDere,Texture SaltoIzq,Texture StaticDere, Texture StaticIzq,Texture EspadazoDerecho,Texture EspadazoIzquierdo,Texture Kill,Texture dormir,float x, float y)
+    public Jugador(World world,Texture dere,Texture izq,Texture SaltoDere,Texture SaltoIzq,Texture StaticDere, Texture StaticIzq,Texture EspadazoDerecho,Texture EspadazoIzquierdo,Texture Kill,Texture dormir,Texture sword,float x, float y)
     {
         this.world = world;
         this.dere = dere;
@@ -188,6 +199,10 @@ public static boolean isTouchPlataformaMov2;
         this.EspadazoIzquierdo = EspadazoIzquierdo;
         this.Kill = Kill;
         this.dormir = dormir;
+        this.Sword = sword;
+        shader = new ShaderProgram(Gdx.files.internal("Shaders/vertex.glsl"),Gdx.files.internal("Shaders/fragment.glsl"));
+        shader2 = new ShaderProgram(Gdx.files.internal("Shaders/vertex2.glsl"),Gdx.files.internal("Shaders/fragment2.glsl"));
+
         negro = new Texture("White.png");
 
         def = new BodyDef();
@@ -196,6 +211,7 @@ public static boolean isTouchPlataformaMov2;
         def.type = BodyDef.BodyType.DynamicBody;
 
         body = world.createBody(def);
+        gravity = body.getGravityScale();
         PolygonShape box = new PolygonShape();
         box.setAsBox(3/Pixels,8/Pixels);//3,8
 
@@ -216,6 +232,18 @@ public static boolean isTouchPlataformaMov2;
         particulaSalto2 = new ParticleEffect();
         particulaSalto2.load(Gdx.files.internal("particles/Salto.p"),Gdx.files.internal("images"));
         particulaSalto2.scaleEffect(.2f/Pixels);
+        ////////////////Espadazo Effect////////////////
+        TextureRegion[][] staticSword = TextureRegion.split(Sword,Sword.getWidth()/c12,Sword.getHeight()/r12);
+        TextureRegion[] tmpSword = new TextureRegion[c12*r12];
+        int index = 0;
+        for(int i=0; i < r12; i++)
+        {
+            for(int j =0; j < c12; j++)
+            {
+                tmpSword[index++] = staticSword[i][j];
+            }
+        }
+        EspadazoEffect = new Animation<TextureRegion>(0.1f,tmpSword);
 
         ////////////////Estatico Derecha////////////////
         TextureRegion[][] StaticDerecha = TextureRegion.split(StaticDere,StaticDere.getWidth()/c3,StaticDere.getHeight()/r3);
@@ -242,12 +270,12 @@ public static boolean isTouchPlataformaMov2;
         /////////////////Caminar derecha/////////////////
         TextureRegion[][] framesDerecha = TextureRegion.split(dere,dere.getWidth()/c,dere.getHeight()/r);
         TextureRegion[] tmpDerecha = new TextureRegion[c * r];
-        int index = 0;
+        int index11 = 0;
         for(int i = 0; i < r; i++)
         {
             for(int j = 0; j < c; j++)
             {
-                tmpDerecha[index++] = framesDerecha[i][j];
+                tmpDerecha[index11++] = framesDerecha[i][j];
             }
         }
 
@@ -386,7 +414,7 @@ BotonA = new Texture("A.png");
         TextureRegion izq = caminarIzq.getKeyFrame(time,true);
         TextureRegion SaltoDere = SaltoDerecha.getKeyFrame(time2,false);
         TextureRegion SaltoIzq = SaltoIzquierda.getKeyFrame(time2,false);
-        TextureRegion EspadaDerecha = EspadazoDereAnimation.getKeyFrame(time4,true);
+
         TextureRegion EspadaIzquierda= EspadazoIzqAnimation.getKeyFrame(time4,true);
         TextureRegion Dormir = mimidoAnimation.getKeyFrame(time,true);
         TextureRegion EmpujarDere = EmpujarDerecha.getKeyFrame(time,true);
@@ -405,9 +433,35 @@ BotonA = new Texture("A.png");
         }
 
 ////////////////////////////Dibujar///////////////////////////////////
-
+        if(Espadazo) {
+            batch.setShader(shader);
+        }else
+        {
+            batch.setShader(shader2);
+        }
         if(MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
             if (!Muerto) {
+
+
+                if(istouchTienda)
+                {
+                    batch.draw(BotonA, getX()+.5f, getY()+1, getWidth()*.5f, getHeight()*.5f);
+                }
+                /******************************************************/
+                if(istouchTienda2)
+                {
+                    batch.draw(BotonA, getX()+.5f, getY()+1, getWidth()*.5f, getHeight()*.5f);
+                }
+                if(istouchTienda3)
+                {
+                    batch.draw(BotonA, getX()+.5f, getY()+1, getWidth()*.5f, getHeight()*.5f);
+                }
+                /******************************************************/
+                if(istouchTienda4)
+                {
+                    batch.draw(BotonA, getX()+.5f, getY()+1, getWidth()*.5f, getHeight()*.5f);
+                }
+
 
                 if (!Espadazo) { /***/
                     if (saltar) {
@@ -490,22 +544,9 @@ BotonA = new Texture("A.png");
                                 }
                             }
                         }
-                        if(istouchTienda)
-                        {
-                            batch.draw(BotonA, getX()+.5f, getY()+1, getWidth()*.5f, getHeight()*.5f);
-                        }else
-                        {
-
-                        }
-                        if(istouchTienda2)
-                        {
-                            batch.draw(BotonA, getX()+.5f, getY()+1, getWidth()*.5f, getHeight()*.5f);
-                        }else
-                        {
-
-                        }
 
                     } else {
+
                         if (!saltar) {
                             if (derecha) {
                                 time2 += Gdx.graphics.getDeltaTime();
@@ -543,11 +584,17 @@ BotonA = new Texture("A.png");
                             espadazoSound.play(0.5f);
                         }
                         iterator++;
+                        TextureRegion EspadaDerecha = EspadazoDereAnimation.getKeyFrame(time4,true);
+                        TextureRegion current = EspadazoEffect.getKeyFrame(timeEspadazoEffect,false);
+                        timeEspadazoEffect += Gdx.graphics.getDeltaTime();
                         batch.draw(EspadaDerecha, getX(), getY(), getWidth(), getHeight());
-                        if (EspadazoDereAnimation.isAnimationFinished(time4)) {
+                        batch.draw(current, getX()-(60/Pixels), getY(), getWidth()+(64/Pixels), getHeight());
+
+                        if (EspadazoDereAnimation.isAnimationFinished(time4)&&EspadazoEffect.isAnimationFinished(timeEspadazoEffect)) {
 
                             iterator = 0;
                             time4 = 0;
+                            timeEspadazoEffect = 0;
                             impulsoEspadaDere = false;
                             Espadazo = false;
 
@@ -594,6 +641,7 @@ BotonA = new Texture("A.png");
                 MyGdxGame.Cinematica.flush();
             }
         }
+
 //////////////////////////////////////////Acabar de dibujar////////////////////////////////////
 
         if(tempoSalto != 0) {
@@ -664,18 +712,22 @@ if(!Muerto) {
 
     particulaSalto.update(delta);
     particulaSalto2.update(delta);
-    if (saltar) {
-        if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || SaltoUp) {
-            particulaSalto.setPosition(getX() + .4f, getY() + .08f);
-            activarParticulas = true;
+
+
+    if(!istouchTienda2&&!istouchTienda) {
+        if (saltar) {
+            if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || SaltoUp) {
+                particulaSalto.setPosition(getX() + .4f, getY() + .08f);
+                activarParticulas = true;
+            }
         }
-    }
-    if (!saltar) {
-        if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || SaltoUp) {
-            if(timeJump<.65f) {
-                if (jumpDouble == 1) {
-                    particulaSalto2.setPosition(getX() + .4f, getY() + .08f);
-                    activarParticulas2 = true;
+        if (!saltar) {
+            if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || SaltoUp) {
+                if (timeJump < .65f) {
+                    if (jumpDouble == 1) {
+                        particulaSalto2.setPosition(getX() + .4f, getY() + .08f);
+                        activarParticulas2 = true;
+                    }
                 }
             }
         }
@@ -728,30 +780,32 @@ if(!Muerto) {
 
             } else {
 if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
-    body.setLinearVelocity(0f, velocidadY);
+        body.setLinearVelocity(0f, velocidadY);
 }
             }
-            if (saltar)
-                if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP) || Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || SaltoUp) {// && body.getLinearVelocity().y == 0
-                    Vector2 position = body.getPosition();
-                    body.applyLinearImpulse(0, .80f/*65*/, position.x, position.y, true);
-                    jumpDouble = 0;
-                    timeJump = 0;
-                    saltar = false;
-                }
-            if (!saltar) {
-                timeJump += 1*Gdx.graphics.getDeltaTime();
-                if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP) || Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || SaltoUp) {// && body.getLinearVelocity().y == 0
-                    Vector2 position = body.getPosition();
-                    if (timeJump> .5f) {
-                        if (jumpDouble == 0) {
-                            Gdx.app.log("JumpDouble", "Salto Aire");
-                            body.applyLinearImpulse(0, 5.80f/*65*/, position.x, position.y, true);
-                            jumpDouble++;
-                            Gdx.app.log("JumpDouble", " " + jumpDouble);
-                        }
+            if(!istouchTienda2&&!istouchTienda&&!istouchTienda3&&!istouchTienda4) {
+                if (saltar)
+                    if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP) || Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || SaltoUp) {// && body.getLinearVelocity().y == 0
+                        Vector2 position = body.getPosition();
+                        body.applyLinearImpulse(0, .80f/*65*/, position.x, position.y, true);
+                        jumpDouble = 0;
+                        timeJump = 0;
+                        saltar = false;
                     }
+                if (!saltar) {
+                    timeJump += 1 * Gdx.graphics.getDeltaTime();
+                    if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP) || Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || SaltoUp) {// && body.getLinearVelocity().y == 0
+                        Vector2 position = body.getPosition();
+                        if (timeJump > .5f) {
+                            if (jumpDouble == 0) {
+                                Gdx.app.log("JumpDouble", "Salto Aire");
+                                body.applyLinearImpulse(0, 5.80f/*65*/, position.x, position.y, true);
+                                jumpDouble++;
+                                Gdx.app.log("JumpDouble", " " + jumpDouble);
+                            }
+                        }
 
+                    }
                 }
             }
             ////////////////Impulso//////////
@@ -765,7 +819,7 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
                     izquierda = false;
                     impuls = true;
                     speedactive = true;
-                    body.setLinearVelocity(body.getLinearVelocity().x+1, body.getLinearVelocity().y);
+                    body.setLinearVelocity(body.getLinearVelocity().x+3, body.getLinearVelocity().y);
 
                 } else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || leftActive && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || leftActive && SpeedButton) {
 
@@ -773,7 +827,7 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
                     izquierda = true;
                     impuls = true;
                     speedactive = true;
-                    body.setLinearVelocity(body.getLinearVelocity().x-1, body.getLinearVelocity().y);
+                    body.setLinearVelocity(body.getLinearVelocity().x-3, body.getLinearVelocity().y);
 
                 }
                 else
@@ -858,24 +912,25 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
         /////////////////////////////////////////
         /////////////////////////////////////////
     }
-    if (!Espadazo) {
+    if (!Espadazo&& time1 >= 3) {
         if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_B) || AttackButton) {
 
             if (izquierda) {
                 if (saltar) {
-                    body.applyForceToCenter(-15, 0, true);
+                    body.applyForceToCenter(-25, 0, true);//-15
                 } else {
-                    body.applyForceToCenter(-10, 0, true);
+                    body.applyForceToCenter(-20, 0, true);//-10
                 }
 
             } else if (derecha) {
                 if (saltar) {
-                    body.applyForceToCenter(15, 0, true);
+                    body.applyForceToCenter(25, 0, true);//15
                 } else {
-                    body.applyForceToCenter(10f, 0, true);
+                    body.applyForceToCenter(20f, 0, true);//10
                 }
             }
             Espadazo = true;
+
         }
     }
     ///////////ESTABLECE VELOCIDAD Y MAXIMA
@@ -888,26 +943,35 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
         Gdx.input.vibrate(100);
         body.setLinearVelocity(velocidades.x, maxVelocidadY*-1);
     }
-    if(speedactive)
-    {
-        Gdx.app.log("Velocidad",""+Jugador.body.getLinearVelocity().x);
-        if(body.getLinearVelocity().x > 3.8f)
-        {
-            body.setLinearVelocity(3.8f,body.getLinearVelocity().y);
-        }
-        if(body.getLinearVelocity().x < -3.8f)
-        {
-            body.setLinearVelocity(-3.8f,body.getLinearVelocity().y);
+
+    if(!Espadazo) {
+        body.setGravityScale(gravity);
+        if (speedactive) {
+           // Gdx.app.log("Velocidad", "" + Jugador.body.getLinearVelocity().x);
+            if (body.getLinearVelocity().x > 5f) {//3.8
+                body.setLinearVelocity(5f, body.getLinearVelocity().y);
+            }
+            if (body.getLinearVelocity().x < -5f) {
+                body.setLinearVelocity(-5f, body.getLinearVelocity().y);
+            }
+        } else {
+            if (body.getLinearVelocity().x > 2.8f) {
+                body.setLinearVelocity(2.8f, body.getLinearVelocity().y);
+            }
+            if (body.getLinearVelocity().x < -2.8f) {
+                body.setLinearVelocity(-2.8f, body.getLinearVelocity().y);
+            }
         }
     }else
     {
-        if(body.getLinearVelocity().x > 2.8f)
+        body.setGravityScale(gravity-.5f);
+        if(impulsoEspadaDere)
         {
-            body.setLinearVelocity(2.8f,body.getLinearVelocity().y);
+
         }
-        if(body.getLinearVelocity().x < -2.8f)
+        if(impulsoEspadaIzq)
         {
-            body.setLinearVelocity(-2.8f,body.getLinearVelocity().y);
+
         }
     }
 
@@ -975,6 +1039,10 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
                 case 5: {
                     add.game.setScreen(new Nivel6(add.game));
                     break;
+                }
+                default:
+                {
+                    add.game.setScreen(new Nivel1Progresion(add.game));
                 }
             }
 
@@ -1065,6 +1133,8 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
         StaticIzq.dispose();
         body.destroyFixture(fixture);
         world.destroyBody(body);
+        shader.dispose();
+        shader2.dispose();
     }
 
 

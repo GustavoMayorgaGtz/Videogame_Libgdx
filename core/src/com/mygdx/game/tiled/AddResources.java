@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -54,7 +55,7 @@ public class AddResources {
     float timethis = 0;
     int itcam = 0;
     public static Texture white;
-    Texture moneda;
+    Texture moneda,monedas;
     MyGdxGame game;
 
     /*****Controles*****/
@@ -107,13 +108,20 @@ public class AddResources {
     Rectangle HojaVerdeRec;
     Sprite HojaV;
     float alphaHV = 1;
+    int iteratorBuyHV;
+    Texture HojaRosa;
+    Rectangle HojaRosaRec;
+    Sprite HojaR;
+    float alphaHR = 1;
+    int iteratorBuyHR;
 
     Sprite blancoS;
     Texture tcero,tuno,tdos,ttres,tcuatro,tcinco,tseis,tsiete,tocho,tnueve;
     int iteratorBuy;
     Texture x;
     Rectangle salir;
-    int iteratorBuyHV;
+    ShaderProgram shader;
+
     public AddResources()
     {
         rectangulosY = new ArrayList<Rectangle>();
@@ -138,6 +146,7 @@ public class AddResources {
         Blanco = new Texture("Blanco.png");
         blancoS = new Sprite(Blanco);
         moneda = new Texture("MonedaR.png");
+        monedas = new Texture("Monedas.png");
         whiteSprite = new Sprite(Blanco);
         puntero = new Rectangle();
         puntero2 = new Rectangle();
@@ -196,7 +205,12 @@ public class AddResources {
         HojaVerde = new Texture("HojaVerde.png");
         HojaVerdeRec = new Rectangle();
         HojaV = new Sprite(HojaVerde);
+        HojaRosa = new Texture("HojaRosa.png");
+        HojaRosaRec = new Rectangle();
+        HojaR = new Sprite(HojaRosa);
 
+
+        shader = new ShaderProgram(Gdx.files.internal("Shaders/vertex.glsl"),Gdx.files.internal("Shaders/fragment.glsl"));
     }
     public void addRender(float delta)
     {
@@ -324,8 +338,9 @@ if(!Jugador.isMenu) {
         ray.update();
         ray.setCombinedMatrix(cam.combined);
         ray.render();
-        //render.render(world,cam.combined);
+     //   render.render(world,cam.combined);
         batch.begin();
+        //batch.setShader(shader);
 if(add.player.Muerto){
     random = (int)Math.random()*50+1;
     if(iterator) {
@@ -351,6 +366,11 @@ if(add.player.Muerto){
         if(!Jugador.isMenu) {
             if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
                 if (!add.player.Muerto) {
+                    if(add.player.Espadazo)
+                    {
+                        add.player.time1 = 0;
+                                widthEntero = 0;
+                    }
                     if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT) && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || add.player.rightActive && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || add.player.rightActive && add.player.SpeedButton) {
                         width = (add.player.time3 * 50) / 1;
                         widthEntero = widthEntero - (width * Gdx.graphics.getDeltaTime() * 2);
@@ -374,6 +394,10 @@ if(add.player.Muerto){
             if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
 
                 switch (MyGdxGame.CoinObjects) {
+                    case 0:
+                    {
+                        break;
+                    }
                     case 1: {
                         batch.draw(moneda, cam.position.x - 2f, cam.position.y + 1.7f, 15 / Pixels, 15 / Pixels);
                         break;
@@ -388,8 +412,11 @@ if(add.player.Muerto){
                         batch.draw(moneda, cam.position.x - 2, cam.position.y + 1.7f, 15 / Pixels, 15 / Pixels);
                         batch.draw(moneda, cam.position.x - 2f + (15 / Pixels), cam.position.y + 1.7f, 15 / Pixels, 15 / Pixels);
                         batch.draw(moneda, cam.position.x - 2f + (30 / Pixels), cam.position.y + 1.7f, 15 / Pixels, 15 / Pixels);
-
                         break;
+                    }
+                    default:
+                    {
+                        batch.draw(monedas, cam.position.x - 2f + (15 / Pixels), cam.position.y + 1.7f, 15 / Pixels, 15 / Pixels);
                     }
                 }
                 DereRect.set(cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
@@ -685,8 +712,187 @@ if(add.player.Muerto){
             {
 
             }
+        }else
+        {
+            UI(3.8f);
         }
+
+
         batch.end();
+    }
+
+    public void UI(float X)
+    {
+        batch.draw(fertilizante,cam.position.x - 3.8f+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+        String[]recoleccion;
+        if(MyGdxGame.Fertilizantes.getInteger("Fertilizantes") > 99)
+        {
+            MyGdxGame.Fertilizantes.putInteger("Fertilizantes",99);
+            MyGdxGame.Fertilizantes.flush();
+        }
+        String datos = ""+MyGdxGame.Fertilizantes.getInteger("Fertilizantes");
+        recoleccion = datos.split("");
+
+
+        if(recoleccion[0]== null) {
+            recoleccion[0] = "0";
+        }
+
+        switch (recoleccion[0]) {
+            case "0": {
+                batch.draw(tcero, (cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                break;
+            }
+            case "1": {
+                batch.draw(tuno, (cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                break;
+            }
+            case "2": {
+                batch.draw(tdos, (cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                break;
+            }
+            case "3": {
+                batch.draw(ttres, (cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                break;
+            }
+            case "4": {
+                batch.draw(tcuatro, (cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                break;
+            }
+            case "5": {
+                batch.draw(tcinco, (cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                break;
+            }
+            case "6": {
+                batch.draw(tseis, (cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                break;
+            }
+            case "7": {
+                batch.draw(tsiete, (cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                break;
+            }
+            case "8": {
+                batch.draw(tocho, (cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                break;
+            }
+            case "9": {
+                batch.draw(tnueve, (cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                break;
+            }
+        }
+        try { switch(recoleccion[1])
+        {
+            case "0":
+            {
+                batch.draw(tcero,(cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "1":
+            {
+                batch.draw(tuno,(cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "2":
+            {
+                batch.draw(tdos,(cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "3":
+            {
+                batch.draw(ttres,(cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "4":
+            {
+                batch.draw(tcuatro,(cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "5":
+            {
+                batch.draw(tcinco,(cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "6":
+            {
+                batch.draw(tseis,(cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "7":
+            {
+                batch.draw(tsiete,(cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "8":
+            {
+                batch.draw(tocho,(cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "9":
+            {
+                batch.draw(tnueve,(cam.position.x - 3.8f)+(15/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+        }}catch(Exception e)
+        {
+
+        }
+        try { switch(recoleccion[2])
+        {
+            case "0":
+            {
+                batch.draw(tcero,(cam.position.x - 3.8f)+(30/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "1":
+            {
+                batch.draw(tuno,(cam.position.x - 3.8f)+(30/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "2":
+            {
+                batch.draw(tdos,(cam.position.x - 3.8f)+(30/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "3":
+            {
+                batch.draw(ttres,(cam.position.x - 3.8f)+(30/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "4":
+            {
+                batch.draw(tcuatro,(cam.position.x - 3.8f)+(30/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "5":
+            {
+                batch.draw(tcinco,(cam.position.x - 3.8f)+(30/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "6":
+            {
+                batch.draw(tseis,(cam.position.x - 3.8f)+(30/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "7":
+            {
+                batch.draw(tsiete,(cam.position.x - 3.8f)+(30/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "8":
+            {
+                batch.draw(tocho,(cam.position.x - 3.8f)+(30/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+            case "9":
+            {
+                batch.draw(tnueve,(cam.position.x - 3.8f)+(30/Pixels)+X, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+                break;
+            }
+        }
+        }catch(Exception e)
+        {
+
+        }
     }
 
     public void CantFertilizante()
@@ -898,7 +1104,7 @@ if(add.player.Muerto){
 
         if (Hoja  == 0) {
             alphaHV = 1;
-        }else if(Hoja == 1)
+        }else if(Hoja == 1 || Hoja == 2)
         {
             alphaHV = 0.5f;
         }
@@ -910,7 +1116,7 @@ if(add.player.Muerto){
 
                 if (monedasActuales == 99&& Hoja < 1) {
 
-                    Hoja++;
+                    Hoja  ++;
                     MyGdxGame.HojaVerde.putInteger("HojaVerde", Hoja);
                     MyGdxGame.HojaVerde.flush();
                     monedasActuales -= 99;
@@ -924,10 +1130,10 @@ if(add.player.Muerto){
         }
 
         String[] recoleccion;
-        if (MyGdxGame.HojaVerde.getInteger("HojaVerde") > 1) {
+      /*  if (MyGdxGame.HojaVerde.getInteger("HojaVerde") > 1) {
             MyGdxGame.HojaVerde.putInteger("HojaVerde", 1);
             MyGdxGame.HojaVerde.flush();
-        }
+        }*/
         String datos = "" + MyGdxGame.HojaVerde.getInteger("HojaVerde");
         recoleccion = datos.split("");
 
@@ -960,6 +1166,8 @@ if(add.player.Muerto){
         }catch(Exception e){}
 
     }
+
+   
     public void detachResources()
     {
         batch.dispose();
@@ -972,6 +1180,7 @@ if(add.player.Muerto){
         contorno.dispose();
         Blanco.dispose();
         moneda.dispose();
+        monedas.dispose();
         punterot.dispose();
         BtnDere.dispose();
         BtnDereHover.dispose();
@@ -989,6 +1198,7 @@ if(add.player.Muerto){
         PantallaSend.dispose();
         fertilizante.dispose();
         HojaVerde.dispose();
+        HojaRosa.dispose();
         tcero.dispose();
         tuno.dispose();
         tdos.dispose();
@@ -999,63 +1209,54 @@ if(add.player.Muerto){
         tsiete.dispose();
         tocho.dispose();
         tnueve.dispose();
+        shader.dispose();
     }
     public void over() {
-        Gdx.input.setInputProcessor(stage);
-        if(puntero.overlaps(DereRect)|| puntero2.overlaps(DereRect))
-        {
-            AddActors.player.setRightActive(true);
-            dere = true;
-        }else
-        {
+        try {
+            Gdx.input.setInputProcessor(stage);
+            if (puntero.overlaps(DereRect) || puntero2.overlaps(DereRect)) {
+                AddActors.player.setRightActive(true);
+                dere = true;
+            } else {
 
-            AddActors.player.setRightActive(false);
-            dere = false;
-        }
-        if(puntero.overlaps(IzqRect)|| puntero2.overlaps(IzqRect))
-        {
-            AddActors.player.setLeftActive(true);
-            izq = true;
-        }else
-        {
-            AddActors.player.setLeftActive(false);
-            izq = false;
-        }
-        if(puntero.overlaps(SaltoRect)|| puntero2.overlaps(SaltoRect))
-        {
-             AddActors.player.setSaltoUp(true);
-             salto = true;
-        }else
-        {
-            AddActors.player.setSaltoUp(false);
-            salto = false;
-        }
-        if(puntero.overlaps(AttackRect)|| puntero2.overlaps(AttackRect))
-        {
-            AddActors.player.setAttackButton(true);
-            attack = true;
-        }else
-        {
-            AddActors.player.setAttackButton(false);
-            attack = false;
-        }
-        if(puntero.overlaps(SpeedRect)|| puntero2.overlaps(SpeedRect))
-        {
-            AddActors.player.setSpeedButton(true);
-            speed = true;
-        }else
-        {
-            AddActors.player.setSpeedButton(false);
-            speed = false;
-        }
-        if(puntero.overlaps(PauseRect)|| puntero2.overlaps(PauseRect))
-        {
-            // game.setScreen(new Menu(game));
-            pause = true;
-        }else
-        {
-            pause = false;
-        }
+                AddActors.player.setRightActive(false);
+                dere = false;
+            }
+            if (puntero.overlaps(IzqRect) || puntero2.overlaps(IzqRect)) {
+                AddActors.player.setLeftActive(true);
+                izq = true;
+            } else {
+                AddActors.player.setLeftActive(false);
+                izq = false;
+            }
+            if (puntero.overlaps(SaltoRect) || puntero2.overlaps(SaltoRect)) {
+                AddActors.player.setSaltoUp(true);
+                salto = true;
+            } else {
+                AddActors.player.setSaltoUp(false);
+                salto = false;
+            }
+            if (puntero.overlaps(AttackRect) || puntero2.overlaps(AttackRect)) {
+                AddActors.player.setAttackButton(true);
+                attack = true;
+            } else {
+                AddActors.player.setAttackButton(false);
+                attack = false;
+            }
+            if (puntero.overlaps(SpeedRect) || puntero2.overlaps(SpeedRect)) {
+                AddActors.player.setSpeedButton(true);
+                speed = true;
+            } else {
+                AddActors.player.setSpeedButton(false);
+                speed = false;
+            }
+            if (puntero.overlaps(PauseRect) || puntero2.overlaps(PauseRect)) {
+                // game.setScreen(new Menu(game));
+                pause = true;
+            } else {
+                pause = false;
+            }
+        }catch(Exception e){}
     }
 
 
