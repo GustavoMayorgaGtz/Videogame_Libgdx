@@ -84,7 +84,7 @@
 
          Gdx.gl.glClearColor(2/255f,13/255f,31/255f,1);//2/255f,13/255f,31/255f
          Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+         MyGdxGame.isNivelProgress1 = true;
          batch.begin();
 
          if(Jugador.Espadazo) {

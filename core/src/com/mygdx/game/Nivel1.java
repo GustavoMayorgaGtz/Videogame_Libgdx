@@ -84,6 +84,7 @@
          Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
          Gdx.gl.glBlendFunc(GL30.GL_SRC_ALPHA, GL30.GL_ONE_MINUS_SRC_ALPHA);
          batch.begin();
+         MyGdxGame.isNivelProgress1 = false;
          TextureRegion fondoA = fondoAnimation.getKeyFrame(time,true);
 
 

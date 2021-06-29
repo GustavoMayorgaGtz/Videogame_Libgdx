@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="400" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="56" nextobjectid="502">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="400" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="62" nextobjectid="541">
  <tileset firstgid="1" name="PisoGreenOficial" tilewidth="16" tileheight="16" tilecount="144" columns="4">
   <image source="PisoGreen/PisoGreenOficial.png" width="64" height="576"/>
  </tileset>
@@ -479,6 +479,16 @@
   <object id="448" x="765.5" y="752" width="18.75" height="19.25"/>
   <object id="449" x="489.875" y="829.875" width="20.25" height="20.75"/>
   <object id="450" x="599.375" y="1007.38" width="23.75" height="23.25"/>
+  <object id="526" x="487.333" y="864" width="23.3333" height="22"/>
+  <object id="527" x="488.333" y="890" width="23.3333" height="22"/>
+  <object id="528" x="489.333" y="921" width="23.3333" height="22"/>
+  <object id="529" x="495.333" y="737" width="23.3333" height="22"/>
+  <object id="530" x="533.333" y="737" width="23.3333" height="22"/>
+  <object id="531" x="570.333" y="737" width="23.3333" height="22"/>
+  <object id="532" x="605.333" y="739" width="23.3333" height="22"/>
+  <object id="533" x="596.333" y="914" width="23.3333" height="22"/>
+  <object id="534" x="596.333" y="943" width="23.3333" height="22"/>
+  <object id="535" x="598.333" y="974" width="23.3333" height="22"/>
  </objectgroup>
  <objectgroup id="39" name="Button2" visible="0">
   <object id="451" x="247" y="798">
@@ -533,6 +543,19 @@
  </objectgroup>
  <objectgroup id="54" name="CamaraNoY"/>
  <objectgroup id="55" name="BloquesRompibles"/>
+ <objectgroup id="56" name="tienda"/>
+ <objectgroup id="57" name="camaraNoX">
+  <object id="536" x="218.667" y="698.667" width="87.3333" height="140"/>
+  <object id="537" x="546.667" y="1120.67" width="104.667" height="93.3333"/>
+  <object id="538" x="-42" y="1338" width="20" height="0.666667"/>
+ </objectgroup>
+ <objectgroup id="58" name="AV"/>
+ <objectgroup id="59" name="AR"/>
+ <objectgroup id="60" name="AA"/>
+ <objectgroup id="61" name="CamaraX">
+  <object id="539" x="306.667" y="714.667" width="479.333" height="419.333"/>
+  <object id="540" x="425.333" y="1133.33" width="118.667" height="67.3333"/>
+ </objectgroup>
  <layer id="1" name="Capa de patrones 1" width="400" height="80">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

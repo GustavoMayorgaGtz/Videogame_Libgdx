@@ -6,12 +6,14 @@
  import com.badlogic.gdx.graphics.OrthographicCamera;
  import com.badlogic.gdx.graphics.Texture;
  import com.badlogic.gdx.graphics.g2d.Animation;
+ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
  import com.badlogic.gdx.graphics.g2d.Sprite;
  import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  import com.badlogic.gdx.graphics.g2d.TextureRegion;
  import com.badlogic.gdx.maps.tiled.TiledMap;
  import com.badlogic.gdx.maps.tiled.TmxMapLoader;
  import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+ import com.badlogic.gdx.math.Rectangle;
  import com.badlogic.gdx.math.Vector2;
  import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
  import com.badlogic.gdx.physics.box2d.World;
@@ -20,6 +22,7 @@
  import com.badlogic.gdx.utils.viewport.Viewport;
  import com.mygdx.game.tiled.AddActors;
  import com.mygdx.game.tiled.AddResources;
+ import com.mygdx.game.tiled.Configuraciones;
  import com.mygdx.game.tiled.WorldContactListener;
 
  import box2dLight.RayHandler;
@@ -38,18 +41,19 @@
      private RayHandler ray;
      boolean isScreenTouched = false;
      private Viewport viewport;
-     Texture t;
-     int c = 1, r = 5;
-     float time;
-     Animation<TextureRegion> a;
+     float time,Alpha;
+     float Alpha2;
+     float y = 0;
+     Rectangle play,confi,Puntero;
+
 
      /****************/
-     public static boolean isScreenUp= false;
-     public static boolean isScreenDown = true;
-     Texture PantallaSend;
-     public static float posicionY = 500;
-     int iteratorPantalla;
-     float timePantalla;
+          Texture ikuno;
+          Sprite ikunoS;
+          ParticleEffect ambiente,ambiente2,ambiente3;
+          Texture Play,Configuration;
+          Sprite PlayS,ConfigurationS;
+
      /*****************/
      public Casa(MyGdxGame game) {
          this.game = game;
@@ -63,22 +67,24 @@
          viewport = new FitViewport(500 / Pixels, 250 / Pixels, cam);//240,140
          stage = new Stage(viewport, batch);//65
          ///////////////////////////////////////////////////////////////////////////////////////////////
-
-         t = new Texture("Inicio.png");
-           TextureRegion[][]FramesAnimation = TextureRegion.split(t,t.getWidth()/c,t.getHeight()/r);
-           TextureRegion[]TmpAnimation = new TextureRegion[c * r];
-           int index1 = 0;
-           for(int i =0 ; i < r; i++)
-           {
-               for(int j = 0; j < c; j++)
-               {
-                   TmpAnimation[index1++] = FramesAnimation[i][j];
-               }
-           }
-           a = new Animation<TextureRegion>(0.2f,TmpAnimation);
-
-
-         PantallaSend = new Texture("ScreenSend.png");
+         ikuno = new Texture("Ikuno2.png");
+         ikunoS = new Sprite(ikuno);
+         ambiente = new ParticleEffect();
+         ambiente.load(Gdx.files.internal("particles/ambiente.p"),Gdx.files.internal("images"));
+         ambiente.scaleEffect(.3f/Pixels);
+         ambiente2 = new ParticleEffect();
+         ambiente2.load(Gdx.files.internal("particles/ambiente.p"),Gdx.files.internal("images"));
+         ambiente2.scaleEffect(.4f/Pixels);
+         ambiente3 = new ParticleEffect();
+         ambiente3.load(Gdx.files.internal("particles/ambiente.p"),Gdx.files.internal("images"));
+         ambiente3.scaleEffect(.3f/Pixels);
+         Play = new Texture("Play.png");
+         PlayS = new Sprite(Play);
+         Configuration = new Texture("Configuration.png");
+         ConfigurationS = new Sprite(Configuration);
+         play = new Rectangle();
+         confi = new Rectangle();
+         Puntero = new Rectangle();
      }
 
      @Override
@@ -88,11 +94,11 @@
 
      @Override
      public void render(float delta) {
-         time += Gdx.graphics.getDeltaTime();
-         Gdx.gl.glClearColor(1,1,1,1);
+         time = Gdx.graphics.getDeltaTime();
+         Gdx.gl.glClearColor(0,0,0,1);
          Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
          Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-TextureRegion current = a.getKeyFrame(time,true);
+
 
          batch.enableBlending();
          cam.update();
@@ -106,81 +112,100 @@ TextureRegion current = a.getKeyFrame(time,true);
          ray.setCombinedMatrix(cam.combined);
          ray.render();
          batch.begin();
-         batch.draw(current,0,0,500/Pixels,250/Pixels);
-         ScreenSend();
-         isScreenDown = true;
-         if(Gdx.input.isTouched()&&!isScreenUp)
+         
+         if(y < 49)
          {
-             isScreenUp = true;
+             Alpha2 = 0;
+             if(Gdx.input.isTouched())
+             {
+                 y = y + 50 * Gdx.graphics.getDeltaTime();
+             }else {
+                 y = y + 10 * Gdx.graphics.getDeltaTime();
+             }
+         }else
+         {
+             Alpha2 += .25f*Gdx.graphics.getDeltaTime();
+             if(Alpha2 > .2f && Gdx.input.isTouched())
+             {
+                 Alpha2 = 1.1f;
+             }
+             if(Alpha2 > 1)
+             {
+                 Alpha2 = 1;
+                 play.set(150/Pixels,25/Pixels,50/Pixels,50/Pixels);
+                 confi.set(300/Pixels,25/Pixels,50/Pixels,50/Pixels);
+                 Vector2 PunteroPosition = new Vector2();
+                 float PosicionY;
+                 if(Gdx.input.isTouched())
+                 {
+                     Vector2 position = new Vector2(Gdx.input.getX(),Gdx.input.getY());
+                     Vector2 size = new Vector2(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+
+                     PunteroPosition.x = (((position.x*500)/size.x)/Pixels)+cam.position.x-(cam.viewportWidth/2);
+                     PosicionY = Gdx.graphics.getHeight()-position.y;
+                     PunteroPosition.y = (((PosicionY*250)/size.y)/Pixels)+cam.position.y-(cam.viewportHeight/2);
+                 }
+                 Puntero.set(PunteroPosition.x-(5/Pixels),PunteroPosition.y-(5/Pixels),10/Pixels,10/Pixels);
+
+                 if(Puntero.overlaps(play))
+                 {
+                     game.setScreen(new Menu(game));
+                 }
+                 if(Puntero.overlaps(confi))
+                 {
+                     game.setScreen(new Configuraciones(game));
+                 }
+             }
          }
-         batch.end();
-/***************/
+         ikunoS.setBounds(0,y/Pixels,500/Pixels,250/Pixels);
          if(Gdx.input.isTouched())
          {
-             isScreenTouched = true;
-         }
-         if(isScreenTouched)
+
+         }else
          {
-             MyGdxGame.Cinematica.putInteger("Cinematica",1);
-             MyGdxGame.Cinematica.flush();
-             alpha -= .5f * Gdx.graphics.getDeltaTime();
-         }else {
-             alpha = 1;
-                 MyGdxGame.Cinematica.putInteger("Cinematica",1);
-                 MyGdxGame.Cinematica.flush();
-             
+             Alpha += .50f*Gdx.graphics.getDeltaTime();
          }
-         if(alpha <= 0)
+
+         if(Alpha > 1)
          {
-             alpha = 0;
+             Alpha = 1;
          }
+
+         ambiente.setPosition(350/Pixels,50/Pixels);
+         ambiente.draw(batch,time);
+         ambiente2.setPosition(150/Pixels,0);
+         ambiente2.draw(batch,time);
+         ambiente3.setPosition(80/Pixels,0);
+         ambiente3.draw(batch,time);
+         ambiente.update(delta);
+         ambiente2.update(delta);
+         ambiente3.update(delta);
+         ikunoS.setAlpha(Alpha);
+         ikunoS.draw(batch);
+
+         PlayS.setBounds(150/Pixels,25/Pixels,50/Pixels,50/Pixels);
+         PlayS.setAlpha(Alpha2);
+         PlayS.draw(batch);
+         ConfigurationS.setBounds(300/Pixels,25/Pixels,50/Pixels,50/Pixels);
+         ConfigurationS.setAlpha(Alpha2);
+         ConfigurationS.draw(batch);
+         batch.end();
+
+/***************/
+         MyGdxGame.Cinematica.putInteger("Cinematica",1);
+         MyGdxGame.Cinematica.flush();
+         if(Gdx.input.isTouched())
+         {
+
+
+         }
+
 /*****************/
      }
 
      public void ScreenSend()
      {
-         if(!isScreenUp)
-         {
-             isScreenDown = true;
-         }else
-         {
-             isScreenDown = false;
-         }
-         if(isScreenUp == true)
-         {
 
-             if(iteratorPantalla == 0) {
-                 posicionY = 500;
-                 iteratorPantalla++;
-             }
-             if(posicionY > 160)
-             {
-                 posicionY -= 250 *Gdx.graphics.getDeltaTime();
-             }else
-             {
-                 game.setScreen(new Menu(game));
-                 posicionY = 160;
-                 isScreenUp = false;
-             }
-         }
-         if(isScreenDown == true)
-         {
-             if(iteratorPantalla == 0) {
-                 posicionY = 240;
-                 iteratorPantalla++;
-             }
-             timePantalla += 1 *Gdx.graphics.getDeltaTime();
-             if(timePantalla > 1) {
-                 if (posicionY < 500) {
-                     posicionY += 150 * Gdx.graphics.getDeltaTime();
-                 } else {
-                     timePantalla = 0;
-                     posicionY = 500;
-                     isScreenDown = false;
-                 }
-             }
-         }
-         batch.draw(PantallaSend,cam.position.x - 8.5f, cam.position.y - 2.5f-(posicionY/Pixels),700/Pixels,450/Pixels);
          /*****************/
      }
 
@@ -206,13 +231,16 @@ TextureRegion current = a.getKeyFrame(time,true);
 
      @Override
      public void dispose() {
-t.dispose();
          batch.dispose();
          stage.dispose();
-
          world.dispose();
-
          ray.dispose();
+         ikuno.dispose();
+         ambiente.dispose();
+         ambiente2.dispose();
+         ambiente3.dispose();
+         Play.dispose();
+         Configuration.dispose();
 
      }
  }

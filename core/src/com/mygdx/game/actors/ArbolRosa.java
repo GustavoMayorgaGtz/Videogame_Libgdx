@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -53,6 +54,12 @@ public class ArbolRosa extends Actor implements Disposable{
     Texture HojaAzul;
     Rectangle HojaAzulRec;
     int iteratorAzul = 0;
+
+    ParticleEffect particula;
+    float timeiterator;
+    boolean activarParticula;
+    float tempo;
+
     public ArbolRosa(World world, Texture texture, float x, float y)
     {
         this.world = world;
@@ -109,6 +116,10 @@ public class ArbolRosa extends Actor implements Disposable{
         fixture3 = body3.createFixture(box3,0);
         fixture3.setUserData("PisoBase");
         box3.dispose();
+
+        particula = new ParticleEffect();
+        particula.load(Gdx.files.internal("particles/fertilizer2.p"),Gdx.files.internal("images"));
+        particula.scaleEffect(.2f/Pixels);
 
         /******Animation***********/
         animationTexture1 = new Texture("AnimationArbolR(1).png");
@@ -179,6 +190,7 @@ public class ArbolRosa extends Actor implements Disposable{
             if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
                 MyGdxGame.HojaRosa.putInteger("HojaRosaA1",1);
                 MyGdxGame.HojaRosa.flush();
+                activarParticula = true;
                 MyGdxGame.HojaRosa.putInteger("HojaRosa",2);
                 MyGdxGame.HojaRosa.flush();
             }
@@ -194,12 +206,13 @@ public class ArbolRosa extends Actor implements Disposable{
 
 /*******animation2**********/
 
-if(timeA2 >= 3) {
+if(timeA2 >= 1) {
     if (rectangle.overlaps(Jugador.jugador) && MyGdxGame.HojaRosa.getInteger("HojaRosaA1") == 1 && MyGdxGame.Fertilizantes.getInteger("Fertilizantes") >= 9) {
 
         if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
             MyGdxGame.HojaRosa.putInteger("HojaRosaA1", 2);
             MyGdxGame.HojaRosa.flush();
+            activarParticula = true;
             int fertilizantes = MyGdxGame.Fertilizantes.getInteger("Fertilizantes");
             fertilizantes -= 9;
             MyGdxGame.Fertilizantes.putInteger("Fertilizantes", fertilizantes);
@@ -209,12 +222,13 @@ if(timeA2 >= 3) {
     }
 }
         /****************/
-        if(timeA3 >= 3) {
+        if(timeA3 >= 1) {
             if (rectangle.overlaps(Jugador.jugador) && MyGdxGame.HojaRosa.getInteger("HojaRosaA1") == 2 && MyGdxGame.Fertilizantes.getInteger("Fertilizantes") >= 9) {
 
                 if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
                     MyGdxGame.HojaRosa.putInteger("HojaRosaA1", 3);
                     MyGdxGame.HojaRosa.flush();
+                    activarParticula = true;
                     int fertilizantes = MyGdxGame.Fertilizantes.getInteger("Fertilizantes");
                     fertilizantes -= 9;
                     MyGdxGame.Fertilizantes.putInteger("Fertilizantes", fertilizantes);
@@ -234,6 +248,15 @@ Jugador.istouchTienda3 = true;
 
         animaciones(batch);
 
+
+        if(activarParticula) {
+            particula.draw(batch, tempo);
+
+        }else
+        {
+            particula.reset();
+            particula.scaleEffect(.4f/Pixels);
+        }
     }
 
     public void animaciones(Batch batch)
@@ -278,6 +301,19 @@ Jugador.istouchTienda3 = true;
 
     @Override
     public void act(float delta) {
+        if(activarParticula) {
+            tempo = Gdx.graphics.getDeltaTime();
+            timeiterator += .5f * Gdx.graphics.getDeltaTime();
+            if( timeiterator > 1)
+            {
+                activarParticula = false;
+                timeiterator = 0;
+            }
+        }
+        particula.update(delta);
+
+        particula.setPosition(getX()-.5f,getY()+.1f);
+
         if(MyGdxGame.HojaRosa.getInteger("HojaRosaA1") == 2) {
             if (body1.getPosition().y <= Jugador.body.getPosition().y - (8 / Pixels)) {
                 body1.setActive(true);
@@ -290,6 +326,8 @@ Jugador.istouchTienda3 = true;
             } else {
                 body2.setActive(false);
             }
+
+            body3.setActive(false);
         }else if(MyGdxGame.HojaRosa.getInteger("HojaRosaA1") == 3) {
             if (body1.getPosition().y <= Jugador.body.getPosition().y - (8 / Pixels)) {
                 body1.setActive(true);
@@ -330,6 +368,6 @@ Jugador.istouchTienda3 = true;
         body3.destroyFixture(fixture3);
         world.destroyBody(body3);
         HojaAzul.dispose();
-
+        particula.dispose();
     }
 }

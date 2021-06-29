@@ -112,15 +112,15 @@ public abstract class InteractivsetScreeen extends Actor implements Disposable {
                 Gdx.app.log("Error",e.getMessage());
             }
 
-            int monedasActuales = MyGdxGame.coins.getInteger("Coins");
+           /* int monedasActuales = MyGdxGame.coins.getInteger("Coins");
             monedasActuales = monedasActuales + MyGdxGame.CoinObjects;
             MyGdxGame.coins.putInteger("Coins", monedasActuales);
             MyGdxGame.coins.flush();
+           */
             MyGdxGame.CoinObjects = 0;
             AddActors.button.activeCaja = false;
-            AddActors.button2.isTouch = true;
+            AddActors.button2.isTouch2 = false;
             AddActors.game.setScreen(new Menu(AddActors.game));
-            Gdx.app.log("Send to ", "Menu");
             Send = false;
         }
     }

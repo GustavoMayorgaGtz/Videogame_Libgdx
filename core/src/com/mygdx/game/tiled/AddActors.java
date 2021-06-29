@@ -55,6 +55,7 @@ public class AddActors {
     private List<CamaraY> cameraY = new ArrayList<CamaraY>();
     private List<CamaraNoY> cameraNoY = new ArrayList<CamaraNoY>();
     private List<CamaraNoX> cameraNoX = new ArrayList<CamaraNoX>();
+    private List<CamaraX> cameraX = new ArrayList<CamaraX>();
     private List<PlataformaMovimiento> plataformaMov = new ArrayList<PlataformaMovimiento>();
     private List<Pincho> pincho = new ArrayList<Pincho>();
     private List<Agarradera> agarradera = new ArrayList<Agarradera>();
@@ -93,6 +94,8 @@ public class AddActors {
     int iteratorCamY = 0;
     int iteratorNoCamY = 0;
     int iteratorNoCamX = 0;
+    int iteratorCamX = 0;
+    int iteratorArboles = 0;//cuenta los arboles y si hay mas de uno se añade el personaje sino marca error
     List<Cajas> cajas = new ArrayList<Cajas>();
     public AddActors(World world, TiledMap map, MyGdxGame game, Stage stage)
     {
@@ -111,41 +114,70 @@ public class AddActors {
         Texture PersonajeKill = game.getManager().get("PersonajeKill.png");
         Texture Dormir = game.getManager().get("mimido.png");
         Texture sword = game.getManager().get("EspadazoEffect.png");
-        try {
+       try {
             /////Cosas hechas para los niveles de progresion
             Texture arbolVerde = game.getManager().get("HojaVerdeCartel.png");
 
-            for (MapObject object : map.getLayers().get(51).getObjects().getByType(RectangleMapObject.class)) {
-                Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                arbolV= new ArbolVerde(world,arbolVerde,rect.x,rect.y);
-            }
-            stage.addActor(arbolV);
-
-            Texture arbolRosa = game.getManager().get("HojaRosaCartel.png");
-
-            for (MapObject object : map.getLayers().get(52).getObjects().getByType(RectangleMapObject.class)) {
-                Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                arbolR= new ArbolRosa(world,arbolRosa,rect.x,rect.y);
-            }
-            stage.addActor(arbolR);
-            Texture arbolAzul= game.getManager().get("HojaAzulCartel.png");
-
-            for (MapObject object : map.getLayers().get(53).getObjects().getByType(RectangleMapObject.class)) {
-                Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                arbolA= new ArbolAzul(world,arbolAzul,rect.x,rect.y);
-            }
-            stage.addActor(arbolA);
+               if(MyGdxGame.isNivelProgress1) {
+                   for (MapObject object : map.getLayers().get(51).getObjects().getByType(RectangleMapObject.class)) {
+                       Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                       arbolV = new ArbolVerde(world, arbolVerde, rect.x, rect.y);
+                       iteratorArboles++;
+                   }
 
 
-            Texture animation = game.getManager().get("Tienda.png");
-            for (MapObject object : map.getLayers().get(49).getObjects().getByType(RectangleMapObject.class)) {
-                Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                tienda.add(new Tienda(world,rect, animation));
-            }
-            for(Tienda t5: tienda)
-            {
-                stage.addActor(t5);
-            }
+                   Texture arbolRosa = game.getManager().get("HojaRosaCartel.png");
+
+                   for (MapObject object : map.getLayers().get(52).getObjects().getByType(RectangleMapObject.class)) {
+                       Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                       arbolR = new ArbolRosa(world, arbolRosa, rect.x, rect.y);
+                       iteratorArboles++;
+                   }
+
+                   Texture arbolAzul = game.getManager().get("HojaAzulCartel.png");
+
+                   for (MapObject object : map.getLayers().get(53).getObjects().getByType(RectangleMapObject.class)) {
+                       Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                       arbolA = new ArbolAzul(world, arbolAzul, rect.x, rect.y);
+                       iteratorArboles++;
+                   }
+
+
+                   Texture animation = game.getManager().get("Tienda.png");
+                   for (MapObject object : map.getLayers().get(49).getObjects().getByType(RectangleMapObject.class)) {
+                       Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                       tienda.add(new Tienda(world, rect, animation));
+
+                   }
+
+
+                   for (Tienda t5 : tienda) {
+                       stage.addActor(t5);
+                   }
+                   stage.addActor(arbolV);
+                   stage.addActor(arbolA);
+                   stage.addActor(arbolR);
+               }
+           for (MapObject object : map.getLayers().get(50).getObjects().getByType(RectangleMapObject.class)) {
+               Rectangle rect = ((RectangleMapObject) object).getRectangle();
+               cameraNoX.add(new CamaraNoX(world, map, rect, iteratorNoCamX));
+               iteratorNoCamX++;
+           }
+
+           for (CamaraNoX cam : cameraNoX) {
+               stage.addActor(cam);
+           }
+           for (MapObject object : map.getLayers().get(54).getObjects().getByType(RectangleMapObject.class)) {
+               Rectangle rect = ((RectangleMapObject) object).getRectangle();
+               cameraX.add(new CamaraX(world, map, rect, iteratorCamX));
+               iteratorCamX++;
+           }
+
+           for (CamaraX cam : cameraX) {
+               stage.addActor(cam);
+           }
+
+
             for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 player = new Jugador(world, dere, izq, SaltoDere, SaltoIzq, StaticRight, StaticLeft, EspadazoDereTexture, EspadazoIzqTexture, PersonajeKill, Dormir,sword, rect.x, rect.y);//300 , 400
@@ -595,14 +627,6 @@ public class AddActors {
             for (CamaraNoY cam: cameraNoY) {
                 stage.addActor(cam);
             }
-            for (MapObject object : map.getLayers().get(50).getObjects().getByType(RectangleMapObject.class)) {
-                Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                cameraNoX.add(new CamaraNoX(world, map, rect,iteratorNoCamX));
-                iteratorNoCamX++;
-            }
-            for (CamaraNoX cam: cameraNoX) {
-                stage.addActor(cam);
-            }
 
 
 
@@ -614,7 +638,7 @@ public class AddActors {
             /***************/
         }catch (Exception e)
         {
-
+Gdx.app.log("Mensaje de error de AddActor",""+e.getMessage()+"||"+e.getLocalizedMessage()+"||"+e.getCause());
         }
 
 

@@ -178,16 +178,11 @@ if(pan < -.8f)
 if(Jugador.muerteimpulso)
 {
     sound.stop();
-    sound.dispose();
+
 }
 
      }
 
-    @Override
-    protected void finalize() throws Throwable {
-
-
-    }
 
     @Override
     public void dispose() {

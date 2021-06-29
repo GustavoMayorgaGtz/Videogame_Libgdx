@@ -9,6 +9,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -25,10 +26,15 @@ public class MyGdxGame extends Game{
     public static Preferences HojaVerde;
     public static Preferences HojaRosa;
     public static Preferences HojaAzul;
+    public static Preferences Mute;
     public static boolean ApagarMusica = false;
+    public static boolean isNivelProgress1;
+    public static Preferences ColorControl;
+    public static Preferences Alpha;
 
 	MyGdxGame game;
 	public static final float Pixels = 30;
+	public static float alpha;
 
 
 	@Override
@@ -46,6 +52,9 @@ public class MyGdxGame extends Game{
 		HojaRosa = Gdx.app.getPreferences("HojaRosaA2");
 		HojaVerde = Gdx.app.getPreferences("HojaVerdeA1");
 		HojaVerde = Gdx.app.getPreferences("HojaVerdeA2");
+		Mute = Gdx.app.getPreferences("Mute");
+		ColorControl = Gdx.app.getPreferences("Color");
+		Alpha = Gdx.app.getPreferences("Alpha");
 
 		manager = new AssetManager();
 
@@ -81,6 +90,7 @@ Gdx.app.getGraphics().getFramesPerSecond();
 		manager.load("PersonajeEspadazoIzquierdo.png",Texture.class);
 		manager.load("EnemigoLeft.png",Texture.class);
 		manager.load("EnemigoRight.png",Texture.class);
+		manager.load("EnemigoRight2.png",Texture.class);
 		manager.load("Enemigo2Left.png",Texture.class);
 		manager.load("Enemigo2Right.png",Texture.class);
 		manager.load("EnemigoVoladorDere.png",Texture.class);
@@ -117,8 +127,8 @@ Gdx.app.getGraphics().getFramesPerSecond();
 		manager.load("HojaRosaCartel.png", Texture.class);
 		manager.load("HojaAzulCartel.png", Texture.class);
 		manager.load("EspadazoEffect.png",Texture.class);
-
 		manager.finishLoading();
+
 		this.setScreen(new Intro(this));
 	}
 

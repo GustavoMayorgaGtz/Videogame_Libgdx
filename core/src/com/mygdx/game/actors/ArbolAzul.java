@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -72,6 +73,11 @@ public class ArbolAzul extends Actor implements Disposable{
     float time7;
     Texture animationTexture7;
     /******************************/
+
+    ParticleEffect particula;
+    float timeiterator;
+    boolean activarParticula;
+    float tempo;
 
     public ArbolAzul(World world, Texture texture, float x, float y)
     {
@@ -179,6 +185,10 @@ public class ArbolAzul extends Actor implements Disposable{
         fixture7 = body7.createFixture(box7,0);
         fixture7.setUserData("PisoBase");
         box7.dispose();
+
+        particula = new ParticleEffect();
+        particula.load(Gdx.files.internal("particles/fertilizer2.p"),Gdx.files.internal("images"));
+        particula.scaleEffect(.2f/Pixels);
 
         /******Animation***********/
         animationTexture1 = new Texture("AnimationArbolA(1).png");
@@ -293,6 +303,7 @@ public class ArbolAzul extends Actor implements Disposable{
             if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
                 MyGdxGame.HojaAzul.putInteger("HojaAzulA1",1);
                 MyGdxGame.HojaAzul.flush();
+                activarParticula = true;
                 MyGdxGame.HojaAzul.putInteger("HojaAzul",2);
                 MyGdxGame.HojaAzul.flush();
             }
@@ -301,12 +312,13 @@ public class ArbolAzul extends Actor implements Disposable{
 
 /*******animation2**********/
 
-if(timeA2 >= 3) {
+if(timeA2 >= 1) {
     if (rectangle.overlaps(Jugador.jugador) && MyGdxGame.HojaAzul.getInteger("HojaAzulA1") == 1 && MyGdxGame.Fertilizantes.getInteger("Fertilizantes") >= 9) {
 
         if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
             MyGdxGame.HojaAzul.putInteger("HojaAzulA1", 2);
             MyGdxGame.HojaAzul.flush();
+            activarParticula = true;
             int fertilizantes = MyGdxGame.Fertilizantes.getInteger("Fertilizantes");
             fertilizantes -= 9;
             MyGdxGame.Fertilizantes.putInteger("Fertilizantes", fertilizantes);
@@ -316,12 +328,13 @@ if(timeA2 >= 3) {
     }
 }
         /********animation 3********/
-        if(timeA3 >= 3) {
+        if(timeA3 >= 1) {
             if (rectangle.overlaps(Jugador.jugador) && MyGdxGame.HojaAzul.getInteger("HojaAzulA1") == 2 && MyGdxGame.Fertilizantes.getInteger("Fertilizantes") >= 9) {
 
                 if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
                     MyGdxGame.HojaAzul.putInteger("HojaAzulA1", 3);
                     MyGdxGame.HojaAzul.flush();
+                    activarParticula = true;
                     int fertilizantes = MyGdxGame.Fertilizantes.getInteger("Fertilizantes");
                     fertilizantes -= 9;
                     MyGdxGame.Fertilizantes.putInteger("Fertilizantes", fertilizantes);
@@ -331,12 +344,13 @@ if(timeA2 >= 3) {
         }
         /****************/
         /********animation 3********/
-        if(timeA4 >= 3) {
+        if(timeA4 >= 1) {
             if (rectangle.overlaps(Jugador.jugador) && MyGdxGame.HojaAzul.getInteger("HojaAzulA1") == 3 && MyGdxGame.Fertilizantes.getInteger("Fertilizantes") >= 9) {
 
                 if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
                     MyGdxGame.HojaAzul.putInteger("HojaAzulA1", 4);
                     MyGdxGame.HojaAzul.flush();
+                    activarParticula = true;
                     int fertilizantes = MyGdxGame.Fertilizantes.getInteger("Fertilizantes");
                     fertilizantes -= 9;
                     MyGdxGame.Fertilizantes.putInteger("Fertilizantes", fertilizantes);
@@ -346,12 +360,13 @@ if(timeA2 >= 3) {
         }
         /****************/
         /********animation 3********/
-        if(timeA5 >= 3) {
+        if(timeA5 >= 1) {
             if (rectangle.overlaps(Jugador.jugador) && MyGdxGame.HojaAzul.getInteger("HojaAzulA1") == 4 && MyGdxGame.Fertilizantes.getInteger("Fertilizantes") >= 9) {
 
                 if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
                     MyGdxGame.HojaAzul.putInteger("HojaAzulA1", 5);
                     MyGdxGame.HojaAzul.flush();
+                    activarParticula = true;
                     int fertilizantes = MyGdxGame.Fertilizantes.getInteger("Fertilizantes");
                     fertilizantes -= 9;
                     MyGdxGame.Fertilizantes.putInteger("Fertilizantes", fertilizantes);
@@ -361,12 +376,13 @@ if(timeA2 >= 3) {
         }
         /****************/
         /********animation 3********/
-        if(timeA6 >= 3) {
+        if(timeA6 >= 1) {
             if (rectangle.overlaps(Jugador.jugador) && MyGdxGame.HojaAzul.getInteger("HojaAzulA1") == 5 && MyGdxGame.Fertilizantes.getInteger("Fertilizantes") >= 9) {
 
                 if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
                     MyGdxGame.HojaAzul.putInteger("HojaAzulA1", 6);
                     MyGdxGame.HojaAzul.flush();
+                    activarParticula = true;
                     int fertilizantes = MyGdxGame.Fertilizantes.getInteger("Fertilizantes");
                     fertilizantes -= 9;
                     MyGdxGame.Fertilizantes.putInteger("Fertilizantes", fertilizantes);
@@ -376,12 +392,13 @@ if(timeA2 >= 3) {
         }
         /****************/
         /********animation 3********/
-        if(timeA7 >= 3) {
+        if(timeA7 >= 1) {
             if (rectangle.overlaps(Jugador.jugador) && MyGdxGame.HojaAzul.getInteger("HojaAzulA1") == 6 && MyGdxGame.Fertilizantes.getInteger("Fertilizantes") >= 9) {
 
                 if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
                     MyGdxGame.HojaAzul.putInteger("HojaAzulA1", 7);
                     MyGdxGame.HojaAzul.flush();
+                    activarParticula = true;
                     int fertilizantes = MyGdxGame.Fertilizantes.getInteger("Fertilizantes");
                     fertilizantes -= 9;
                     MyGdxGame.Fertilizantes.putInteger("Fertilizantes", fertilizantes);
@@ -390,7 +407,7 @@ if(timeA2 >= 3) {
             }
         }
 
-        if(ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzul")==1||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzul")==2||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzul")==3||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzul")==4||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzul")==5||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzul")==6)
+        if(ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzul")==1||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==1||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==2||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==3||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==4||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==5||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==6)
         {
            Jugador.istouchTienda4 = true;
         }else
@@ -399,6 +416,14 @@ if(timeA2 >= 3) {
         }
         animaciones(batch);
 
+        if(activarParticula) {
+            particula.draw(batch, tempo);
+
+        }else
+        {
+            particula.reset();
+            particula.scaleEffect(.4f/Pixels);
+        }
     }
 
     public void animaciones(Batch batch)
@@ -492,6 +517,19 @@ if(timeA2 >= 3) {
 
     @Override
     public void act(float delta) {
+        if(activarParticula) {
+            tempo = Gdx.graphics.getDeltaTime();
+            timeiterator += .5f * Gdx.graphics.getDeltaTime();
+            if( timeiterator > 1)
+            {
+                activarParticula = false;
+                timeiterator = 0;
+            }
+        }
+        particula.update(delta);
+
+        particula.setPosition(getX()-.5f,getY()+.1f);
+
         if (MyGdxGame.HojaAzul.getInteger("HojaAzulA1") == 2) {
             if (body1.getPosition().y <= Jugador.body.getPosition().y - (8 / Pixels)) {
                 body1.setActive(true);
@@ -504,6 +542,11 @@ if(timeA2 >= 3) {
             } else {
                 body2.setActive(false);
             }
+            body3.setActive(false);
+            body4.setActive(false);
+            body5.setActive(false);
+            body6.setActive(false);
+            body7.setActive(false);
         } else if (MyGdxGame.HojaAzul.getInteger("HojaAzulA1") == 3) {
             if (body1.getPosition().y <= Jugador.body.getPosition().y - (8 / Pixels)) {
                 body1.setActive(true);
@@ -522,6 +565,11 @@ if(timeA2 >= 3) {
             } else {
                 body3.setActive(false);
             }
+
+            body4.setActive(false);
+            body5.setActive(false);
+            body6.setActive(false);
+            body7.setActive(false);
         } else if (MyGdxGame.HojaAzul.getInteger("HojaAzulA1") == 4) {
             if (body1.getPosition().y <= Jugador.body.getPosition().y - (8 / Pixels)) {
                 body1.setActive(true);
@@ -545,6 +593,10 @@ if(timeA2 >= 3) {
             } else {
                 body4.setActive(false);
             }
+
+            body5.setActive(false);
+            body6.setActive(false);
+            body7.setActive(false);
         } else if (MyGdxGame.HojaAzul.getInteger("HojaAzulA1") == 5) {
             if (body1.getPosition().y <= Jugador.body.getPosition().y - (8 / Pixels)) {
                 body1.setActive(true);
@@ -573,6 +625,9 @@ if(timeA2 >= 3) {
             } else {
                 body5.setActive(false);
             }
+
+            body6.setActive(false);
+            body7.setActive(false);
         } else if (MyGdxGame.HojaAzul.getInteger("HojaAzulA1") == 6) {
             if (body1.getPosition().y <= Jugador.body.getPosition().y - (8 / Pixels)) {
                 body1.setActive(true);
@@ -607,6 +662,7 @@ if(timeA2 >= 3) {
                 body6.setActive(false);
             }
 
+            body7.setActive(false);
         } else if (MyGdxGame.HojaAzul.getInteger("HojaAzulA1") == 7) {
             if (body1.getPosition().y <= Jugador.body.getPosition().y - (8 / Pixels)) {
                 body1.setActive(true);
@@ -679,5 +735,6 @@ if(timeA2 >= 3) {
         world.destroyBody(body6);
         body7.destroyFixture(fixture7);
         world.destroyBody(body7);
+        particula.dispose();
     }
 }

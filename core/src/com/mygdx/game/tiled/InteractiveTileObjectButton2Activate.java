@@ -46,12 +46,12 @@ public abstract class InteractiveTileObjectButton2Activate extends Actor impleme
 
     @Override
     public void act(float delta) {
-        if(!Button2.isTouch)
-        {
-            body.setActive(true);
-        }else
+        if(!Button2.isTouch2)
         {
             body.setActive(false);
+        }else
+        {
+            body.setActive(true);
         }
     }
 

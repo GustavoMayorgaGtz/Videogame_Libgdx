@@ -7,6 +7,7 @@
  import com.badlogic.gdx.graphics.g2d.Animation;
  import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  import com.badlogic.gdx.graphics.g2d.TextureRegion;
+ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
  import com.badlogic.gdx.maps.tiled.TiledMap;
  import com.badlogic.gdx.maps.tiled.TmxMapLoader;
  import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -30,6 +31,8 @@
      int c = 1, r = 3;
      float time = 0;
      float x;
+     ShaderProgram shader;
+     ShaderProgram shader2;
 
      public Nivel0(MyGdxGame game) {
          this.game = game;
@@ -57,6 +60,8 @@
              }
          }
          fondoAnimation = new Animation<TextureRegion>(0.6f,FramesFondo);
+         shader = new ShaderProgram(Gdx.files.internal("Shaders/vertex.glsl"),Gdx.files.internal("Shaders/fragment.glsl"));
+         shader2 = new ShaderProgram(Gdx.files.internal("Shaders/vertex2.glsl"),Gdx.files.internal("Shaders/fragment2.glsl"));
  }
 
      @Override
@@ -82,6 +87,18 @@
          Gdx.gl.glClearColor(.05f,.05f,.05f,1);
          Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
          batch.begin();
+         MyGdxGame.isNivelProgress1 = false;
+         if(Jugador.Espadazo) {
+             renderer.getBatch().setShader(shader);
+             renderer2.getBatch().setShader(shader);
+             batch.setShader(shader);
+         }
+         else
+         {
+             renderer.getBatch().setShader(shader2);
+             renderer2.getBatch().setShader(shader2);
+             batch.setShader(shader2);
+         }
          TextureRegion fondoA = fondoAnimation.getKeyFrame(time,true);
 
 
@@ -131,5 +148,7 @@
          add.AddDetach();
          fondoAnimado.dispose();
          addR.detachResources();
+         shader.dispose();
+         shader2.dispose();
      }
  }

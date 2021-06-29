@@ -25,11 +25,14 @@ public class Button2 extends Actor {
     BodyDef def;
     protected Fixture fixture;
     Texture texture,texture2;
-    public static boolean isTouch = true;
+    public static boolean isTouch2 = false;
     public static  Rectangle rect;
-    public static boolean active = false;
+
     int iterator = 0;
     Sound sound;
+
+
+    float  timeIterator = 0;
 
     public Button2(World world, Texture texture, Texture texture2, float x, float y)
     {
@@ -58,7 +61,7 @@ public class Button2 extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         setPosition(body.getPosition().x-(10)/Pixels,body.getPosition().y-(10)/Pixels);
 
-        if(!isTouch)
+        if(isTouch2)
         {
             if(iterator == 0) {
                 sound.play();
@@ -75,17 +78,20 @@ public class Button2 extends Actor {
 
     @Override
     public void act(float delta) {
-
+    timeIterator += 1 * Gdx.graphics.getDeltaTime();
         rect.set(getX()+.3f,getY(),getWidth()-.3f,getHeight()+.1f);
-    if (rect.overlaps(Jugador.jugador)) {
-        isTouch = false;
-    }
-    if(!isTouch)
-    {
-        body.setActive(true);
-    }else
+        if(timeIterator > 1) {
+            if (rect.overlaps(Jugador.jugador)) {
+                   isTouch2 = true;
+            }
+        }
+    if(!isTouch2)
     {
         body.setActive(false);
+
+    }else
+    {
+        body.setActive(true);
     }
 
 

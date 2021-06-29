@@ -73,10 +73,10 @@ public abstract class InteractiveTileObjectButtons extends Actor implements Disp
         }
         else
         {
-            if (Button2.isTouch) {
+            if (Button2.isTouch2) {
+                batch.draw(texture2, getX(), getY(), getWidth(), getHeight());
             } else {
 
-                batch.draw(texture2, getX(), getY(), getWidth(), getHeight());
             }
         }
     }
@@ -91,10 +91,10 @@ public abstract class InteractiveTileObjectButtons extends Actor implements Disp
             }
         }else
         {
-            if (Button2.isTouch) {
-                body.setActive(false);
-            } else {
+            if (Button2.isTouch2) {
                 body.setActive(true);
+            } else {
+                body.setActive(false);
             }
         }
     }

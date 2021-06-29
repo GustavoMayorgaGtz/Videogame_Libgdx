@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -45,7 +46,10 @@ public class ArbolVerde extends Actor implements Disposable{
     float time2;
     Texture animationTexture2;
     /******************************/
-
+    ParticleEffect particula;
+    float timeiterator;
+    boolean activarParticula;
+    float tempo;
     Texture HojaRosa;
     Rectangle HojaRosaRec;
     int iteratorRosa = 0;
@@ -95,6 +99,10 @@ public class ArbolVerde extends Actor implements Disposable{
         fixture2 = body2.createFixture(box2,0);
         fixture2.setUserData("PisoBase");
         box2.dispose();
+
+        particula = new ParticleEffect();
+        particula.load(Gdx.files.internal("particles/fertilizer2.p"),Gdx.files.internal("images"));
+        particula.scaleEffect(.2f/Pixels);
 
         /******Animation***********/
         animationTexture1 = new Texture("AnimationArbolV(1).png");
@@ -151,6 +159,7 @@ public class ArbolVerde extends Actor implements Disposable{
             if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
                 MyGdxGame.HojaVerde.putInteger("HojaVerdeA1",1);
                 MyGdxGame.HojaVerde.flush();
+                activarParticula = true;
                 MyGdxGame.HojaVerde.putInteger("HojaVerde",2);
                 MyGdxGame.HojaVerde.flush();
             }
@@ -164,14 +173,17 @@ public class ArbolVerde extends Actor implements Disposable{
         }
 
 /*******animation2**********/
-        Gdx.app.log("Time Game",""+MyGdxGame.HojaVerde.getInteger("HojaVerde"));
-if(timeA2 >= 3) {
+
+
+if(timeA2 >= 1) {
     if (rectangle.overlaps(Jugador.jugador) && MyGdxGame.HojaVerde.getInteger("HojaVerdeA1") == 1 && MyGdxGame.Fertilizantes.getInteger("Fertilizantes") >= 9) {
-        Gdx.app.log("Tgoooooooooooooooooooooooooooooooooooooooooooooooooooooooooool",""+timeA2);
 
         if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || Jugador.SaltoUp) {
             MyGdxGame.HojaVerde.putInteger("HojaVerdeA1", 2);
             MyGdxGame.HojaVerde.flush();
+
+activarParticula = true;
+
             int fertilizantes = MyGdxGame.Fertilizantes.getInteger("Fertilizantes");
             fertilizantes -= 9;
             MyGdxGame.Fertilizantes.putInteger("Fertilizantes", fertilizantes);
@@ -182,6 +194,16 @@ if(timeA2 >= 3) {
 }
         /****************/
         animaciones(batch);
+
+       if(activarParticula) {
+           particula.draw(batch, tempo);
+
+       }else
+       {
+           particula.reset();
+           particula.scaleEffect(.4f/Pixels);
+       }
+
 
     }
 
@@ -216,6 +238,20 @@ if(timeA2 >= 3) {
 
     @Override
     public void act(float delta) {
+
+        if(activarParticula) {
+            tempo = Gdx.graphics.getDeltaTime();
+            timeiterator += .5f * Gdx.graphics.getDeltaTime();
+            if( timeiterator > 1)
+            {
+                activarParticula = false;
+                timeiterator = 0;
+            }
+        }
+        particula.update(delta);
+
+        particula.setPosition(getX()-.5f,getY()+.1f);
+//Jugador.body.getPosition().x,Jugador.body.getPosition().y
         if(MyGdxGame.HojaVerde.getInteger("HojaVerdeA1") == 2) {
             if (body1.getPosition().y <= Jugador.body.getPosition().y - (8 / Pixels)) {
                 body1.setActive(true);
@@ -246,5 +282,6 @@ if(timeA2 >= 3) {
         body2.destroyFixture(fixture2);
         world.destroyBody(body2);
         HojaRosa.dispose();
+        particula.dispose();
     }
 }

@@ -227,8 +227,8 @@ public abstract class InteractiveTileObjectEnemies extends Actor implements Disp
         /*********************/
         /*************************/
 
-        setSize((bounds.getWidth()+2)/Pixels,(bounds.getHeight()+2)/Pixels);
-        setPosition(body.getPosition().x-(((bounds.getWidth()-1)/2)/Pixels),body.getPosition().y-((bounds.getHeight()/2)/Pixels));
+        setSize((bounds.getWidth()+30)/Pixels,(bounds.getHeight()+10)/Pixels);
+        setPosition(body.getPosition().x-(((bounds.getWidth()+30)/2)/Pixels),body.getPosition().y-((bounds.getHeight()/2)/Pixels));
         Enemies = new Rectangle();
         r.add( new Rectangle(getX(), getY(), getWidth(), getHeight()));
         pop = Gdx.audio.newSound(Gdx.files.internal("Pop.mp3"));
@@ -236,7 +236,7 @@ public abstract class InteractiveTileObjectEnemies extends Actor implements Disp
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition(body.getPosition().x-(((bounds.getWidth()-1)/2)/Pixels),body.getPosition().y-((bounds.getHeight()/2)/Pixels));
+        setPosition(body.getPosition().x-(((bounds.getWidth()+30)/2)/Pixels),body.getPosition().y-((bounds.getHeight()/2)/Pixels));
           if(body.isActive()) {
               TextureRegion WL = WalkLeftA.getKeyFrame(time, true);
               TextureRegion WR = WalkRightA.getKeyFrame(time, true);

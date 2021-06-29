@@ -45,7 +45,7 @@ import com.mygdx.game.tiled.InteractiveTileCoins;
 import com.mygdx.game.tiled.InteractiveTileObjectEnemies;
 import com.mygdx.game.tiled.InteractiveTilePortal;
 import com.mygdx.game.tiled.Niveles;
-import com.sun.jndi.cosnaming.IiopUrl;
+
 
 
 import java.io.Console;
@@ -180,6 +180,7 @@ public static boolean isTouchPlataformaMov2;
     public static boolean isMenu;
     Texture fondo;
     public static Sprite fondoMenu;
+    Texture CostoMoneda;
 
 ShaderProgram shader;
     ShaderProgram shader2;
@@ -400,6 +401,7 @@ BotonA = new Texture("A.png");
 /***********Menu***************/
         fondo = new Texture("PantallaNegro.png");
         fondoMenu = new Sprite(fondo);
+        CostoMoneda = new Texture("9Fertilizante.png");
     }
 
     @Override
@@ -451,15 +453,18 @@ BotonA = new Texture("A.png");
                 if(istouchTienda2)
                 {
                     batch.draw(BotonA, getX()+.5f, getY()+1, getWidth()*.5f, getHeight()*.5f);
+                    batch.draw(CostoMoneda, getX()+1f, getY()+1, getWidth()*.8f, getHeight()*.5f);
                 }
                 if(istouchTienda3)
                 {
                     batch.draw(BotonA, getX()+.5f, getY()+1, getWidth()*.5f, getHeight()*.5f);
+                    batch.draw(CostoMoneda, getX()+1f, getY()+1, getWidth()*.8f, getHeight()*.5f);
                 }
                 /******************************************************/
                 if(istouchTienda4)
                 {
                     batch.draw(BotonA, getX()+.5f, getY()+1, getWidth()*.5f, getHeight()*.5f);
+                    batch.draw(CostoMoneda, getX()+1f, getY()+1, getWidth()*.8f, getHeight()*.5f);
                 }
 
 
@@ -714,7 +719,7 @@ if(!Muerto) {
     particulaSalto2.update(delta);
 
 
-    if(!istouchTienda2&&!istouchTienda) {
+    if(!istouchTienda2&&!istouchTienda&&!istouchTienda3&&!istouchTienda4) {
         if (saltar) {
             if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || SaltoUp) {
                 particulaSalto.setPosition(getX() + .4f, getY() + .08f);
@@ -1012,7 +1017,7 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
         }
     } else if (AddResources.isScreenUp == false) {
         AddActors.button.activeCaja = false;
-        AddActors.button2.isTouch = true;
+        AddActors.button2.isTouch2 = false;
 
         muerteimpulso = false;
         Muerto = false;
@@ -1135,6 +1140,7 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
         world.destroyBody(body);
         shader.dispose();
         shader2.dispose();
+        CostoMoneda.dispose();
     }
 
 

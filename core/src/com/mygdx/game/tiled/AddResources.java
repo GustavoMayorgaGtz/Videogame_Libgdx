@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Casa;
 import com.mygdx.game.Menu;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.actors.Jugador;
@@ -74,6 +75,7 @@ public class AddResources {
     public static Texture BtnPause,BtnPauseHover;
     public static Rectangle PauseRect;
     boolean dere,izq,salto,attack,speed,pause;
+    Sprite dereS,dereHoverS,izqS,izqHoverS,saltoS,saltoHoverS,speedS,speedHoverS,attackS,attackHoverS,pauseS,pauseHoverS;
     /**********/
 
     /****************/
@@ -93,6 +95,8 @@ public class AddResources {
     public static ArrayList<Rectangle> rectangulosY;
     public static ArrayList<Rectangle> rectangulosNoY;
     public static ArrayList<Rectangle> rectangulosNoX;
+    public static ArrayList<Rectangle> rectangulosX;
+
     public static boolean tocoPiso = false;
     int ConfigurarCamara = 0;
     boolean camaraPersonaje = false;
@@ -102,6 +106,9 @@ public class AddResources {
 
 
     /*****************MENU DE TIENDA*****************/
+    float timeHome = 0;
+    Texture costo1,costo2;
+    Sprite costo2S;
     Texture fertilizante;
     Rectangle fertilizanteRect;
     Texture HojaVerde;
@@ -122,11 +129,13 @@ public class AddResources {
     Rectangle salir;
     ShaderProgram shader;
 
+    Sprite progress;
     public AddResources()
     {
         rectangulosY = new ArrayList<Rectangle>();
         rectangulosNoY = new ArrayList<Rectangle>();
         rectangulosNoX = new ArrayList<Rectangle>();
+        rectangulosX = new ArrayList<Rectangle>();
         batch = new SpriteBatch();
         cam = new OrthographicCamera();
         viewport = new FitViewport(240/ Pixels, 140/Pixels, cam);//240,140
@@ -141,7 +150,7 @@ public class AddResources {
         white =new Texture("White.png");
         r = new Random();
 
-        relleno = new Texture("ProgressBar1.png");
+
         contorno= new Texture("ProgressBar2.png");
         Blanco = new Texture("Blanco.png");
         blancoS = new Sprite(Blanco);
@@ -151,18 +160,118 @@ public class AddResources {
         puntero = new Rectangle();
         puntero2 = new Rectangle();
         punterot = new Texture("Punto.png");
-        BtnDere = new Texture("controles/BtnDere.png");
-        BtnDereHover = new Texture("controles/BtnDereHover.png");
-        BtnIzq = new Texture("controles/BtnIzq.png");
-        BtnIzqHover = new Texture("controles/BtnIzqHover.png");
-        BtnSalto = new Texture("controles/BtnSalto.png");
-        BtnSaltoHover = new Texture("controles/BtnSaltoHover.png");
-        BtnAttack = new Texture("controles/Espada.png");
-        BtnAttackHover = new Texture("controles/EspadaHover.png");
-        BtnSpeed = new Texture("controles/BtnSpeed.png");
-        BtnSpeedHover = new Texture("controles/BtnSpeedHover.png");
-        BtnPause = new Texture("controles/BtnPause.png");
-        BtnPauseHover = new Texture("controles/BtnPauseHover.png");
+        switch(MyGdxGame.ColorControl.getInteger("Color")) {
+            case 0: {
+                relleno = new Texture("controles/Blanco/ProgressBar1.png");
+                BtnDere = new Texture("controles/Blanco/BtnDere.png");
+                BtnDereHover = new Texture("controles/Blanco/BtnDereHover.png");
+                BtnIzq = new Texture("controles/Blanco/BtnIzq.png");
+                BtnIzqHover = new Texture("controles/Blanco/BtnIzqHover.png");
+                BtnSalto = new Texture("controles/Blanco/BtnSalto.png");
+                BtnSaltoHover = new Texture("controles/Blanco/BtnSaltoHover.png");
+                BtnAttack = new Texture("controles/Blanco/Espada.png");
+                BtnAttackHover = new Texture("controles/Blanco/EspadaHover.png");
+                BtnSpeed = new Texture("controles/Blanco/BtnSpeed.png");
+                BtnSpeedHover = new Texture("controles/Blanco/BtnSpeedHover.png");
+                BtnPause = new Texture("controles/Blanco/BtnPause.png");
+                BtnPauseHover = new Texture("controles/Blanco/BtnPauseHover.png");
+                break;
+            }
+            case 1:
+            {
+                relleno = new Texture("ProgressBar1.png");
+                BtnDere = new Texture("controles/BtnDere.png");
+                BtnDereHover = new Texture("controles/BtnDereHover.png");
+                BtnIzq = new Texture("controles/BtnIzq.png");
+                BtnIzqHover = new Texture("controles/BtnIzqHover.png");
+                BtnSalto = new Texture("controles/BtnSalto.png");
+                BtnSaltoHover = new Texture("controles/BtnSaltoHover.png");
+                BtnAttack = new Texture("controles/Espada.png");
+                BtnAttackHover = new Texture("controles/EspadaHover.png");
+                BtnSpeed = new Texture("controles/BtnSpeed.png");
+                BtnSpeedHover = new Texture("controles/BtnSpeedHover.png");
+                BtnPause = new Texture("controles/BtnPause.png");
+                BtnPauseHover = new Texture("controles/BtnPauseHover.png");
+                break;
+            }
+            case 2: {
+                relleno = new Texture("controles/Azul/ProgressBar1.png");
+                BtnDere = new Texture("controles/Azul/BtnDere.png");
+                BtnDereHover = new Texture("controles/Azul/BtnDereHover.png");
+                BtnIzq = new Texture("controles/Azul/BtnIzq.png");
+                BtnIzqHover = new Texture("controles/Azul/BtnIzqHover.png");
+                BtnSalto = new Texture("controles/Azul/BtnSalto.png");
+                BtnSaltoHover = new Texture("controles/Azul/BtnSaltoHover.png");
+                BtnAttack = new Texture("controles/Azul/Espada.png");
+                BtnAttackHover = new Texture("controles/Azul/EspadaHover.png");
+                BtnSpeed = new Texture("controles/Azul/BtnSpeed.png");
+                BtnSpeedHover = new Texture("controles/Azul/BtnSpeedHover.png");
+                BtnPause = new Texture("controles/Azul/BtnPause.png");
+                BtnPauseHover = new Texture("controles/Azul/BtnPauseHover.png");
+                break;
+            }
+            case 3: {
+                relleno = new Texture("controles/Amarillo/ProgressBar1.png");
+                BtnDere = new Texture("controles/Amarillo/BtnDere.png");
+                BtnDereHover = new Texture("controles/Amarillo/BtnDereHover.png");
+                BtnIzq = new Texture("controles/Amarillo/BtnIzq.png");
+                BtnIzqHover = new Texture("controles/Amarillo/BtnIzqHover.png");
+                BtnSalto = new Texture("controles/Amarillo/BtnSalto.png");
+                BtnSaltoHover = new Texture("controles/Amarillo/BtnSaltoHover.png");
+                BtnAttack = new Texture("controles/Amarillo/Espada.png");
+                BtnAttackHover = new Texture("controles/Amarillo/EspadaHover.png");
+                BtnSpeed = new Texture("controles/Amarillo/BtnSpeed.png");
+                BtnSpeedHover = new Texture("controles/Amarillo/BtnSpeedHover.png");
+                BtnPause = new Texture("controles/Amarillo/BtnPause.png");
+                BtnPauseHover = new Texture("controles/Amarillo/BtnPauseHover.png");
+                break;
+            }
+            case 4: {
+                relleno = new Texture("controles/Rosa/ProgressBar1.png");
+                BtnDere = new Texture("controles/Rosa/BtnDere.png");
+                BtnDereHover = new Texture("controles/Rosa/BtnDereHover.png");
+                BtnIzq = new Texture("controles/Rosa/BtnIzq.png");
+                BtnIzqHover = new Texture("controles/Rosa/BtnIzqHover.png");
+                BtnSalto = new Texture("controles/Rosa/BtnSalto.png");
+                BtnSaltoHover = new Texture("controles/Rosa/BtnSaltoHover.png");
+                BtnAttack = new Texture("controles/Rosa/Espada.png");
+                BtnAttackHover = new Texture("controles/Rosa/EspadaHover.png");
+                BtnSpeed = new Texture("controles/Rosa/BtnSpeed.png");
+                BtnSpeedHover = new Texture("controles/Rosa/BtnSpeedHover.png");
+                BtnPause = new Texture("controles/Rosa/BtnPause.png");
+                BtnPauseHover = new Texture("controles/Rosa/BtnPauseHover.png");
+                break;
+            }
+            case 5: {
+                relleno = new Texture("controles/Verde/ProgressBar1.png");
+                BtnDere = new Texture("controles/Verde/BtnDere.png");
+                BtnDereHover = new Texture("controles/Verde/BtnDereHover.png");
+                BtnIzq = new Texture("controles/Verde/BtnIzq.png");
+                BtnIzqHover = new Texture("controles/Verde/BtnIzqHover.png");
+                BtnSalto = new Texture("controles/Verde/BtnSalto.png");
+                BtnSaltoHover = new Texture("controles/Verde/BtnSaltoHover.png");
+                BtnAttack = new Texture("controles/Verde/Espada.png");
+                BtnAttackHover = new Texture("controles/Verde/EspadaHover.png");
+                BtnSpeed = new Texture("controles/Verde/BtnSpeed.png");
+                BtnSpeedHover = new Texture("controles/Verde/BtnSpeedHover.png");
+                BtnPause = new Texture("controles/Verde/BtnPause.png");
+                BtnPauseHover = new Texture("controles/Verde/BtnPauseHover.png");
+                break;
+            }
+        }
+        dereS = new Sprite(BtnDere);
+        dereHoverS = new Sprite(BtnDereHover);
+        izqS = new Sprite(BtnIzq);
+        izqHoverS = new Sprite(BtnIzqHover);
+        saltoS = new Sprite(BtnSalto);
+        saltoHoverS = new Sprite(BtnSaltoHover);
+        speedS = new Sprite(BtnSpeed);
+        speedHoverS = new Sprite(BtnSpeedHover);
+        attackS = new Sprite(BtnAttack);
+        attackHoverS = new Sprite(BtnAttackHover);
+        pauseS = new Sprite(BtnPause);
+        pauseHoverS = new Sprite(BtnPauseHover);
+
         PantallaSend = new Texture("ScreenSend.png");
         DereRect = new Rectangle();
         IzqRect = new Rectangle();
@@ -188,6 +297,8 @@ public class AddResources {
 
 
         /*****************Menu tienda*************/
+        costo1 = new Texture("3Moneda.png");
+        costo2 = new Texture("99Moneda.png");
         fertilizante = new Texture("Fertilizante.png");
         fertilizanteRect = new Rectangle();
         tcero = new Texture("cero.png");
@@ -208,6 +319,7 @@ public class AddResources {
         HojaRosa = new Texture("HojaRosa.png");
         HojaRosaRec = new Rectangle();
         HojaR = new Sprite(HojaRosa);
+        progress = new Sprite(relleno);
 
 
         shader = new ShaderProgram(Gdx.files.internal("Shaders/vertex.glsl"),Gdx.files.internal("Shaders/fragment.glsl"));
@@ -263,16 +375,20 @@ public class AddResources {
         }
         if(!add.player.Muerto) {
 
-                for (Rectangle camnoX: rectangulosNoX) {
+                for (Rectangle camnoX : rectangulosNoX) {
 
                     if (camnoX.overlaps(Jugador.jugador)) {
 
-                    }else
-                    {
-
-                        cam.position.x = (add.player.getX() + .4f);
                     }
                 }
+                for(Rectangle camX : rectangulosX)
+                {
+                    if(camX.overlaps(Jugador.jugador)){
+
+                    cam.position.x = (add.player.getX() + .4f);
+                }
+                }
+
 
             for(Rectangle  camy: rectangulosY) {
                 if (camy.overlaps(Jugador.jugador)) {
@@ -325,32 +441,32 @@ if(tocoPiso) {
         stage.act(delta);
         world.step(delta,6,2);
         stage.draw();
-if(!Jugador.isMenu) {
-    over();
-}else
-{
-        AddActors.player.setRightActive(false);
-        AddActors.player.setLeftActive(false);
-        AddActors.player.setSaltoUp(false);
-        AddActors.player.setAttackButton(false);
-        AddActors.player.setSpeedButton(false);
-}
-        ray.update();
-        ray.setCombinedMatrix(cam.combined);
-        ray.render();
-     //   render.render(world,cam.combined);
-        batch.begin();
-        //batch.setShader(shader);
-if(add.player.Muerto){
-    random = (int)Math.random()*50+1;
-    if(iterator) {
-        iterator = false;
-    }else
-    {
-        iterator = true;
-    }
 
-}
+            if (!Jugador.isMenu) {
+                over();
+            } else {
+                AddActors.player.setRightActive(false);
+                AddActors.player.setLeftActive(false);
+                AddActors.player.setSaltoUp(false);
+                AddActors.player.setAttackButton(false);
+                AddActors.player.setSpeedButton(false);
+            }
+            ray.update();
+            ray.setCombinedMatrix(cam.combined);
+            ray.render();
+          //  render.render(world, cam.combined);
+            batch.begin();
+            //batch.setShader(shader);
+            if (add.player.Muerto) {
+                random = (int) Math.random() * 50 + 1;
+                if (iterator) {
+                    iterator = false;
+                } else {
+                    iterator = true;
+                }
+
+            }
+
        puntero.set(PunteroPosition.x-(5/Pixels),PunteroPosition.y-(5/Pixels),10/Pixels,10/Pixels);
         puntero2.set(PunteroPosition2.x-(5f/Pixels),PunteroPosition2.y-(5f/Pixels),10/Pixels,10/Pixels);
 
@@ -387,7 +503,9 @@ if(add.player.Muerto){
                         widthEntero = 50;
                     }
 
-                    batch.draw(relleno, cam.position.x - 3.8f, cam.position.y + 1.7f, widthEntero / Pixels, 15 / Pixels);
+                    progress.setAlpha(MyGdxGame.alpha);
+                    progress.setBounds(cam.position.x - 3.8f, cam.position.y + 1.7f, widthEntero / Pixels, 15 / Pixels);
+                    progress.draw(batch);
                     batch.draw(contorno, cam.position.x - 3.8f, cam.position.y + 1.7f, 50 / Pixels, 15 / Pixels);
                 }
             }
@@ -426,38 +544,75 @@ if(add.player.Muerto){
                 SpeedRect.set(cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
                 PauseRect.set(cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
                 if (!izq) {
-                    batch.draw(BtnIzq, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                   // batch.draw(BtnIzq, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    izqS.setAlpha(MyGdxGame.alpha);
+                    izqS.setBounds(cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    izqS.draw(batch);
                 } else {
-                    batch.draw(BtnIzqHover, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                   // batch.draw(BtnIzqHover, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    izqHoverS.setAlpha(MyGdxGame.alpha);
+                    izqHoverS.setBounds(cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    izqHoverS.draw(batch);
                 }
 
                 if (!dere) {
-                    batch.draw(BtnDere, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    //batch.draw(BtnDere, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    dereS.setAlpha(MyGdxGame.alpha);
+                    dereS.setBounds(cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    dereS.draw(batch);
                 } else {
-                    batch.draw(BtnDereHover, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                  //  batch.draw(BtnDereHover, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    dereHoverS.setAlpha(MyGdxGame.alpha);
+                    dereHoverS.setBounds(cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    dereHoverS.draw(batch);
                 }
 
                 if (!attack) {
-                    batch.draw(BtnAttack, cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    //batch.draw(BtnAttack, cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    attackS.setAlpha(MyGdxGame.alpha);
+                    attackS.setBounds(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    attackS.draw(batch);
                 } else {
-                    batch.draw(BtnAttackHover, cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    //batch.draw(BtnAttackHover, cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    attackHoverS.setAlpha(MyGdxGame.alpha);
+                    attackHoverS.setBounds(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    attackHoverS.draw(batch);
                 }
 
                 if (!salto) {
-                    batch.draw(BtnSalto, cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                   // batch.draw(BtnSalto, cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    saltoS.setAlpha(MyGdxGame.alpha);
+                    saltoS.setBounds(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    saltoS.draw(batch);
                 } else {
-                    batch.draw(BtnSaltoHover, cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    //batch.draw(BtnSaltoHover, cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    saltoHoverS.setAlpha(MyGdxGame.alpha);
+                    saltoHoverS.setBounds(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                    saltoHoverS.draw(batch);
                 }
 
                 if (!speed) {
-                    batch.draw(BtnSpeed, cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
+                    //batch.draw(BtnSpeed, cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
+                    speedS.setAlpha(MyGdxGame.alpha);
+                    speedS.setBounds(cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
+                    speedS.draw(batch);
                 } else {
-                    batch.draw(BtnSpeedHover, cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
+                  //  bat
+                    //  ch.draw(BtnSpeedHover, cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
+                    saltoHoverS.setAlpha(MyGdxGame.alpha);
+                    speedHoverS.setBounds(cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
+                    speedHoverS.draw(batch);
                 }
                 if (!pause) {
-                    batch.draw(BtnPause, cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                   // batch.draw(BtnPause, cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                    pauseS.setAlpha(MyGdxGame.alpha);
+                    pauseS.setBounds(cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                    pauseS.draw(batch);
                 } else {
-                    batch.draw(BtnPauseHover, cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                  //  batch.draw(BtnPauseHover, cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                    pauseHoverS.setAlpha(MyGdxGame.alpha);
+                    pauseHoverS.setBounds(cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                    pauseHoverS.draw(batch);
 
                 }
             }
@@ -512,212 +667,193 @@ if(add.player.Muerto){
             batch.draw(PantallaSend, cam.position.x - 4.2f, cam.position.y - 2.3f - (posicionY / Pixels), 440 / Pixels, 340 / Pixels);
         }
         /*********MENUUUUUUUUUUUUUUUUUUUUUUUUUUU********/
-        if(Gdx.input.isTouched(2))
-        {
-            MyGdxGame.coins.putInteger("Coins", 99);
-            MyGdxGame.coins.flush();
+        if(MyGdxGame.isNivelProgress1) {
+            try {
+             /*   if (Gdx.input.isTouched(2)) {
+                    MyGdxGame.coins.putInteger("Coins", 99);
+                    MyGdxGame.coins.flush();
+                }
+                if (Gdx.input.isTouched(3)) {
+                    MyGdxGame.HojaVerde.putInteger("HojaVerde", 0);
+                    MyGdxGame.HojaVerde.flush();
+
+                    MyGdxGame.Fertilizantes.putInteger("Fertilizantes", 0);
+                    MyGdxGame.Fertilizantes.flush();
+
+                }*/
+                if (Jugador.isMenu) {
+                    timeHome = 0;
+                    Jugador.fondoMenu.setBounds(AddResources.cam.position.x - 3, AddResources.cam.position.y - 2, (AddResources.cam.viewportWidth / 2) + 2, (AddResources.cam.viewportHeight / 2) + 1.5f);
+                    Jugador.fondoMenu.setAlpha(0.5f);
+                    Jugador.fondoMenu.draw(batch);
+
+                    blancoS.setBounds(AddResources.cam.position.x - 3 + (10 / Pixels), (AddResources.cam.position.y - 2) + ((AddResources.cam.viewportHeight / 2) + .5f) - (10 / Pixels), 30 / Pixels, 30 / Pixels);
+                    blancoS.setAlpha(0.1f);
+                    blancoS.draw(batch);
+                    batch.draw(x, cam.position.x + 2f + (15 / Pixels), cam.position.y + 1.3f, 15 / Pixels, 15 / Pixels);
+                    salir.set(cam.position.x + 2f + (15 / Pixels), cam.position.y + 1.3f, 15 / Pixels, 15 / Pixels);
+                    if (salir.overlaps(puntero)) {
+                        Jugador.isMenu = false;
+                        Gdx.input.vibrate(100);
+                    }
+                    CantFertilizante();
+                    CantHojaVerde();
+                    String[] recoleccion;
+                    if (MyGdxGame.coins.getInteger("Coins") > 99) {
+                        MyGdxGame.coins.putInteger("Coins", 99);
+                        MyGdxGame.coins.flush();
+                    }
+                    String datos = "" + MyGdxGame.coins.getInteger("Coins");
+                    recoleccion = datos.split("");
+                    //   Gdx.app.log("Monedas",""+recoleccion[1]+" "+recoleccion[2]+" "+recoleccion[3]);
+                    batch.draw(moneda, cam.position.x + 2f - (10 / Pixels), cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                    if (recoleccion[0] == null) {
+                        recoleccion[0] = "0";
+                    }
+
+                    switch (recoleccion[0]) {
+                        case "0": {
+                            batch.draw(tcero, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                            break;
+                        }
+                        case "1": {
+                            batch.draw(tuno, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                            break;
+                        }
+                        case "2": {
+                            batch.draw(tdos, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                            break;
+                        }
+                        case "3": {
+                            batch.draw(ttres, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                            break;
+                        }
+                        case "4": {
+                            batch.draw(tcuatro, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                            break;
+                        }
+                        case "5": {
+                            batch.draw(tcinco, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                            break;
+                        }
+                        case "6": {
+                            batch.draw(tseis, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                            break;
+                        }
+                        case "7": {
+                            batch.draw(tsiete, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                            break;
+                        }
+                        case "8": {
+                            batch.draw(tocho, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                            break;
+                        }
+                        case "9": {
+                            batch.draw(tnueve, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                            break;
+                        }
+                    }
+                    try {
+                        switch (recoleccion[1]) {
+                            case "0": {
+                                batch.draw(tcero, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "1": {
+                                batch.draw(tuno, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "2": {
+                                batch.draw(tdos, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "3": {
+                                batch.draw(ttres, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "4": {
+                                batch.draw(tcuatro, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "5": {
+                                batch.draw(tcinco, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "6": {
+                                batch.draw(tseis, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "7": {
+                                batch.draw(tsiete, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "8": {
+                                batch.draw(tocho, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "9": {
+                                batch.draw(tnueve, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                        }
+                    } catch (Exception e) {
+
+                    }
+                    try {
+                        switch (recoleccion[2]) {
+                            case "0": {
+                                batch.draw(tcero, cam.position.x + 2f + (15f / Pixels), cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "1": {
+                                batch.draw(tuno, cam.position.x + 2f + (15f / Pixels), cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "2": {
+                                batch.draw(tdos, cam.position.x + 2f + (15f / Pixels), cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "3": {
+                                batch.draw(ttres, cam.position.x + 2f + (15f / Pixels), cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "4": {
+                                batch.draw(tcuatro, cam.position.x + 2f + (15f / Pixels), cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "5": {
+                                batch.draw(tcinco, cam.position.x + 2f + (15f / Pixels), cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "6": {
+                                batch.draw(tseis, cam.position.x + 2f + (15f / Pixels), cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "7": {
+                                batch.draw(tsiete, cam.position.x + 2f + (15f / Pixels), cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "8": {
+                                batch.draw(tocho, cam.position.x + 2f + (15f / Pixels), cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                            case "9": {
+                                batch.draw(tnueve, cam.position.x + 2f + (15f / Pixels), cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
+                                break;
+                            }
+                        }
+                    } catch (Exception e) {
+
+                    }
+                } else {
+                    UI(3.8f);
+                    timeHome += .2f *Gdx.graphics.getDeltaTime();
+                }
+
+            } catch (Exception e) {
+                Gdx.app.log("Error en resources", "" + e.getMessage());
+            }
         }
-        if(Gdx.input.isTouched(3))
-        {
-            MyGdxGame.HojaVerde.putInteger("HojaVerde", 0);
-            MyGdxGame.HojaVerde.flush();
-
-            MyGdxGame.Fertilizantes.putInteger("Fertilizantes", 0);
-            MyGdxGame.Fertilizantes.flush();
-
-        }
-        if(Jugador.isMenu)
-        {
-            Jugador.fondoMenu.setBounds(AddResources.cam.position.x-3, AddResources.cam.position.y-2,(AddResources.cam.viewportWidth/2)+2,(AddResources.cam.viewportHeight/2)+1.5f);
-            Jugador.fondoMenu.setAlpha(0.5f);
-            Jugador.fondoMenu.draw(batch);
-
-            blancoS.setBounds(AddResources.cam.position.x-3+(10/Pixels),(AddResources.cam.position.y-2)+((AddResources.cam.viewportHeight/2)+.5f)-(10/Pixels),30/Pixels,30/Pixels);
-            blancoS.setAlpha(0.1f);
-            blancoS.draw(batch);
-            batch.draw(x,cam.position.x+2f+(15/Pixels), cam.position.y + 1.3f, 15 / Pixels, 15 / Pixels);
-            salir.set(cam.position.x+2f+(15/Pixels), cam.position.y + 1.3f, 15 / Pixels, 15 / Pixels);
-            if(salir.overlaps(puntero))
-            {
-                Jugador.isMenu = false;
-                Gdx.input.vibrate(100);
-            }
-            CantFertilizante();
-            CantHojaVerde();
-            String[]recoleccion;
-            if(MyGdxGame.coins.getInteger("Coins") > 99)
-            {
-                MyGdxGame.coins.putInteger("Coins",99);
-                MyGdxGame.coins.flush();
-            }
-            String datos = ""+MyGdxGame.coins.getInteger("Coins");
-            recoleccion = datos.split("");
-            //   Gdx.app.log("Monedas",""+recoleccion[1]+" "+recoleccion[2]+" "+recoleccion[3]);
-            batch.draw(moneda, cam.position.x + 2f-(10/Pixels), cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
-            if(recoleccion[0]== null) {
-                recoleccion[0] = "0";
-            }
-
-            switch (recoleccion[0]) {
-                case "0": {
-                    batch.draw(tcero, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
-                    break;
-                }
-                case "1": {
-                    batch.draw(tuno, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
-                    break;
-                }
-                case "2": {
-                    batch.draw(tdos, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
-                    break;
-                }
-                case "3": {
-                    batch.draw(ttres, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
-                    break;
-                }
-                case "4": {
-                    batch.draw(tcuatro, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
-                    break;
-                }
-                case "5": {
-                    batch.draw(tcinco, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
-                    break;
-                }
-                case "6": {
-                    batch.draw(tseis, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
-                    break;
-                }
-                case "7": {
-                    batch.draw(tsiete, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
-                    break;
-                }
-                case "8": {
-                    batch.draw(tocho, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
-                    break;
-                }
-                case "9": {
-                    batch.draw(tnueve, cam.position.x + 2f, cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
-                    break;
-                }
-            }
-            try { switch(recoleccion[1])
-            {
-                case "0":
-                {
-                    batch.draw(tcero,cam.position.x+2f,  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "1":
-                {
-                    batch.draw(tuno,cam.position.x+2f,  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "2":
-                {
-                    batch.draw(tdos,cam.position.x+2f,  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "3":
-                {
-                    batch.draw(ttres,cam.position.x+2f,  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "4":
-                {
-                    batch.draw(tcuatro,cam.position.x+2f,  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "5":
-                {
-                    batch.draw(tcinco,cam.position.x+2f,  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "6":
-                {
-                    batch.draw(tseis,cam.position.x+2f,  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "7":
-                {
-                    batch.draw(tsiete,cam.position.x+2f,  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "8":
-                {
-                    batch.draw(tocho,cam.position.x+2f,  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "9":
-                {
-                    batch.draw(tnueve,cam.position.x+2f,  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-            }}catch(Exception e)
-            {
-
-            }
-            try { switch(recoleccion[2])
-            {
-                case "0":
-                {
-                    batch.draw(tcero,cam.position.x+2f+(15f/Pixels),  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "1":
-                {
-                    batch.draw(tuno,cam.position.x+2f+(15f/Pixels),  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "2":
-                {
-                    batch.draw(tdos,cam.position.x+2f+(15f/Pixels),  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "3":
-                {
-                    batch.draw(ttres,cam.position.x+2f+(15f/Pixels),  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "4":
-                {
-                    batch.draw(tcuatro,cam.position.x+2f+(15f/Pixels),  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "5":
-                {
-                    batch.draw(tcinco,cam.position.x+2f+(15f/Pixels),  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "6":
-                {
-                    batch.draw(tseis,cam.position.x+2f+(15f/Pixels),  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "7":
-                {
-                    batch.draw(tsiete,cam.position.x+2f+(15f/Pixels),  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "8":
-                {
-                    batch.draw(tocho,cam.position.x+2f+(15f/Pixels),  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-                case "9":
-                {
-                    batch.draw(tnueve,cam.position.x+2f+(15f/Pixels),  cam.position.y-1.9f,10/Pixels,10/Pixels);
-                    break;
-                }
-            }}catch(Exception e)
-            {
-
-            }
-        }else
-        {
-            UI(3.8f);
-        }
-
-
         batch.end();
     }
 
@@ -898,6 +1034,8 @@ if(add.player.Muerto){
     public void CantFertilizante()
     {
         batch.draw(fertilizante,AddResources.cam.position.x-3+(10/Pixels),(AddResources.cam.position.y-2)+((AddResources.cam.viewportHeight/2)+.5f)-(10/Pixels),30/Pixels,30/Pixels);
+        batch.draw(costo1,AddResources.cam.position.x-3+(15/Pixels),(AddResources.cam.position.y-2)+((AddResources.cam.viewportHeight/2)+.5f)-(20/Pixels),20/Pixels,10/Pixels);
+
         batch.draw(fertilizante,cam.position.x - 3.8f, cam.position.y + 1.9f,10/Pixels,10/Pixels);
         fertilizanteRect.set(AddResources.cam.position.x-3+(10/Pixels),(AddResources.cam.position.y-2)+((AddResources.cam.viewportHeight/2)+.5f)-(10/Pixels),30/Pixels,30/Pixels);
         if(puntero.overlaps(fertilizanteRect))
@@ -907,12 +1045,12 @@ if(add.player.Muerto){
                 Gdx.input.vibrate(100);
                 int monedasActuales = MyGdxGame.coins.getInteger("Coins");
                 int fertilizante = MyGdxGame.Fertilizantes.getInteger("Fertilizantes");
-                if(monedasActuales >= 10 && fertilizante < 99) {
+                if(monedasActuales >= 3 && fertilizante < 99) {
 
                     fertilizante++;
                     MyGdxGame.Fertilizantes.putInteger("Fertilizantes", fertilizante);
                     MyGdxGame.Fertilizantes.flush();
-                    monedasActuales -= 10;
+                    monedasActuales -= 3;
                     MyGdxGame.coins.putInteger("Coins", monedasActuales);
                     MyGdxGame.coins.flush();
                     iteratorBuy++;
@@ -1097,6 +1235,10 @@ if(add.player.Muerto){
         HojaV.setBounds(AddResources.cam.position.x - 3 + (10 / Pixels) + (40 / Pixels), (AddResources.cam.position.y - 2) + ((AddResources.cam.viewportHeight / 2) + .5f) - (10 / Pixels), 30 / Pixels, 30 / Pixels);
         HojaV.setAlpha(alphaHV);
         HojaV.draw(batch);
+        costo2S = new Sprite(costo2);
+        costo2S.setBounds(AddResources.cam.position.x - 3 + (55 / Pixels), (AddResources.cam.position.y - 2) + ((AddResources.cam.viewportHeight / 2) + .5f) - (20 / Pixels), 20/ Pixels, 10 / Pixels);
+        costo2S.setAlpha(alphaHV);
+        costo2S.draw(batch);
         batch.draw(HojaVerde,(cam.position.x - 3.8f) + (50 / Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
         HojaVerdeRec.set(AddResources.cam.position.x - 3 + (10 / Pixels) + (40 / Pixels), (AddResources.cam.position.y - 2) + ((AddResources.cam.viewportHeight / 2) + .5f) - (10 / Pixels), 30 / Pixels, 30 / Pixels);
         int monedasActuales = MyGdxGame.coins.getInteger("Coins");
@@ -1210,6 +1352,8 @@ if(add.player.Muerto){
         tocho.dispose();
         tnueve.dispose();
         shader.dispose();
+        costo1.dispose();
+        costo2.dispose();
     }
     public void over() {
         try {
@@ -1250,11 +1394,22 @@ if(add.player.Muerto){
                 AddActors.player.setSpeedButton(false);
                 speed = false;
             }
-            if (puntero.overlaps(PauseRect) || puntero2.overlaps(PauseRect)) {
-                // game.setScreen(new Menu(game));
-                pause = true;
-            } else {
-                pause = false;
+            if(timeHome >= 1) {
+                if (puntero.overlaps(PauseRect) || puntero2.overlaps(PauseRect)) {
+                    Jugador.isMenu = false;
+                    Jugador.istouchTienda = false;
+                    Jugador.istouchTienda2 = false;
+                    Jugador.istouchTienda3 = false;
+                    Jugador.istouchTienda4 = false;
+
+                    Menu.id = 1;
+                    MyGdxGame.isNivelProgress1 = false
+                    ;
+                    AddResourcesOfMenu.game.setScreen(new Menu(AddResourcesOfMenu.game));
+                    pause = true;
+                } else {
+                    pause = false;
+                }
             }
         }catch(Exception e){}
     }

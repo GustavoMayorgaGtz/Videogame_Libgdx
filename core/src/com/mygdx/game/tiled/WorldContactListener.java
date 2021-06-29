@@ -35,7 +35,7 @@ try {
         add.player.setSpiderLeft(false);
         add.player.setSpiderRight(false);
         addR.tocoPiso = true;
-        Gdx.app.log("Toco piso","pisooooo");
+
     }
     try {
 
@@ -409,7 +409,7 @@ try {
     if (areCollided(contact, "PisoBase", "Jugador")) {
 
         addR.tocoPiso = false;
-        Gdx.app.log("No toco ", "piso");
+
     }
 }catch(Exception e)
 {

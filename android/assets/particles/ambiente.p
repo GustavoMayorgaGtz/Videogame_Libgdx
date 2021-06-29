@@ -147,7 +147,7 @@ aligned: false
 additive: true
 behind: false
 - Image Paths -
-./images/A.png
+/C:/Users/dell/AndroidStudioProjects/project/android/assets/images/A.png
 
 
 dos
@@ -283,7 +283,7 @@ aligned: false
 additive: true
 behind: false
 - Image Paths -
-./images/CuboP.png
+/C:/Users/dell/AndroidStudioProjects/project/android/assets/images/CuboP.png
 
 
 tres
@@ -435,7 +435,7 @@ aligned: false
 additive: true
 behind: false
 - Image Paths -
-./images/A.png
+/C:/Users/dell/AndroidStudioProjects/project/android/assets/images/A.png
 
 
 cuatro
@@ -589,7 +589,7 @@ aligned: false
 additive: true
 behind: false
 - Image Paths -
-./images/CuboP.png
+/C:/Users/dell/AndroidStudioProjects/project/android/assets/images/CuboP.png
 
 
 cinco
@@ -741,7 +741,7 @@ aligned: false
 additive: true
 behind: false
 - Image Paths -
-./images/A.png
+/C:/Users/dell/AndroidStudioProjects/project/android/assets/images/A.png
 
 
 seis
@@ -895,4 +895,4 @@ aligned: false
 additive: true
 behind: false
 - Image Paths -
-./images/CuboP.png
+/C:/Users/dell/AndroidStudioProjects/project/android/assets/images/CuboP.png

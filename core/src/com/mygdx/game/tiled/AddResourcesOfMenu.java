@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Menu;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Nivel1Progresion;
 import com.mygdx.game.Niveo1T;
 
 import java.util.ArrayList;
@@ -125,7 +126,6 @@ numeros.getData().scale(1/Pixels);
         batch.begin();
         batch.draw(Menu.puntero,PunteroPosition.x-(5f/Pixels),PunteroPosition.y-(5f/Pixels),10/Pixels,10/Pixels);
         batch.draw(Menu.Monedas,cam.position.x+4f+(35/Pixels)*2,  cam.position.y+2f,30/Pixels,30/Pixels);
-
 
         Menu.Puntero.set(PunteroPosition.x-(5/Pixels),PunteroPosition.y-(5/Pixels),10/Pixels,10/Pixels);
         String[]recoleccion;
@@ -297,6 +297,14 @@ numeros.getData().scale(1/Pixels);
         {
 
         }
+
+        batch.draw(Menu.Home,Menu.vec4.x,Menu.vec4.y,Menu.vec4.width,Menu.vec4.height);
+        if(Menu.Puntero.overlaps(Menu.vec4))
+        {
+            MyGdxGame.isNivelProgress1 = true;
+            game.setScreen(new Nivel1Progresion(game));
+        }
+
         batch.end();
     }
 

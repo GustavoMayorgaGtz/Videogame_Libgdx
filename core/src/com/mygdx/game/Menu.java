@@ -32,6 +32,7 @@ public class Menu implements Screen {
 
     public static Texture  puntero;
     Texture uno, dos,tres,cuatro,cinco;
+    public static Texture Home;
     public static Texture Monedas;
     private ArrayList<Niveles> NivelesMenu = new ArrayList<Niveles>();
     public static Vector2 position;//Cordenadas del icono
@@ -39,6 +40,8 @@ public class Menu implements Screen {
     public static Rectangle Puntero;
 
     public static int id = 1;
+
+    public static Rectangle vec4;
 
     public Menu(MyGdxGame game) {
         this.game = game;
@@ -57,6 +60,7 @@ public class Menu implements Screen {
         tres = new Texture("Menu3.png");
         cuatro = new Texture("Menu4.png");
         cinco = new Texture("Menu5.png");
+        Home = new Texture("MenuHome.png");
         Monedas = new Texture("MonedaR.png");
         puntero = new Texture("Punto.png");
 
@@ -68,6 +72,11 @@ public class Menu implements Screen {
         }
         for (Niveles NivelesMenu : NivelesMenu) {
             addR.stage.addActor(NivelesMenu);
+        }
+
+        for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            vec4 = new Rectangle(rect.getX()/Pixels,rect.getY()/Pixels,rect.getWidth()/Pixels,rect.getHeight()/Pixels);
         }
 
         Puntero = new Rectangle();
@@ -95,10 +104,7 @@ public class Menu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderer.render();
         addR.addRender(delta);
-        if(Gdx.input.isTouched(2))
-        {
-            game.setScreen(new Nivel1Progresion(game));
-        }
+
                 }
 
 
@@ -129,5 +135,11 @@ public class Menu implements Screen {
         addR.detachResources();
         puntero.dispose();
         Monedas.dispose();
+        Home.dispose();
+        uno.dispose();
+        dos.dispose();
+        tres.dispose();
+        cuatro.dispose();
+        cinco.dispose();
     }
 }
