@@ -115,12 +115,14 @@ if(Menu.Puntero.overlaps(rect))
             {
 
                 AddResourcesOfMenu.game.setScreen(new Nivel0(AddResourcesOfMenu.game));
+                MyGdxGame.isNivelProgress1 = false;
                 break;
             }
             case 2:
             {
                 if(levelComplete >= 1) {
                     AddResourcesOfMenu.game.setScreen(new Nivel1(AddResourcesOfMenu.game));
+                    MyGdxGame.isNivelProgress1 = false;
                 }
                 break;
             }
@@ -128,6 +130,7 @@ if(Menu.Puntero.overlaps(rect))
             {
                 if(levelComplete >= 2) {
                     AddResourcesOfMenu.game.setScreen(new Nivel2(AddResourcesOfMenu.game));
+                    MyGdxGame.isNivelProgress1 = false;
                 }
                 break;
             }
@@ -135,6 +138,7 @@ if(Menu.Puntero.overlaps(rect))
             {
                 if(levelComplete >= 3) {
                     AddResourcesOfMenu.game.setScreen(new Nivel5(AddResourcesOfMenu.game));
+                    MyGdxGame.isNivelProgress1 = false;
                 }
                 break;
             }
@@ -142,6 +146,7 @@ if(Menu.Puntero.overlaps(rect))
             {
                 if(levelComplete >= 4) {
                     AddResourcesOfMenu.game.setScreen(new Nivel6(AddResourcesOfMenu.game));
+                    MyGdxGame.isNivelProgress1 = false;
                 }
                 break;
             }

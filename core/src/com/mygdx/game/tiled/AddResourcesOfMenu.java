@@ -302,6 +302,7 @@ numeros.getData().scale(1/Pixels);
         if(Menu.Puntero.overlaps(Menu.vec4))
         {
             MyGdxGame.isNivelProgress1 = true;
+            AddResourcesOfMenu.SelectLevel = 0;
             game.setScreen(new Nivel1Progresion(game));
         }
 

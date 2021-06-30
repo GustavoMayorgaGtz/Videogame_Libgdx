@@ -405,7 +405,7 @@ try {
 
     @Override
     public void endContact(Contact contact) {
-try {
+       /* try {
     if (areCollided(contact, "PisoBase", "Jugador")) {
 
         addR.tocoPiso = false;
@@ -414,7 +414,7 @@ try {
 }catch(Exception e)
 {
     addR.tocoPiso = false;
-}
+}*/
     }
 
     @Override

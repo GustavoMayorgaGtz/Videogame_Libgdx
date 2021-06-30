@@ -1,7 +1,9 @@
 package com.mygdx.game.tiled;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -16,6 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
 
 import org.omg.CORBA.PolicyOperations;
+
+import java.util.Random;
 
 import static com.mygdx.game.MyGdxGame.Pixels;
 
@@ -32,7 +36,11 @@ public abstract class InteractivePinchos extends Actor implements Disposable {
     float MaxVelX = 1f;
     float MinVelX = -1f;
     Texture texture;
-
+    ParticleEffect polvo;
+    float timeEnd;
+    Random random;
+int x;
+float timeCaer;
 
     public InteractivePinchos(World world, Rectangle bounds, Texture texture)    {
         this.world = world;
@@ -75,23 +83,39 @@ public abstract class InteractivePinchos extends Actor implements Disposable {
         ////////////////////////////////
         setSize(12/Pixels,6/Pixels);
 
+        polvo = new ParticleEffect();
+        polvo.load(Gdx.files.internal("particles/Salto.p"),Gdx.files.internal("images"));
+        polvo.scaleEffect(.2f/Pixels);
+        random = new Random();
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         setPosition(body.getPosition().x-(6)/Pixels,body.getPosition().y-6/Pixels);
-        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
+        batch.draw(texture, getX()+(x/Pixels), getY(), getWidth(), getHeight());
+
+     //   polvo.scaleEffect(.8f/Pixels);
+
+        if (abajo) {
+            polvo.setPosition(getX()+.20f, getY()+.10f);
+            timeEnd = Gdx.graphics.getDeltaTime();
+            polvo.draw(batch, timeEnd);
+            x = random.nextInt(3);
+            timeCaer += 1*Gdx.graphics.getDeltaTime();
+        }
 }
 
     @Override public void act(float delta) {
-       Movimientos();
+        Movimientos();
+        polvo.update(delta);
 
     }
 
     public void Movimientos()
     {
-        if (abajo) {
-            body.setLinearVelocity(0,-2f);
+        if (timeCaer > 1) {
+
+            body.setLinearVelocity(0,-4f);
             }
     }
 
@@ -106,6 +130,7 @@ public abstract class InteractivePinchos extends Actor implements Disposable {
         map.dispose();
         body.destroyFixture(fixture);
         world.destroyBody(body);
+        polvo.dispose();
     }
 
 }

@@ -517,19 +517,18 @@
  <objectgroup id="36" name="In"/>
  <objectgroup id="37" name="Out"/>
  <objectgroup id="38" name="Coins">
-  <object id="600" x="1212.33" y="1004.67" width="18.3333" height="18.6667"/>
-  <object id="601" x="1157.67" y="709" width="20.3333" height="18.6667"/>
+  <object id="600" x="1212.33" y="1004.67" width="13.6666" height="14.6667"/>
+  <object id="601" x="1157.67" y="709" width="15.6666" height="14"/>
   <object id="656" x="1350.5" y="863.667" width="20.3333" height="18.6667"/>
-  <object id="687" x="1089.33" y="825.667" width="19" height="19.3333"/>
-  <object id="688" x="1112.83" y="830.333" width="19" height="19.3333"/>
-  <object id="689" x="1304.17" y="930.333" width="19" height="19.3333"/>
-  <object id="690" x="1111.83" y="713.667" width="19" height="19.3333"/>
-  <object id="691" x="1193.17" y="714.333" width="19" height="19.3333"/>
-  <object id="692" x="1240.5" y="1001.67" width="19" height="19.3333"/>
-  <object id="695" x="1322.5" y="862.333" width="19" height="19.3333"/>
-  <object id="696" x="1379.17" y="863.667" width="19" height="19.3333"/>
-  <object id="697" x="1047.83" y="711" width="19" height="19.3333"/>
-  <object id="698" x="1047.83" y="688.333" width="19" height="19.3333"/>
+  <object id="687" x="1089.33" y="825.667" width="16.3333" height="16"/>
+  <object id="688" x="1112.83" y="830.333" width="14.3333" height="14.6666"/>
+  <object id="690" x="1111.83" y="713.667" width="15" height="14"/>
+  <object id="691" x="1193.17" y="714.333" width="14.3333" height="13.3333"/>
+  <object id="692" x="1240.5" y="1001.67" width="14.3333" height="14"/>
+  <object id="695" x="1322.5" y="862.333" width="14.3333" height="13.3333"/>
+  <object id="696" x="1379.17" y="863.667" width="13.6667" height="14"/>
+  <object id="697" x="1047.83" y="711" width="14.3333" height="13.3333"/>
+  <object id="698" x="1047.83" y="688.333" width="13.6667" height="13.3333"/>
  </objectgroup>
  <objectgroup id="39" name="Button2" visible="0">
   <object id="451" x="247" y="798">
@@ -581,10 +580,10 @@
  <objectgroup id="59" name="AR"/>
  <objectgroup id="60" name="AA"/>
  <objectgroup id="61" name="CamaraX">
-  <object id="703" x="799.333" y="710" width="857.333" height="188"/>
+  <object id="703" x="808" y="712" width="857.333" height="198"/>
   <object id="704" x="922" y="628.667" width="339.333" height="82.6667"/>
   <object id="705" x="1367.33" y="642" width="273.333" height="76.6667"/>
-  <object id="706" x="1248.67" y="893.333" width="228.667" height="183.333"/>
+  <object id="706" x="1247.34" y="892" width="228.667" height="183.333"/>
  </objectgroup>
  <layer id="1" name="Capa de patrones 1" width="400" height="80">
   <data encoding="csv">

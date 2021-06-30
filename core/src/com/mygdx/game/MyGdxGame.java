@@ -31,6 +31,7 @@ public class MyGdxGame extends Game{
     public static boolean isNivelProgress1;
     public static Preferences ColorControl;
     public static Preferences Alpha;
+    public static boolean NoSeguirFondo;
 
 	MyGdxGame game;
 	public static final float Pixels = 30;
@@ -59,7 +60,7 @@ public class MyGdxGame extends Game{
 		manager = new AssetManager();
 
 Gdx.app.getGraphics().getFramesPerSecond();
-		//manager.load("correrizq.p", ParticleEffect.class);
+
 		manager.load("greatBeattle.ogg", Music.class);
 		manager.load("Fuego.mp3", Music.class);
 		manager.load("PisoTime.mp3",Music.class);

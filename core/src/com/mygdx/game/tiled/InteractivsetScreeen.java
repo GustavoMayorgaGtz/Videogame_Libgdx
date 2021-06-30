@@ -17,6 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.Menu;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Nivel1Progresion;
+import com.mygdx.game.Nivel2Progresion;
 import com.mygdx.game.actors.Fuego;
 import com.mygdx.game.actors.Jugador;
 
@@ -120,7 +122,11 @@ public abstract class InteractivsetScreeen extends Actor implements Disposable {
             MyGdxGame.CoinObjects = 0;
             AddActors.button.activeCaja = false;
             AddActors.button2.isTouch2 = false;
-            AddActors.game.setScreen(new Menu(AddActors.game));
+            if(AddResourcesOfMenu.SelectLevel == 0) {
+                AddActors.game.setScreen(new Nivel2Progresion(AddActors.game));
+            }else {
+                AddActors.game.setScreen(new Menu(AddActors.game));
+            }
             Send = false;
         }
     }
