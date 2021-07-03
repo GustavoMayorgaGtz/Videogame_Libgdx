@@ -32,6 +32,19 @@ public class MyGdxGame extends Game{
     public static Preferences ColorControl;
     public static Preferences Alpha;
     public static boolean NoSeguirFondo;
+    public static boolean isIsNivelProgress2;
+
+    /*Tierras*/
+	public static Preferences tierra1;
+	public static Preferences tierra2;
+	public static Preferences tierra3;
+	public static Preferences tierra4;
+	public static Preferences tierra5;
+	public static Preferences agua1;
+	public static Preferences agua2;
+	public static Preferences agua3;
+	public static Preferences agua4;
+	public static Preferences agua5;
 
 	MyGdxGame game;
 	public static final float Pixels = 30;
@@ -56,6 +69,28 @@ public class MyGdxGame extends Game{
 		Mute = Gdx.app.getPreferences("Mute");
 		ColorControl = Gdx.app.getPreferences("Color");
 		Alpha = Gdx.app.getPreferences("Alpha");
+		/********************Tierras****************/
+		tierra1 = Gdx.app.getPreferences("X");
+		tierra1 = Gdx.app.getPreferences("Y");
+		tierra2 = Gdx.app.getPreferences("X");
+		tierra2 = Gdx.app.getPreferences("Y");
+		tierra3 = Gdx.app.getPreferences("X");
+		tierra3 = Gdx.app.getPreferences("Y");
+		tierra4 = Gdx.app.getPreferences("X");
+		tierra4 = Gdx.app.getPreferences("Y");
+		tierra5 = Gdx.app.getPreferences("X");
+		tierra5 = Gdx.app.getPreferences("Y");
+		/******************Aguas******************/
+		agua1 = Gdx.app.getPreferences("X");
+		agua1 = Gdx.app.getPreferences("Y");
+		agua2 = Gdx.app.getPreferences("X");
+		agua2 = Gdx.app.getPreferences("Y");
+		agua3 = Gdx.app.getPreferences("X");
+		agua3 = Gdx.app.getPreferences("Y");
+		agua4 = Gdx.app.getPreferences("X");
+		agua4 = Gdx.app.getPreferences("Y");
+		agua5 = Gdx.app.getPreferences("X");
+		agua5 = Gdx.app.getPreferences("Y");
 
 		manager = new AssetManager();
 

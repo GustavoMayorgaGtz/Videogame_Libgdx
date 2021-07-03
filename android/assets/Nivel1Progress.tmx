@@ -339,17 +339,13 @@
   <object id="579" x="597.333" y="470.667" width="37.3333" height="520"/>
   <object id="580" x="546.667" y="401.333" width="930.667" height="82.6667"/>
  </objectgroup>
- <objectgroup color="#ffaaff" id="23" name="EnemigoWalk">
-  <object id="556" x="1102.5" y="917.667" width="29.3333" height="26.3333"/>
- </objectgroup>
+ <objectgroup color="#ffaaff" id="23" name="EnemigoWalk"/>
  <objectgroup id="24" name="ButtonObject1"/>
  <objectgroup id="25" name="Button1"/>
  <objectgroup id="27" name="Aplastador"/>
  <objectgroup id="28" name="PinchosGravity"/>
  <objectgroup id="31" name="AgarraderaCircular"/>
- <objectgroup id="32" name="EnemigoJump">
-  <object id="555" x="970" y="903.5" width="51.5" height="39.5"/>
- </objectgroup>
+ <objectgroup id="32" name="EnemigoJump"/>
  <objectgroup id="33" name="RayoFuego"/>
  <objectgroup id="36" name="In">
   <object id="576" x="861.5" y="718.5" width="29.5" height="34.5"/>

@@ -70,9 +70,9 @@
      public void update(float d)
      {
 
-         handleInput(d);
-         renderer2.setView(addR.cam);
-         renderer.setView(addR.cam);
+         addR.cam.update();
+         renderer.setView(addR.cam.combined,addR.cam.position.x-((240/Pixels)),addR.cam.position.y-(140/Pixels),(240/ Pixels)*2, (140/Pixels)*2);
+         renderer2.setView(addR.cam.combined,addR.cam.position.x-((240/Pixels)),addR.cam.position.y-(140/Pixels),(240/ Pixels)*2, (140/Pixels)*2);
 
      }
 
@@ -85,6 +85,7 @@
          Gdx.gl.glBlendFunc(GL30.GL_SRC_ALPHA, GL30.GL_ONE_MINUS_SRC_ALPHA);
          batch.begin();
          MyGdxGame.isNivelProgress1 = false;
+         game.isIsNivelProgress2 = false;
          TextureRegion fondoA = fondoAnimation.getKeyFrame(time,true);
 
 

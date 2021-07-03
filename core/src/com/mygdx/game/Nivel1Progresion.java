@@ -62,9 +62,9 @@
          }
          fondoAnimation = new Animation<TextureRegion>(0.6f,FramesFondo);
 
-         shader = new ShaderProgram(Gdx.files.internal("Shaders/vertex.glsl"),Gdx.files.internal("Shaders/fragment.glsl"));
+         /*shader = new ShaderProgram(Gdx.files.internal("Shaders/vertex.glsl"),Gdx.files.internal("Shaders/fragment.glsl"));
          shader2 = new ShaderProgram(Gdx.files.internal("Shaders/vertex2.glsl"),Gdx.files.internal("Shaders/fragment2.glsl"));
-
+*/
  }
 
      @Override
@@ -74,8 +74,9 @@
 
      public void update()
      {
-         renderer.setView(addR.cam);
-         renderer2.setView(addR.cam);
+         addR.cam.update();
+         renderer.setView(addR.cam.combined,addR.cam.position.x-((240/Pixels)),addR.cam.position.y-(140/Pixels),(240/ Pixels)*2, (140/Pixels)*2);
+         renderer2.setView(addR.cam.combined,addR.cam.position.x-((240/Pixels)),addR.cam.position.y-(140/Pixels),(240/ Pixels)*2, (140/Pixels)*2);
      }
 
      @Override
@@ -85,6 +86,7 @@
          Gdx.gl.glClearColor(2/255f,13/255f,31/255f,1);//2/255f,13/255f,31/255f
          Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
          MyGdxGame.isNivelProgress1 = true;
+         game.isIsNivelProgress2 = false;
          batch.begin();
 
          if(Jugador.Espadazo) {

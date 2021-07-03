@@ -111,7 +111,7 @@ public class Jugador extends Actor {
     float timeEspadazoEffect;
     //
     public static boolean dereD,izqD;//se mandan a la clase parajo
-    boolean derecha = true, izquierda = false;
+    public static boolean derecha = true, izquierda;
    public static boolean saltar = true;
    public static boolean Movimiento = false;
    public static boolean desMov;

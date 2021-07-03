@@ -67,8 +67,9 @@
 
      public void update(float d)
      {
-         renderer2.setView(addR.cam);
-         renderer.setView(addR.cam);
+         addR.cam.update();
+         renderer.setView(addR.cam.combined,addR.cam.position.x-((240/Pixels)),addR.cam.position.y-(140/Pixels),(240/ Pixels)*2, (140/Pixels)*2);
+         renderer2.setView(addR.cam.combined,addR.cam.position.x-((240/Pixels)),addR.cam.position.y-(140/Pixels),(240/ Pixels)*2, (140/Pixels)*2);
      }
 
      @Override
@@ -79,6 +80,7 @@
          Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
          batch.begin();
          MyGdxGame.isNivelProgress1 = false;
+         game.isIsNivelProgress2 = false;
          TextureRegion fondoA = fondoAnimation.getKeyFrame(time,true);
          batch.draw(fondoA,(addR.cam.position.x-100)+x,addR.cam.position.y-50,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
          batch.end();

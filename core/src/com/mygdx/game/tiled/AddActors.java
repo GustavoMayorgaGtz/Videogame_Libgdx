@@ -27,10 +27,14 @@ import com.mygdx.game.actors.Sierra2;
 import com.mygdx.game.actors.Sierra3;
 import com.mygdx.game.actors.Sierra4;
 import com.mygdx.game.actors.Sierra5;
+import com.mygdx.game.actors.Tierra1;
 import com.mygdx.game.actors.particulas;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mygdx.game.MyGdxGame.Pixels;
+import static com.mygdx.game.MyGdxGame.tierra1;
 
 public class AddActors {
     World world;
@@ -84,6 +88,7 @@ public class AddActors {
     private List<PisoButton2> piso2 = new ArrayList<PisoButton2>();
     private List<ParedesButton2> pared2 = new ArrayList<ParedesButton2>();
 
+
     public static int i = 0;
     public static  MyGdxGame game;
     private Stage stage;
@@ -96,6 +101,9 @@ public class AddActors {
     int iteratorNoCamX = 0;
     int iteratorCamX = 0;
     int iteratorArboles = 0;//cuenta los arboles y si hay mas de uno se añade el personaje sino marca error
+    int iteratorNoBuild = 0;
+    int iteratorBuild = 0;
+   public static int iteratorpisos = 0;
     List<Cajas> cajas = new ArrayList<Cajas>();
     public AddActors(World world, TiledMap map, MyGdxGame game, Stage stage)
     {
@@ -192,6 +200,29 @@ public class AddActors {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 new Piso(world, map, rect);
             }
+           if(MyGdxGame.isIsNivelProgress2) {
+               Tierra1.rects = new ArrayList<Rectangle>();
+               Tierra1.noBuild = new ArrayList<>();
+               Tierra1.Build = new ArrayList<>();
+
+               for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
+                   Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                   Tierra1.rects.add(iteratorpisos, new Rectangle(rect.x / Pixels, rect.y / Pixels, rect.width / Pixels, (rect.height +10f)  / Pixels));
+                   //Gdx.app.log("Si paso por aqui", "trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                   iteratorpisos++;
+               }
+               for (MapObject object : map.getLayers().get(55).getObjects().getByType(RectangleMapObject.class)) {
+                   Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                   Tierra1.noBuild.add(iteratorNoBuild, new Rectangle(rect.x / Pixels, rect.y / Pixels, rect.width / Pixels, (rect.height +10f)  / Pixels));
+                   iteratorNoBuild++;
+               }
+               for (MapObject object : map.getLayers().get(56).getObjects().getByType(RectangleMapObject.class)) {
+                   Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                   Tierra1.Build.add(iteratorBuild, new Rectangle(rect.x / Pixels, rect.y / Pixels, rect.width / Pixels, (rect.height +10f)  / Pixels));
+                   iteratorBuild++;
+               }
+           }
+
             for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 new Techo(world, map, rect);
@@ -202,6 +233,7 @@ public class AddActors {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 pincho.add(new Pincho(world, pico, rect.x, rect.y));
             }
+
 
             for (Pincho p : pincho) {
                 stage.addActor(p);
@@ -513,7 +545,7 @@ public class AddActors {
             for (MapObject object : map.getLayers().get(48).getObjects().getByType(RectangleMapObject.class)) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 Gdx.app.log("Bloques rompibles on",""+rect.x);
-                bloquesrompibles.add(new BloquesRompibles(world,staticb,animationbloque,interatorBloques,rect.x/game.Pixels,rect.y/game.Pixels));
+                bloquesrompibles.add(new BloquesRompibles(world,staticb,animationbloque,interatorBloques,rect.x/ Pixels,rect.y/ Pixels));
                 interatorBloques++;
             }
             for (BloquesRompibles br : bloquesrompibles) {
@@ -627,6 +659,7 @@ public class AddActors {
             for (CamaraNoY cam: cameraNoY) {
                 stage.addActor(cam);
             }
+
 
 
 

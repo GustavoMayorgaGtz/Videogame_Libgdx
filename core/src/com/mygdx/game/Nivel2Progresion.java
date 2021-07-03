@@ -14,6 +14,7 @@
  import com.mygdx.game.actors.Jugador;
  import com.mygdx.game.tiled.AddActors;
  import com.mygdx.game.tiled.AddResources;
+ import com.mygdx.game.tiled.addActors2;
 
  import static com.mygdx.game.MyGdxGame.Pixels;
 
@@ -24,13 +25,14 @@
      private OrthogonalTiledMapRenderer renderer,renderer2;
 
      AddActors add;
+     addActors2 add2;
      AddResources addR;
-     Texture fondoAnimado;
+     Texture fondoAnimado,fondoAnimado2,fondoAnimado3;
      SpriteBatch batch;
      Animation<TextureRegion> fondoAnimation;
      int c = 1, r = 3;
      float time = 0;
-     float x;
+     float x,x2,x3;
      ShaderProgram shader;
      ShaderProgram shader2;
 
@@ -40,15 +42,18 @@
          mapLoader = new TmxMapLoader();
          map = mapLoader.load("Nivel2Progress.tmx");
          mapLoader2 = new TmxMapLoader();
-         map2 = mapLoader2.load("Nivel1ProgressFondo.tmx");
+         map2 = mapLoader2.load("Nivel2ProgressFondo.tmx");
          ///////////////////////////////////////////////////////////////////////////////////////////////
          addR = new AddResources();
          add = new AddActors(addR.world,map,game,addR.stage);
+         add2 = new addActors2(addR.stage);
          renderer = new OrthogonalTiledMapRenderer(map,1/Pixels);
          renderer2 = new OrthogonalTiledMapRenderer(map2,1/Pixels);
          batch = new SpriteBatch();
 
-         fondoAnimado = new Texture("FondoAnimado1.png");
+         fondoAnimado = new Texture("Fondo1.png");
+         fondoAnimado2 = new Texture("Fondo2.png");
+         fondoAnimado3 = new Texture("Fondo3.png");
          TextureRegion[][] TmpFondo = TextureRegion.split(fondoAnimado,fondoAnimado.getWidth()/c,fondoAnimado.getHeight()/r);
          TextureRegion[] FramesFondo = new TextureRegion[c * r];
          int index = 0;
@@ -73,19 +78,20 @@
 
      public void update()
      {
-         renderer.setView(addR.cam);
-         renderer2.setView(addR.cam);
+         addR.cam.update();
+         renderer.setView(addR.cam.combined,addR.cam.position.x-((240/Pixels)),addR.cam.position.y-(140/Pixels),(240/ Pixels)*2, (140/Pixels)*2);
+         renderer2.setView(addR.cam.combined,addR.cam.position.x-((240/Pixels)),addR.cam.position.y-(140/Pixels),(240/ Pixels)*2, (140/Pixels)*2);
      }
 
      @Override
      public void render(float delta) {
          time += Gdx.graphics.getDeltaTime();
 
-         Gdx.gl.glClearColor(2/255f,13/255f,31/255f,1);//2/255f,13/255f,31/255f
+         Gdx.gl.glClearColor(2/255f,13/255f,31/255f,1);
          Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
          MyGdxGame.isNivelProgress1 = true;
          batch.begin();
-
+         game.isIsNivelProgress2 = true;
          if(Jugador.Espadazo) {
              renderer.getBatch().setShader(shader);
              renderer2.getBatch().setShader(shader);
@@ -99,9 +105,12 @@
              }
          TextureRegion fondoA = fondoAnimation.getKeyFrame(time,true);
 
-
-         batch.draw(fondoA,(addR.cam.position.x-100)+x,addR.cam.position.y-50,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
-
+         batch.draw(fondoAnimado3,(addR.cam.position.x-150)+x3,addR.cam.position.y-150,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
+         batch.draw(fondoAnimado3,(addR.cam.position.x-150-(Gdx.graphics.getWidth()+150))+x3,addR.cam.position.y-150,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
+         batch.draw(fondoAnimado2,(addR.cam.position.x-150)+x2,addR.cam.position.y-100,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
+         batch.draw(fondoAnimado2,(addR.cam.position.x-150-(Gdx.graphics.getWidth()+150))+x2,addR.cam.position.y-100,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
+         batch.draw(fondoAnimado,(addR.cam.position.x-250)+x,addR.cam.position.y-50,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
+         batch.draw(fondoAnimado,(addR.cam.position.x-250-(Gdx.graphics.getWidth()+150))+x,addR.cam.position.y-50,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
          batch.end();
 
 
@@ -115,13 +124,17 @@
          if(!MyGdxGame.NoSeguirFondo&&!Jugador.Muerto) {
              if (Jugador.body.getLinearVelocity().x >= 0.60f) {
                  x -= 15f * Gdx.graphics.getDeltaTime();
+                 x2 -= 25f * Gdx.graphics.getDeltaTime();
+                 x3 -= 35 * Gdx.graphics.getDeltaTime();
              } else if (Jugador.body.getLinearVelocity().x <= -0.60f) {
                  x += 15f * Gdx.graphics.getDeltaTime();
+                 x2 += 25f * Gdx.graphics.getDeltaTime();
+                 x3 += 35f * Gdx.graphics.getDeltaTime();
              }
          }
 
 
-         update();
+
 
      }
 
@@ -155,6 +168,8 @@
       addR.detachResources();
       batch.dispose();
       fondoAnimado.dispose();
+      fondoAnimado2.dispose();
+      fondoAnimado3.dispose();
       shader.dispose();
       shader2.dispose();
 

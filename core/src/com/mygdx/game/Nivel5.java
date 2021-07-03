@@ -67,12 +67,14 @@
 
      public void update(float d)
      {
-         renderer2.setView(addR.cam);
-         renderer.setView(addR.cam);
+         addR.cam.update();
+         renderer.setView(addR.cam.combined,addR.cam.position.x-((240/Pixels)),addR.cam.position.y-(140/Pixels),(240/ Pixels)*2, (140/Pixels)*2);
+         renderer2.setView(addR.cam.combined,addR.cam.position.x-((240/Pixels)),addR.cam.position.y-(140/Pixels),(240/ Pixels)*2, (140/Pixels)*2);
      }
 
      @Override
      public void render(float delta) {
+         game.isIsNivelProgress2 = false;
          time += Gdx.graphics.getDeltaTime();
          update(delta);
          Gdx.gl.glClearColor(.05f,.05f,.05f,1);

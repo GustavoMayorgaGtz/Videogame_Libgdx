@@ -295,7 +295,7 @@ public class ArbolAzul extends Actor implements Disposable{
         setPosition(body.getPosition().x-(12/Pixels),body.getPosition().y);
 
         batch.draw(texture, getX(),getY(),getWidth(),getHeight());
-        if(MyGdxGame.HojaAzul.getInteger("HojaAzulA1") != 3) {
+        if(MyGdxGame.HojaAzul.getInteger("HojaAzulA1") != 7) {
             rectangle.set(getX(), getY(), getWidth(), getHeight());
         }
         if(rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzul")==1)
@@ -407,9 +407,11 @@ if(timeA2 >= 1) {
             }
         }
 
-        if(ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzul")==1||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==1||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==2||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==3||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==4||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==5||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==6)
+        if(ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzul")==1||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==1||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==2||rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==3||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==4||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==5||ArbolAzul.rectangle.overlaps(Jugador.jugador)&&MyGdxGame.HojaAzul.getInteger("HojaAzulA1")==6)
         {
+          //  Gdx.app.log("Arbol azul","Tocando y siendo 3");
            Jugador.istouchTienda4 = true;
+
         }else
         {
             Jugador.istouchTienda4 = false;
@@ -463,6 +465,7 @@ if(timeA2 >= 1) {
                 if(animation3.isAnimationFinished(time3))
                 {
                     timeA4 += 1*Gdx.graphics.getDeltaTime();
+
                 }
                 break;
             }

@@ -32,6 +32,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Menu;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Nivel1Progresion;
+import com.mygdx.game.Nivel2Progresion;
 import com.mygdx.game.Niveo1T;
 
 import java.util.ArrayList;
@@ -61,7 +62,11 @@ public class AddResourcesOfMenu {
     public static float camX = 3.5555568f,camY = 54.3f;
     BitmapFont numeros;
     Texture tcero,tuno,tdos,ttres,tcuatro,tcinco,tseis,tsiete,tocho,tnueve;
-
+    String[] numeros2 = new String[3];
+    String[] recoleccion = new String[2];
+    int iteratorSplit1;
+    boolean is0,is1,is2;
+    int valoractual;
 
     public AddResourcesOfMenu(MyGdxGame game ,TiledMap map) {
         this.game = game;
@@ -96,6 +101,11 @@ numeros.getData().scale(1/Pixels);
 
     public void addRender(float delta) {
 
+        if(Gdx.input.isTouched(2))
+        {
+            MyGdxGame.isIsNivelProgress2 = true;
+            game.setScreen(new Nivel2Progresion(game));
+        }
         Vector2 PunteroPosition = new Vector2();
         float PosicionY;
         if(Gdx.input.isTouched())
@@ -128,18 +138,77 @@ numeros.getData().scale(1/Pixels);
         batch.draw(Menu.Monedas,cam.position.x+4f+(35/Pixels)*2,  cam.position.y+2f,30/Pixels,30/Pixels);
 
         Menu.Puntero.set(PunteroPosition.x-(5/Pixels),PunteroPosition.y-(5/Pixels),10/Pixels,10/Pixels);
-        String[]recoleccion;
+
         if(MyGdxGame.coins.getInteger("Coins") > 99)
         {
             MyGdxGame.coins.putInteger("Coins",99);
             MyGdxGame.coins.flush();
         }
-        String datos = ""+MyGdxGame.coins.getInteger("Coins");
-        recoleccion = datos.split("");
-     //   Gdx.app.log("Monedas",""+recoleccion[1]+" "+recoleccion[2]+" "+recoleccion[3]);
-        if(recoleccion[0]== null) {
-            recoleccion[0] = "0";
+        int datos0 =  MyGdxGame.coins.getInteger("Coins");
+        String datos = String.valueOf(datos0);
+        if(datos0 != valoractual)
+        {
+            iteratorSplit1 = 0;
         }
+        if(iteratorSplit1 == 0)
+        {
+            valoractual = MyGdxGame.coins.getInteger("Coins");
+            numeros2 = datos.split("");
+            iteratorSplit1++;
+        }
+        if(numeros2[0] != null)
+        {
+            is0 = true;
+            Gdx.app.log("boolean","is0"+numeros2[0]);
+        }else {
+            is0 = false;
+        }
+        try {
+            if (numeros2[1] != null) {
+                Gdx.app.log("boolean", "is1" + numeros2[1]);
+                is1 = true;
+            } else {
+                is1 = false;
+            }
+        }catch(Exception e){
+            is1 = false;
+        }
+        try {
+            if (numeros2[2] != null) {
+                Gdx.app.log("boolean","is2"+numeros2[2]);
+                is2 = true;
+            }else
+            {
+                is2 = false;
+            }
+        }catch(Exception e){
+            is2 = false;
+        }
+
+        if(is0 && is1&&!is2)
+        {
+            recoleccion[0]= numeros2[0];
+            try {
+                recoleccion[1] = numeros2[1];
+            }catch(Exception e){}
+        } else if (is0 && !is1 && !is2) {
+            recoleccion[0] = numeros2[0];
+            recoleccion[1] = "";
+        }else if(is0&&is1&&is2)
+        {
+            recoleccion[0]= numeros2[1];
+            try
+            {
+
+                recoleccion[1] = numeros2[2];
+
+            }catch(Exception e)
+            {
+                recoleccion[1]=null;
+            }
+
+        }
+
 
             switch (recoleccion[0]) {
                 case "0": {
@@ -184,64 +253,7 @@ numeros.getData().scale(1/Pixels);
                 }
             }
 
-
-       try { switch(recoleccion[1])
-        {
-            case "0":
-            {
-                batch.draw(tcero,(cam.position.x+4f),cam.position.y+2f,30/Pixels,30/Pixels);
-                break;
-            }
-            case "1":
-            {
-                batch.draw(tuno,cam.position.x+4f,cam.position.y+2f,30/Pixels,30/Pixels);
-                break;
-            }
-            case "2":
-            {
-                batch.draw(tdos,cam.position.x+4f,cam.position.y+2f,30/Pixels,30/Pixels);
-                break;
-            }
-            case "3":
-            {
-                batch.draw(ttres,cam.position.x+4f,cam.position.y+2f,30/Pixels,30/Pixels);
-                break;
-            }
-            case "4":
-            {
-                batch.draw(tcuatro,cam.position.x+4f,cam.position.y+2f,30/Pixels,30/Pixels);
-                break;
-            }
-            case "5":
-            {
-                batch.draw(tcinco,cam.position.x+4f, cam.position.y+2f,30/Pixels,30/Pixels);
-                break;
-            }
-            case "6":
-            {
-                batch.draw(tseis,cam.position.x+4f,  cam.position.y+2f,30/Pixels,30/Pixels);
-                break;
-            }
-            case "7":
-            {
-                batch.draw(tsiete,cam.position.x+4f,  cam.position.y+2f,30/Pixels,30/Pixels);
-                break;
-            }
-            case "8":
-            {
-                batch.draw(tocho,cam.position.x+4f,   cam.position.y+2f,30/Pixels,30/Pixels);
-                break;
-            }
-            case "9":
-            {
-                batch.draw(tnueve,cam.position.x+4f,  cam.position.y+2f,30/Pixels,30/Pixels);
-                break;
-            }
-        }}catch(Exception e)
-       {
-
-       }
-        try { switch(recoleccion[2])
+        try { switch(recoleccion[1])
         {
             case "0":
             {
@@ -295,7 +307,6 @@ numeros.getData().scale(1/Pixels);
             }
         }}catch(Exception e)
         {
-
         }
 
         batch.draw(Menu.Home,Menu.vec4.x,Menu.vec4.y,Menu.vec4.width,Menu.vec4.height);
