@@ -19,7 +19,7 @@ import static com.mygdx.game.MyGdxGame.tierra1;
 
 public class Tierra1 extends Actor implements Disposable {
 
-    Rectangle Cuerpo;
+    public static Rectangle Cuerpo;
     Texture tierra;
     float x,y;
     public static ArrayList<Rectangle> rects;
@@ -29,10 +29,15 @@ public class Tierra1 extends Actor implements Disposable {
     public static boolean noToca;
     Texture rango;
     Sprite rangoS;
+
+
+    float timeDurationTouch;
+    boolean cambiarPosicion;
     public Tierra1()
     {
-        rango = new Texture("cuadradoNegro.png");
-        rangoS = new Sprite(rango);
+            rango = new Texture("cuadradoNegro.png");
+            rangoS = new Sprite(rango);
+
         Cuerpo = new Rectangle(x,y,32/ Pixels,32/Pixels);
         tierra = new Texture("Tierral.png");
         b = new Texture("White.png");
@@ -41,10 +46,13 @@ public class Tierra1 extends Actor implements Disposable {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+
+        if(MenuBuild.BuildTierra) {
         rangoS.setBounds(x-(32/Pixels),y,92/Pixels,32/Pixels);
         rangoS.setAlpha(0.5f);
         rangoS.draw(batch);
-   //   batch.draw(tierra,x,y,32/Pixels,32/Pixels);
+        }
+        batch.draw(tierra,x,y,32/Pixels,32/Pixels);
 
       for(Rectangle no: noBuild) {
           if (no.overlaps(Jugador.jugador)) {
@@ -56,31 +64,34 @@ public class Tierra1 extends Actor implements Disposable {
                 noToca = true;
             }
         }
-if(MyGdxGame.TierrasColocadas.getInteger("Posiciones") == 0 && MenuBuild.BuildTierra) {
-    for (Rectangle e : rects) {
-        if (Jugador.jugador.overlaps(e)) {
-            if (noToca) {
-                tierra1.putFloat("X", Jugador.body.getPosition().x);
-                if(AddResources.TouchConfirm) {
-                    tierra1.flush();
-                }
-                tierra1.putFloat("Y", (e.y + (5 / Pixels)) - 32 / Pixels);
-                if(AddResources.TouchConfirm) {
-                    tierra1.flush();
-                    MenuBuild.BuildTierra = false;
-                    AddResources.TouchConfirm = false;
-                    AddResources.TouchCancel = false;
-                    MyGdxGame.TierrasColocadas.getInteger("Posiciones",1);
-                    MyGdxGame.TierrasColocadas.flush();
-                }
-            }
-        }
-    }
-}
+
     }
 
     @Override
     public void act(float delta) {
+
+        if(MyGdxGame.TierrasColocadas.getInteger("Posiciones") == 0 && MenuBuild.BuildTierra) {
+            for (Rectangle e : rects) {
+                if (Jugador.jugador.overlaps(e)) {
+                    if (noToca) {
+                        MyGdxGame.TierrasColocadas.putInteger("Posiciones",1);
+                        tierra1.putFloat("X", Jugador.body.getPosition().x);
+                        if(AddResources.TouchConfirm) {
+                            tierra1.flush();
+                        }
+                        tierra1.putFloat("Y", (e.y + (5 / Pixels)) - 32 / Pixels);
+                        if(AddResources.TouchConfirm) {
+                            tierra1.flush();
+                            MyGdxGame.TierrasColocadas.flush();
+                            MenuBuild.BuildTierra = false;
+                            AddResources.TouchConfirm = false;
+                            AddResources.TouchCancel = false;
+                        }
+                    }
+                }
+            }
+        }
+
 if(MenuBuild.BuildTierra&&MyGdxGame.TierrasColocadas.getInteger("Posiciones") == 0 ) {
     for (Rectangle e : rects) {
     if (Jugador.jugador.overlaps(e)) {
@@ -93,6 +104,46 @@ if(MenuBuild.BuildTierra&&MyGdxGame.TierrasColocadas.getInteger("Posiciones") ==
     x = tierra1.getFloat("X");
     y = tierra1.getFloat("Y");
     Cuerpo.set(x,y,32/ Pixels,32/Pixels);
+}
+
+if(Cuerpo.overlaps(AddResources.puntero))
+{
+    timeDurationTouch += 1 * Gdx.graphics.getDeltaTime();
+    if(timeDurationTouch > 2)
+    {
+        cambiarPosicion = true;
+    }
+}
+
+if(cambiarPosicion)
+{
+    MenuBuild.BuildTierra = true;
+    for (Rectangle e : rects) {
+        if (Jugador.jugador.overlaps(e)) {
+            y = (e.y + (5 / Pixels)) - 32 / Pixels;
+            x = Jugador.body.getPosition().x;
+        }
+    }
+    for (Rectangle e : rects) {
+        if (Jugador.jugador.overlaps(e)) {
+            if (noToca) {
+                tierra1.putFloat("X", Jugador.body.getPosition().x);
+                if(AddResources.TouchConfirm) {
+                    tierra1.flush();
+                }
+                tierra1.putFloat("Y", (e.y + (5 / Pixels)) - 32 / Pixels);
+                if(AddResources.TouchConfirm) {
+                    tierra1.flush();
+                    MenuBuild.BuildTierra = false;
+                    MenuBuild.isMenu = false;
+                    AddResources.TouchConfirm = false;
+                    AddResources.TouchCancel = false;
+                    cambiarPosicion = false;
+                    timeDurationTouch = 0;
+                }
+            }
+        }
+    }
 }
 
     }

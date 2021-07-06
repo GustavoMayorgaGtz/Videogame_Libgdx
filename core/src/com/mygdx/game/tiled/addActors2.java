@@ -1,8 +1,6 @@
 package com.mygdx.game.tiled;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.actors.Agua1;
 import com.mygdx.game.actors.Agua2;
 import com.mygdx.game.actors.Agua3;
