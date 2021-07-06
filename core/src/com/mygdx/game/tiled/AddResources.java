@@ -22,6 +22,7 @@ import com.mygdx.game.Casa;
 import com.mygdx.game.Menu;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.actors.Jugador;
+import com.mygdx.game.actors.MenuBuild;
 import com.mygdx.game.actors.TimeZone;
 
 
@@ -81,6 +82,12 @@ public class AddResources {
     public static Rectangle PauseRect;
     boolean dere,izq,salto,attack,speed,pause;
     Sprite dereS,dereHoverS,izqS,izqHoverS,saltoS,saltoHoverS,speedS,speedHoverS,attackS,attackHoverS,pauseS,pauseHoverS;
+
+    //Controles Escondidos
+    public static boolean TouchConfirm,TouchCancel;
+    public static Rectangle confirm,cancel;
+    public static Texture Confirmar,Cancelar;
+    public static Sprite ConfirmarS,CancelarS;
     /**********/
 
     /****************/
@@ -146,6 +153,8 @@ public class AddResources {
     int iteratorSplit2;
     boolean is02,is12,is22;
     int valoractual2;
+
+
 
     public AddResources()
     {
@@ -341,7 +350,12 @@ public class AddResources {
 
 
         shader = new ShaderProgram(Gdx.files.internal("Shaders/vertex.glsl"),Gdx.files.internal("Shaders/fragment.glsl"));
-
+        confirm = new Rectangle();
+        cancel = new Rectangle();
+        Confirmar = new Texture("Confirmar.png");
+        Cancelar = new Texture("Cancelar.png");
+        ConfirmarS = new Sprite(Confirmar);
+        CancelarS = new Sprite(Cancelar);
 
     }
     public void addRender(float delta)
@@ -504,35 +518,7 @@ if(tocoPiso) {
         actualizarDatos();
 batch.begin();
         if(!Jugador.isMenu) {
-            if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
-                if (!add.player.Muerto) {
-                    if(add.player.Espadazo)
-                    {
-                        add.player.time1 = 0;
-                                widthEntero = 0;
-                    }
-                    if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT) && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || add.player.rightActive && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || add.player.rightActive && add.player.SpeedButton) {
-                        width = (add.player.time3 * 50) / 1;
-                        widthEntero = widthEntero - (width * Gdx.graphics.getDeltaTime() * 2);
-                    }
-                    if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || add.player.leftActive && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || add.player.leftActive && add.player.SpeedButton) {
-                        width = (add.player.time3 * 50) / 1;
-                        widthEntero = widthEntero - (width * Gdx.graphics.getDeltaTime() * 2);
-                    }
-                    if (widthEntero <= 5 || add.player.time3 >= 1) {
-                        widthEntero = 0;
-                    }
 
-                    if (add.player.time1 > 3 && add.player.time3 <= 0.1f) {
-                        widthEntero = 50;
-                    }
-
-                    progress.setAlpha(MyGdxGame.alpha);
-                    progress.setBounds(cam.position.x - 3.8f, cam.position.y + 1.7f, widthEntero / Pixels, 15 / Pixels);
-                    progress.draw(batch);
-                    batch.draw(contorno, cam.position.x - 3.8f, cam.position.y + 1.7f, 50 / Pixels, 15 / Pixels);
-                }
-            }
             if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
 /************************************************/
 
@@ -584,7 +570,7 @@ batch.begin();
                         batch.draw(tnueve, cam.position.x - 2, cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
                         break;
                     }
-                    default:{
+                    default: {
 
                     }
                 }
@@ -592,154 +578,272 @@ batch.begin();
                 try {
                     switch (recoleccion[1]) {
                         case "0": {
-                            batch.draw(tcero, cam.position.x - 2f+(13/Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                            batch.draw(tcero, cam.position.x - 2f + (13 / Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
                             break;
                         }
                         case "1": {
-                            batch.draw(tuno, cam.position.x - 2f+(13/Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                            batch.draw(tuno, cam.position.x - 2f + (13 / Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
                             break;
                         }
                         case "2": {
-                            batch.draw(tdos, cam.position.x - 2f+(13/Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                            batch.draw(tdos, cam.position.x - 2f + (13 / Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
                             break;
                         }
                         case "3": {
-                            batch.draw(ttres, cam.position.x - 2f+(13/Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                            batch.draw(ttres, cam.position.x - 2f + (13 / Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
                             break;
                         }
                         case "4": {
-                            batch.draw(tcuatro, cam.position.x - 2f+(13/Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                            batch.draw(tcuatro, cam.position.x - 2f + (13 / Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
                             break;
                         }
                         case "5": {
-                            batch.draw(tcinco, cam.position.x - 2f+(13/Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                            batch.draw(tcinco, cam.position.x - 2f + (13 / Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
                             break;
                         }
                         case "6": {
-                            batch.draw(tseis, cam.position.x - 2f+(13/Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                            batch.draw(tseis, cam.position.x - 2f + (13 / Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
                             break;
                         }
                         case "7": {
-                            batch.draw(tsiete, cam.position.x - 2f+(13/Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                            batch.draw(tsiete, cam.position.x - 2f + (13 / Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
                             break;
                         }
                         case "8": {
-                            batch.draw(tocho, cam.position.x - 2f+(13/Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                            batch.draw(tocho, cam.position.x - 2f + (13 / Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
                             break;
                         }
                         case "9": {
-                            batch.draw(tnueve, cam.position.x - 2f+(13/Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                            batch.draw(tnueve, cam.position.x - 2f + (13 / Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
                             break;
                         }
-                        default:{
+                        default: {
 
                         }
                     }
                 } catch (Exception e) {
 
                 }
-                batch.draw(moneda, cam.position.x - 2f+(26/Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+                batch.draw(moneda, cam.position.x - 2f + (26 / Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
 /************************************************/
 
 
-                switch (MyGdxGame.Alpha.getInteger("Alpha"))
-                {
-                    case 0:
-                    {
+                switch (MyGdxGame.Alpha.getInteger("Alpha")) {
+                    case 0: {
                         MyGdxGame.alpha = 0.2f;
                         break;
                     }
-                    case 1:
-                    {
+                    case 1: {
                         MyGdxGame.alpha = 0.5f;
                         break;
                     }
-                    case 2:
-                    {
+                    case 2: {
                         MyGdxGame.alpha = 0.8f;
                         break;
                     }
                 }
-                DereRect.set(cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                IzqRect.set(cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                SaltoRect.set(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                AttackRect.set(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                SpeedRect.set(cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
-                PauseRect.set(cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
-                if (!izq) {
-                   // batch.draw(BtnIzq, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    izqS.setAlpha(MyGdxGame.alpha);
-                    izqS.setBounds(cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    izqS.draw(batch);
-                } else {
-                   // batch.draw(BtnIzqHover, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    izqHoverS.setAlpha(MyGdxGame.alpha);
-                    izqHoverS.setBounds(cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    izqHoverS.draw(batch);
-                }
 
-                if (!dere) {
-                    //batch.draw(BtnDere, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    dereS.setAlpha(MyGdxGame.alpha);
-                    dereS.setBounds(cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    dereS.draw(batch);
-                } else {
-                  //  batch.draw(BtnDereHover, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    dereHoverS.setAlpha(MyGdxGame.alpha);
-                    dereHoverS.setBounds(cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    dereHoverS.draw(batch);
-                }
+                /**************************/
+                /**************************/
+                /**************************/
+                /**************************/
+                /**************************/
+                /**************************/
+                /**************************/
+                if (!MenuBuild.BuildTierra) {
+                    if (!MenuBuild.isMenu) {
+                        if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
+                            if (!add.player.Muerto) {
+                                if (add.player.Espadazo) {
+                                    add.player.time1 = 0;
+                                    widthEntero = 0;
+                                }
+                                if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT) && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || add.player.rightActive && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || add.player.rightActive && add.player.SpeedButton) {
+                                    width = (add.player.time3 * 50) / 1;
+                                    widthEntero = widthEntero - (width * Gdx.graphics.getDeltaTime() * 2);
+                                }
+                                if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || add.player.leftActive && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || add.player.leftActive && add.player.SpeedButton) {
+                                    width = (add.player.time3 * 50) / 1;
+                                    widthEntero = widthEntero - (width * Gdx.graphics.getDeltaTime() * 2);
+                                }
+                                if (widthEntero <= 5 || add.player.time3 >= 1) {
+                                    widthEntero = 0;
+                                }
 
-                if (!attack) {
-                    //batch.draw(BtnAttack, cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    attackS.setAlpha(MyGdxGame.alpha);
-                    attackS.setBounds(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    attackS.draw(batch);
-                } else {
-                    //batch.draw(BtnAttackHover, cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    attackHoverS.setAlpha(MyGdxGame.alpha);
-                    attackHoverS.setBounds(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    attackHoverS.draw(batch);
-                }
+                                if (add.player.time1 > 3 && add.player.time3 <= 0.1f) {
+                                    widthEntero = 50;
+                                }
 
-                if (!salto) {
-                   // batch.draw(BtnSalto, cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    saltoS.setAlpha(MyGdxGame.alpha);
-                    saltoS.setBounds(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    saltoS.draw(batch);
-                } else {
-                    //batch.draw(BtnSaltoHover, cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    saltoHoverS.setAlpha(MyGdxGame.alpha);
-                    saltoHoverS.setBounds(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                    saltoHoverS.draw(batch);
-                }
+                                progress.setAlpha(MyGdxGame.alpha);
+                                progress.setBounds(cam.position.x - 3.8f, cam.position.y + 1.7f, widthEntero / Pixels, 15 / Pixels);
+                                progress.draw(batch);
+                                batch.draw(contorno, cam.position.x - 3.8f, cam.position.y + 1.7f, 50 / Pixels, 15 / Pixels);
+                            }
+                        }
 
-                if (!speed) {
-                    //batch.draw(BtnSpeed, cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
-                    speedS.setAlpha(MyGdxGame.alpha);
-                    speedS.setBounds(cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
-                    speedS.draw(batch);
-                } else {
-                  //  bat
-                    //  ch.draw(BtnSpeedHover, cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
-                    saltoHoverS.setAlpha(MyGdxGame.alpha);
-                    speedHoverS.setBounds(cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
-                    speedHoverS.draw(batch);
-                }
-                if (!pause) {
-                   // batch.draw(BtnPause, cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
-                    pauseS.setAlpha(MyGdxGame.alpha);
-                    pauseS.setBounds(cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
-                    pauseS.draw(batch);
-                } else {
-                  //  batch.draw(BtnPauseHover, cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
-                    pauseHoverS.setAlpha(MyGdxGame.alpha);
-                    pauseHoverS.setBounds(cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
-                    pauseHoverS.draw(batch);
+                        DereRect.set(cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                        IzqRect.set(cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                        SaltoRect.set(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                        AttackRect.set(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                        SpeedRect.set(cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
+                        PauseRect.set(cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                        if (!izq) {
+                            // batch.draw(BtnIzq, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            izqS.setAlpha(MyGdxGame.alpha);
+                            izqS.setBounds(cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            izqS.draw(batch);
+                        } else {
+                            // batch.draw(BtnIzqHover, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            izqHoverS.setAlpha(MyGdxGame.alpha);
+                            izqHoverS.setBounds(cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            izqHoverS.draw(batch);
+                        }
 
+                        if (!dere) {
+                            //batch.draw(BtnDere, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            dereS.setAlpha(MyGdxGame.alpha);
+                            dereS.setBounds(cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            dereS.draw(batch);
+                        } else {
+                            //  batch.draw(BtnDereHover, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            dereHoverS.setAlpha(MyGdxGame.alpha);
+                            dereHoverS.setBounds(cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            dereHoverS.draw(batch);
+                        }
+
+                        if (!attack) {
+                            //batch.draw(BtnAttack, cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            attackS.setAlpha(MyGdxGame.alpha);
+                            attackS.setBounds(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            attackS.draw(batch);
+                        } else {
+                            //batch.draw(BtnAttackHover, cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            attackHoverS.setAlpha(MyGdxGame.alpha);
+                            attackHoverS.setBounds(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            attackHoverS.draw(batch);
+                        }
+
+                        if (!salto) {
+                            // batch.draw(BtnSalto, cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            saltoS.setAlpha(MyGdxGame.alpha);
+                            saltoS.setBounds(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            saltoS.draw(batch);
+                        } else {
+                            //batch.draw(BtnSaltoHover, cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            saltoHoverS.setAlpha(MyGdxGame.alpha);
+                            saltoHoverS.setBounds(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                            saltoHoverS.draw(batch);
+                        }
+
+                        if (!speed) {
+                            //batch.draw(BtnSpeed, cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
+                            speedS.setAlpha(MyGdxGame.alpha);
+                            speedS.setBounds(cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
+                            speedS.draw(batch);
+                        } else {
+                            //  bat
+                            //  ch.draw(BtnSpeedHover, cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
+                            saltoHoverS.setAlpha(MyGdxGame.alpha);
+                            speedHoverS.setBounds(cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
+                            speedHoverS.draw(batch);
+                        }
+                        if (!pause) {
+                            // batch.draw(BtnPause, cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                            pauseS.setAlpha(MyGdxGame.alpha);
+                            pauseS.setBounds(cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                            pauseS.draw(batch);
+                        } else {
+                            //  batch.draw(BtnPauseHover, cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                            pauseHoverS.setAlpha(MyGdxGame.alpha);
+                            pauseHoverS.setBounds(cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                            pauseHoverS.draw(batch);
+
+                        }
+
+                        if (MyGdxGame.isIsNivelProgress2) {
+
+                            MenuBuild.Logo.draw(batch);
+                        }
+                    } else {
+                        MenuBuild m = new MenuBuild();
+                        m.MenuDraw(batch, cam);
+                        if (AddResources.puntero.overlaps(MenuBuild.Menu1)) {
+                            MenuBuild.isMenu1 = true;
+                            MenuBuild.isMenu2 = false;
+                            MenuBuild.isMenu3 = false;
+                            MenuBuild.isMenu4 = false;
+
+                        }
+                        if (AddResources.puntero.overlaps(MenuBuild.Menu2)) {
+                            MenuBuild.isMenu1 = false;
+                            MenuBuild.isMenu2 = true;
+                            MenuBuild.isMenu3 = false;
+                            MenuBuild.isMenu4 = false;
+
+                        }
+                        if (AddResources.puntero.overlaps(MenuBuild.Menu3)) {
+                            MenuBuild.isMenu1 = false;
+                            MenuBuild.isMenu2 = false;
+                            MenuBuild.isMenu3 = true;
+                            MenuBuild.isMenu4 = false;
+
+                        }
+                        if (AddResources.puntero.overlaps(MenuBuild.Menu4)) {
+                            MenuBuild.isMenu1 = false;
+                            MenuBuild.isMenu2 = false;
+                            MenuBuild.isMenu3 = false;
+                            MenuBuild.isMenu4 = true;
+
+                        }
+                        if (AddResources.puntero.overlaps(MenuBuild.Salir)) {
+                            MenuBuild.isMenu = false;
+                        }
+                        if(!MenuBuild.BuildTierra) {
+                            DereRect.set(0, 0, 0, 0);
+                            IzqRect.set(0, 0, 0, 0);
+                        }
+                        SaltoRect.set(0, 0, 0, 0);
+                        AttackRect.set(0, 0, 0, 0);
+                        SpeedRect.set(0, 0, 0, 0);
+                        PauseRect.set(0, 0, 0, 0);
+                    }
+                }else {
+/**********TIERRAS**************/
+                    DereRect.set(cam.position.x + 3, cam.position.y, 30 / Pixels, 30 / Pixels);
+                    IzqRect.set(cam.position.x - 3.8f, cam.position.y, 30 / Pixels, 30 / Pixels);
+                    if (!izq) {
+                        // batch.draw(BtnIzq, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                        izqS.setAlpha(MyGdxGame.alpha);
+                        izqS.setBounds(cam.position.x - 3.8f, cam.position.y, 30 / Pixels, 30 / Pixels);
+                        izqS.draw(batch);
+                    } else {
+                        // batch.draw(BtnIzqHover, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                        izqHoverS.setAlpha(MyGdxGame.alpha);
+                        izqHoverS.setBounds(cam.position.x - 3.8f, cam.position.y, 30 / Pixels, 30 / Pixels);
+                        izqHoverS.draw(batch);
+                    }
+
+                    if (!dere) {
+                        //batch.draw(BtnDere, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                        dereS.setAlpha(MyGdxGame.alpha);
+                        dereS.setBounds(cam.position.x + 3, cam.position.y, 30 / Pixels, 30 / Pixels);
+                        dereS.draw(batch);
+                    } else {
+                        //  batch.draw(BtnDereHover, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+                        dereHoverS.setAlpha(MyGdxGame.alpha);
+                        dereHoverS.setBounds(cam.position.x + 3, cam.position.y, 30 / Pixels, 30 / Pixels);
+                        dereHoverS.draw(batch);
+                    }
+                   botonesConfirm();
                 }
+/*****************************/
+                /**************************/
+                /**************************/
+                /**************************/
+                /**************************/
+                /**************************/
+                /**************************/
             }
-
             if (ScreenWhite) {
                 whiteSprite.draw(batch);
                 whiteSprite.setBounds(cam.position.x - 5, cam.position.y - 5f, 1000 / Pixels, 1000 / Pixels);
@@ -1438,6 +1542,8 @@ batch.begin();
         shader.dispose();
         costo1.dispose();
         costo2.dispose();
+        Confirmar.dispose();
+        Cancelar.dispose();
     }
     public void over() {
         try {
@@ -1497,6 +1603,29 @@ batch.begin();
                 }
             }
         }catch(Exception e){}
+    }
+
+    public void botonesConfirm()
+    {
+        ConfirmarS.setAlpha(MyGdxGame.alpha);
+        CancelarS.setAlpha(MyGdxGame.alpha);
+        ConfirmarS.setBounds(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+        confirm.set(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+        CancelarS.setBounds(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+        cancel.set(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+        ConfirmarS.draw(batch);
+        CancelarS.draw(batch);
+        if (confirm.overlaps(puntero)) {
+            TouchConfirm = true;
+        } else {
+            TouchConfirm =false;
+        }
+        if (cancel.overlaps(puntero)) {
+            TouchCancel = true;
+        } else
+        {
+            TouchCancel = false;
+        }
     }
 
 

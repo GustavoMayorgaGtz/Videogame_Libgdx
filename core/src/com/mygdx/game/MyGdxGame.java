@@ -35,6 +35,7 @@ public class MyGdxGame extends Game{
     public static boolean isIsNivelProgress2;
 
     /*Tierras*/
+	public static Preferences TierrasColocadas;
 	public static Preferences tierra1;
 	public static Preferences tierra2;
 	public static Preferences tierra3;
@@ -70,16 +71,17 @@ public class MyGdxGame extends Game{
 		ColorControl = Gdx.app.getPreferences("Color");
 		Alpha = Gdx.app.getPreferences("Alpha");
 		/********************Tierras****************/
+		TierrasColocadas = Gdx.app.getPreferences("Posicion");
 		tierra1 = Gdx.app.getPreferences("X");
 		tierra1 = Gdx.app.getPreferences("Y");
-		tierra2 = Gdx.app.getPreferences("X");
-		tierra2 = Gdx.app.getPreferences("Y");
-		tierra3 = Gdx.app.getPreferences("X");
-		tierra3 = Gdx.app.getPreferences("Y");
-		tierra4 = Gdx.app.getPreferences("X");
-		tierra4 = Gdx.app.getPreferences("Y");
-		tierra5 = Gdx.app.getPreferences("X");
-		tierra5 = Gdx.app.getPreferences("Y");
+		tierra2 = Gdx.app.getPreferences("X2");
+		tierra2 = Gdx.app.getPreferences("Y2");
+		tierra3 = Gdx.app.getPreferences("X3");
+		tierra3 = Gdx.app.getPreferences("Y3");
+		tierra4 = Gdx.app.getPreferences("X4");
+		tierra4 = Gdx.app.getPreferences("Y4");
+		tierra5 = Gdx.app.getPreferences("X5");
+		tierra5 = Gdx.app.getPreferences("Y5");
 		/******************Aguas******************/
 		agua1 = Gdx.app.getPreferences("X");
 		agua1 = Gdx.app.getPreferences("Y");

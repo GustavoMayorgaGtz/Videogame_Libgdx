@@ -1,7 +1,6 @@
 package com.mygdx.game.tiled;
 
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.actors.Agua1;
@@ -9,6 +8,7 @@ import com.mygdx.game.actors.Agua2;
 import com.mygdx.game.actors.Agua3;
 import com.mygdx.game.actors.Agua4;
 import com.mygdx.game.actors.Agua5;
+import com.mygdx.game.actors.MenuBuild;
 import com.mygdx.game.actors.Tierra1;
 import com.mygdx.game.actors.Tierra2;
 import com.mygdx.game.actors.Tierra3;
@@ -26,18 +26,23 @@ public class addActors2 {
     Agua3 agua3;
     Agua4 agua4;
     Agua5 agua5;
+    MenuBuild menuBuild;
     public addActors2(Stage stage)
     {
         tierra1 = new Tierra1();
-        stage.addActor(tierra1);
         tierra2 = new Tierra2();
-       // stage.addActor(tierra2);
         tierra3 = new Tierra3();
-        //stage.addActor(tierra3);
         tierra4 = new Tierra4();
-      //  stage.addActor(tierra4);
         tierra5 = new Tierra5();
-      //  stage.addActor(tierra5);
+
+
+
+        stage.addActor(tierra1);
+        stage.addActor(tierra2);
+       /* stage.addActor(tierra3);
+        stage.addActor(tierra4);
+        stage.addActor(tierra5);*/
+        /********************************/
 
         agua1 = new Agua1();
        // stage.addActor(agua1);
@@ -49,5 +54,7 @@ public class addActors2 {
       //  stage.addActor(agua4);
         agua5 = new Agua5();
       //  stage.addActor(agua5);
+        menuBuild = new MenuBuild();
+        stage.addActor(menuBuild );
     }
 }
