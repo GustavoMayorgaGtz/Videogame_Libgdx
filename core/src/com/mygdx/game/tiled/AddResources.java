@@ -64,6 +64,8 @@ public class AddResources {
     public static Texture white;
     Texture moneda,monedas;
 
+    public static boolean isFreeSpace;
+
 
     /*****Controles*****/
     public static Rectangle puntero, puntero2;
@@ -153,6 +155,8 @@ public class AddResources {
     int iteratorSplit2;
     boolean is02,is12,is22;
     int valoractual2;
+
+
 
 
 
@@ -356,6 +360,8 @@ public class AddResources {
         Cancelar = new Texture("Cancelar.png");
         ConfirmarS = new Sprite(Confirmar);
         CancelarS = new Sprite(Cancelar);
+
+
 
     }
     public void addRender(float delta)
@@ -761,12 +767,16 @@ batch.begin();
                         }
 
                         if (MyGdxGame.isIsNivelProgress2) {
-
                             MenuBuild.Logo.draw(batch);
+                            MenuBuild.Fondo2.draw(batch);
+                            MenuBuild.moverS.draw(batch);
+                            MenuBuild.moverR.set(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
+
                         }
                     } else {
                         MenuBuild m = new MenuBuild();
                         m.MenuDraw(batch, cam);
+                        MenuBuild.moverR.set(0,0,0,0);
                         if (AddResources.puntero.overlaps(MenuBuild.Menu1)) {
                             MenuBuild.isMenu1 = true;
                             MenuBuild.isMenu2 = false;
@@ -809,31 +819,7 @@ batch.begin();
                     }
                 }else {
 /**********TIERRAS**************/
-                    DereRect.set(cam.position.x + 3, cam.position.y, 30 / Pixels, 30 / Pixels);
-                    IzqRect.set(cam.position.x - 3.8f, cam.position.y, 30 / Pixels, 30 / Pixels);
-                    if (!izq) {
-                        // batch.draw(BtnIzq, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                        izqS.setAlpha(MyGdxGame.alpha);
-                        izqS.setBounds(cam.position.x - 3.8f, cam.position.y, 30 / Pixels, 30 / Pixels);
-                        izqS.draw(batch);
-                    } else {
-                        // batch.draw(BtnIzqHover, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                        izqHoverS.setAlpha(MyGdxGame.alpha);
-                        izqHoverS.setBounds(cam.position.x - 3.8f, cam.position.y, 30 / Pixels, 30 / Pixels);
-                        izqHoverS.draw(batch);
-                    }
 
-                    if (!dere) {
-                        //batch.draw(BtnDere, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                        dereS.setAlpha(MyGdxGame.alpha);
-                        dereS.setBounds(cam.position.x + 3, cam.position.y, 30 / Pixels, 30 / Pixels);
-                        dereS.draw(batch);
-                    } else {
-                        //  batch.draw(BtnDereHover, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-                        dereHoverS.setAlpha(MyGdxGame.alpha);
-                        dereHoverS.setBounds(cam.position.x + 3, cam.position.y, 30 / Pixels, 30 / Pixels);
-                        dereHoverS.draw(batch);
-                    }
                    botonesConfirm();
                 }
 /*****************************/
@@ -1544,6 +1530,7 @@ batch.begin();
         costo2.dispose();
         Confirmar.dispose();
         Cancelar.dispose();
+
     }
     public void over() {
         try {
@@ -1607,10 +1594,47 @@ batch.begin();
 
     public void botonesConfirm()
     {
-        ConfirmarS.setAlpha(MyGdxGame.alpha);
-        CancelarS.setAlpha(MyGdxGame.alpha);
-        ConfirmarS.setBounds(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-        confirm.set(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+        SaltoRect.set(0, 0, 0, 0);
+        AttackRect.set(0, 0, 0, 0);
+        SpeedRect.set(0, 0, 0, 0);
+        PauseRect.set(0, 0, 0, 0);
+        DereRect.set(cam.position.x + 3, cam.position.y, 30 / Pixels, 30 / Pixels);
+        IzqRect.set(cam.position.x - 3.8f, cam.position.y, 30 / Pixels, 30 / Pixels);
+        if (!izq) {
+            // batch.draw(BtnIzq, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+            izqS.setAlpha(MyGdxGame.alpha);
+            izqS.setBounds(cam.position.x - 3.8f, cam.position.y, 30 / Pixels, 30 / Pixels);
+            izqS.draw(batch);
+        } else {
+            // batch.draw(BtnIzqHover, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+            izqHoverS.setAlpha(MyGdxGame.alpha);
+            izqHoverS.setBounds(cam.position.x - 3.8f, cam.position.y, 30 / Pixels, 30 / Pixels);
+            izqHoverS.draw(batch);
+        }
+
+        if (!dere) {
+            //batch.draw(BtnDere, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+            dereS.setAlpha(MyGdxGame.alpha);
+            dereS.setBounds(cam.position.x + 3, cam.position.y, 30 / Pixels, 30 / Pixels);
+            dereS.draw(batch);
+        } else {
+            //  batch.draw(BtnDereHover, cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+            dereHoverS.setAlpha(MyGdxGame.alpha);
+            dereHoverS.setBounds(cam.position.x + 3, cam.position.y, 30 / Pixels, 30 / Pixels);
+            dereHoverS.draw(batch);
+        }
+
+     /**************************/
+        if(isFreeSpace) {
+            ConfirmarS.setAlpha(1);
+            CancelarS.setAlpha(1);
+            ConfirmarS.setBounds(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+            confirm.set(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+        }else
+        {
+            confirm.set(0,0,0,0);
+            ConfirmarS.setBounds(0,0,0,0);
+        }
         CancelarS.setBounds(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
         cancel.set(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
         ConfirmarS.draw(batch);
@@ -1621,10 +1645,7 @@ batch.begin();
             TouchConfirm =false;
         }
         if (cancel.overlaps(puntero)) {
-            TouchCancel = true;
-        } else
-        {
-            TouchCancel = false;
+            MenuBuild.BuildTierra = false;
         }
     }
 

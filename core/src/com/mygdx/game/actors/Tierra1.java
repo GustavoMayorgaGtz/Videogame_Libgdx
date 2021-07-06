@@ -20,6 +20,7 @@ import static com.mygdx.game.MyGdxGame.tierra1;
 public class Tierra1 extends Actor implements Disposable {
 
     public static Rectangle Cuerpo;
+    public static Rectangle Cuerpo2;
     Texture tierra;
     float x,y;
     public static ArrayList<Rectangle> rects;
@@ -39,6 +40,7 @@ public class Tierra1 extends Actor implements Disposable {
             rangoS = new Sprite(rango);
 
         Cuerpo = new Rectangle(x,y,32/ Pixels,32/Pixels);
+        Cuerpo2 = new Rectangle(x,y,32/ Pixels,32/Pixels);
         tierra = new Texture("Tierral.png");
         b = new Texture("White.png");
 
@@ -69,7 +71,7 @@ public class Tierra1 extends Actor implements Disposable {
 
     @Override
     public void act(float delta) {
-
+colisiones();
         if(MyGdxGame.TierrasColocadas.getInteger("Posiciones") == 0 && MenuBuild.BuildTierra) {
             for (Rectangle e : rects) {
                 if (Jugador.jugador.overlaps(e)) {
@@ -97,21 +99,29 @@ if(MenuBuild.BuildTierra&&MyGdxGame.TierrasColocadas.getInteger("Posiciones") ==
     if (Jugador.jugador.overlaps(e)) {
         y = (e.y + (5 / Pixels)) - 32 / Pixels;
         x = Jugador.body.getPosition().x;
+        Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
     }
     }
 }else
 {
     x = tierra1.getFloat("X");
     y = tierra1.getFloat("Y");
-    Cuerpo.set(x,y,32/ Pixels,32/Pixels);
+    Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
+    if(!MenuBuild.BuildTierra) {
+
+        Cuerpo.set(x, y, 32 / Pixels, 32 / Pixels);
+    }else
+    {
+        Cuerpo.set(0,0,0,0);
+    }
 }
 
-if(Cuerpo.overlaps(AddResources.puntero))
-{
-    timeDurationTouch += 1 * Gdx.graphics.getDeltaTime();
-    if(timeDurationTouch > 2)
-    {
-        cambiarPosicion = true;
+if(MenuBuild.isMover) {
+    if (Cuerpo.overlaps(AddResources.puntero)) {
+        timeDurationTouch += 1 * Gdx.graphics.getDeltaTime();
+        if (timeDurationTouch > 2) {
+            cambiarPosicion = true;
+        }
     }
 }
 
@@ -119,9 +129,12 @@ if(cambiarPosicion)
 {
     MenuBuild.BuildTierra = true;
     for (Rectangle e : rects) {
-        if (Jugador.jugador.overlaps(e)) {
-            y = (e.y + (5 / Pixels)) - 32 / Pixels;
-            x = Jugador.body.getPosition().x;
+        if (noToca) {
+            if (Jugador.jugador.overlaps(e)) {
+                y = (e.y + (5 / Pixels)) - 32 / Pixels;
+                x = Jugador.body.getPosition().x;
+                Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
+            }
         }
     }
     for (Rectangle e : rects) {
@@ -146,6 +159,17 @@ if(cambiarPosicion)
     }
 }
 
+    }
+
+    public void colisiones()
+    {
+        if(Cuerpo2.overlaps(Tierra2.Cuerpo2))
+        {
+            AddResources.isFreeSpace = false;
+        }else
+        {
+            AddResources.isFreeSpace = true;
+        }
     }
 
     @Override

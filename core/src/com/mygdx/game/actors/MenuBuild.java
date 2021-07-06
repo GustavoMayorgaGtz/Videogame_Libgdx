@@ -26,10 +26,11 @@ public class MenuBuild extends Actor implements Disposable
     public static boolean isMenu;
 
     /*****Menu****/
+    public static float timeRetrasar; //retrasa la seleccion para no seleccionar un menu por accidente
     Texture equis;
     Texture fondo,logo1,logo2,logo3,logo4;
     public static Rectangle Menu1,Menu2,Menu3,Menu4,Salir;
-    public static Sprite Fondo,Logo1,Logo2,Logo3,Logo4;
+    public static Sprite Fondo,Fondo2,Logo1,Logo2,Logo3,Logo4;
     public static boolean isMenu1 = true,isMenu2,isMenu3,isMenu4;
     float alpha1,alpha2,alpha3,alpha4;
 
@@ -39,6 +40,16 @@ public class MenuBuild extends Actor implements Disposable
     Sprite  TierraS,AguaS,TrigoS,MaizS,SojaS,ZanahoriaS,CanaS,AlgodonS;
     public static Rectangle tierraR,aguaR,trigoR,maizR,sojaR,zanahoriaR,canaR,algodonR;
     public static boolean BuildTierra;
+
+    /****MoverButton****/
+    Texture mover;
+    public static Rectangle moverR;
+   public static Sprite moverS;
+   public static boolean isMover;
+    float moverTime;
+    float alphaMover;
+
+
 
     public MenuBuild()
     {
@@ -85,6 +96,8 @@ public class MenuBuild extends Actor implements Disposable
         Logo4 = new Sprite(logo4);
         fondo = new Texture("cuadradoNegro.png");
         Fondo = new Sprite(fondo);
+        Fondo2 = new Sprite(fondo);
+
 
         Menu1 = new Rectangle();
         Menu2 = new Rectangle();
@@ -119,7 +132,9 @@ public class MenuBuild extends Actor implements Disposable
         canaR = new Rectangle();
         algodonR = new Rectangle();
 
-
+        mover = new Texture("MoveOn.png");
+        moverR = new Rectangle();
+        moverS = new Sprite(mover);
     }
 
     @Override
@@ -127,14 +142,39 @@ public class MenuBuild extends Actor implements Disposable
         time += 1 * Gdx.graphics.getDeltaTime();
         Logo.setBounds(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y , 20 / Pixels, 20 / Pixels);
         Logo.setAlpha(MyGdxGame.alpha);
+        Fondo2.setBounds(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
+        Fondo2.setAlpha(alphaMover);
+        moverS.setBounds(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
+        moverS.setAlpha(MyGdxGame.alpha+.2f);
+        moverTime += 1 * Gdx.graphics.getDeltaTime();
+        if(moverTime > 1) {
+            if (moverR.overlaps(AddResources.puntero)) {
+                if(isMover)
+                {
+                    isMover = false;
+                    alphaMover = 0.4f;
+                }else
+                {
+                    isMover = true;
+                    alphaMover = 0.8f;
+                }
+
+                moverTime = 0;
+            }
+        }
         Cuadro.set(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y , 20 / Pixels, 20 / Pixels);
         if(time > 1 && Cuadro.overlaps(AddResources.puntero))
         {
-
-                Gdx.app.log("isMenu","true");
                 isMenu = true;
                 time = 0;
+        }
 
+        if(isMenu) {
+            timeRetrasar = timeRetrasar + 1 * Gdx.graphics.getDeltaTime();
+            Gdx.app.log("time", "" + timeRetrasar);
+        }else
+        {
+            timeRetrasar = 0;
         }
     }
 
@@ -142,63 +182,61 @@ public class MenuBuild extends Actor implements Disposable
     {
 
         if(isMenu) {
-           // time2 += 1 * Gdx.graphics.getDeltaTime();
-            //if(time2 > 1) {
+       if(MenuBuild.timeRetrasar > 1) {
+           Menu1.set(cam.position.x - 3.8f, cam.position.y - 2 + (5 / Pixels), 25 / Pixels, 25 / Pixels);
+           Menu2.set(cam.position.x - 3.8f, cam.position.y - 2 + (30 / Pixels), 25 / Pixels, 25 / Pixels);
+           Menu3.set(cam.position.x - 3.8f, cam.position.y - 2 + (55 / Pixels), 25 / Pixels, 25 / Pixels);
+           Menu4.set(cam.position.x - 3.8f, cam.position.y - 2 + (80 / Pixels), 25 / Pixels, 25 / Pixels);
+       }
+           if (isMenu1) {
+               alpha1 = 0.2f;
+               alpha2 = 0.8f;
+               alpha3 = 0.8f;
+               alpha4 = 0.8f;
+           }
+           if (isMenu2) {
+               alpha1 = 0.8f;
+               alpha2 = 0.2f;
+               alpha3 = 0.8f;
+               alpha4 = 0.8f;
+           }
+           if (isMenu3) {
+               alpha1 = 0.8f;
+               alpha2 = 0.8f;
+               alpha3 = 0.2f;
+               alpha4 = 0.8f;
+           }
+           if (isMenu4) {
+               alpha1 = 0.8f;
+               alpha2 = 0.8f;
+               alpha3 = 0.8f;
+               alpha4 = 0.2f;
+           }
+           Fondo.setAlpha(alpha1);
 
-         //   }
-            if(isMenu1)
-            {
-                alpha1 = 0.2f;
-                alpha2 = 0.8f;
-                alpha3 = 0.8f;
-                alpha4 = 0.8f;
-            }
-            if(isMenu2)
-            {
-                alpha1 = 0.8f;
-                alpha2 = 0.2f;
-                alpha3 = 0.8f;
-                alpha4 = 0.8f;
-            }
-            if(isMenu3)
-            {
-                alpha1 = 0.8f;
-                alpha2 = 0.8f;
-                alpha3 = 0.2f;
-                alpha4 = 0.8f;
-            }
-            if(isMenu4)
-            {
-                alpha1 = 0.8f;
-                alpha2 = 0.8f;
-                alpha3 = 0.8f;
-                alpha4 = 0.2f;
-            }
-            Fondo.setAlpha(alpha1);
-            Menu1.set(cam.position.x - 3.8f, cam.position.y - 2 + (5 / Pixels), 25 / Pixels, 25 / Pixels);
-            Fondo.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (5 / Pixels), 25 / Pixels, 25 / Pixels);
-            Logo1.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (5 / Pixels), 25 / Pixels, 25 / Pixels);
-            Logo1.draw(batch);
-            Fondo.draw(batch);
-            Fondo.setAlpha(alpha2);
-            Menu2.set(cam.position.x - 3.8f, cam.position.y - 2 + (30 / Pixels), 25 / Pixels, 25 / Pixels);
-            Fondo.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (30 / Pixels), 25 / Pixels, 25 / Pixels);
-            Logo2.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (30 / Pixels), 25 / Pixels, 25 / Pixels);
-            Logo2.draw(batch);
-            Fondo.draw(batch);
-            Fondo.setAlpha(alpha3);
-            Menu3.set(cam.position.x - 3.8f, cam.position.y - 2 + (55 / Pixels), 25 / Pixels, 25 / Pixels);
-            Fondo.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (55 / Pixels), 25 / Pixels, 25 / Pixels);
-            Logo3.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (55 / Pixels), 25 / Pixels, 25 / Pixels);
-            Logo3.draw(batch);
-            Fondo.draw(batch);
-            Fondo.setAlpha(alpha4);
-            Menu4.set(cam.position.x - 3.8f, cam.position.y - 2 + (80 / Pixels), 25 / Pixels, 25 / Pixels);
-            Fondo.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (80 / Pixels), 25 / Pixels, 25 / Pixels);
-            Logo4.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (80 / Pixels), 25 / Pixels, 25 / Pixels);
-            Logo4.draw(batch);
-            Fondo.draw(batch);
-            MenuItems(batch,AddResources.puntero);
+           Fondo.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (5 / Pixels), 25 / Pixels, 25 / Pixels);
+           Logo1.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (5 / Pixels), 25 / Pixels, 25 / Pixels);
+           Logo1.draw(batch);
+           Fondo.draw(batch);
+           Fondo.setAlpha(alpha2);
+          Fondo.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (30 / Pixels), 25 / Pixels, 25 / Pixels);
+           Logo2.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (30 / Pixels), 25 / Pixels, 25 / Pixels);
+           Logo2.draw(batch);
+           Fondo.draw(batch);
+           Fondo.setAlpha(alpha3);
+           Fondo.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (55 / Pixels), 25 / Pixels, 25 / Pixels);
+           Logo3.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (55 / Pixels), 25 / Pixels, 25 / Pixels);
+           Logo3.draw(batch);
+           Fondo.draw(batch);
+           Fondo.setAlpha(alpha4);
+
+           Fondo.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (80 / Pixels), 25 / Pixels, 25 / Pixels);
+           Logo4.setBounds(cam.position.x - 3.8f, cam.position.y - 2 + (80 / Pixels), 25 / Pixels, 25 / Pixels);
+           Logo4.draw(batch);
+           Fondo.draw(batch);
+
+           MenuItems(batch, AddResources.puntero);
+
         }else
         {
             Menu1.set(0,0,0,0);
@@ -303,5 +341,6 @@ public class MenuBuild extends Actor implements Disposable
         Zanahoria.dispose();
         Cana.dispose();
         Algodon.dispose();
+        mover.dispose();
     }
 }
