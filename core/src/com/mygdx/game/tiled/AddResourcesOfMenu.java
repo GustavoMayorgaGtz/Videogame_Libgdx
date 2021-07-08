@@ -101,7 +101,7 @@ numeros.getData().scale(1/Pixels);
 
     public void addRender(float delta) {
 
-        if(Gdx.input.isTouched(2))
+        if(Gdx.input.isTouched())
         {
             MyGdxGame.isIsNivelProgress2 = true;
             game.setScreen(new Nivel2Progresion(game));
@@ -159,13 +159,12 @@ numeros.getData().scale(1/Pixels);
         if(numeros2[0] != null)
         {
             is0 = true;
-            Gdx.app.log("boolean","is0"+numeros2[0]);
+          //  Gdx.app.log("boolean","is0"+numeros2[0]);
         }else {
             is0 = false;
         }
         try {
             if (numeros2[1] != null) {
-                Gdx.app.log("boolean", "is1" + numeros2[1]);
                 is1 = true;
             } else {
                 is1 = false;
@@ -175,7 +174,7 @@ numeros.getData().scale(1/Pixels);
         }
         try {
             if (numeros2[2] != null) {
-                Gdx.app.log("boolean","is2"+numeros2[2]);
+              //  Gdx.app.log("boolean","is2"+numeros2[2]);
                 is2 = true;
             }else
             {

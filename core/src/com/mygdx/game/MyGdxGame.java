@@ -41,6 +41,8 @@ public class MyGdxGame extends Game{
 	public static Preferences tierra3;
 	public static Preferences tierra4;
 	public static Preferences tierra5;
+	/*Agua*/
+	public static Preferences AguasColocadas;
 	public static Preferences agua1;
 	public static Preferences agua2;
 	public static Preferences agua3;
@@ -50,6 +52,23 @@ public class MyGdxGame extends Game{
 	MyGdxGame game;
 	public static final float Pixels = 30;
 	public static float alpha;
+
+	/*Cultivos*/
+	public static Preferences Trigo;
+	public static Preferences Maiz;
+	public static Preferences Soja;
+	public static Preferences Zanahoria;
+	public static Preferences Cana;
+	public static Preferences Algodon;
+
+	/**Tierra1**/
+	public static Preferences tierra1Trigo;
+	public static Preferences tierra1Maiz;
+	public static Preferences tierra1Soja;
+	public static Preferences tierra1Zanahoria;
+	public static Preferences tierra1Cana;
+	public static Preferences tierra1Algodon;
+	public static Preferences tierra1Enable;
 
 
 	@Override
@@ -83,16 +102,68 @@ public class MyGdxGame extends Game{
 		tierra5 = Gdx.app.getPreferences("X5");
 		tierra5 = Gdx.app.getPreferences("Y5");
 		/******************Aguas******************/
-		agua1 = Gdx.app.getPreferences("X");
-		agua1 = Gdx.app.getPreferences("Y");
-		agua2 = Gdx.app.getPreferences("X");
-		agua2 = Gdx.app.getPreferences("Y");
-		agua3 = Gdx.app.getPreferences("X");
-		agua3 = Gdx.app.getPreferences("Y");
-		agua4 = Gdx.app.getPreferences("X");
-		agua4 = Gdx.app.getPreferences("Y");
-		agua5 = Gdx.app.getPreferences("X");
-		agua5 = Gdx.app.getPreferences("Y");
+		AguasColocadas = Gdx.app.getPreferences("Posiciones2");
+		agua1 = Gdx.app.getPreferences("X6");
+		agua1 = Gdx.app.getPreferences("Y6");
+		agua2 = Gdx.app.getPreferences("X7");
+		agua2 = Gdx.app.getPreferences("Y7");
+		agua3 = Gdx.app.getPreferences("X8");
+		agua3 = Gdx.app.getPreferences("Y8");
+		agua4 = Gdx.app.getPreferences("X9");
+		agua4 = Gdx.app.getPreferences("Y9");
+
+		/*****************Cultivos******************/
+		Trigo = Gdx.app.getPreferences("Trigo");
+		Maiz = Gdx.app.getPreferences("Maiz");
+		Soja = Gdx.app.getPreferences("Soja");
+		Zanahoria = Gdx.app.getPreferences("Zanahoria");
+		Cana = Gdx.app.getPreferences("Cana");
+		Algodon = Gdx.app.getPreferences("Algodon");
+
+		if(Cinematica.getInteger("Cinematica")==0)
+		{
+			tierra1.putFloat("X",0.0f);
+			tierra1.putFloat("Y",0.0f);
+			tierra2.putFloat("X2",10.0f);
+			tierra2.putFloat("Y2",10.0f);
+			tierra3.putFloat("X3",20.0f);
+			tierra3.putFloat("Y3",20.0f);
+			tierra4.putFloat("X4",30.0f);
+			tierra4.putFloat("Y4",30.0f);
+			tierra5.putFloat("X5",40.0f);
+			tierra5.putFloat("Y5",40.0f);
+			tierra1.flush();
+			tierra2.flush();
+			tierra3.flush();
+			tierra4.flush();
+			tierra5.flush();
+
+			agua1.putFloat("X6",50.0f);
+			agua1.putFloat("Y6",50.0f);
+
+			agua2.putFloat("X7",60.0f);
+			agua2.putFloat("Y7",60.0f);
+
+			agua3.putFloat("X8",70.0f);
+			agua3.putFloat("Y8",70.0f);
+
+			agua4.putFloat("X9",80.0f);
+			agua4.putFloat("Y9",80.0f);
+
+			agua1.flush();
+			agua2.flush();
+			agua3.flush();
+			agua4.flush();
+		}
+
+		/***Tierra1*****/
+		tierra1Trigo = Gdx.app.getPreferences("tierra1");
+		tierra1Maiz = Gdx.app.getPreferences("tierra1");
+		tierra1Soja = Gdx.app.getPreferences("tierra1");
+		tierra1Zanahoria = Gdx.app.getPreferences("tierra1");
+		tierra1Cana = Gdx.app.getPreferences("tierra1");
+		tierra1Algodon = Gdx.app.getPreferences("tierra1");
+		tierra1Enable = Gdx.app.getPreferences("tierra1");
 
 		manager = new AssetManager();
 

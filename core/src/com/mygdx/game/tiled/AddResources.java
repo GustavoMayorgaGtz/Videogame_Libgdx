@@ -64,7 +64,15 @@ public class AddResources {
     public static Texture white;
     Texture moneda,monedas;
 
-    public static boolean isFreeSpace;
+    public static boolean isFreeSpace1;
+    public static boolean isFreeSpace2;
+    public static boolean isFreeSpace3;
+    public static boolean isFreeSpace4;
+    public static boolean isFreeSpace5;
+    public static boolean isFreeSpace6;
+    public static boolean isFreeSpace7;
+    public static boolean isFreeSpace8;
+    public static boolean isFreeSpace9;
 
 
     /*****Controles*****/
@@ -656,8 +664,8 @@ batch.begin();
                 /**************************/
                 /**************************/
                 /**************************/
-                if (!MenuBuild.BuildTierra) {
-                    if (!MenuBuild.isMenu) {
+                if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua) {
+                    if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection) {
                         if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
                             if (!add.player.Muerto) {
                                 if (add.player.Espadazo) {
@@ -774,48 +782,66 @@ batch.begin();
 
                         }
                     } else {
+                        if (MenuBuild.isMenu) {
+                            MenuBuild m = new MenuBuild();
+                            m.MenuDraw(batch, cam);
+                            MenuBuild.moverR.set(0, 0, 0, 0);
+                            if (AddResources.puntero.overlaps(MenuBuild.Menu1)) {
+                                MenuBuild.isMenu1 = true;
+                                MenuBuild.isMenu2 = false;
+                                MenuBuild.isMenu3 = false;
+                                MenuBuild.isMenu4 = false;
+
+                            }
+                            if (AddResources.puntero.overlaps(MenuBuild.Menu2)) {
+                                MenuBuild.isMenu1 = false;
+                                MenuBuild.isMenu2 = true;
+                                MenuBuild.isMenu3 = false;
+                                MenuBuild.isMenu4 = false;
+
+                            }
+                            if (AddResources.puntero.overlaps(MenuBuild.Menu3)) {
+                                MenuBuild.isMenu1 = false;
+                                MenuBuild.isMenu2 = false;
+                                MenuBuild.isMenu3 = true;
+                                MenuBuild.isMenu4 = false;
+
+                            }
+                            if (AddResources.puntero.overlaps(MenuBuild.Menu4)) {
+                                MenuBuild.isMenu1 = false;
+                                MenuBuild.isMenu2 = false;
+                                MenuBuild.isMenu3 = false;
+                                MenuBuild.isMenu4 = true;
+
+                            }
+                            if (AddResources.puntero.overlaps(MenuBuild.Salir)) {
+                                MenuBuild.isMenu = false;
+                                MenuBuild.isMenuSeedSelection = false;
+                            }
+                            if (!MenuBuild.BuildTierra || !MenuBuild.BuildAgua) {
+                                DereRect.set(0, 0, 0, 0);
+                                IzqRect.set(0, 0, 0, 0);
+                            }
+                            SaltoRect.set(0, 0, 0, 0);
+                            AttackRect.set(0, 0, 0, 0);
+                            SpeedRect.set(0, 0, 0, 0);
+                            PauseRect.set(0, 0, 0, 0);
+                        }
+                    }
+                    if (MenuBuild.isMenuSeedSelection) {
                         MenuBuild m = new MenuBuild();
-                        m.MenuDraw(batch, cam);
-                        MenuBuild.moverR.set(0,0,0,0);
-                        if (AddResources.puntero.overlaps(MenuBuild.Menu1)) {
-                            MenuBuild.isMenu1 = true;
-                            MenuBuild.isMenu2 = false;
-                            MenuBuild.isMenu3 = false;
-                            MenuBuild.isMenu4 = false;
-
-                        }
-                        if (AddResources.puntero.overlaps(MenuBuild.Menu2)) {
-                            MenuBuild.isMenu1 = false;
-                            MenuBuild.isMenu2 = true;
-                            MenuBuild.isMenu3 = false;
-                            MenuBuild.isMenu4 = false;
-
-                        }
-                        if (AddResources.puntero.overlaps(MenuBuild.Menu3)) {
-                            MenuBuild.isMenu1 = false;
-                            MenuBuild.isMenu2 = false;
-                            MenuBuild.isMenu3 = true;
-                            MenuBuild.isMenu4 = false;
-
-                        }
-                        if (AddResources.puntero.overlaps(MenuBuild.Menu4)) {
-                            MenuBuild.isMenu1 = false;
-                            MenuBuild.isMenu2 = false;
-                            MenuBuild.isMenu3 = false;
-                            MenuBuild.isMenu4 = true;
-
-                        }
-                        if (AddResources.puntero.overlaps(MenuBuild.Salir)) {
-                            MenuBuild.isMenu = false;
-                        }
-                        if(!MenuBuild.BuildTierra) {
-                            DereRect.set(0, 0, 0, 0);
-                            IzqRect.set(0, 0, 0, 0);
-                        }
+                        m.MenuSeedsSelection(batch);
+                        MenuBuild.moverR.set(0, 0, 0, 0);
+                        DereRect.set(0, 0, 0, 0);
+                        IzqRect.set(0, 0, 0, 0);
                         SaltoRect.set(0, 0, 0, 0);
                         AttackRect.set(0, 0, 0, 0);
                         SpeedRect.set(0, 0, 0, 0);
                         PauseRect.set(0, 0, 0, 0);
+                        if (AddResources.puntero.overlaps(MenuBuild.Salir)) {
+                            MenuBuild.isMenu = false;
+                            MenuBuild.isMenuSeedSelection = false;
+                        }
                     }
                 }else {
 /**********TIERRAS**************/
@@ -1625,16 +1651,7 @@ batch.begin();
         }
 
      /**************************/
-        if(isFreeSpace) {
-            ConfirmarS.setAlpha(1);
-            CancelarS.setAlpha(1);
-            ConfirmarS.setBounds(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-            confirm.set(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-        }else
-        {
-            confirm.set(0,0,0,0);
-            ConfirmarS.setBounds(0,0,0,0);
-        }
+freeSpace();
         CancelarS.setBounds(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
         cancel.set(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
         ConfirmarS.draw(batch);
@@ -1646,7 +1663,42 @@ batch.begin();
         }
         if (cancel.overlaps(puntero)) {
             MenuBuild.BuildTierra = false;
+            MenuBuild.BuildAgua = false;
         }
+    }
+
+    public void freeSpace()
+    {
+        if(Gdx.input.isTouched(1))
+        {
+            Gdx.app.log("-----","-------");
+            Gdx.app.log("val:",""+isFreeSpace1);
+            Gdx.app.log("val:",""+isFreeSpace2);
+            Gdx.app.log("val:",""+isFreeSpace3);
+            Gdx.app.log("val:",""+isFreeSpace4);
+            Gdx.app.log("val:",""+isFreeSpace5);
+            Gdx.app.log("val:",""+isFreeSpace6);
+            Gdx.app.log("val:",""+isFreeSpace7);
+            Gdx.app.log("val:",""+isFreeSpace8);
+            Gdx.app.log("val:",""+isFreeSpace9);
+            Gdx.app.log("-----","-------");
+        }
+
+        if(!isFreeSpace1||!isFreeSpace2||!isFreeSpace3||!isFreeSpace4||!isFreeSpace5||!isFreeSpace6||!isFreeSpace7||!isFreeSpace8||!isFreeSpace9) {
+
+
+            confirm.set(0,0,0,0);
+            ConfirmarS.setBounds(0,0,0,0);
+
+        }else
+        {
+
+            ConfirmarS.setAlpha(1);
+            CancelarS.setAlpha(1);
+            ConfirmarS.setBounds(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+            confirm.set(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
+        }
+
     }
 
 

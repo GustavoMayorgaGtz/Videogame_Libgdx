@@ -191,16 +191,7 @@
          ConfigurationS.draw(batch);
          batch.end();
 
-/***************/
-         MyGdxGame.Cinematica.putInteger("Cinematica",1);
-         MyGdxGame.Cinematica.flush();
-         if(Gdx.input.isTouched())
-         {
 
-
-         }
-
-/*****************/
      }
 
      public void ScreenSend()

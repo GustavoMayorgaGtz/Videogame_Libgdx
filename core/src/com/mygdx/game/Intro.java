@@ -50,6 +50,8 @@ public class Intro implements Screen
     @Override
     public void render(float p1)
     {
+        MyGdxGame.Cinematica.putInteger("Cinematica",1);
+        MyGdxGame.Cinematica.flush();
         state += Gdx.graphics.getDeltaTime();
         TextureRegion current = Logo.getKeyFrame(state,true);
         Gdx.gl.glClearColor(0,0,0,0);
@@ -65,7 +67,7 @@ public class Intro implements Screen
         if(time >= 5)
         {
             intro.stop();
-            game.setScreen(new Casa(game));
+            game.setScreen(new Menu(game));
         }
     }
 

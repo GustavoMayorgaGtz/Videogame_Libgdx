@@ -14,14 +14,17 @@ import com.mygdx.game.tiled.AddResources;
 
 import java.util.ArrayList;
 
+import static com.mygdx.game.MyGdxGame.Alpha;
 import static com.mygdx.game.MyGdxGame.Pixels;
 import static com.mygdx.game.MyGdxGame.tierra1;
+import static com.mygdx.game.MyGdxGame.tierra2;
 
 public class Tierra1 extends Actor implements Disposable {
 
     public static Rectangle Cuerpo;
     public static Rectangle Cuerpo2;
-    Texture tierra;
+    public static Rectangle range;
+    Texture tierra,tierra2;
     float x,y;
     public static ArrayList<Rectangle> rects;
     public static ArrayList<Rectangle> noBuild ;
@@ -30,10 +33,13 @@ public class Tierra1 extends Actor implements Disposable {
     public static boolean noToca;
     Texture rango;
     Sprite rangoS;
-
-
     float timeDurationTouch;
     boolean cambiarPosicion;
+
+    public static boolean isDamp;
+    public static boolean Trigo,Maiz,Soja,Zanahoria,Cana,Algodon;
+
+    Texture brote;
     public Tierra1()
     {
             rango = new Texture("cuadradoNegro.png");
@@ -42,19 +48,67 @@ public class Tierra1 extends Actor implements Disposable {
         Cuerpo = new Rectangle(x,y,32/ Pixels,32/Pixels);
         Cuerpo2 = new Rectangle(x,y,32/ Pixels,32/Pixels);
         tierra = new Texture("Tierral.png");
+        tierra2 = new Texture("tierra2.png");
         b = new Texture("White.png");
-
+        range = new Rectangle();
+        brote = new Texture("Brote.png");
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
 
-        if(MenuBuild.BuildTierra) {
-        rangoS.setBounds(x-(32/Pixels),y,92/Pixels,32/Pixels);
-        rangoS.setAlpha(0.5f);
-        rangoS.draw(batch);
+
+        range.set(x-(32/Pixels),y,92/Pixels,32/Pixels);
+        if(range.overlaps(Agua1.range)||range.overlaps(Agua2.range)||range.overlaps(Agua3.range)||range.overlaps(Agua4.range))
+        {
+            batch.draw(tierra2, x, y, 32 / Pixels, 32 / Pixels);
+            isDamp = true;
+        }else {
+            batch.draw(tierra, x, y, 32 / Pixels, 32 / Pixels);
+            isDamp = false;
         }
-        batch.draw(tierra,x,y,32/Pixels,32/Pixels);
+
+        if(MyGdxGame.tierra1Trigo.getBoolean("tierra1"))
+        {
+            batch.draw(brote,x,y+(32/Pixels),32/Pixels,32/Pixels);
+           MyGdxGame.tierra1Enable.putBoolean("tierrra1",false);
+            MyGdxGame.tierra1Enable.flush();
+        }
+
+        if(MyGdxGame.tierra1Maiz.getBoolean("tierra1"))
+        {
+            batch.draw(brote,x,y+(32/Pixels),32/Pixels,32/Pixels);
+            MyGdxGame.tierra1Enable.putBoolean("tierrra1",false);
+            MyGdxGame.tierra1Enable.flush();
+        }
+
+        if(MyGdxGame.tierra1Soja.getBoolean("tierra1"))
+        {
+            batch.draw(brote,x,y+(32/Pixels),32/Pixels,32/Pixels);
+            MyGdxGame.tierra1Enable.putBoolean("tierrra1",false);
+            MyGdxGame.tierra1Enable.flush();
+        }
+
+        if(MyGdxGame.tierra1Zanahoria.getBoolean("tierra1"))
+        {
+            batch.draw(brote,x,y+(32/Pixels),32/Pixels,32/Pixels);
+            MyGdxGame.tierra1Enable.putBoolean("tierrra1",false);
+            MyGdxGame.tierra1Enable.flush();
+        }
+
+        if(MyGdxGame.tierra1Cana.getBoolean("tierra1"))
+        {
+            batch.draw(brote,x,y+(32/Pixels),32/Pixels,32/Pixels);
+            MyGdxGame.tierra1Enable.putBoolean("tierrra1",false);
+            MyGdxGame.tierra1Enable.flush();
+        }
+
+        if(MyGdxGame.tierra1Algodon.getBoolean("tierra1"))
+        {
+            batch.draw(brote,x,y+(32/Pixels),32/Pixels,32/Pixels);
+            MyGdxGame.tierra1Enable.putBoolean("tierrra1",false);
+            MyGdxGame.tierra1Enable.flush();
+        }
 
       for(Rectangle no: noBuild) {
           if (no.overlaps(Jugador.jugador)) {
@@ -109,8 +163,12 @@ if(MenuBuild.BuildTierra&&MyGdxGame.TierrasColocadas.getInteger("Posiciones") ==
     Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
     if(!MenuBuild.BuildTierra) {
 
-        Cuerpo.set(x, y, 32 / Pixels, 32 / Pixels);
+        Cuerpo.set(x, y, 32 / Pixels, 40 / Pixels);
     }else
+    {
+        Cuerpo.set(0,0,0,0);
+    }
+    if(MenuBuild.isMenu)
     {
         Cuerpo.set(0,0,0,0);
     }
@@ -125,7 +183,7 @@ if(MenuBuild.isMover) {
     }
 }
 
-if(cambiarPosicion)
+if(cambiarPosicion&&  MyGdxGame.tierra1Enable.getBoolean("tierra1"))
 {
     MenuBuild.BuildTierra = true;
     for (Rectangle e : rects) {
@@ -163,19 +221,25 @@ if(cambiarPosicion)
 
     public void colisiones()
     {
-        if(Cuerpo2.overlaps(Tierra2.Cuerpo2))
-        {
-            AddResources.isFreeSpace = false;
+        if(MyGdxGame.TierrasColocadas.getInteger("Posiciones") > 0) {
+            if (Cuerpo2.overlaps(Tierra2.Cuerpo2) || Cuerpo2.overlaps(Tierra3.Cuerpo2) || Cuerpo2.overlaps(Tierra4.Cuerpo2) || Cuerpo2.overlaps(Tierra5.Cuerpo2) || Cuerpo2.overlaps(Agua1.Cuerpo2) || Cuerpo2.overlaps(Agua2.Cuerpo2) || Cuerpo2.overlaps(Agua3.Cuerpo2) || Cuerpo2.overlaps(Agua4.Cuerpo2)) {
+                AddResources.isFreeSpace1 = false;
+            } else {
+                AddResources.isFreeSpace1 = true;
+            }
         }else
         {
-            AddResources.isFreeSpace = true;
+
+            AddResources.isFreeSpace1 = true;
         }
     }
 
     @Override
     public void dispose() {
         tierra.dispose();
+        tierra2.dispose();
         rango.dispose();
         b.dispose();
+        brote.dispose();
     }
 }

@@ -20,16 +20,16 @@ public class Tierra2 extends Actor implements Disposable {
 
     public static Rectangle Cuerpo;
     public static Rectangle Cuerpo2;
-    Texture tierra;
+    Texture tierra,Tierra2;
     float x,y;
     Texture b;
     public static boolean noToca;
     Texture rango;
     Sprite rangoS;
-
-
     float timeDurationTouch;
     boolean cambiarPosicion;
+
+    public static Rectangle range;
     public Tierra2()
     {
             rango = new Texture("cuadradoNegro.png");
@@ -38,19 +38,23 @@ public class Tierra2 extends Actor implements Disposable {
         Cuerpo = new Rectangle(x,y,32/ Pixels,32/Pixels);
         Cuerpo2 = new Rectangle(x, y, 32 / Pixels, 32 / Pixels);
         tierra = new Texture("Tierral.png");
+        Tierra2 = new Texture("tierra2.png");
         b = new Texture("White.png");
+        range = new Rectangle();
 
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
 
-        if(MenuBuild.BuildTierra) {
-        rangoS.setBounds(x-(32/Pixels),y,92/Pixels,32/Pixels);
-        rangoS.setAlpha(0.5f);
-        rangoS.draw(batch);
+
+        range.set(x-(32/Pixels),y,92/Pixels,32/Pixels);
+        if(range.overlaps(Agua1.range)||range.overlaps(Agua2.range)||range.overlaps(Agua3.range)||range.overlaps(Agua4.range))
+        {
+            batch.draw(Tierra2, x, y, 32 / Pixels, 32 / Pixels);
+        }else {
+            batch.draw(tierra, x, y, 32 / Pixels, 32 / Pixels);
         }
-        batch.draw(tierra,x,y,32/Pixels,32/Pixels);
 
       for(Rectangle no: Tierra1.noBuild) {
           if (no.overlaps(Jugador.jugador)) {
@@ -73,11 +77,11 @@ colisiones();
                 if (Jugador.jugador.overlaps(e)) {
                     if (noToca) {
                         MyGdxGame.TierrasColocadas.putInteger("Posiciones",2);
-                        tierra2.putFloat("X", Jugador.body.getPosition().x);
+                        tierra2.putFloat("X2", Jugador.body.getPosition().x);
                         if(AddResources.TouchConfirm) {
                             tierra2.flush();
                         }
-                        tierra2.putFloat("Y", (e.y + (5 / Pixels)) - 32 / Pixels);
+                        tierra2.putFloat("Y2", (e.y + (5 / Pixels)) - 32 / Pixels);
                         if(AddResources.TouchConfirm) {
                             tierra2.flush();
                             MyGdxGame.TierrasColocadas.flush();
@@ -100,15 +104,15 @@ if(MenuBuild.BuildTierra&&MyGdxGame.TierrasColocadas.getInteger("Posiciones") ==
     }
 }else
 {
-    x = tierra2.getFloat("X");
-    y = tierra2.getFloat("Y");
+    x = tierra2.getFloat("X2");
+    y = tierra2.getFloat("Y2");
     Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
     if(!MenuBuild.BuildTierra) {
 
         Cuerpo.set(x, y, 32 / Pixels, 32 / Pixels);
     }else
     {
-        Cuerpo.set(0,0,0,0);
+        Cuerpo.set(1,0,0,0);
     }
 }
 if(MenuBuild.isMover) {
@@ -134,11 +138,11 @@ if(cambiarPosicion)
     for (Rectangle e :  Tierra1.rects) {
         if (Jugador.jugador.overlaps(e)) {
             if (noToca) {
-                tierra2.putFloat("X", Jugador.body.getPosition().x);
+                tierra2.putFloat("X2", Jugador.body.getPosition().x);
                 if(AddResources.TouchConfirm) {
                     tierra2.flush();
                 }
-                tierra2.putFloat("Y", (e.y + (5 / Pixels)) - 32 / Pixels);
+                tierra2.putFloat("Y2", (e.y + (5 / Pixels)) - 32 / Pixels);
                 if(AddResources.TouchConfirm) {
                     tierra2.flush();
                     MenuBuild.BuildTierra = false;
@@ -157,18 +161,57 @@ if(cambiarPosicion)
 
     public void colisiones()
     {
-        if(Cuerpo2.overlaps(Tierra1.Cuerpo2)|| !noToca)
-        {
-            AddResources.isFreeSpace = false;
+        if(MyGdxGame.TierrasColocadas.getInteger("Posiciones") >= 1) {
+            if (Cuerpo2.overlaps(Tierra1.Cuerpo2) || Cuerpo2.overlaps(Tierra3.Cuerpo2) || Cuerpo2.overlaps(Tierra4.Cuerpo2) || Cuerpo2.overlaps(Tierra5.Cuerpo2) || Cuerpo2.overlaps(Agua1.Cuerpo2) || Cuerpo2.overlaps(Agua2.Cuerpo2) || Cuerpo2.overlaps(Agua3.Cuerpo2) || Cuerpo2.overlaps(Agua4.Cuerpo2)) {
+                AddResources.isFreeSpace2 = false;
+            } else {
+                AddResources.isFreeSpace2 = true;
+            }
+
+            if(Cuerpo2.overlaps(Tierra1.Cuerpo2))
+            {
+                Gdx.app.log("Toco","Tierra1");
+            }
+            if(Cuerpo2.overlaps(Tierra3.Cuerpo2))
+            {
+                Gdx.app.log("Toco","Tierra3");
+            }
+            if(Cuerpo2.overlaps(Tierra4.Cuerpo2))
+            {
+                Gdx.app.log("Toco","Tierra4");
+            }
+            if(Cuerpo2.overlaps(Tierra5.Cuerpo2))
+            {
+                Gdx.app.log("Toco","Tierra5");
+            }
+            if(Cuerpo2.overlaps(Agua1.Cuerpo2))
+            {
+                Gdx.app.log("Toco","Agua1");
+            }
+            if(Cuerpo2.overlaps(Agua2.Cuerpo2))
+            {
+                Gdx.app.log("Toco","Agua2");
+            }
+            if(Cuerpo2.overlaps(Agua3.Cuerpo2))
+            {
+                Gdx.app.log("Toco","Agua3");
+            }
+            if(Cuerpo2.overlaps(Agua4.Cuerpo2))
+            {
+                Gdx.app.log("Toco","Agua4");
+            }
+
         }else
         {
-            AddResources.isFreeSpace = true;
+
+            AddResources.isFreeSpace2 = true;
         }
     }
 
     @Override
     public void dispose() {
         tierra.dispose();
+        Tierra2.dispose();
         rango.dispose();
         b.dispose();
     }
