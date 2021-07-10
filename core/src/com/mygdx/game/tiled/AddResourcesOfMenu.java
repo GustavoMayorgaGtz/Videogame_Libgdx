@@ -101,7 +101,7 @@ numeros.getData().scale(1/Pixels);
 
     public void addRender(float delta) {
 
-        if(Gdx.input.isTouched())
+        if(Gdx.input.isTouched(1))
         {
             MyGdxGame.isIsNivelProgress2 = true;
             game.setScreen(new Nivel2Progresion(game));

@@ -24,8 +24,8 @@ public class Tierra5 extends Actor implements Disposable {
     public static boolean noToca;
     Texture rango;
     Sprite rangoS;
-    float timeDurationTouch;
-    boolean cambiarPosicion;
+    public static float timeDurationTouch;
+    public static boolean cambiarPosicion;
 
     public static Rectangle range;
     public Tierra5()
@@ -34,7 +34,7 @@ public class Tierra5 extends Actor implements Disposable {
             rangoS = new Sprite(rango);
 
         Cuerpo = new Rectangle(x,y,32/ Pixels,32/Pixels);
-        Cuerpo2 = new Rectangle(x, y, 32 / Pixels, 32 / Pixels);
+        Cuerpo2 = new Rectangle();
         tierra = new Texture("Tierral.png");
         tierra2 = new Texture("tierra2.png");
         b = new Texture("White.png");
@@ -68,6 +68,7 @@ public class Tierra5 extends Actor implements Disposable {
 
     @Override
     public void act(float delta) {
+
 colisiones();
         if(MyGdxGame.TierrasColocadas.getInteger("Posiciones") == 4 && MenuBuild.BuildTierra) {
             for (Rectangle e :  Tierra1.rects) {
@@ -101,9 +102,11 @@ if(MenuBuild.BuildTierra&&MyGdxGame.TierrasColocadas.getInteger("Posiciones") ==
     }
 }else
 {
-    x = tierra5.getFloat("X5");
-    y = tierra5.getFloat("Y5");
-    Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
+    if(!cambiarPosicion) {
+        x = tierra5.getFloat("X5");
+        y = tierra5.getFloat("Y5");
+        Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
+    }
     if(!MenuBuild.BuildTierra) {
 
         Cuerpo.set(x, y, 32 / Pixels, 32 / Pixels);
@@ -122,19 +125,13 @@ if(MenuBuild.isMover) {
 }
 if(cambiarPosicion)
 {
-    MenuBuild.BuildTierra = true;
+    MenuBuild.BuildMover = true;
     for (Rectangle e :  Tierra1.rects) {
         if (Jugador.jugador.overlaps(e)) {
             if (noToca) {
                 y = (e.y + (5 / Pixels)) - 32 / Pixels;
                 x = Jugador.body.getPosition().x;
                 Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
-            }
-        }
-    }
-    for (Rectangle e :  Tierra1.rects) {
-        if (Jugador.jugador.overlaps(e)) {
-            if (noToca) {
                 tierra5.putFloat("X5", Jugador.body.getPosition().x);
                 if(AddResources.TouchConfirm) {
                     tierra5.flush();
@@ -142,33 +139,28 @@ if(cambiarPosicion)
                 tierra5.putFloat("Y5", (e.y + (5 / Pixels)) - 32 / Pixels);
                 if(AddResources.TouchConfirm) {
                     tierra5.flush();
-                    MenuBuild.BuildTierra = false;
+                    MenuBuild.BuildMover = false;
                     MenuBuild.isMenu = false;
-                    AddResources.TouchConfirm = false;
-                    AddResources.TouchCancel = false;
                     cambiarPosicion = false;
                     timeDurationTouch = 0;
                 }
             }
         }
     }
+
 }
 
     }
 
     public void colisiones()
     {
-        if(MyGdxGame.TierrasColocadas.getInteger("Posiciones") >= 4) {
+
             if (Cuerpo2.overlaps(Tierra2.Cuerpo2) || Cuerpo2.overlaps(Tierra3.Cuerpo2) || Cuerpo2.overlaps(Tierra4.Cuerpo2) || Cuerpo2.overlaps(Tierra1.Cuerpo2) || Cuerpo2.overlaps(Agua1.Cuerpo2) || Cuerpo2.overlaps(Agua2.Cuerpo2) || Cuerpo2.overlaps(Agua3.Cuerpo2) || Cuerpo2.overlaps(Agua4.Cuerpo2)) {
                 AddResources.isFreeSpace5 = false;
             } else {
                 AddResources.isFreeSpace5 = true;
             }
-        }else
-        {
 
-            AddResources.isFreeSpace5 = true;
-        }
     }
 
     @Override

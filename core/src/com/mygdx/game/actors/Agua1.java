@@ -42,8 +42,8 @@ public class Agua1 extends Actor implements Disposable {
     Sprite rangoS;
 
 
-    float timeDurationTouch;
-    boolean cambiarPosicion;
+    public static float timeDurationTouch;
+    public static boolean cambiarPosicion;
     public Agua1()
     {
         Cuerpo = new Rectangle(x,y,32/ Pixels,32/Pixels);
@@ -131,9 +131,12 @@ public class Agua1 extends Actor implements Disposable {
             }
         }else
         {
-            x = agua1.getFloat("X6");
-            y = agua1.getFloat("Y6");
-            Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
+            if(!cambiarPosicion) {
+
+                x = agua1.getFloat("X6");
+                y = agua1.getFloat("Y6");
+                Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
+            }
             if(!MenuBuild.BuildAgua) {
 
                 Cuerpo.set(x, y, 32 / Pixels, 32 / Pixels);
@@ -155,19 +158,14 @@ public class Agua1 extends Actor implements Disposable {
 
         if(cambiarPosicion)
         {
-            MenuBuild.BuildAgua = true;
+            MenuBuild.BuildMover = true;
             for (Rectangle e : Tierra1.rects) {
                 if (noToca) {
                     if (Jugador.jugador.overlaps(e)) {
                         y = (e.y + (5 / Pixels)) - 32 / Pixels;
                         x = Jugador.body.getPosition().x;
                         Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
-                    }
-                }
-            }
-            for (Rectangle e : Tierra1.rects) {
-                if (Jugador.jugador.overlaps(e)) {
-                    if (noToca) {
+
                         agua1.putFloat("X6", Jugador.body.getPosition().x);
                         if(AddResources.TouchConfirm) {
                             agua1.flush();
@@ -175,34 +173,28 @@ public class Agua1 extends Actor implements Disposable {
                         agua1.putFloat("Y6", (e.y + (5 / Pixels)) - 32 / Pixels);
                         if(AddResources.TouchConfirm) {
                             agua1.flush();
-                            MenuBuild.BuildAgua = false;
+                            MenuBuild.BuildMover= false;
                             MenuBuild.isMenu = false;
-                            AddResources.TouchConfirm = false;
-                            AddResources.TouchCancel = false;
                             cambiarPosicion = false;
                             timeDurationTouch = 0;
                         }
                     }
                 }
             }
+
         }
     }
 
     public void colisiones()
     {
 
-        if(MyGdxGame.AguasColocadas.getInteger("Posiciones2") > 0) {
-     //       Gdx.app.log("posicion Agua",""+MyGdxGame.AguasColocadas.getInteger("Posiciones2"));
             if (Cuerpo2.overlaps(Tierra1.Cuerpo2) || Cuerpo2.overlaps(Tierra2.Cuerpo2) || Cuerpo2.overlaps(Tierra3.Cuerpo2) || Cuerpo2.overlaps(Tierra4.Cuerpo2) || Cuerpo2.overlaps(Tierra5.Cuerpo2) || Cuerpo2.overlaps(Agua2.Cuerpo2) || Cuerpo2.overlaps(Agua3.Cuerpo2) || Cuerpo2.overlaps(Agua4.Cuerpo2)) {
                 AddResources.isFreeSpace6 = false;
+
             } else {
                 AddResources.isFreeSpace6 = true;
             }
-        }else
-        {
 
-                AddResources.isFreeSpace6 = true;
-        }
     }
 
     @Override

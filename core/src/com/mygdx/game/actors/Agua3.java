@@ -39,9 +39,9 @@ public class Agua3 extends Actor implements Disposable {
     Texture rango;
     Sprite rangoS;
 
+    public static boolean cambiarPosicion;
+    public static float timeDurationTouch;
 
-    float timeDurationTouch;
-    boolean cambiarPosicion;
     public Agua3()
     {
         Cuerpo = new Rectangle(x,y,32/ Pixels,32/Pixels);
@@ -59,7 +59,7 @@ public class Agua3 extends Actor implements Disposable {
         AguaAnimation = new Animation<TextureRegion>(0.2f,Tmp);
         rango = new Texture("cuadradoNegro.png");
         rangoS = new Sprite(rango);
-        Cuerpo2 = new Rectangle(x,y,32/ Pixels,32/Pixels);
+        Cuerpo2 = new Rectangle();
         b = new Texture("White.png");
         range = new Rectangle();
     }
@@ -129,9 +129,11 @@ public class Agua3 extends Actor implements Disposable {
             }
         }else
         {
-            x = agua3.getFloat("X8");
-            y = agua3.getFloat("Y8");
-            Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
+            if(!cambiarPosicion) {
+                x = agua3.getFloat("X8");
+                y = agua3.getFloat("Y8");
+                Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
+            }
             if(!MenuBuild.BuildAgua) {
 
                 Cuerpo.set(x, y, 32 / Pixels, 32 / Pixels);
@@ -152,7 +154,7 @@ public class Agua3 extends Actor implements Disposable {
 
         if(cambiarPosicion)
         {
-            MenuBuild.BuildAgua = true;
+            MenuBuild.BuildMover = true;
             for (Rectangle e : Tierra1.rects) {
                 if (noToca) {
                     if (Jugador.jugador.overlaps(e)) {
@@ -172,10 +174,9 @@ public class Agua3 extends Actor implements Disposable {
                         agua3.putFloat("Y8", (e.y + (5 / Pixels)) - 32 / Pixels);
                         if(AddResources.TouchConfirm) {
                             agua3.flush();
-                            MenuBuild.BuildAgua = false;
+                            MenuBuild.BuildMover = false;
                             MenuBuild.isMenu = false;
-                            AddResources.TouchConfirm = false;
-                            AddResources.TouchCancel = false;
+
                             cambiarPosicion = false;
                             timeDurationTouch = 0;
                         }
@@ -187,17 +188,13 @@ public class Agua3 extends Actor implements Disposable {
 
     public void colisiones()
     {
-        if(MyGdxGame.AguasColocadas.getInteger("Posiciones2") >= 2 ) {
+
             if (Cuerpo2.overlaps(Tierra1.Cuerpo2) || Cuerpo2.overlaps(Tierra2.Cuerpo2) || Cuerpo2.overlaps(Tierra3.Cuerpo2) || Cuerpo2.overlaps(Tierra4.Cuerpo2) || Cuerpo2.overlaps(Tierra5.Cuerpo2) || Cuerpo2.overlaps(Agua1.Cuerpo2) || Cuerpo2.overlaps(Agua2.Cuerpo2) || Cuerpo2.overlaps(Agua4.Cuerpo2)) {
                 AddResources.isFreeSpace8 = false;
             } else {
                 AddResources.isFreeSpace8 = true;
             }
-        }else
-        {
-            AddResources.isFreeSpace8 = true;
 
-        }
     }
 
     @Override

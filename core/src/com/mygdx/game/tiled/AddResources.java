@@ -21,8 +21,17 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Casa;
 import com.mygdx.game.Menu;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.actors.Agua1;
+import com.mygdx.game.actors.Agua2;
+import com.mygdx.game.actors.Agua3;
+import com.mygdx.game.actors.Agua4;
 import com.mygdx.game.actors.Jugador;
 import com.mygdx.game.actors.MenuBuild;
+import com.mygdx.game.actors.Tierra1;
+import com.mygdx.game.actors.Tierra2;
+import com.mygdx.game.actors.Tierra3;
+import com.mygdx.game.actors.Tierra4;
+import com.mygdx.game.actors.Tierra5;
 import com.mygdx.game.actors.TimeZone;
 
 
@@ -664,9 +673,14 @@ batch.begin();
                 /**************************/
                 /**************************/
                 /**************************/
-                if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua) {
+                if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover) {
                     if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection) {
                         if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
+                            cancel.set(0,0,0,0);
+                            confirm.set(0,0,0,0);
+                            TouchCancel = false;
+                            TouchConfirm = false;
+
                             if (!add.player.Muerto) {
                                 if (add.player.Espadazo) {
                                     add.player.time1 = 0;
@@ -700,7 +714,7 @@ batch.begin();
                         SaltoRect.set(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
                         AttackRect.set(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
                         SpeedRect.set(cam.position.x + 3, cam.position.y - 1, 30 / Pixels, 30 / Pixels);
-                        PauseRect.set(cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                        PauseRect.set(cam.position.x + 3, cam.position.y + 1.8f, 15 / Pixels, 15 / Pixels);
                         if (!izq) {
                             // batch.draw(BtnIzq, cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
                             izqS.setAlpha(MyGdxGame.alpha);
@@ -764,12 +778,12 @@ batch.begin();
                         if (!pause) {
                             // batch.draw(BtnPause, cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
                             pauseS.setAlpha(MyGdxGame.alpha);
-                            pauseS.setBounds(cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                            pauseS.setBounds(cam.position.x + 3, cam.position.y + 1.8f, 15 / Pixels, 15 / Pixels);
                             pauseS.draw(batch);
                         } else {
                             //  batch.draw(BtnPauseHover, cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
                             pauseHoverS.setAlpha(MyGdxGame.alpha);
-                            pauseHoverS.setBounds(cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                            pauseHoverS.setBounds(cam.position.x + 3, cam.position.y + 1.8f, 15 / Pixels, 15 / Pixels);
                             pauseHoverS.draw(batch);
 
                         }
@@ -1651,20 +1665,44 @@ batch.begin();
         }
 
      /**************************/
-freeSpace();
         CancelarS.setBounds(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
         cancel.set(cam.position.x + 2, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
-        ConfirmarS.draw(batch);
+
+        if (cancel.overlaps(puntero)) {
+            Tierra1.cambiarPosicion = false;
+            Tierra2.cambiarPosicion = false;
+            Tierra3.cambiarPosicion = false;
+            Tierra4.cambiarPosicion = false;
+            Tierra5.cambiarPosicion = false;
+
+            Agua1.cambiarPosicion = false;
+            Agua2.cambiarPosicion = false;
+            Agua3.cambiarPosicion = false;
+            Agua4.cambiarPosicion = false;
+
+            Tierra1.timeDurationTouch= 0;
+            Tierra2.timeDurationTouch= 0;
+            Tierra3.timeDurationTouch= 0;
+            Tierra4.timeDurationTouch= 0;
+            Tierra5.timeDurationTouch= 0;
+
+            Agua1.timeDurationTouch = 0;
+            Agua2.timeDurationTouch = 0;
+            Agua3.timeDurationTouch = 0;
+            Agua4.timeDurationTouch = 0;
+            MenuBuild.BuildTierra = false;
+            MenuBuild.BuildAgua = false;
+            MenuBuild.BuildMover = false;
+        }
+freeSpace();
+       ConfirmarS.draw(batch);
         CancelarS.draw(batch);
         if (confirm.overlaps(puntero)) {
             TouchConfirm = true;
         } else {
             TouchConfirm =false;
         }
-        if (cancel.overlaps(puntero)) {
-            MenuBuild.BuildTierra = false;
-            MenuBuild.BuildAgua = false;
-        }
+
     }
 
     public void freeSpace()
@@ -1686,13 +1724,11 @@ freeSpace();
 
         if(!isFreeSpace1||!isFreeSpace2||!isFreeSpace3||!isFreeSpace4||!isFreeSpace5||!isFreeSpace6||!isFreeSpace7||!isFreeSpace8||!isFreeSpace9) {
 
-
             confirm.set(0,0,0,0);
             ConfirmarS.setBounds(0,0,0,0);
 
         }else
         {
-
             ConfirmarS.setAlpha(1);
             CancelarS.setAlpha(1);
             ConfirmarS.setBounds(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);

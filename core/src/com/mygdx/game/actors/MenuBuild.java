@@ -45,6 +45,7 @@ public class MenuBuild extends Actor implements Disposable
     public static Rectangle trigoR2,maizR2,sojaR2,zanahoriaR2,canaR2,algodonR2;
     public static boolean BuildTierra;
     public static boolean BuildAgua;
+    public static boolean BuildMover;
 
     /****MoverButton****/
     Texture mover;
@@ -343,7 +344,7 @@ public class MenuBuild extends Actor implements Disposable
                     Gdx.app.log("Valor de trigo",""+MyGdxGame.Trigo.getInteger("Trigo"));
                     if(isTierra1)
                     {
-                      MyGdxGame.tierra1Trigo.putBoolean("tierra1",true);
+                      MyGdxGame.tierra1Trigo.putBoolean("tierra11",true);
                         MyGdxGame.tierra1Trigo.flush();
                     }
                     if(isTierra2)
@@ -374,7 +375,7 @@ public class MenuBuild extends Actor implements Disposable
                     Gdx.app.log("Valor de maiz",""+MyGdxGame.Maiz.getInteger("Maiz"));
                     if(isTierra1)
                     {
-                        MyGdxGame.tierra1Maiz.putBoolean("tierra1",true);
+                        MyGdxGame.tierra1Maiz.putBoolean("tierra12",true);
                         MyGdxGame.tierra1Maiz.flush();
                     }
                     if(isTierra2)
@@ -405,7 +406,7 @@ public class MenuBuild extends Actor implements Disposable
                     MenuBuild.timeQuitar = 0;
                     if(isTierra1)
                     {
-                        MyGdxGame.tierra1Soja.putBoolean("tierra1",true);
+                        MyGdxGame.tierra1Soja.putBoolean("tierra13",true);
                         MyGdxGame.tierra1Soja.flush();
                     }
                     if(isTierra2)
@@ -435,7 +436,7 @@ public class MenuBuild extends Actor implements Disposable
                     MenuBuild.timeQuitar = 0;
                     if(isTierra1)
                     {
-                        MyGdxGame.tierra1Zanahoria.putBoolean("tierra1",true);
+                        MyGdxGame.tierra1Zanahoria.putBoolean("tierra14",true);
                         MyGdxGame.tierra1Zanahoria.flush();
                     }
                     if(isTierra2)
@@ -465,7 +466,7 @@ public class MenuBuild extends Actor implements Disposable
                     MenuBuild.timeQuitar = 0;
                     if(isTierra1)
                     {
-                        MyGdxGame.tierra1Cana.putBoolean("tierra1",true);
+                        MyGdxGame.tierra1Cana.putBoolean("tierra15",true);
                         MyGdxGame.tierra1Cana.flush();
                     }
                     if(isTierra2)
@@ -494,7 +495,7 @@ public class MenuBuild extends Actor implements Disposable
                     Gdx.app.log("Valor de Algodon",""+MyGdxGame.Algodon.getInteger("Algodon"));
                     if(isTierra1)
                     {
-                        MyGdxGame.tierra1Algodon.putBoolean("tierra1",true);
+                        MyGdxGame.tierra1Algodon.putBoolean("tierra16",true);
                         MyGdxGame.tierra1Algodon.flush();
                     }
                     if(isTierra2)

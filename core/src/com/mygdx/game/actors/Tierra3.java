@@ -16,7 +16,7 @@ import static com.mygdx.game.MyGdxGame.tierra3;
 
 public class Tierra3 extends Actor implements Disposable {
 
-    public static Rectangle Cuerpo;
+     Rectangle Cuerpo;
     public static Rectangle Cuerpo2;
     Texture tierra,tierra2;
     float x,y;
@@ -24,8 +24,8 @@ public class Tierra3 extends Actor implements Disposable {
     public static boolean noToca;
     Texture rango;
     Sprite rangoS;
-    float timeDurationTouch;
-    boolean cambiarPosicion;
+    public static float timeDurationTouch;
+    public static boolean cambiarPosicion;
 
     public static Rectangle range;
     public Tierra3()
@@ -34,7 +34,7 @@ public class Tierra3 extends Actor implements Disposable {
             rangoS = new Sprite(rango);
 
         Cuerpo = new Rectangle(x,y,32/ Pixels,32/Pixels);
-        Cuerpo2 = new Rectangle(x, y, 32 / Pixels, 32 / Pixels);
+        Cuerpo2 = new Rectangle();
         tierra = new Texture("Tierral.png");
         tierra2 = new Texture("tierra2.png");
         b = new Texture("White.png");
@@ -102,9 +102,11 @@ if(MenuBuild.BuildTierra&&MyGdxGame.TierrasColocadas.getInteger("Posiciones") ==
     }
 }else
 {
-    x = tierra3.getFloat("X3");
-    y = tierra3.getFloat("Y3");
-    Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
+    if(!cambiarPosicion) {
+        x = tierra3.getFloat("X3");
+        y = tierra3.getFloat("Y3");
+        Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
+    }
     if(!MenuBuild.BuildTierra) {
 
         Cuerpo.set(x, y, 32 / Pixels, 32 / Pixels);
@@ -123,7 +125,7 @@ if(MenuBuild.isMover) {
 }
 if(cambiarPosicion)
 {
-    MenuBuild.BuildTierra = true;
+    MenuBuild.BuildMover = true;
     for (Rectangle e :  Tierra1.rects) {
         if (Jugador.jugador.overlaps(e)) {
             if (noToca) {
@@ -143,10 +145,9 @@ if(cambiarPosicion)
                 tierra3.putFloat("Y3", (e.y + (5 / Pixels)) - 32 / Pixels);
                 if(AddResources.TouchConfirm) {
                     tierra3.flush();
-                    MenuBuild.BuildTierra = false;
+                    MenuBuild.BuildMover = false;
                     MenuBuild.isMenu = false;
-                    AddResources.TouchConfirm = false;
-                    AddResources.TouchCancel = false;
+
                     cambiarPosicion = false;
                     timeDurationTouch = 0;
                 }
@@ -159,16 +160,13 @@ if(cambiarPosicion)
 
     public void colisiones()
     {
-        if(MyGdxGame.TierrasColocadas.getInteger("Posiciones") >= 2) {
+
             if (Cuerpo2.overlaps(Tierra2.Cuerpo2) || Cuerpo2.overlaps(Tierra1.Cuerpo2) || Cuerpo2.overlaps(Tierra4.Cuerpo2) || Cuerpo2.overlaps(Tierra5.Cuerpo2) || Cuerpo2.overlaps(Agua1.Cuerpo2) || Cuerpo2.overlaps(Agua2.Cuerpo2) || Cuerpo2.overlaps(Agua3.Cuerpo2) || Cuerpo2.overlaps(Agua4.Cuerpo2)) {
                 AddResources.isFreeSpace3 = false;
             } else {
                 AddResources.isFreeSpace3 = true;
             }
-        }else
-        {
-            AddResources.isFreeSpace3 = true;
-        }
+
     }
 
     @Override

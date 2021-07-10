@@ -119,36 +119,59 @@ public class MyGdxGame extends Game{
 		Zanahoria = Gdx.app.getPreferences("Zanahoria");
 		Cana = Gdx.app.getPreferences("Cana");
 		Algodon = Gdx.app.getPreferences("Algodon");
+		/***Tierra1*****/
+		tierra1Trigo = Gdx.app.getPreferences("tierra11");
+		tierra1Maiz = Gdx.app.getPreferences("tierra12");
+		tierra1Soja = Gdx.app.getPreferences("tierra13");
+		tierra1Zanahoria = Gdx.app.getPreferences("tierra14");
+		tierra1Cana = Gdx.app.getPreferences("tierra15");
+		tierra1Algodon = Gdx.app.getPreferences("tierra16");
+		tierra1Enable = Gdx.app.getPreferences("tierra1");
+
 
 		if(Cinematica.getInteger("Cinematica")==0)
 		{
+			tierra1Enable.putBoolean("tierra1",true);
+			tierra1Enable.flush();
+			tierra1Trigo.putBoolean("tierra11",false);
+			tierra1Trigo.flush();
+			tierra1Maiz.putBoolean("tierra12",false);
+			tierra1Maiz.flush();
+			tierra1Soja.putBoolean("tierra13",false);
+			tierra1Soja.flush();
+			tierra1Zanahoria.putBoolean("tierra14",false);
+			tierra1Zanahoria.flush();
+			tierra1Cana.putBoolean("tierra15",false);
+			tierra1Cana.flush();
+			tierra1Algodon.putBoolean("tierra16",false);
+			tierra1Algodon.flush();
 			tierra1.putFloat("X",0.0f);
 			tierra1.putFloat("Y",0.0f);
-			tierra2.putFloat("X2",10.0f);
-			tierra2.putFloat("Y2",10.0f);
-			tierra3.putFloat("X3",20.0f);
-			tierra3.putFloat("Y3",20.0f);
-			tierra4.putFloat("X4",30.0f);
-			tierra4.putFloat("Y4",30.0f);
-			tierra5.putFloat("X5",40.0f);
-			tierra5.putFloat("Y5",40.0f);
+			tierra2.putFloat("X2",100.0f);
+			tierra2.putFloat("Y2",100.0f);
+			tierra3.putFloat("X3",200.0f);
+			tierra3.putFloat("Y3",200.0f);
+			tierra4.putFloat("X4",300.0f);
+			tierra4.putFloat("Y4",300.0f);
+			tierra5.putFloat("X5",400.0f);
+			tierra5.putFloat("Y5",400.0f);
 			tierra1.flush();
 			tierra2.flush();
 			tierra3.flush();
 			tierra4.flush();
 			tierra5.flush();
 
-			agua1.putFloat("X6",50.0f);
-			agua1.putFloat("Y6",50.0f);
+			agua1.putFloat("X6",500.0f);
+			agua1.putFloat("Y6",500.0f);
 
-			agua2.putFloat("X7",60.0f);
-			agua2.putFloat("Y7",60.0f);
+			agua2.putFloat("X7",600.0f);
+			agua2.putFloat("Y7",600.0f);
 
-			agua3.putFloat("X8",70.0f);
-			agua3.putFloat("Y8",70.0f);
+			agua3.putFloat("X8",700.0f);
+			agua3.putFloat("Y8",700.0f);
 
-			agua4.putFloat("X9",80.0f);
-			agua4.putFloat("Y9",80.0f);
+			agua4.putFloat("X9",800.0f);
+			agua4.putFloat("Y9",800.0f);
 
 			agua1.flush();
 			agua2.flush();
@@ -156,14 +179,6 @@ public class MyGdxGame extends Game{
 			agua4.flush();
 		}
 
-		/***Tierra1*****/
-		tierra1Trigo = Gdx.app.getPreferences("tierra1");
-		tierra1Maiz = Gdx.app.getPreferences("tierra1");
-		tierra1Soja = Gdx.app.getPreferences("tierra1");
-		tierra1Zanahoria = Gdx.app.getPreferences("tierra1");
-		tierra1Cana = Gdx.app.getPreferences("tierra1");
-		tierra1Algodon = Gdx.app.getPreferences("tierra1");
-		tierra1Enable = Gdx.app.getPreferences("tierra1");
 
 		manager = new AssetManager();
 
