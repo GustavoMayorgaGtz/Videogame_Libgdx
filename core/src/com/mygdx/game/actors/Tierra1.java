@@ -39,7 +39,10 @@ public class Tierra1 extends Actor implements Disposable {
     public static boolean isDamp;
     public static boolean Trigo,Maiz,Soja,Zanahoria,Cana,Algodon;
 
+
     Texture brote;
+    Texture trigoPrueba;
+    boolean isOld;
     public Tierra1()
     {
             rango = new Texture("cuadradoNegro.png");
@@ -52,10 +55,12 @@ public class Tierra1 extends Actor implements Disposable {
         b = new Texture("White.png");
         range = new Rectangle();
         brote = new Texture("Brote.png");
+        trigoPrueba = new Texture("TrigoPrueba.png");
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+
 
 
         range.set(x-(32/Pixels),y,92/Pixels,32/Pixels);
@@ -67,10 +72,62 @@ public class Tierra1 extends Actor implements Disposable {
             batch.draw(tierra, x, y, 32 / Pixels, 32 / Pixels);
             isDamp = false;
         }
+        if(!MyGdxGame.tierra1Enable.getBoolean("tierra1"))
+        {
+            if(MyGdxGame.tierra1Iterator.getInteger("iteratorTierra1")==0) {
+                TimeZone t = new TimeZone();
+                t.calcularHora = true;
+                t.CalcularTiempo(1);
+                MyGdxGame.tierra1Day.putInteger("DayTierra1",t.dayS);
+                MyGdxGame.tierra1Year.putInteger("YearTierra1",t.yearS);
+                MyGdxGame.tierra1Hour.putInteger("HourTierra1",t.hourS);
+                MyGdxGame.tierra1Minute.putInteger("MinuteTierra1",t.minuteS);
+                MyGdxGame.tierra1Day.flush();
+                MyGdxGame.tierra1Year.flush();
+                MyGdxGame.tierra1Hour.flush();
+                MyGdxGame.tierra1Minute.flush();
+                MyGdxGame.tierra1Iterator.putInteger("iteratorTierra1",5);
+                MyGdxGame.tierra1Iterator.flush();
+                Gdx.app.log("year",""+MyGdxGame.tierra1Year.getInteger("YearTierra1"));
+                Gdx.app.log("day",""+MyGdxGame.tierra1Day.getInteger("DayTierra1"));
+                Gdx.app.log("hour",""+MyGdxGame.tierra1Hour.getInteger("HourTierra1"));
+                Gdx.app.log("minute",""+MyGdxGame.tierra1Minute.getInteger("MinuteTierra1"));
+                Gdx.app.log("minute",""+t.minuteS);
+
+
+            }
+
+            TimeZone t = new TimeZone();
+
+            if(t.year > MyGdxGame.tierra1Year.getInteger("YearTierra1"))
+            {
+                isOld = true;
+            }else if(t.day > MyGdxGame.tierra1Day.getInteger("DayTierra1"))
+            {
+                isOld = true;
+            }else if(t.hour > MyGdxGame.tierra1Hour.getInteger("HourTierra1"))
+            {
+                isOld = true;
+            }else if(t.minute > MyGdxGame.tierra1Minute.getInteger("MinuteTierra1"))
+            {
+                isOld = true;
+            }else
+            {
+                isOld = false;
+            }
+
+        }
 
         if(MyGdxGame.tierra1Trigo.getBoolean("tierra11"))
         {
-            batch.draw(brote,x,y+(32/Pixels),32/Pixels,32/Pixels);
+
+            if(isOld)
+            {
+                batch.draw(trigoPrueba,x,y+(32/Pixels),32/Pixels,32/Pixels);
+            }else {
+                batch.draw(brote, x, y + (32 / Pixels), 32 / Pixels, 32 / Pixels);
+            }
+
            MyGdxGame.tierra1Enable.putBoolean("tierra1",false);
             MyGdxGame.tierra1Enable.flush();
         }
@@ -240,5 +297,6 @@ if(cambiarPosicion&&  MyGdxGame.tierra1Enable.getBoolean("tierra1"))
         rango.dispose();
         b.dispose();
         brote.dispose();
+        trigoPrueba.dispose();
     }
 }

@@ -62,6 +62,7 @@ public class MyGdxGame extends Game{
 	public static Preferences Algodon;
 
 	/**Tierra1**/
+	public static Preferences tierra1Year,tierra1Day,tierra1Hour,tierra1Minute,tierra1Iterator;
 	public static Preferences tierra1Trigo;
 	public static Preferences tierra1Maiz;
 	public static Preferences tierra1Soja;
@@ -127,6 +128,11 @@ public class MyGdxGame extends Game{
 		tierra1Cana = Gdx.app.getPreferences("tierra15");
 		tierra1Algodon = Gdx.app.getPreferences("tierra16");
 		tierra1Enable = Gdx.app.getPreferences("tierra1");
+		tierra1Year = Gdx.app.getPreferences("YearTierra1");
+		tierra1Day = Gdx.app.getPreferences("DayTierra1");
+		tierra1Hour = Gdx.app.getPreferences("HourTierra1");
+		tierra1Minute = Gdx.app.getPreferences("MinuteTierra1");
+		tierra1Iterator = Gdx.app.getPreferences("iteratorTierra1");
 
 
 		if(Cinematica.getInteger("Cinematica")==0)
