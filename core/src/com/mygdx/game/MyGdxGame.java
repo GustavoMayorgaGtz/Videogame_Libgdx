@@ -47,9 +47,9 @@ public class MyGdxGame extends Game{
 	public static Preferences agua2;
 	public static Preferences agua3;
 	public static Preferences agua4;
-	public static Preferences agua5;
 
-	MyGdxGame game;
+
+
 	public static final float Pixels = 30;
 	public static float alpha;
 
@@ -63,6 +63,7 @@ public class MyGdxGame extends Game{
 
 	/**Tierra1**/
 	public static Preferences tierra1Year,tierra1Day,tierra1Hour,tierra1Minute,tierra1Iterator;
+	public static Preferences tierra1Year2,tierra1Day2,tierra1Hour2,tierra1Minute2;
 	public static Preferences tierra1Trigo;
 	public static Preferences tierra1Maiz;
 	public static Preferences tierra1Soja;
@@ -71,7 +72,49 @@ public class MyGdxGame extends Game{
 	public static Preferences tierra1Algodon;
 	public static Preferences tierra1Enable;
 
+	/**Tierra2**/
+	public static Preferences tierra2Year,tierra2Day,tierra2Hour,tierra2Minute,tierra2Iterator;
+	public static Preferences tierra2Year2,tierra2Day2,tierra2Hour2,tierra2Minute2;
+	public static Preferences tierra2Trigo;
+	public static Preferences tierra2Maiz;
+	public static Preferences tierra2Soja;
+	public static Preferences tierra2Zanahoria;
+	public static Preferences tierra2Cana;
+	public static Preferences tierra2Algodon;
+	public static Preferences tierra2Enable;
 
+	/**Tierra3**/
+	public static Preferences tierra3Year,tierra3Day,tierra3Hour,tierra3Minute,tierra3Iterator;
+	public static Preferences tierra3Year2,tierra3Day2,tierra3Hour2,tierra3Minute2;
+	public static Preferences tierra3Trigo;
+	public static Preferences tierra3Maiz;
+	public static Preferences tierra3Soja;
+	public static Preferences tierra3Zanahoria;
+	public static Preferences tierra3Cana;
+	public static Preferences tierra3Algodon;
+	public static Preferences tierra3Enable;
+
+
+	/**Tierra4**/
+	public static Preferences tierra4Year,tierra4Day,tierra4Hour,tierra4Minute,tierra4Iterator;
+	public static Preferences tierra4Year2,tierra4Day2,tierra4Hour2,tierra4Minute2;
+	public static Preferences tierra4Trigo;
+	public static Preferences tierra4Maiz;
+	public static Preferences tierra4Soja;
+	public static Preferences tierra4Zanahoria;
+	public static Preferences tierra4Cana;
+	public static Preferences tierra4Algodon;
+	public static Preferences tierra4Enable;
+	/**Tierra5**/
+	public static Preferences tierra5Year,tierra5Day,tierra5Hour,tierra5Minute,tierra5Iterator;
+	public static Preferences tierra5Year2,tierra5Day2,tierra5Hour2,tierra5Minute2;
+	public static Preferences tierra5Trigo;
+	public static Preferences tierra5Maiz;
+	public static Preferences tierra5Soja;
+	public static Preferences tierra5Zanahoria;
+	public static Preferences tierra5Cana;
+	public static Preferences tierra5Algodon;
+	public static Preferences tierra5Enable;
 	@Override
 	public void create() {
 		Cinematica = Gdx.app.getPreferences("Cinematica");
@@ -133,7 +176,81 @@ public class MyGdxGame extends Game{
 		tierra1Hour = Gdx.app.getPreferences("HourTierra1");
 		tierra1Minute = Gdx.app.getPreferences("MinuteTierra1");
 		tierra1Iterator = Gdx.app.getPreferences("iteratorTierra1");
+		tierra1Year2 = Gdx.app.getPreferences("Year2Tierra1");
+		tierra1Day2 = Gdx.app.getPreferences("Day2Tierra1");
+		tierra1Hour2 = Gdx.app.getPreferences("Hour2Tierra1");
+		tierra1Minute2 = Gdx.app.getPreferences("Minute2Tierra1");
+		/***Tierra2*****/
+		tierra2Trigo = Gdx.app.getPreferences("tierra21");
+		tierra2Maiz = Gdx.app.getPreferences("tierra22");
+		tierra2Soja = Gdx.app.getPreferences("tierra23");
+		tierra2Zanahoria = Gdx.app.getPreferences("tierra24");
+		tierra2Cana = Gdx.app.getPreferences("tierra25");
+		tierra2Algodon = Gdx.app.getPreferences("tierra26");
+		tierra2Enable = Gdx.app.getPreferences("tierra2");
+		tierra2Year = Gdx.app.getPreferences("YearTierra2");
+		tierra2Day = Gdx.app.getPreferences("DayTierra2");
+		tierra2Hour = Gdx.app.getPreferences("HourTierra2");
+		tierra2Minute = Gdx.app.getPreferences("MinuteTierra2");
+		tierra2Iterator = Gdx.app.getPreferences("iteratorTierra2");
+		tierra2Year2 = Gdx.app.getPreferences("Year2Tierra2");
+		tierra2Day2 = Gdx.app.getPreferences("Day2Tierra2");
+		tierra2Hour2 = Gdx.app.getPreferences("Hour2Tierra2");
+		tierra2Minute2 = Gdx.app.getPreferences("Minute2Tierra2");
 
+		/***Tierra3*****/
+		tierra3Trigo = Gdx.app.getPreferences("tierra31");
+		tierra3Maiz = Gdx.app.getPreferences("tierra32");
+		tierra3Soja = Gdx.app.getPreferences("tierra33");
+		tierra3Zanahoria = Gdx.app.getPreferences("tierra34");
+		tierra3Cana = Gdx.app.getPreferences("tierra35");
+		tierra3Algodon = Gdx.app.getPreferences("tierra36");
+		tierra3Enable = Gdx.app.getPreferences("tierra3");
+		tierra3Year = Gdx.app.getPreferences("YearTierra3");
+		tierra3Day = Gdx.app.getPreferences("DayTierra3");
+		tierra3Hour = Gdx.app.getPreferences("HourTierra3");
+		tierra3Minute = Gdx.app.getPreferences("MinuteTierra3");
+		tierra3Iterator = Gdx.app.getPreferences("iteratorTierra3");
+		tierra3Year2 = Gdx.app.getPreferences("Year2Tierra3");
+		tierra3Day2 = Gdx.app.getPreferences("Day2Tierra3");
+		tierra3Hour2 = Gdx.app.getPreferences("Hour2Tierra3");
+		tierra3Minute2 = Gdx.app.getPreferences("Minute2Tierra3");
+
+		/***Tierra4*****/
+		tierra4Trigo = Gdx.app.getPreferences("tierra41");
+		tierra4Maiz = Gdx.app.getPreferences("tierra42");
+		tierra4Soja = Gdx.app.getPreferences("tierra43");
+		tierra4Zanahoria = Gdx.app.getPreferences("tierra44");
+		tierra4Cana = Gdx.app.getPreferences("tierra45");
+		tierra4Algodon = Gdx.app.getPreferences("tierra46");
+		tierra4Enable = Gdx.app.getPreferences("tierra4");
+		tierra4Year = Gdx.app.getPreferences("YearTierra4");
+		tierra4Day = Gdx.app.getPreferences("DayTierra4");
+		tierra4Hour = Gdx.app.getPreferences("HourTierra4");
+		tierra4Minute = Gdx.app.getPreferences("MinuteTierra4");
+		tierra4Iterator = Gdx.app.getPreferences("iteratorTierra4");
+		tierra4Year2 = Gdx.app.getPreferences("Year2Tierra4");
+		tierra4Day2 = Gdx.app.getPreferences("Day2Tierra4");
+		tierra4Hour2 = Gdx.app.getPreferences("Hour2Tierra4");
+		tierra4Minute2 = Gdx.app.getPreferences("Minute2Tierra4");
+
+		/***Tierra5*****/
+		tierra5Trigo = Gdx.app.getPreferences("tierra51");
+		tierra5Maiz = Gdx.app.getPreferences("tierra52");
+		tierra5Soja = Gdx.app.getPreferences("tierra53");
+		tierra5Zanahoria = Gdx.app.getPreferences("tierra54");
+		tierra5Cana = Gdx.app.getPreferences("tierra55");
+		tierra5Algodon = Gdx.app.getPreferences("tierra56");
+		tierra5Enable = Gdx.app.getPreferences("tierra5");
+		tierra5Year = Gdx.app.getPreferences("YearTierra5");
+		tierra5Day = Gdx.app.getPreferences("DayTierra5");
+		tierra5Hour = Gdx.app.getPreferences("HourTierra5");
+		tierra5Minute = Gdx.app.getPreferences("MinuteTierra5");
+		tierra5Iterator = Gdx.app.getPreferences("iteratorTierra5");
+		tierra5Year2 = Gdx.app.getPreferences("Year2Tierra5");
+		tierra5Day2 = Gdx.app.getPreferences("Day2Tierra5");
+		tierra5Hour2 = Gdx.app.getPreferences("Hour2Tierra5");
+		tierra5Minute2 = Gdx.app.getPreferences("Minute2Tierra5");
 
 		if(Cinematica.getInteger("Cinematica")==0)
 		{
@@ -151,6 +268,70 @@ public class MyGdxGame extends Game{
 			tierra1Cana.flush();
 			tierra1Algodon.putBoolean("tierra16",false);
 			tierra1Algodon.flush();
+
+			tierra2Enable.putBoolean("tierra2",true);
+			tierra2Enable.flush();
+			tierra2Trigo.putBoolean("tierra21",false);
+			tierra2Trigo.flush();
+			tierra2Maiz.putBoolean("tierra22",false);
+			tierra2Maiz.flush();
+			tierra2Soja.putBoolean("tierra23",false);
+			tierra2Soja.flush();
+			tierra2Zanahoria.putBoolean("tierra24",false);
+			tierra2Zanahoria.flush();
+			tierra2Cana.putBoolean("tierra25",false);
+			tierra2Cana.flush();
+			tierra2Algodon.putBoolean("tierra26",false);
+			tierra2Algodon.flush();
+
+			tierra3Enable.putBoolean("tierra3",true);
+			tierra3Enable.flush();
+			tierra3Trigo.putBoolean("tierra31",false);
+			tierra3Trigo.flush();
+			tierra3Maiz.putBoolean("tierra32",false);
+			tierra3Maiz.flush();
+			tierra3Soja.putBoolean("tierra33",false);
+			tierra3Soja.flush();
+			tierra3Zanahoria.putBoolean("tierra34",false);
+			tierra3Zanahoria.flush();
+			tierra3Cana.putBoolean("tierra35",false);
+			tierra3Cana.flush();
+			tierra3Algodon.putBoolean("tierra36",false);
+			tierra3Algodon.flush();
+
+
+			tierra4Enable.putBoolean("tierra4",true);
+			tierra4Enable.flush();
+			tierra4Trigo.putBoolean("tierra41",false);
+			tierra4Trigo.flush();
+			tierra4Maiz.putBoolean("tierra42",false);
+			tierra4Maiz.flush();
+			tierra4Soja.putBoolean("tierra43",false);
+			tierra4Soja.flush();
+			tierra4Zanahoria.putBoolean("tierra44",false);
+			tierra4Zanahoria.flush();
+			tierra4Cana.putBoolean("tierra45",false);
+			tierra4Cana.flush();
+			tierra4Algodon.putBoolean("tierra46",false);
+			tierra4Algodon.flush();
+
+
+
+			tierra5Enable.putBoolean("tierra5",true);
+			tierra5Enable.flush();
+			tierra5Trigo.putBoolean("tierra51",false);
+			tierra5Trigo.flush();
+			tierra5Maiz.putBoolean("tierra52",false);
+			tierra5Maiz.flush();
+			tierra5Soja.putBoolean("tierra53",false);
+			tierra5Soja.flush();
+			tierra5Zanahoria.putBoolean("tierra54",false);
+			tierra5Zanahoria.flush();
+			tierra5Cana.putBoolean("tierra55",false);
+			tierra5Cana.flush();
+			tierra5Algodon.putBoolean("tierra56",false);
+			tierra5Algodon.flush();
+
 			tierra1.putFloat("X",0.0f);
 			tierra1.putFloat("Y",0.0f);
 			tierra2.putFloat("X2",100.0f);

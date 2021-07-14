@@ -67,7 +67,7 @@ public class Intro implements Screen
         if(time >= 5)
         {
             intro.stop();
-            game.setScreen(new Menu(game));
+            game.setScreen(new Casa(game));
         }
     }
 

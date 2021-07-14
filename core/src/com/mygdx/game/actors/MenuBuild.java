@@ -57,14 +57,20 @@ public class MenuBuild extends Actor implements Disposable
     /******Cultivos******/
     public static float timeCultivos;
 
-    public static Texture flechaVerde;
+    public static Texture flechaVerde,flechaRoja;
     public static boolean isMenuSeedSelection;
     float abs;
     boolean sube= true,baja;
     public static float timeQuitar;
 
     public static boolean isTierra1,isTierra2,isTierra3,isTierra4,isTierra5;
-
+    /******Menu2******/
+    Texture Arbusto1,Arbusto2;
+    Sprite Arbusto1S,Arbusto2S;
+    Texture Maceta1,Maceta2;
+    Sprite Maceta1S,Maceta2S;
+    Texture Casa2Pisos,Casa;
+    Sprite Casa2PisosS,CasaS;
 
     public MenuBuild()
     {
@@ -139,6 +145,7 @@ public class MenuBuild extends Actor implements Disposable
         AlgodonS = new Sprite(Algodon);
 
         flechaVerde = new Texture("FlechaVerde.png");
+        flechaRoja = new Texture("FlechaRoja.png");
 
         tierraR = new Rectangle();
         aguaR  = new Rectangle();
@@ -160,6 +167,19 @@ public class MenuBuild extends Actor implements Disposable
         mover = new Texture("MoveOn.png");
         moverR = new Rectangle();
         moverS = new Sprite(mover);
+
+        Maceta1 = new Texture("Maceta1.png");
+        Maceta2 = new Texture("Maceta2.png");
+        Maceta1S = new Sprite(Maceta1);
+        Maceta2S = new Sprite(Maceta2);
+        Casa2Pisos = new Texture("CasaDosPisos.png");
+        Casa = new Texture("Casa.png");
+        Casa2PisosS = new Sprite(Casa2Pisos);
+        CasaS = new Sprite(Casa);
+        Arbusto1 = new Texture("Arbusto1.png");
+        Arbusto1S = new Sprite(Arbusto1);
+        Arbusto2 = new Texture("Arbusto2.png");
+        Arbusto2S = new Sprite(Arbusto2);
     }
 
     @Override
@@ -224,28 +244,179 @@ public class MenuBuild extends Actor implements Disposable
                 sube = true;
             }
         }
+        if(!isMenuSeedSelection) {
         /**************************************/
-        if(MyGdxGame.tierra1Enable.getBoolean("tierra1")) {
-            if (Tierra1.isDamp) {
+
+            if (MyGdxGame.tierra1Enable.getBoolean("tierra1")) {
+                if (Tierra1.isDamp) {
+                    if (Tierra1.Cuerpo.overlaps(Jugador.jugador)) {
+                        float x = Tierra1.Cuerpo.x;
+                        float y = (Tierra1.Cuerpo.y + Tierra1.Cuerpo.height) + (abs / Pixels);
+
+                        batch.draw(flechaVerde, x, y, 32 / Pixels, 32 / Pixels);
+                        if (Tierra1.reiniciarTime > 1) {
+                            if (AddResources.puntero.overlaps(Tierra1.Cuerpo)) {
+                                isTierra1 = true;
+                                isTierra2 = false;
+                                isTierra3 = false;
+                                isTierra4 = false;
+                                isTierra5 = false;
+                                isMenuSeedSelection = true;
+                            }
+                        }
+                    }
+                }
+            } else {
                 if (Tierra1.Cuerpo.overlaps(Jugador.jugador)) {
-                    float x = Tierra1.Cuerpo.x;
-                    float y = (Tierra1.Cuerpo.y + Tierra1.Cuerpo.height) + (abs / Pixels);
-                    batch.draw(flechaVerde, x, y, 32 / Pixels, 32 / Pixels);
-                    if (AddResources.puntero.overlaps(Tierra1.Cuerpo)) {
-                        isTierra1 = true;
-                        isTierra2 = false;
-                        isTierra3 = false;
-                        isTierra4 = false;
-                        isTierra5 = false;
-                        isMenuSeedSelection = true;
+                    if (Tierra1.isOld == 2) {
+                        float x = Tierra1.Cuerpo.x;
+                        float y = (Tierra1.Cuerpo.y + Tierra1.Cuerpo.height) + (abs / Pixels);
+                        batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
+                        if (Tierra1.Cuerpo.overlaps(AddResources.puntero)) {
+                            Tierra1.reiniciar = true;
+
+                        }
                     }
                 }
             }
+            /**************************************/
+            /**************************************/
+            if (MyGdxGame.tierra2Enable.getBoolean("tierra2")) {
+                if (Tierra2.isDamp) {
+                    if (Tierra2.Cuerpo.overlaps(Jugador.jugador)) {
+                        float x = Tierra2.Cuerpo.x;
+                        float y = (Tierra2.Cuerpo.y + Tierra2.Cuerpo.height) + (abs / Pixels);
+                        batch.draw(flechaVerde, x, y, 32 / Pixels, 32 / Pixels);
+                        if (Tierra2.reiniciarTime > 1) {
+                            if (AddResources.puntero.overlaps(Tierra2.Cuerpo)) {
+                                isTierra1 = false;
+                                isTierra2 = true;
+                                isTierra3 = false;
+                                isTierra4 = false;
+                                isTierra5 = false;
+                                isMenuSeedSelection = true;
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (Tierra2.Cuerpo.overlaps(Jugador.jugador)) {
+                    if (Tierra2.isOld == 2) {
+                        float x = Tierra2.Cuerpo.x;
+                        float y = (Tierra2.Cuerpo.y + Tierra2.Cuerpo.height) + (abs / Pixels);
+                        batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
+                        if (Tierra2.Cuerpo.overlaps(AddResources.puntero)) {
+                            Tierra2.reiniciar = true;
+
+                        }
+                    }
+                }
+            }
+            /**************************************/
+            /**************************************/
+            if (MyGdxGame.tierra3Enable.getBoolean("tierra3")) {
+                if (Tierra3.isDamp) {
+                    if (Tierra3.Cuerpo.overlaps(Jugador.jugador)) {
+                        float x = Tierra3.Cuerpo.x;
+                        float y = (Tierra3.Cuerpo.y + Tierra3.Cuerpo.height) + (abs / Pixels);
+                        batch.draw(flechaVerde, x, y, 32 / Pixels, 32 / Pixels);
+                        if (Tierra3.reiniciarTime > 1) {
+                            if (AddResources.puntero.overlaps(Tierra3.Cuerpo)) {
+                                isTierra1 = false;
+                                isTierra2 = false;
+                                isTierra3 = true;
+                                isTierra4 = false;
+                                isTierra5 = false;
+                                isMenuSeedSelection = true;
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (Tierra3.Cuerpo.overlaps(Jugador.jugador)) {
+                    if (Tierra3.isOld == 2) {
+                        float x = Tierra3.Cuerpo.x;
+                        float y = (Tierra3.Cuerpo.y + Tierra3.Cuerpo.height) + (abs / Pixels);
+                        batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
+                        if (Tierra3.Cuerpo.overlaps(AddResources.puntero)) {
+                            Tierra3.reiniciar = true;
+                        }
+                    }
+                }
+            }
+            /**************************************/
+            /**************************************/
+            if (MyGdxGame.tierra4Enable.getBoolean("tierra4")) {
+                if (Tierra4.isDamp) {
+                    if (Tierra4.Cuerpo.overlaps(Jugador.jugador)) {
+                        float x = Tierra4.Cuerpo.x;
+                        float y = (Tierra4.Cuerpo.y + Tierra4.Cuerpo.height) + (abs / Pixels);
+                        Gdx.app.log("y",""+Tierra4.Cuerpo.height+" Y2: "+Tierra4.Cuerpo2.y);
+                        batch.draw(flechaVerde, x, y, 32 / Pixels, 32 / Pixels);
+                        if (Tierra4.reiniciarTime > 1) {
+                            if (AddResources.puntero.overlaps(Tierra4.Cuerpo)) {
+                                isTierra1 = false;
+                                isTierra2 = false;
+                                isTierra3 = false;
+                                isTierra4 = true;
+                                isTierra5 = false;
+                                isMenuSeedSelection = true;
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (Tierra4.Cuerpo.overlaps(Jugador.jugador)) {
+                    if (Tierra4.isOld == 2) {
+                        float x = Tierra4.Cuerpo.x;
+                        float y = (Tierra4.Cuerpo.y + Tierra4.Cuerpo.height) + (abs / Pixels);
+                        batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
+                        if (Tierra4.Cuerpo.overlaps(AddResources.puntero)) {
+                            Tierra4.reiniciar = true;
+                        }
+                    }
+                }
+            }
+            /**************************************/
+            /**************************************/
+            if (MyGdxGame.tierra5Enable.getBoolean("tierra5")) {
+                if (Tierra5.isDamp) {
+                    if (Tierra5.Cuerpo.overlaps(Jugador.jugador)) {
+                        float x = Tierra5.Cuerpo.x;
+                        float y = (Tierra5.Cuerpo.y + Tierra5.Cuerpo.height) + (abs / Pixels);
+                        batch.draw(flechaVerde, x, y, 32 / Pixels, 32 / Pixels);
+                        if (Tierra5.reiniciarTime > 1) {
+                            if (AddResources.puntero.overlaps(Tierra5.Cuerpo)) {
+                                isTierra1 = false;
+                                isTierra2 = false;
+                                isTierra3 = false;
+                                isTierra4 = false;
+                                isTierra5 = true;
+                                isMenuSeedSelection = true;
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (Tierra5.Cuerpo.overlaps(Jugador.jugador)) {
+                    if (Tierra5.isOld == 2) {
+                        float x = Tierra5.Cuerpo.x;
+                        float y = (Tierra5.Cuerpo.y + Tierra5.Cuerpo.height) + (abs / Pixels);
+                        batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
+                        if (Tierra5.Cuerpo.overlaps(AddResources.puntero)) {
+                            Tierra5.reiniciar = true;
+                        }
+                    }
+                }
+            }
+            /**************************************/
+
         }
     }
     public void MenuSeedsSelection(Batch batch)
     {
         if(isMenuSeedSelection) {
+            MenuBuild.isMenu = false;
             MenuBuild.timeQuitar += 1 * Gdx.graphics.getDeltaTime();
             Fondo.setBounds(AddResources.cam.position.x - 3.8f + (30 / Pixels), AddResources.cam.position.y - 2 + (5 / Pixels), 190 / Pixels, 100 / Pixels);
             Fondo.setAlpha(0.8f);
@@ -349,19 +520,23 @@ public class MenuBuild extends Actor implements Disposable
                     }
                     if(isTierra2)
                     {
-                      //  Tierra1.Trigo = true;
+                        MyGdxGame.tierra2Trigo.putBoolean("tierra21",true);
+                        MyGdxGame.tierra2Trigo.flush();
                     }
                     if(isTierra3)
                     {
-
+                        MyGdxGame.tierra3Trigo.putBoolean("tierra31",true);
+                        MyGdxGame.tierra3Trigo.flush();
                     }
                     if(isTierra4)
                     {
-
+                        MyGdxGame.tierra4Trigo.putBoolean("tierra41",true);
+                        MyGdxGame.tierra4Trigo.flush();
                     }
                     if(isTierra5)
                     {
-
+                        MyGdxGame.tierra5Trigo.putBoolean("tierra51",true);
+                        MyGdxGame.tierra5Trigo.flush();
                     }
 
                     MenuBuild.isMenuSeedSelection = false;
@@ -380,19 +555,24 @@ public class MenuBuild extends Actor implements Disposable
                     }
                     if(isTierra2)
                     {
-                        //  Tierra1.Trigo = true;
+                        MyGdxGame.tierra2Maiz.putBoolean("tierra22",true);
+                        MyGdxGame.tierra2Maiz.flush();
                     }
                     if(isTierra3)
                     {
+                        MyGdxGame.tierra3Maiz.putBoolean("tierra32",true);
+                        MyGdxGame.tierra3Maiz.flush();
 
                     }
                     if(isTierra4)
                     {
-
+                        MyGdxGame.tierra4Maiz.putBoolean("tierra42",true);
+                        MyGdxGame.tierra4Maiz.flush();
                     }
                     if(isTierra5)
                     {
-
+                        MyGdxGame.tierra5Maiz.putBoolean("tierra52",true);
+                        MyGdxGame.tierra5Maiz.flush();
                     }
                     MenuBuild.isMenuSeedSelection = false;
                     MenuBuild.timeQuitar = 0;
@@ -411,19 +591,23 @@ public class MenuBuild extends Actor implements Disposable
                     }
                     if(isTierra2)
                     {
-                        //  Tierra1.Trigo = true;
+                        MyGdxGame.tierra2Soja.putBoolean("tierra23",true);
+                        MyGdxGame.tierra2Soja.flush();
                     }
                     if(isTierra3)
                     {
-
+                        MyGdxGame.tierra3Soja.putBoolean("tierra33",true);
+                        MyGdxGame.tierra3Soja.flush();
                     }
                     if(isTierra4)
                     {
-
+                        MyGdxGame.tierra4Soja.putBoolean("tierra43",true);
+                        MyGdxGame.tierra4Soja.flush();
                     }
                     if(isTierra5)
                     {
-
+                        MyGdxGame.tierra5Soja.putBoolean("tierra53",true);
+                        MyGdxGame.tierra5Soja.flush();
                     }
                     MenuBuild.isMenuSeedSelection = false;
                 }
@@ -441,19 +625,23 @@ public class MenuBuild extends Actor implements Disposable
                     }
                     if(isTierra2)
                     {
-                        //  Tierra1.Trigo = true;
+                        MyGdxGame.tierra2Zanahoria.putBoolean("tierra24",true);
+                        MyGdxGame.tierra2Zanahoria.flush();
                     }
                     if(isTierra3)
                     {
-
+                        MyGdxGame.tierra3Zanahoria.putBoolean("tierra34",true);
+                        MyGdxGame.tierra3Zanahoria.flush();
                     }
                     if(isTierra4)
                     {
-
+                        MyGdxGame.tierra4Zanahoria.putBoolean("tierra44",true);
+                        MyGdxGame.tierra4Zanahoria.flush();
                     }
                     if(isTierra5)
                     {
-
+                        MyGdxGame.tierra5Zanahoria.putBoolean("tierra54",true);
+                        MyGdxGame.tierra5Zanahoria.flush();
                     }
                     MenuBuild.isMenuSeedSelection = false;
                 }
@@ -471,19 +659,23 @@ public class MenuBuild extends Actor implements Disposable
                     }
                     if(isTierra2)
                     {
-                        //  Tierra1.Trigo = true;
+                        MyGdxGame.tierra2Cana.putBoolean("tierra25",true);
+                        MyGdxGame.tierra2Cana.flush();
                     }
                     if(isTierra3)
                     {
-
+                        MyGdxGame.tierra3Cana.putBoolean("tierra35",true);
+                        MyGdxGame.tierra3Cana.flush();
                     }
                     if(isTierra4)
                     {
-
+                        MyGdxGame.tierra4Cana.putBoolean("tierra45",true);
+                        MyGdxGame.tierra4Cana.flush();
                     }
                     if(isTierra5)
                     {
-
+                        MyGdxGame.tierra5Cana.putBoolean("tierra55",true);
+                        MyGdxGame.tierra5Cana.flush();
                     }
                     MenuBuild.isMenuSeedSelection = false;
                 }
@@ -500,19 +692,23 @@ public class MenuBuild extends Actor implements Disposable
                     }
                     if(isTierra2)
                     {
-                        //  Tierra1.Trigo = true;
+                        MyGdxGame.tierra2Algodon.putBoolean("tierra26",true);
+                        MyGdxGame.tierra2Algodon.flush();
                     }
                     if(isTierra3)
                     {
-
+                        MyGdxGame.tierra3Algodon.putBoolean("tierra36",true);
+                        MyGdxGame.tierra3Algodon.flush();
                     }
                     if(isTierra4)
                     {
-
+                        MyGdxGame.tierra4Algodon.putBoolean("tierra46",true);
+                        MyGdxGame.tierra4Algodon.flush();
                     }
                     if(isTierra5)
                     {
-
+                        MyGdxGame.tierra5Algodon.putBoolean("tierra56",true);
+                        MyGdxGame.tierra5Algodon.flush();
                     }
                     MenuBuild.timeQuitar = 0;
                     MenuBuild.isMenuSeedSelection = false;
@@ -728,10 +924,24 @@ public class MenuBuild extends Actor implements Disposable
         if(isMenu2)
         {
             MenuBuild.timeCultivos = 0;
+
+
         }
         if(isMenu3)
         {
             MenuBuild.timeCultivos = 0;
+            Casa2PisosS.setBounds(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
+            Casa2PisosS.draw(batch);
+            CasaS.setBounds(AddResources.cam.position.x - 3.8f+ (105 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 60 / Pixels);
+            CasaS.draw(batch);
+            Maceta1S.setBounds(AddResources.cam.position.x - 3.8f+ (95 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
+            Maceta1S.draw(batch);
+            Maceta2S.setBounds(AddResources.cam.position.x - 3.8f+ (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
+            Maceta2S.draw(batch);
+            Arbusto1S.setBounds(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32 / Pixels, 32 / Pixels);
+            Arbusto1S.draw(batch);
+            Arbusto2S.setBounds(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (64 / Pixels), 50/ Pixels, 50/ Pixels);
+            Arbusto2S.draw(batch);
         }
         if(isMenu4)
         {
@@ -762,6 +972,13 @@ public class MenuBuild extends Actor implements Disposable
         Cana.dispose();
         Algodon.dispose();
         flechaVerde.dispose();
+        flechaRoja.dispose();
         mover.dispose();
+        Casa2Pisos.dispose();
+        Casa.dispose();
+        Maceta1.dispose();
+        Maceta2.dispose();
+        Arbusto1.dispose();
+        Arbusto2.dispose();
     }
 }

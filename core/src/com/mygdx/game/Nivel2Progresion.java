@@ -92,17 +92,7 @@
          MyGdxGame.isNivelProgress1 = true;
          batch.begin();
          game.isIsNivelProgress2 = true;
-         if(Jugador.Espadazo) {
-             renderer.getBatch().setShader(shader);
-             renderer2.getBatch().setShader(shader);
-             batch.setShader(shader);
-         }
-         else
-             {
-                 renderer.getBatch().setShader(shader2);
-                 renderer2.getBatch().setShader(shader2);
-                 batch.setShader(shader2);
-             }
+
          TextureRegion fondoA = fondoAnimation.getKeyFrame(time,true);
 
          batch.draw(fondoAnimado3,(addR.cam.position.x-150)+x3,addR.cam.position.y-150,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
