@@ -673,7 +673,7 @@ batch.begin();
                 /**************************/
                 /**************************/
                 /**************************/
-                if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover) {
+                if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.CasasDosPisosBuild&&!MenuBuild.CasasBuild) {
                     if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection) {
                         if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
                             cancel.set(0,0,0,0);
@@ -1693,12 +1693,15 @@ batch.begin();
             MenuBuild.BuildTierra = false;
             MenuBuild.BuildAgua = false;
             MenuBuild.BuildMover = false;
+            MenuBuild.CasasDosPisosBuild = false;
+            MenuBuild.CasasBuild = false;
         }
 freeSpace();
        ConfirmarS.draw(batch);
         CancelarS.draw(batch);
         if (confirm.overlaps(puntero)) {
             TouchConfirm = true;
+            Gdx.app.log("Look","a error");
         } else {
             TouchConfirm =false;
         }

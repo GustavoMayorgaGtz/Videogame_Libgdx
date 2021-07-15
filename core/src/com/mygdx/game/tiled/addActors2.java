@@ -5,6 +5,10 @@ import com.mygdx.game.actors.Agua1;
 import com.mygdx.game.actors.Agua2;
 import com.mygdx.game.actors.Agua3;
 import com.mygdx.game.actors.Agua4;
+import com.mygdx.game.actors.Casa1;
+import com.mygdx.game.actors.Casa2;
+import com.mygdx.game.actors.Casa2Pisos;
+import com.mygdx.game.actors.Casa2Pisos2;
 import com.mygdx.game.actors.MenuBuild;
 import com.mygdx.game.actors.Tierra1;
 import com.mygdx.game.actors.Tierra2;
@@ -22,10 +26,19 @@ public class addActors2 {
     Agua2 agua2;
     Agua3 agua3;
     Agua4 agua4;
-
+    Casa2Pisos casa2Pisos1;
+    Casa2Pisos2 casa2Pisos2;
+    Casa1 casa1 = new Casa1();
+    Casa2 casa2 = new Casa2();
     MenuBuild menuBuild;
     public addActors2(Stage stage)
     {
+        casa2Pisos1 = new Casa2Pisos();
+        stage.addActor(casa2Pisos1);
+        casa2Pisos2 = new Casa2Pisos2();
+        stage.addActor(casa2Pisos2);
+        stage.addActor(casa1);
+        stage.addActor(casa2);
         tierra1 = new Tierra1();
         tierra2 = new Tierra2();
         tierra3 = new Tierra3();
@@ -50,5 +63,7 @@ public class addActors2 {
         stage.addActor(agua4);
            menuBuild = new MenuBuild();
         stage.addActor(menuBuild );
+
+
     }
 }

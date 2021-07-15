@@ -11,6 +11,7 @@
  import com.badlogic.gdx.maps.tiled.TiledMap;
  import com.badlogic.gdx.maps.tiled.TmxMapLoader;
  import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+ import com.mygdx.game.actors.Casa2Pisos;
  import com.mygdx.game.actors.Jugador;
  import com.mygdx.game.tiled.AddActors;
  import com.mygdx.game.tiled.AddResources;
@@ -45,8 +46,9 @@
          map2 = mapLoader2.load("Nivel2ProgressFondo.tmx");
          ///////////////////////////////////////////////////////////////////////////////////////////////
          addR = new AddResources();
-         add = new AddActors(addR.world,map,game,addR.stage);
          add2 = new addActors2(addR.stage);
+         add = new AddActors(addR.world,map,game,addR.stage);
+
          renderer = new OrthogonalTiledMapRenderer(map,1/Pixels);
          renderer2 = new OrthogonalTiledMapRenderer(map2,1/Pixels);
          batch = new SpriteBatch();
@@ -91,6 +93,7 @@
          Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
          MyGdxGame.isNivelProgress1 = true;
          batch.begin();
+
          game.isIsNivelProgress2 = true;
 
          TextureRegion fondoA = fondoAnimation.getKeyFrame(time,true);
@@ -101,12 +104,14 @@
          batch.draw(fondoAnimado2,(addR.cam.position.x-150-(Gdx.graphics.getWidth()+150))+x2,addR.cam.position.y-100,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
          batch.draw(fondoAnimado,(addR.cam.position.x-250)+x,addR.cam.position.y-50,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
          batch.draw(fondoAnimado,(addR.cam.position.x-250-(Gdx.graphics.getWidth()+150))+x,addR.cam.position.y-50,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
-         batch.end();
 
+
+         batch.end();
 
          update();
          renderer.render();
          addR.addRender(delta);
+
          renderer2.render();
          addR.batchFunctions();
          update();

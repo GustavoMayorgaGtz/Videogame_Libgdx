@@ -48,6 +48,15 @@ public class MyGdxGame extends Game{
 	public static Preferences agua3;
 	public static Preferences agua4;
 
+	/*CasasDosPisos*/
+	public static Preferences CasasDosPisosColocadas;
+	public static Preferences CasaDosPisos1;
+	public static Preferences CasaDosPisos2;
+
+	/*Casas*/
+	public static Preferences CasasColocadas;
+	public static Preferences Casa1;
+	public static Preferences Casa2;
 
 
 	public static final float Pixels = 30;
@@ -251,6 +260,20 @@ public class MyGdxGame extends Game{
 		tierra5Day2 = Gdx.app.getPreferences("Day2Tierra5");
 		tierra5Hour2 = Gdx.app.getPreferences("Hour2Tierra5");
 		tierra5Minute2 = Gdx.app.getPreferences("Minute2Tierra5");
+
+		/***CasasDosPisos***/
+		CasasDosPisosColocadas = Gdx.app.getPreferences("Posiciones3");
+		CasaDosPisos1 = Gdx.app.getPreferences("X10");
+		CasaDosPisos1 = Gdx.app.getPreferences("Y10");
+		CasaDosPisos2 = Gdx.app.getPreferences("X11");
+		CasaDosPisos2 = Gdx.app.getPreferences("Y11");
+
+		/***Casas***/
+		CasasColocadas = Gdx.app.getPreferences("Posiciones4");
+		Casa1 = Gdx.app.getPreferences("X12");
+		Casa1 = Gdx.app.getPreferences("Y12");
+		Casa2 = Gdx.app.getPreferences("X13");
+		Casa2 = Gdx.app.getPreferences("Y13");
 
 		if(Cinematica.getInteger("Cinematica")==0)
 		{

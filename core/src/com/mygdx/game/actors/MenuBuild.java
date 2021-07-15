@@ -15,6 +15,7 @@ import com.mygdx.game.Menu;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.tiled.AddResources;
 
+import static com.mygdx.game.MyGdxGame.CasaDosPisos1;
 import static com.mygdx.game.MyGdxGame.Pixels;
 import static com.mygdx.game.MyGdxGame.agua1;
 
@@ -65,6 +66,9 @@ public class MenuBuild extends Actor implements Disposable
 
     public static boolean isTierra1,isTierra2,isTierra3,isTierra4,isTierra5;
     /******Menu2******/
+    public static boolean CasasDosPisosBuild;
+    public static boolean CasasBuild;
+    public static Rectangle Casa2PisosR,CasaR,Maceta1R,Maceta2R,Arbusto1R,Arbusto2R;
     Texture Arbusto1,Arbusto2;
     Sprite Arbusto1S,Arbusto2S;
     Texture Maceta1,Maceta2;
@@ -180,6 +184,13 @@ public class MenuBuild extends Actor implements Disposable
         Arbusto1S = new Sprite(Arbusto1);
         Arbusto2 = new Texture("Arbusto2.png");
         Arbusto2S = new Sprite(Arbusto2);
+
+        Casa2PisosR = new Rectangle();
+        CasaR = new Rectangle();
+        Maceta1R = new Rectangle();
+        Maceta2R = new Rectangle();
+        Arbusto1R = new Rectangle();
+        Arbusto2R = new Rectangle();
     }
 
     @Override
@@ -931,17 +942,32 @@ public class MenuBuild extends Actor implements Disposable
         {
             MenuBuild.timeCultivos = 0;
             Casa2PisosS.setBounds(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
+            Casa2PisosR.set(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
             Casa2PisosS.draw(batch);
             CasaS.setBounds(AddResources.cam.position.x - 3.8f+ (105 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 60 / Pixels);
+            CasaR.set(AddResources.cam.position.x - 3.8f+ (105 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 60 / Pixels);
             CasaS.draw(batch);
             Maceta1S.setBounds(AddResources.cam.position.x - 3.8f+ (95 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
+            Maceta1R.set(AddResources.cam.position.x - 3.8f+ (95 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
             Maceta1S.draw(batch);
             Maceta2S.setBounds(AddResources.cam.position.x - 3.8f+ (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
+            Maceta2R.set(AddResources.cam.position.x - 3.8f+ (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
             Maceta2S.draw(batch);
             Arbusto1S.setBounds(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32 / Pixels, 32 / Pixels);
+            Arbusto1R.set(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32 / Pixels, 32 / Pixels);
             Arbusto1S.draw(batch);
             Arbusto2S.setBounds(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (64 / Pixels), 50/ Pixels, 50/ Pixels);
+            Arbusto2R.set(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (64 / Pixels), 50/ Pixels, 50/ Pixels);
             Arbusto2S.draw(batch);
+
+            if(Casa2PisosR.overlaps(puntero))
+            {
+                MenuBuild.CasasDosPisosBuild = true;
+            }
+            if(CasaR.overlaps(puntero))
+            {
+                MenuBuild.CasasBuild = true;
+            }
         }
         if(isMenu4)
         {
