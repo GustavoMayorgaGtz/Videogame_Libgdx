@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.actors.Casa2Pisos;
 
 public class MyGdxGame extends Game{
 	private AssetManager manager;
@@ -124,6 +125,17 @@ public class MyGdxGame extends Game{
 	public static Preferences tierra5Cana;
 	public static Preferences tierra5Algodon;
 	public static Preferences tierra5Enable;
+
+	/**Macetas1**/
+	public static Preferences Maceta1Colocadas;
+	public static Preferences Maceta1_1;
+	public static Preferences Maceta1_2;
+	public static Preferences Maceta1_3;
+	/**Macetas2**/
+	public static Preferences Maceta2Colocadas;
+	public static Preferences Maceta2_1;
+	public static Preferences Maceta2_2;
+	public static Preferences Maceta2_3;
 	@Override
 	public void create() {
 		Cinematica = Gdx.app.getPreferences("Cinematica");
@@ -275,6 +287,23 @@ public class MyGdxGame extends Game{
 		Casa2 = Gdx.app.getPreferences("X13");
 		Casa2 = Gdx.app.getPreferences("Y13");
 
+		/**Maceta1**/
+		Maceta1Colocadas = Gdx.app.getPreferences("Posiciones5");
+		Maceta1_1 = Gdx.app.getPreferences("X14");
+		Maceta1_1 = Gdx.app.getPreferences("Y14");
+		Maceta1_2 = Gdx.app.getPreferences("X15");
+		Maceta1_2 = Gdx.app.getPreferences("Y15");
+		Maceta1_3 = Gdx.app.getPreferences("X16");
+		Maceta1_3 = Gdx.app.getPreferences("Y16");
+
+		/**Maceta1**/
+		Maceta2Colocadas = Gdx.app.getPreferences("Posiciones6");
+		Maceta2_1 = Gdx.app.getPreferences("X17");
+		Maceta2_1 = Gdx.app.getPreferences("Y17");
+		Maceta2_2 = Gdx.app.getPreferences("X18");
+		Maceta2_2 = Gdx.app.getPreferences("Y18");
+		Maceta2_3 = Gdx.app.getPreferences("X19");
+		Maceta2_3 = Gdx.app.getPreferences("Y19");
 		if(Cinematica.getInteger("Cinematica")==0)
 		{
 			tierra1Enable.putBoolean("tierra1",true);
@@ -387,6 +416,39 @@ public class MyGdxGame extends Game{
 			agua2.flush();
 			agua3.flush();
 			agua4.flush();
+
+			Casa1.putFloat("X12",900);
+			Casa1.putFloat("Y12",900);
+			Casa2.putFloat("X13",1000);
+			Casa2.putFloat("Y13",1000);
+			CasaDosPisos1.putFloat("X10",1100);
+			CasaDosPisos1.putFloat("Y10",1100);
+			CasaDosPisos2.putFloat("X11",1200);
+			CasaDosPisos2.putFloat("Y11",1200);
+
+			Casa1.flush();
+			Casa2.flush();
+			CasaDosPisos1.flush();
+			CasaDosPisos2.flush();
+			Maceta1_1.putFloat("X14",1300);
+			Maceta1_1.putFloat("Y14",1300);
+			Maceta1_1.flush();
+			Maceta1_2.putFloat("X15",1400);
+			Maceta1_2.putFloat("Y15",1400);
+			Maceta1_2.flush();
+			Maceta1_3.putFloat("X16",1500);
+			Maceta1_3.putFloat("Y16",1500);
+			Maceta1_3.flush();
+
+			Maceta2_1.putFloat("X17",1600);
+			Maceta2_1.putFloat("Y17",1600);
+			Maceta2_1.flush();
+			Maceta2_2.putFloat("X18",1700);
+			Maceta2_2.putFloat("Y18",1700);
+			Maceta2_2.flush();
+			Maceta2_3.putFloat("X19",1800);
+			Maceta2_3.putFloat("Y19",1800);
+			Maceta2_3.flush();
 		}
 
 

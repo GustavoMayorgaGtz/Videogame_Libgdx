@@ -83,6 +83,8 @@ public class AddResources {
     public static boolean isFreeSpace8;
     public static boolean isFreeSpace9;
 
+    public static boolean isFreeSpaceTop1,isFreeSpaceTop2,isFreeSpaceTop3,isFreeSpaceTop4,isFreeSpaceTop5,isFreeSpaceTop6,isFreeSpaceTop7;
+    public static boolean isFreeSpaceTop8,isFreeSpaceTop9,isFreeSpaceTop10;
 
     /*****Controles*****/
     public static Rectangle puntero, puntero2;
@@ -673,7 +675,7 @@ batch.begin();
                 /**************************/
                 /**************************/
                 /**************************/
-                if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.CasasDosPisosBuild&&!MenuBuild.CasasBuild) {
+                if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.CasasDosPisosBuild&&!MenuBuild.CasasBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build) {
                     if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection) {
                         if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
                             cancel.set(0,0,0,0);
@@ -1695,13 +1697,15 @@ batch.begin();
             MenuBuild.BuildMover = false;
             MenuBuild.CasasDosPisosBuild = false;
             MenuBuild.CasasBuild = false;
+            MenuBuild.Maceta1Build = false;
+            MenuBuild.Maceta2Build = false;
         }
 freeSpace();
        ConfirmarS.draw(batch);
         CancelarS.draw(batch);
         if (confirm.overlaps(puntero)) {
             TouchConfirm = true;
-            Gdx.app.log("Look","a error");
+
         } else {
             TouchConfirm =false;
         }
@@ -1725,7 +1729,10 @@ freeSpace();
             Gdx.app.log("-----","-------");
         }
 
-        if(!isFreeSpace1||!isFreeSpace2||!isFreeSpace3||!isFreeSpace4||!isFreeSpace5||!isFreeSpace6||!isFreeSpace7||!isFreeSpace8||!isFreeSpace9) {
+        if(!isFreeSpace1||!isFreeSpace2||!isFreeSpace3||!isFreeSpace4||!isFreeSpace5||!isFreeSpace6||!isFreeSpace7||!isFreeSpace8||!isFreeSpace9
+                ||!isFreeSpaceTop1||!isFreeSpaceTop2||!isFreeSpaceTop3||!isFreeSpaceTop4
+                ||!isFreeSpaceTop5||!isFreeSpaceTop6||!isFreeSpaceTop7
+                ||!isFreeSpaceTop8||!isFreeSpaceTop9||!isFreeSpaceTop10){
 
             confirm.set(0,0,0,0);
             ConfirmarS.setBounds(0,0,0,0);
@@ -1737,6 +1744,7 @@ freeSpace();
             ConfirmarS.setBounds(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
             confirm.set(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
         }
+
 
     }
 

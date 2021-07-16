@@ -19,7 +19,7 @@ public class Casa1 extends Actor implements Disposable {
     public static float x,y;
     boolean noToca;
     boolean cambiarPosicion = false;
-
+float timeDurationTouch;
 
     public Casa1()
     {
@@ -46,17 +46,18 @@ public class Casa1 extends Actor implements Disposable {
 
     @Override
     public void act(float delta) {
-        if(MyGdxGame.CasasColocadas.getInteger("Posiciones4") == 0 && MenuBuild.CasasBuild ) {
+        colisiones();
+        if (MyGdxGame.CasasColocadas.getInteger("Posiciones4") == 0 && MenuBuild.CasasBuild) {
             for (Rectangle e : Tierra1.rects) {
                 if (Jugador.jugador.overlaps(e)) {
                     if (noToca) {
-                        MyGdxGame.CasasColocadas.putInteger("Posiciones4",1);
+                        MyGdxGame.CasasColocadas.putInteger("Posiciones4", 1);
                         Casa1.putFloat("X12", Jugador.body.getPosition().x);
-                        if(AddResources.TouchConfirm) {
+                        if (AddResources.TouchConfirm) {
                             Casa1.flush();
                         }
-                        Casa1.putFloat("Y12", (e.y + (5 / Pixels))-5/Pixels);
-                        if(AddResources.TouchConfirm) {
+                        Casa1.putFloat("Y12", (e.y + (5 / Pixels)) - 5 / Pixels);
+                        if (AddResources.TouchConfirm) {
                             Casa1.flush();
                             MyGdxGame.CasasColocadas.flush();
 
@@ -69,36 +70,79 @@ public class Casa1 extends Actor implements Disposable {
             }
         }
 
-        if(MenuBuild.CasasBuild&&MyGdxGame.CasasColocadas.getInteger("Posiciones4") == 0 ) {
+        if (MenuBuild.CasasBuild && MyGdxGame.CasasColocadas.getInteger("Posiciones4") == 0) {
             for (Rectangle e : Tierra1.rects) {
 
-                    if (Jugador.jugador.overlaps(e)) {
-                        y =  (e.y + (5 / Pixels))-5/Pixels;
-                        x = Jugador.body.getPosition().x;
-                        Cuerpo2.set(x, y, 110/Pixels,170/Pixels);
+                if (Jugador.jugador.overlaps(e)) {
+                    y = (e.y + (5 / Pixels)) - 5 / Pixels;
+                    x = Jugador.body.getPosition().x;
+                    Cuerpo2.set(x, y, 110 / Pixels, 170 / Pixels);
 
                 }
             }
-        }else
-        {
-            if(!cambiarPosicion) {
+        } else {
+            if (!cambiarPosicion) {
                 x = Casa1.getFloat("X12");
                 y = Casa1.getFloat("Y12");
-                Cuerpo2.set(x, y, 110/Pixels,170/Pixels);
+                Cuerpo2.set(x, y, 110 / Pixels, 170 / Pixels);
             }
-            if(!MenuBuild.CasasBuild) {
+            if (!MenuBuild.CasasBuild) {
 
-                Cuerpo.set(x, y, 110/Pixels,170/Pixels);
-            }else
-            {
-                Cuerpo.set(0,0,0,0);
+                Cuerpo.set(x, y, 110 / Pixels, 170 / Pixels);
+            } else {
+                Cuerpo.set(0, 0, 0, 0);
             }
-            if(MenuBuild.isMenu)
-            {
-                Cuerpo.set(0,0,0,0);
+            if (MenuBuild.isMenu) {
+                Cuerpo.set(0, 0, 0, 0);
             }
         }
 
+        if (MenuBuild.isMover) {
+            if (Cuerpo.overlaps(AddResources.puntero)) {
+                timeDurationTouch += 1 * Gdx.graphics.getDeltaTime();
+                if (timeDurationTouch > 2) {
+                    cambiarPosicion = true;
+                }
+            }
+        }
+
+        if (cambiarPosicion) {
+            MenuBuild.BuildMover = true;
+            for (Rectangle e : Tierra1.rects) {
+                if (noToca) {
+                    if (Jugador.jugador.overlaps(e)) {
+                        y = (e.y + (5 / Pixels)) - 3 / Pixels;
+                        x = Jugador.body.getPosition().x;
+                        Cuerpo2.set(x, y, 110 / Pixels, 170 / Pixels);
+
+                        Casa1.putFloat("X12", Jugador.body.getPosition().x);
+                        if (AddResources.TouchConfirm) {
+                            Casa1.flush();
+                        }
+                        Casa1.putFloat("Y12", (e.y + (5 / Pixels)) - 3 / Pixels);
+                        if (AddResources.TouchConfirm) {
+                            Casa1.flush();
+                            MenuBuild.BuildMover = false;
+                            MenuBuild.isMenu = false;
+                            cambiarPosicion = false;
+                            timeDurationTouch = 0;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    public void colisiones()
+    {
+        if(Cuerpo2.overlaps(Casa2Pisos.Cuerpo2)||Cuerpo2.overlaps(Casa2Pisos2.Cuerpo2)||Cuerpo2.overlaps(Casa2.Cuerpo2))
+        {
+            AddResources.isFreeSpaceTop3 = false;
+        }else
+        {
+            AddResources.isFreeSpaceTop3 = true;
+        }
     }
 
     @Override

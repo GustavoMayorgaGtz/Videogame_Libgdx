@@ -66,8 +66,11 @@ public class MenuBuild extends Actor implements Disposable
 
     public static boolean isTierra1,isTierra2,isTierra3,isTierra4,isTierra5;
     /******Menu2******/
+    float alphaCasa2 = 1,alphaCasa1 = 1,alphaMaceta1 = 1,alphaMaceta2 = 1,alphaArbusto1 = 1,alphaArbusto2 = 1;
     public static boolean CasasDosPisosBuild;
     public static boolean CasasBuild;
+    public static boolean Maceta1Build;
+    public static boolean Maceta2Build;
     public static Rectangle Casa2PisosR,CasaR,Maceta1R,Maceta2R,Arbusto1R,Arbusto2R;
     Texture Arbusto1,Arbusto2;
     Sprite Arbusto1S,Arbusto2S;
@@ -817,7 +820,15 @@ public class MenuBuild extends Actor implements Disposable
         /**********************************************************************************************************************************************************************/
         if(isMenu1)
         {
-            tierraR.set(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (20 / Pixels), 30 / Pixels, 30 / Pixels);
+            if(MyGdxGame.TierrasColocadas.getInteger("Posiciones") < 5)
+            {
+                tierraR.set(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (20 / Pixels), 30 / Pixels, 30 / Pixels);
+            }else
+            {
+                alphaTierra = 0.4f;
+                tierraR.set(0,0,0,0);
+            }
+
             TierraS.setAlpha(alphaTierra);
             TierraS.setBounds(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (20 / Pixels), 30 / Pixels, 30 / Pixels);
             TierraS.draw(batch);
@@ -938,17 +949,59 @@ public class MenuBuild extends Actor implements Disposable
 
 
         }
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
         if(isMenu3)
         {
             MenuBuild.timeCultivos = 0;
+            if(MyGdxGame.CasasDosPisosColocadas.getInteger("Posiciones3") < 2)
+            {
+                Casa2PisosR.set(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
+            }else
+            {
+                alphaCasa2 = 0.4f;
+                Casa2PisosR.set(0,0,0,0);
+            }
+            Casa2PisosS.setAlpha(alphaCasa2);
             Casa2PisosS.setBounds(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
-            Casa2PisosR.set(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
             Casa2PisosS.draw(batch);
+            if(MyGdxGame.CasasColocadas.getInteger("Posiciones4") < 2)
+            {
+                CasaR.set(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
+            }else
+            {
+                alphaCasa1 = 0.4f;
+                CasaR.set(0,0,0,0);
+            }
+
+            CasaS.setAlpha(alphaCasa1);
             CasaS.setBounds(AddResources.cam.position.x - 3.8f+ (105 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 60 / Pixels);
-            CasaR.set(AddResources.cam.position.x - 3.8f+ (105 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 60 / Pixels);
+            CasaR.set(AddResources.cam.position.x - 3.8f+ (105 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 40 / Pixels);
             CasaS.draw(batch);
+            if(MyGdxGame.Maceta1Colocadas.getInteger("Posiciones5") < 3)
+            {
+                Maceta1R.set(AddResources.cam.position.x - 3.8f+ (95 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
+            }else
+            {
+                Maceta1R.set(0,0,0,0);
+                alphaMaceta1 = 0.4f;
+            }
             Maceta1S.setBounds(AddResources.cam.position.x - 3.8f+ (95 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
-            Maceta1R.set(AddResources.cam.position.x - 3.8f+ (95 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
+            Maceta1S.setAlpha(alphaMaceta1);
             Maceta1S.draw(batch);
             Maceta2S.setBounds(AddResources.cam.position.x - 3.8f+ (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
             Maceta2R.set(AddResources.cam.position.x - 3.8f+ (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
@@ -963,12 +1016,45 @@ public class MenuBuild extends Actor implements Disposable
             if(Casa2PisosR.overlaps(puntero))
             {
                 MenuBuild.CasasDosPisosBuild = true;
+                MenuBuild.CasasBuild = false;
+                MenuBuild.Maceta1Build = false;
+                MenuBuild.Maceta2Build = false;
             }
             if(CasaR.overlaps(puntero))
             {
+                MenuBuild.CasasDosPisosBuild = false;
                 MenuBuild.CasasBuild = true;
+                MenuBuild.Maceta1Build = false;
+                MenuBuild.Maceta2Build = false;
+            }
+            if(Maceta1R.overlaps(puntero))
+            {
+                MenuBuild.CasasDosPisosBuild = false;
+                MenuBuild.CasasBuild = false;
+                MenuBuild.Maceta1Build = true;
+                MenuBuild.Maceta2Build = false;
+            }
+            if(Maceta2R.overlaps(puntero))
+            {
+                MenuBuild.CasasDosPisosBuild = false;
+                MenuBuild.CasasBuild = false;
+                MenuBuild.Maceta1Build = false;
+                MenuBuild.Maceta2Build = true;
             }
         }
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+        /***************************************************************************/
+
         if(isMenu4)
         {
             MenuBuild.timeCultivos = 0;

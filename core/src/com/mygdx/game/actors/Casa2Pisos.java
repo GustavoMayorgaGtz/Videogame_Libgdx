@@ -7,12 +7,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.Casa;
+import com.mygdx.game.Menu;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.tiled.AddResources;
 
 
 import static com.mygdx.game.MyGdxGame.CasaDosPisos1;
 import static com.mygdx.game.MyGdxGame.Pixels;
+import static com.mygdx.game.MyGdxGame.agua1;
 import static com.mygdx.game.MyGdxGame.tierra1;
 
 public class Casa2Pisos extends Actor implements Disposable {
@@ -22,6 +24,7 @@ public class Casa2Pisos extends Actor implements Disposable {
     boolean noToca;
     boolean cambiarPosicion = false;
     public static boolean isCasa2Pisos1Activate = false;
+    float timeDurationTouch;
 
     public Casa2Pisos()
     {
@@ -48,13 +51,14 @@ public class Casa2Pisos extends Actor implements Disposable {
 
     @Override
     public void act(float delta) {
+        colisiones();
         if(MyGdxGame.CasasDosPisosColocadas.getInteger("Posiciones3") == 0 && MenuBuild.CasasDosPisosBuild ) {
             for (Rectangle e : Tierra1.rects) {
                 if (Jugador.jugador.overlaps(e)) {
                     if (noToca) {
                         MyGdxGame.CasasDosPisosColocadas.putInteger("Posiciones3",1);
                         CasaDosPisos1.putFloat("X10", Jugador.body.getPosition().x);
-                        Gdx.app.log("lookerewr","eqrew");
+
                         if(AddResources.TouchConfirm) {
                             CasaDosPisos1.flush();
                         }
@@ -102,7 +106,54 @@ public class Casa2Pisos extends Actor implements Disposable {
             }
         }
 
+        if(MenuBuild.isMover) {
+            if (Cuerpo.overlaps(AddResources.puntero)) {
+                timeDurationTouch += 1 * Gdx.graphics.getDeltaTime();
+                if (timeDurationTouch > 2) {
+                    cambiarPosicion = true;
+                }
+            }
+        }
+
+        if(cambiarPosicion)
+        {
+            MenuBuild.BuildMover = true;
+            for (Rectangle e : Tierra1.rects) {
+                if (noToca) {
+                    if (Jugador.jugador.overlaps(e)) {
+                        y = (e.y + (5 / Pixels)) -3/Pixels;
+                        x = Jugador.body.getPosition().x;
+                        Cuerpo2.set(x, y, 110 / Pixels, 170 / Pixels);
+
+                        CasaDosPisos1.putFloat("X10", Jugador.body.getPosition().x);
+                        if(AddResources.TouchConfirm) {
+                            CasaDosPisos1.flush();
+                        }
+                        CasaDosPisos1.putFloat("Y10", (e.y + (5 / Pixels)) -3/Pixels);
+                        if(AddResources.TouchConfirm) {
+                            CasaDosPisos1.flush();
+                            MenuBuild.BuildMover= false;
+                            MenuBuild.isMenu = false;
+                            cambiarPosicion = false;
+                            timeDurationTouch = 0;
+                        }
+                    }
+                }
+            }
+
+        }
+}
+
+public void colisiones()
+{
+    if(Cuerpo2.overlaps(Casa2Pisos2.Cuerpo2)||Cuerpo2.overlaps(Casa1.Cuerpo2)||Cuerpo2.overlaps(Casa2.Cuerpo2))
+    {
+        AddResources.isFreeSpaceTop1 = false;
+    }else
+    {
+        AddResources.isFreeSpaceTop1 = true;
     }
+}
 
     @Override
     public void dispose() {
