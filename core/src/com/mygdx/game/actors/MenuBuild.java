@@ -71,6 +71,8 @@ public class MenuBuild extends Actor implements Disposable
     public static boolean CasasBuild;
     public static boolean Maceta1Build;
     public static boolean Maceta2Build;
+    public static boolean Arbusto1Build;
+    public static boolean Arbusto2Build;
     public static Rectangle Casa2PisosR,CasaR,Maceta1R,Maceta2R,Arbusto1R,Arbusto2R;
     Texture Arbusto1,Arbusto2;
     Sprite Arbusto1S,Arbusto2S;
@@ -220,6 +222,7 @@ public class MenuBuild extends Actor implements Disposable
                 }
 
                 moverTime = 0;
+
             }
         }
         Cuadro.set(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y , 20 / Pixels, 20 / Pixels);
@@ -234,6 +237,10 @@ public class MenuBuild extends Actor implements Disposable
             timeRetrasar = timeRetrasar + 1 * Gdx.graphics.getDeltaTime();
           //   Gdx.app.log("timeCultivos", "" + timeCultivos);
         }else
+        {
+            timeRetrasar = 0;
+        }
+        if(MenuBuild.BuildTierra||MenuBuild.BuildAgua||MenuBuild.BuildMover||MenuBuild.CasasDosPisosBuild||MenuBuild.CasasBuild||MenuBuild.Maceta1Build||MenuBuild.Maceta2Build||MenuBuild.Arbusto1Build||MenuBuild.Arbusto2Build)
         {
             timeRetrasar = 0;
         }
@@ -1003,14 +1010,41 @@ public class MenuBuild extends Actor implements Disposable
             Maceta1S.setBounds(AddResources.cam.position.x - 3.8f+ (95 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
             Maceta1S.setAlpha(alphaMaceta1);
             Maceta1S.draw(batch);
+            if(MyGdxGame.Maceta2Colocadas.getInteger("Posiciones6") < 3)
+            {
+                Maceta2R.set(AddResources.cam.position.x - 3.8f+ (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
+            }else
+            {
+                Maceta2R.set(0,0,0,0);
+                alphaMaceta2 = 0.4f;
+            }
+            Maceta2S.setAlpha(alphaMaceta2);
             Maceta2S.setBounds(AddResources.cam.position.x - 3.8f+ (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
             Maceta2R.set(AddResources.cam.position.x - 3.8f+ (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
             Maceta2S.draw(batch);
+            if(MyGdxGame.Arbusto1Colocadas.getInteger("Posiciones7") < 3)
+            {
+                Arbusto1R.set(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32 / Pixels, 32 / Pixels);
+            }else
+            {
+                Arbusto1R.set(0,0,0,0);
+                alphaArbusto1 = 0.4f;
+            }
             Arbusto1S.setBounds(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32 / Pixels, 32 / Pixels);
-            Arbusto1R.set(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32 / Pixels, 32 / Pixels);
+          Arbusto1S.setAlpha(alphaArbusto1);
             Arbusto1S.draw(batch);
+            if(MyGdxGame.Arbusto2Colocadas.getInteger("Posiciones8") < 3)
+            {
+                Arbusto2R.set(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (64 / Pixels), 50/ Pixels, 50/ Pixels);
+
+            }else
+            {
+                alphaArbusto2 = 0.4f;
+                Arbusto2R.set(0,0,0,0);
+
+            }
             Arbusto2S.setBounds(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (64 / Pixels), 50/ Pixels, 50/ Pixels);
-            Arbusto2R.set(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (64 / Pixels), 50/ Pixels, 50/ Pixels);
+            Arbusto2S .setAlpha(alphaArbusto2);
             Arbusto2S.draw(batch);
 
             if(Casa2PisosR.overlaps(puntero))
@@ -1019,6 +1053,8 @@ public class MenuBuild extends Actor implements Disposable
                 MenuBuild.CasasBuild = false;
                 MenuBuild.Maceta1Build = false;
                 MenuBuild.Maceta2Build = false;
+                MenuBuild.Arbusto1Build = false;
+                MenuBuild.Arbusto2Build = false;
             }
             if(CasaR.overlaps(puntero))
             {
@@ -1026,6 +1062,8 @@ public class MenuBuild extends Actor implements Disposable
                 MenuBuild.CasasBuild = true;
                 MenuBuild.Maceta1Build = false;
                 MenuBuild.Maceta2Build = false;
+                MenuBuild.Arbusto1Build = false;
+                MenuBuild.Arbusto2Build = false;
             }
             if(Maceta1R.overlaps(puntero))
             {
@@ -1033,6 +1071,8 @@ public class MenuBuild extends Actor implements Disposable
                 MenuBuild.CasasBuild = false;
                 MenuBuild.Maceta1Build = true;
                 MenuBuild.Maceta2Build = false;
+                MenuBuild.Arbusto1Build = false;
+                MenuBuild.Arbusto2Build = false;
             }
             if(Maceta2R.overlaps(puntero))
             {
@@ -1040,6 +1080,27 @@ public class MenuBuild extends Actor implements Disposable
                 MenuBuild.CasasBuild = false;
                 MenuBuild.Maceta1Build = false;
                 MenuBuild.Maceta2Build = true;
+                MenuBuild.Arbusto1Build = false;
+                MenuBuild.Arbusto2Build = false;
+            }
+
+            if(Arbusto1R.overlaps(puntero))
+            {
+                MenuBuild.CasasDosPisosBuild = false;
+                MenuBuild.CasasBuild = false;
+                MenuBuild.Maceta1Build = false;
+                MenuBuild.Maceta2Build = false;
+                MenuBuild.Arbusto1Build = true;
+                MenuBuild.Arbusto2Build = false;
+            }
+            if(Arbusto2R.overlaps(puntero))
+            {
+                MenuBuild.CasasDosPisosBuild = false;
+                MenuBuild.CasasBuild = false;
+                MenuBuild.Maceta1Build = false;
+                MenuBuild.Maceta2Build = false;
+                MenuBuild.Arbusto1Build = false;
+                MenuBuild.Arbusto2Build = true;
             }
         }
         /***************************************************************************/

@@ -5,6 +5,12 @@ import com.mygdx.game.actors.Agua1;
 import com.mygdx.game.actors.Agua2;
 import com.mygdx.game.actors.Agua3;
 import com.mygdx.game.actors.Agua4;
+import com.mygdx.game.actors.Arbusto1_1;
+import com.mygdx.game.actors.Arbusto1_2;
+import com.mygdx.game.actors.Arbusto1_3;
+import com.mygdx.game.actors.Arbusto2_1;
+import com.mygdx.game.actors.Arbusto2_2;
+import com.mygdx.game.actors.Arbusto2_3;
 import com.mygdx.game.actors.Casa1;
 import com.mygdx.game.actors.Casa2;
 import com.mygdx.game.actors.Casa2Pisos;
@@ -48,6 +54,14 @@ public class addActors2 {
     Maceta2_2 maceta2_2 = new Maceta2_2();
     Maceta2_3 maceta2_3 = new Maceta2_3();
 
+    Arbusto1_1 arbusto1_1 = new Arbusto1_1();
+    Arbusto1_2 arbusto1_2 = new Arbusto1_2();
+    Arbusto1_3 arbusto1_3 = new Arbusto1_3();
+
+    Arbusto2_1 arbusto2_1 = new Arbusto2_1();
+    Arbusto2_2 arbusto2_2 = new Arbusto2_2();
+    Arbusto2_3 arbusto2_3 = new Arbusto2_3();
+
     MenuBuild menuBuild;
     public addActors2(Stage stage)
     {
@@ -89,6 +103,14 @@ public class addActors2 {
         stage.addActor(maceta2_1);
         stage.addActor(maceta2_2);
         stage.addActor(maceta2_3);
+
+        stage.addActor(arbusto1_1);
+        stage.addActor(arbusto1_2);
+        stage.addActor(arbusto1_3);
+
+        stage.addActor(arbusto2_1);
+        stage.addActor(arbusto2_2);
+        stage.addActor(arbusto2_3);
 
            menuBuild = new MenuBuild();
         stage.addActor(menuBuild );

@@ -89,7 +89,7 @@
      public void render(float delta) {
          time += Gdx.graphics.getDeltaTime();
 
-         Gdx.gl.glClearColor(2/255f,13/255f,31/255f,1);
+         Gdx.gl.glClearColor(2/255f,13/255f,31/255f,1);//97/255f,173/255f,233/255f
          Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
          MyGdxGame.isNivelProgress1 = true;
          batch.begin();

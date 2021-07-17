@@ -85,7 +85,7 @@ public class AddResources {
 
     public static boolean isFreeSpaceTop1,isFreeSpaceTop2,isFreeSpaceTop3,isFreeSpaceTop4,isFreeSpaceTop5,isFreeSpaceTop6,isFreeSpaceTop7;
     public static boolean isFreeSpaceTop8,isFreeSpaceTop9,isFreeSpaceTop10;
-
+    public static boolean free1,free2,free3,free4,free5,free6;
     /*****Controles*****/
     public static Rectangle puntero, puntero2;
     public static Texture punterot;
@@ -675,7 +675,7 @@ batch.begin();
                 /**************************/
                 /**************************/
                 /**************************/
-                if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.CasasDosPisosBuild&&!MenuBuild.CasasBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build) {
+                if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.CasasDosPisosBuild&&!MenuBuild.CasasBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build&&!MenuBuild.Arbusto1Build&&!MenuBuild.Arbusto2Build) {
                     if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection) {
                         if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
                             cancel.set(0,0,0,0);
@@ -1699,6 +1699,8 @@ batch.begin();
             MenuBuild.CasasBuild = false;
             MenuBuild.Maceta1Build = false;
             MenuBuild.Maceta2Build = false;
+            MenuBuild.Arbusto1Build = false;
+            MenuBuild.Arbusto2Build = false;
         }
 freeSpace();
        ConfirmarS.draw(batch);
@@ -1732,7 +1734,8 @@ freeSpace();
         if(!isFreeSpace1||!isFreeSpace2||!isFreeSpace3||!isFreeSpace4||!isFreeSpace5||!isFreeSpace6||!isFreeSpace7||!isFreeSpace8||!isFreeSpace9
                 ||!isFreeSpaceTop1||!isFreeSpaceTop2||!isFreeSpaceTop3||!isFreeSpaceTop4
                 ||!isFreeSpaceTop5||!isFreeSpaceTop6||!isFreeSpaceTop7
-                ||!isFreeSpaceTop8||!isFreeSpaceTop9||!isFreeSpaceTop10){
+                ||!isFreeSpaceTop8||!isFreeSpaceTop9||!isFreeSpaceTop10
+        ||!free1||!free2||!free3||!free4||!free5||!free6){
 
             confirm.set(0,0,0,0);
             ConfirmarS.setBounds(0,0,0,0);

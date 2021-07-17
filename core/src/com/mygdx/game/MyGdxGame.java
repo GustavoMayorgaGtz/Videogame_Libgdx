@@ -136,6 +136,17 @@ public class MyGdxGame extends Game{
 	public static Preferences Maceta2_1;
 	public static Preferences Maceta2_2;
 	public static Preferences Maceta2_3;
+
+	/**Arbusto1**/
+	public static Preferences Arbusto1Colocadas;
+	public static Preferences Arbusto1_1;
+	public static Preferences Arbusto1_2;
+	public static Preferences Arbusto1_3;
+	/**Arbusto2**/
+	public static Preferences Arbusto2Colocadas;
+	public static Preferences Arbusto2_1;
+	public static Preferences Arbusto2_2;
+	public static Preferences Arbusto2_3;
 	@Override
 	public void create() {
 		Cinematica = Gdx.app.getPreferences("Cinematica");
@@ -296,7 +307,7 @@ public class MyGdxGame extends Game{
 		Maceta1_3 = Gdx.app.getPreferences("X16");
 		Maceta1_3 = Gdx.app.getPreferences("Y16");
 
-		/**Maceta1**/
+		/**Maceta2**/
 		Maceta2Colocadas = Gdx.app.getPreferences("Posiciones6");
 		Maceta2_1 = Gdx.app.getPreferences("X17");
 		Maceta2_1 = Gdx.app.getPreferences("Y17");
@@ -304,6 +315,24 @@ public class MyGdxGame extends Game{
 		Maceta2_2 = Gdx.app.getPreferences("Y18");
 		Maceta2_3 = Gdx.app.getPreferences("X19");
 		Maceta2_3 = Gdx.app.getPreferences("Y19");
+		/**Arbusto1**/
+		Arbusto1Colocadas = Gdx.app.getPreferences("Posiciones7");
+		Arbusto1_1 = Gdx.app.getPreferences("X20");
+		Arbusto1_1 = Gdx.app.getPreferences("Y20");
+		Arbusto1_2 = Gdx.app.getPreferences("X21");
+		Arbusto1_2 = Gdx.app.getPreferences("Y21");
+		Arbusto1_3 = Gdx.app.getPreferences("X22");
+		Arbusto1_3 = Gdx.app.getPreferences("Y22");
+		/**Arbusto2**/
+		Arbusto2Colocadas = Gdx.app.getPreferences("Posiciones8");
+		Arbusto2_1 = Gdx.app.getPreferences("X23");
+		Arbusto2_1 = Gdx.app.getPreferences("Y23");
+		Arbusto2_2 = Gdx.app.getPreferences("X24");
+		Arbusto2_2 = Gdx.app.getPreferences("Y24");
+		Arbusto2_3 = Gdx.app.getPreferences("X25");
+		Arbusto2_3 = Gdx.app.getPreferences("Y25");
+
+
 		if(Cinematica.getInteger("Cinematica")==0)
 		{
 			tierra1Enable.putBoolean("tierra1",true);
@@ -449,6 +478,26 @@ public class MyGdxGame extends Game{
 			Maceta2_3.putFloat("X19",1800);
 			Maceta2_3.putFloat("Y19",1800);
 			Maceta2_3.flush();
+
+			Arbusto1_1.putFloat("X20",1900);
+			Arbusto1_1.putFloat("Y20",1900);
+			Arbusto1_1.flush();
+			Arbusto1_2.putFloat("X21",2000);
+			Arbusto1_2.putFloat("Y21",2000);
+			Arbusto1_2.flush();
+			Arbusto1_3.putFloat("X22",2100);
+			Arbusto1_3.putFloat("Y22",2100);
+			Arbusto1_3.flush();
+
+			Arbusto2_1.putFloat("X23",2200);
+			Arbusto2_1.putFloat("Y23",2200);
+			Arbusto2_1.flush();
+			Arbusto2_2.putFloat("X24",2300);
+			Arbusto2_2.putFloat("Y24",2300);
+			Arbusto2_2.flush();
+			Arbusto2_3.putFloat("X25",2400);
+			Arbusto2_3.putFloat("Y25",2400);
+			Arbusto2_3.flush();
 		}
 
 

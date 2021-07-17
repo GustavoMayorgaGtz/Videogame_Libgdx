@@ -9,10 +9,10 @@ import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.tiled.AddResources;
 
-import static com.mygdx.game.MyGdxGame.Maceta2_1;
+import static com.mygdx.game.MyGdxGame.Arbusto1_2;
 import static com.mygdx.game.MyGdxGame.Pixels;
 
-public class Maceta2_2 extends Actor implements Disposable {
+public class Arbusto1_2 extends Actor implements Disposable {
     public static Texture logo;
     public static Rectangle Cuerpo,Cuerpo2;
     public static float x,y;
@@ -20,9 +20,9 @@ public class Maceta2_2 extends Actor implements Disposable {
     boolean cambiarPosicion = false;
 float timeDurationTouch;
 
-    public Maceta2_2()
+    public Arbusto1_2()
     {
-        logo = new Texture("Maceta2.png");
+        logo = new Texture("Arbusto1.png");
         Cuerpo = new Rectangle();
         Cuerpo2 = new Rectangle();
     }
@@ -46,21 +46,20 @@ float timeDurationTouch;
     @Override
     public void act(float delta) {
         colisiones();
-        if (MyGdxGame.Maceta2Colocadas.getInteger("Posiciones6") == 1&& MenuBuild.Maceta2Build) {
+        if (MyGdxGame.Arbusto1Colocadas.getInteger("Posiciones7") == 1 && MenuBuild.Arbusto1Build) {
             for (Rectangle e : Tierra1.rects) {
                 if (Jugador.jugador.overlaps(e)) {
                     if (noToca) {
-                        MyGdxGame.Maceta2Colocadas.putInteger("Posiciones6", 2);
-                       MyGdxGame.Maceta2_2.putFloat("X18", Jugador.body.getPosition().x);
-
+                        MyGdxGame.Arbusto1Colocadas.putInteger("Posiciones7", 2);
+                        Arbusto1_2.putFloat("X21", Jugador.body.getPosition().x);
                         if (AddResources.TouchConfirm) {
-                            MyGdxGame.Maceta2_2.flush();
+                            Arbusto1_2.flush();
                         }
-                        MyGdxGame.Maceta2_2.putFloat("Y18", (e.y + (5 / Pixels)) - 5 / Pixels);
+                        Arbusto1_2.putFloat("Y21", (e.y + (5 / Pixels)) - 5 / Pixels);
                         if (AddResources.TouchConfirm) {
-                            MyGdxGame.Maceta2_2.flush();
-                            MyGdxGame.Maceta2Colocadas.flush();
-                            MenuBuild.Maceta2Build = false;
+                            Arbusto1_2.flush();
+                            MyGdxGame.Arbusto1Colocadas.flush();
+                            MenuBuild.Arbusto1Build = false;
                             AddResources.TouchConfirm = false;
                             AddResources.TouchCancel = false;
                         }
@@ -69,7 +68,7 @@ float timeDurationTouch;
             }
         }
 
-        if (MyGdxGame.Maceta2Colocadas.getInteger("Posiciones6") == 1 && MenuBuild.Maceta2Build) {
+        if (MyGdxGame.Arbusto1Colocadas.getInteger("Posiciones7") == 1 && MenuBuild.Arbusto1Build) {
             for (Rectangle e : Tierra1.rects) {
 
                 if (Jugador.jugador.overlaps(e)) {
@@ -81,11 +80,11 @@ float timeDurationTouch;
             }
         } else {
             if (!cambiarPosicion) {
-                x =    MyGdxGame.Maceta2_2.getFloat("X18");
-                y =    MyGdxGame.Maceta2_2.getFloat("Y18");
+                x = Arbusto1_2.getFloat("X21");
+                y = Arbusto1_2.getFloat("Y21");
                 Cuerpo2.set(x, y, 32/Pixels,32/Pixels);
             }
-            if (!MenuBuild.Maceta2Build) {
+            if (!MenuBuild.Arbusto1Build) {
 
                 Cuerpo.set(x, y, 32/Pixels,32/Pixels);
             } else {
@@ -114,13 +113,13 @@ float timeDurationTouch;
                         x = Jugador.body.getPosition().x;
                         Cuerpo2.set(x, y, 32/Pixels,32/Pixels);
 
-                        MyGdxGame.Maceta2_2.putFloat("X18", Jugador.body.getPosition().x);
+                        Arbusto1_2.putFloat("X21", Jugador.body.getPosition().x);
                         if (AddResources.TouchConfirm) {
-                            MyGdxGame.Maceta2_2.flush();
+                            Arbusto1_2.flush();
                         }
-                        MyGdxGame.Maceta2_2.putFloat("Y18", (e.y + (5 / Pixels)) - 3 / Pixels);
+                        Arbusto1_2.putFloat("Y21", (e.y + (5 / Pixels)) - 3 / Pixels);
                         if (AddResources.TouchConfirm) {
-                            MyGdxGame.Maceta2_2.flush();
+                            Arbusto1_2.flush();
                             MenuBuild.BuildMover = false;
                             MenuBuild.isMenu = false;
                             cambiarPosicion = false;
@@ -130,16 +129,18 @@ float timeDurationTouch;
                 }
             }
         }
+
     }
 
     public void colisiones()
     {
-        if(Cuerpo2.overlaps(Casa2Pisos.Cuerpo2)||Cuerpo2.overlaps(Casa2Pisos2.Cuerpo2)||Cuerpo2.overlaps(com.mygdx.game.actors.Casa1.Cuerpo2)||Cuerpo2.overlaps(Casa2.Cuerpo2)||Cuerpo2.overlaps(Maceta1_2.Cuerpo2)||Cuerpo2.overlaps(Maceta1_3.Cuerpo2)||Cuerpo2.overlaps(Maceta1_1.Cuerpo2)||Cuerpo2.overlaps(Maceta2_3.Cuerpo2)||Cuerpo2.overlaps(com.mygdx.game.actors.Maceta2_1.Cuerpo2))
+        if(Cuerpo2.overlaps(Casa2Pisos.Cuerpo2)||Cuerpo2.overlaps(Casa2Pisos2.Cuerpo2)||Cuerpo2.overlaps(Casa1.Cuerpo2)||Cuerpo2.overlaps(Casa2.Cuerpo2)||Cuerpo2.overlaps(Maceta1_2.Cuerpo2)||Cuerpo2.overlaps(Maceta1_3.Cuerpo2)
+                ||Cuerpo2.overlaps(Arbusto1_1.Cuerpo2)||Cuerpo2.overlaps(Arbusto1_3.Cuerpo2)||Cuerpo2.overlaps(Arbusto2_1.Cuerpo2)||Cuerpo2.overlaps(Arbusto2_2.Cuerpo2)||Cuerpo2.overlaps(Arbusto2_3.Cuerpo2))
         {
-            AddResources.isFreeSpaceTop9 = false;
+            AddResources.free2 = false;
         }else
         {
-            AddResources.isFreeSpaceTop9 = true;
+            AddResources.free2 = true;
         }
     }
 
