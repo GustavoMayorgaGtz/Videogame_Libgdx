@@ -65,6 +65,14 @@ public class addActors2 {
     MenuBuild menuBuild;
     public addActors2(Stage stage)
     {
+        stage.addActor(arbusto1_1);
+        stage.addActor(arbusto1_2);
+        stage.addActor(arbusto1_3);
+
+        stage.addActor(arbusto2_1);
+        stage.addActor(arbusto2_2);
+        stage.addActor(arbusto2_3);
+
         casa2Pisos1 = new Casa2Pisos();
         stage.addActor(casa2Pisos1);
         casa2Pisos2 = new Casa2Pisos2();
@@ -104,13 +112,7 @@ public class addActors2 {
         stage.addActor(maceta2_2);
         stage.addActor(maceta2_3);
 
-        stage.addActor(arbusto1_1);
-        stage.addActor(arbusto1_2);
-        stage.addActor(arbusto1_3);
 
-        stage.addActor(arbusto2_1);
-        stage.addActor(arbusto2_2);
-        stage.addActor(arbusto2_3);
 
            menuBuild = new MenuBuild();
         stage.addActor(menuBuild );

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="400" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="71" nextobjectid="657">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="400" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="71" nextobjectid="658">
  <tileset firstgid="1" name="PisoGreenOficial" tilewidth="16" tileheight="16" tilecount="144" columns="4">
   <image source="PisoGreen/PisoGreenOficial.png" width="64" height="576"/>
  </tileset>
@@ -447,7 +447,7 @@
  <objectgroup id="59" name="HojaRosa"/>
  <objectgroup id="60" name="HojaAzul" visible="0" locked="1"/>
  <objectgroup id="62" name="CamaraX">
-  <object id="633" x="5126.25" y="752.5" width="1135.92" height="297.333"/>
+  <object id="633" x="5127.58" y="752.5" width="1135.92" height="297.333"/>
  </objectgroup>
  <objectgroup id="68" name="RectangulosNOconstruir">
   <object id="646" x="6074.5" y="953.167" width="325.167" height="72.1667"/>
@@ -455,11 +455,12 @@
   <object id="649" x="5423.33" y="944" width="9.33333" height="32.6667"/>
   <object id="650" x="5373" y="1007" width="51.3333" height="35.6667"/>
   <object id="651" x="5001.67" y="956.83" width="68" height="82.1667"/>
+  <object id="657" x="5552" y="991" width="10.3333" height="35.3333"/>
  </objectgroup>
  <objectgroup id="69" name="Build">
   <object id="652" x="5074.17" y="1004.67" width="292" height="37"/>
   <object id="653" x="5434" y="942.667" width="73.3333" height="34.6667"/>
-  <object id="654" x="5553.17" y="991.667" width="519.833" height="33"/>
+  <object id="654" x="5567.84" y="991.667" width="505.166" height="33"/>
  </objectgroup>
  <layer id="1" name="Capa de patrones 1" width="400" height="80">
   <data encoding="csv">

@@ -31,9 +31,6 @@ public class Sierra2 extends Actor {
     public Sierra2(World world, Texture texture, float x, float y)
     {
         this.world = world;
-        this.body = body;
-
-       // this.texture = texture;
         region = new TextureRegion(texture);
         def = new BodyDef();
         def.position.set((x-(12/2))/Pixels,( y-(12/2))/Pixels);
@@ -43,7 +40,6 @@ public class Sierra2 extends Actor {
         body = world.createBody(def);
         body.setGravityScale(0);
         PolygonShape box = new PolygonShape();
-     //   box.setRadius(6/Pixels);
        box.setAsBox((12)/Pixels,(12)/Pixels);
 
 
@@ -75,7 +71,6 @@ contacto();
                 rotacion = 0;
             }
 
-   //     body.setLinearVelocity(new Vector2(0,-.1f));//abajo
 
         if (RD) {
             body.setLinearVelocity(new Vector2(0,velocidad));//arriba
