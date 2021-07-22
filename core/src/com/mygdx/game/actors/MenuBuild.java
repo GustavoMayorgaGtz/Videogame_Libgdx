@@ -54,7 +54,7 @@ public class MenuBuild extends Actor implements Disposable
    public static Sprite moverS;
    public static boolean isMover;
     float moverTime;
-    float alphaMover;
+    float alphaMover = 0.2f;
     /******Cultivos******/
     public static float timeCultivos;
 
@@ -66,6 +66,7 @@ public class MenuBuild extends Actor implements Disposable
 
     public static boolean isTierra1,isTierra2,isTierra3,isTierra4,isTierra5;
     /******Menu2******/
+    public static float timeMenu2 = 0;
     float alphaCasa2 = 1,alphaCasa1 = 1,alphaMaceta1 = 1,alphaMaceta2 = 1,alphaArbusto1 = 1,alphaArbusto2 = 1;
     public static boolean CasasDosPisosBuild;
     public static boolean CasasBuild;
@@ -80,9 +81,12 @@ public class MenuBuild extends Actor implements Disposable
     Sprite Maceta1S,Maceta2S;
     Texture Casa2Pisos,Casa;
     Sprite Casa2PisosS,CasaS;
+    Texture negro;
+
 
     public MenuBuild()
     {
+        negro = new Texture("White.png");
         equis= new Texture("X.png");
         switch(MyGdxGame.ColorControl.getInteger("Color")) {
             case 0: {
@@ -201,7 +205,7 @@ public class MenuBuild extends Actor implements Disposable
     @Override
     public void draw(Batch batch, float parentAlpha) {
         time += 1 * Gdx.graphics.getDeltaTime();
-
+        timeMenu2 += 1 * Gdx.graphics.getDeltaTime();
         Logo.setBounds(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y , 20 / Pixels, 20 / Pixels);
         Logo.setAlpha(MyGdxGame.alpha);
         Fondo2.setBounds(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
@@ -214,7 +218,7 @@ public class MenuBuild extends Actor implements Disposable
                 if(isMover)
                 {
                     isMover = false;
-                    alphaMover = 0.4f;
+                    alphaMover = 0.2f;
                 }else
                 {
                     isMover = true;
@@ -975,75 +979,73 @@ public class MenuBuild extends Actor implements Disposable
         if(isMenu3)
         {
             MenuBuild.timeCultivos = 0;
-            if(MyGdxGame.CasasDosPisosColocadas.getInteger("Posiciones3") < 2)
-            {
-                Casa2PisosR.set(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
-            }else
-            {
-                alphaCasa2 = 0.4f;
-                Casa2PisosR.set(0,0,0,0);
+            if(timeMenu2 > 1f) {
+                if (MyGdxGame.CasasDosPisosColocadas.getInteger("Posiciones3") < 2) {
+                    Casa2PisosR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
+                } else {
+                    alphaCasa2 = 0.4f;
+                    Casa2PisosR.set(0, 0, 0, 0);
+                }
+                if (MyGdxGame.CasasColocadas.getInteger("Posiciones4") < 2) {
+                    CasaR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
+                } else {
+                    alphaCasa1 = 0.4f;
+                    CasaR.set(0, 0, 0, 0);
+                }
+
+                if (MyGdxGame.Maceta1Colocadas.getInteger("Posiciones5") < 3) {
+                    Maceta1R.set(AddResources.cam.position.x - 3.8f + (95 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
+                } else {
+                    Maceta1R.set(0, 0, 0, 0);
+                    alphaMaceta1 = 0.4f;
+                }
+
+                if (MyGdxGame.Maceta2Colocadas.getInteger("Posiciones6") < 3) {
+                    Maceta2R.set(AddResources.cam.position.x - 3.8f + (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
+                } else {
+                    Maceta2R.set(0, 0, 0, 0);
+                    alphaMaceta2 = 0.4f;
+                }
+                if (MyGdxGame.Arbusto1Colocadas.getInteger("Posiciones7") < 3) {
+                    Arbusto1R.set(AddResources.cam.position.x - 3.8f + (160 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32 / Pixels, 32 / Pixels);
+                } else {
+                    Arbusto1R.set(0, 0, 0, 0);
+                    alphaArbusto1 = 0.4f;
+                }
+                if (MyGdxGame.Arbusto2Colocadas.getInteger("Posiciones8") < 3) {
+                    Arbusto2R.set(AddResources.cam.position.x - 3.8f + (160 / Pixels), AddResources.cam.position.y - 2 + (64 / Pixels), 32 / Pixels, 32 / Pixels);
+
+                } else {
+                    alphaArbusto2 = 0.4f;
+                    Arbusto2R.set(0, 0, 0, 0);
+
+                }
             }
             Casa2PisosS.setAlpha(alphaCasa2);
             Casa2PisosS.setBounds(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
             Casa2PisosS.draw(batch);
-            if(MyGdxGame.CasasColocadas.getInteger("Posiciones4") < 2)
-            {
-                CasaR.set(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
-            }else
-            {
-                alphaCasa1 = 0.4f;
-                CasaR.set(0,0,0,0);
-            }
+
 
             CasaS.setAlpha(alphaCasa1);
             CasaS.setBounds(AddResources.cam.position.x - 3.8f+ (105 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 60 / Pixels);
             CasaR.set(AddResources.cam.position.x - 3.8f+ (105 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 40 / Pixels);
             CasaS.draw(batch);
-            if(MyGdxGame.Maceta1Colocadas.getInteger("Posiciones5") < 3)
-            {
-                Maceta1R.set(AddResources.cam.position.x - 3.8f+ (95 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
-            }else
-            {
-                Maceta1R.set(0,0,0,0);
-                alphaMaceta1 = 0.4f;
-            }
+
             Maceta1S.setBounds(AddResources.cam.position.x - 3.8f+ (95 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
             Maceta1S.setAlpha(alphaMaceta1);
             Maceta1S.draw(batch);
-            if(MyGdxGame.Maceta2Colocadas.getInteger("Posiciones6") < 3)
-            {
-                Maceta2R.set(AddResources.cam.position.x - 3.8f+ (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
-            }else
-            {
-                Maceta2R.set(0,0,0,0);
-                alphaMaceta2 = 0.4f;
-            }
+
             Maceta2S.setAlpha(alphaMaceta2);
             Maceta2S.setBounds(AddResources.cam.position.x - 3.8f+ (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
             Maceta2R.set(AddResources.cam.position.x - 3.8f+ (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
             Maceta2S.draw(batch);
-            if(MyGdxGame.Arbusto1Colocadas.getInteger("Posiciones7") < 3)
-            {
-                Arbusto1R.set(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32 / Pixels, 32 / Pixels);
-            }else
-            {
-                Arbusto1R.set(0,0,0,0);
-                alphaArbusto1 = 0.4f;
-            }
+
             Arbusto1S.setBounds(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32 / Pixels, 32 / Pixels);
           Arbusto1S.setAlpha(alphaArbusto1);
             Arbusto1S.draw(batch);
-            if(MyGdxGame.Arbusto2Colocadas.getInteger("Posiciones8") < 3)
-            {
-                Arbusto2R.set(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (64 / Pixels), 50/ Pixels, 50/ Pixels);
 
-            }else
-            {
-                alphaArbusto2 = 0.4f;
-                Arbusto2R.set(0,0,0,0);
-
-            }
             Arbusto2S.setBounds(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (64 / Pixels), 50/ Pixels, 50/ Pixels);
+
             Arbusto2S .setAlpha(alphaArbusto2);
             Arbusto2S.draw(batch);
 
@@ -1153,5 +1155,7 @@ public class MenuBuild extends Actor implements Disposable
         Maceta2.dispose();
         Arbusto1.dispose();
         Arbusto2.dispose();
+
+        negro.dispose();
     }
 }

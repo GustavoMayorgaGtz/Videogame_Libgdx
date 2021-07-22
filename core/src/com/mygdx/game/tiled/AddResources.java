@@ -861,7 +861,7 @@ batch.begin();
                     }
                 }else {
 /**********TIERRAS**************/
-
+                   MenuBuild.timeMenu2=0;
                    botonesConfirm();
                 }
 /*****************************/

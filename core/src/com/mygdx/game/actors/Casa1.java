@@ -212,7 +212,7 @@ Random random;
                 y = Casa1.getFloat("Y12");
                 Cuerpo2.set(x, y, 110 / Pixels, 170 / Pixels);
             }
-            if (!MenuBuild.CasasBuild) {
+            if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.CasasDosPisosBuild&&!MenuBuild.CasasBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build&&!MenuBuild.Arbusto1Build&&!MenuBuild.Arbusto2Build) {
 
                 Cuerpo.set(x, y, 110 / Pixels, 170 / Pixels);
             } else {
@@ -248,6 +248,7 @@ Random random;
                         Casa1.putFloat("Y12", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
                             Casa1.flush();
+                            iterator = 0;
                             MenuBuild.BuildMover = false;
                             MenuBuild.isMenu = false;
                             cambiarPosicion = false;
