@@ -122,6 +122,7 @@ public class AddActors {
         Texture PersonajeKill = game.getManager().get("PersonajeKill.png");
         Texture Dormir = game.getManager().get("mimido.png");
         Texture sword = game.getManager().get("EspadazoEffect.png");
+        Texture sword2 = game.getManager().get("EspadazoEffectIzq.png");
        try {
             /////Cosas hechas para los niveles de progresion
             Texture arbolVerde = game.getManager().get("HojaVerdeCartel.png");
@@ -188,7 +189,7 @@ public class AddActors {
 
             for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                player = new Jugador(world, dere, izq, SaltoDere, SaltoIzq, StaticRight, StaticLeft, EspadazoDereTexture, EspadazoIzqTexture, PersonajeKill, Dormir,sword, rect.x, rect.y);//300 , 400
+                player = new Jugador(world, dere, izq, SaltoDere, SaltoIzq, StaticRight, StaticLeft, EspadazoDereTexture, EspadazoIzqTexture, PersonajeKill, Dormir,sword,sword2, rect.x, rect.y);//300 , 400
 
             }
             stage.addActor(player);

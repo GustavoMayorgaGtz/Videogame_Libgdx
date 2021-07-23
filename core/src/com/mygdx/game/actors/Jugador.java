@@ -64,6 +64,7 @@ public class Jugador extends Actor {
     BodyDef def;
     //
     Animation<TextureRegion> EspadazoEffect;
+    Animation<TextureRegion> EspadazoEffectI;
     Animation<TextureRegion> estaticoDerecha;
     Animation<TextureRegion> estaticoIzquierda;
     Animation<TextureRegion> caminarDerecha;
@@ -82,6 +83,7 @@ public class Jugador extends Actor {
     Texture EspadazoIzquierdo;
     Texture SaltoDere,SaltoIzq,StaticDere1,StaticIzq;
     Texture Sword;
+    Texture Sword2;
   boolean dormirtime;
 
 
@@ -102,6 +104,7 @@ public class Jugador extends Actor {
     int c10 = 2, r10 = 1;
     int c11 = 2, r11 = 1;
     int c12 = 1, r12 = 6;
+    int c13 = 1, r13 = 6;
     int iterator;
 
     float time;
@@ -109,6 +112,7 @@ public class Jugador extends Actor {
   public static float time3;
     float time4 = 0;
     float timeEspadazoEffect;
+    float timeEspadazoEffect2;
     //
     public static boolean dereD,izqD;//se mandan a la clase parajo
     public static boolean derecha = true, izquierda;
@@ -187,7 +191,7 @@ ShaderProgram shader;
 
 
     
-    public Jugador(World world,Texture dere,Texture izq,Texture SaltoDere,Texture SaltoIzq,Texture StaticDere, Texture StaticIzq,Texture EspadazoDerecho,Texture EspadazoIzquierdo,Texture Kill,Texture dormir,Texture sword,float x, float y)
+    public Jugador(World world,Texture dere,Texture izq,Texture SaltoDere,Texture SaltoIzq,Texture StaticDere, Texture StaticIzq,Texture EspadazoDerecho,Texture EspadazoIzquierdo,Texture Kill,Texture dormir,Texture sword,Texture sword2,float x, float y)
     {
         this.world = world;
         this.dere = dere;
@@ -201,6 +205,7 @@ ShaderProgram shader;
         this.Kill = Kill;
         this.dormir = dormir;
         this.Sword = sword;
+        this.Sword2 = sword2;
         shader = new ShaderProgram(Gdx.files.internal("Shaders/vertex.glsl"),Gdx.files.internal("Shaders/fragment.glsl"));
         shader2 = new ShaderProgram(Gdx.files.internal("Shaders/vertex2.glsl"),Gdx.files.internal("Shaders/fragment2.glsl"));
 
@@ -233,6 +238,19 @@ ShaderProgram shader;
         particulaSalto2 = new ParticleEffect();
         particulaSalto2.load(Gdx.files.internal("particles/Salto.p"),Gdx.files.internal("images"));
         particulaSalto2.scaleEffect(.2f/Pixels);
+        ////////////////Espadazo Effect////////////////
+        TextureRegion[][] staticSwordI = TextureRegion.split(Sword2,Sword2.getWidth()/c13,Sword2.getHeight()/r13);
+        TextureRegion[] tmpSwordI = new TextureRegion[c13*r13];
+        int index0 = 0;
+        for(int i=0; i < r13; i++)
+        {
+            for(int j =0; j < c13; j++)
+            {
+                tmpSwordI[index0++] = staticSwordI[i][j];
+            }
+        }
+        EspadazoEffectI = new Animation<TextureRegion>(0.1f,tmpSwordI);
+
         ////////////////Espadazo Effect////////////////
         TextureRegion[][] staticSword = TextureRegion.split(Sword,Sword.getWidth()/c12,Sword.getHeight()/r12);
         TextureRegion[] tmpSword = new TextureRegion[c12*r12];
@@ -435,6 +453,7 @@ BotonA = new Texture("A.png");
         }
 
 ////////////////////////////Dibujar///////////////////////////////////
+       // batch.draw(negro,espadaRec.x,espadaRec.y,espadaRec.width,espadaRec.height);
         if(Espadazo) {
             batch.setShader(shader);
         }else
@@ -612,11 +631,14 @@ BotonA = new Texture("A.png");
                             espadazoSound.play(0.5f);
                         }
                         iterator++;
+                        TextureRegion current = EspadazoEffectI.getKeyFrame(timeEspadazoEffect2,false);
+                        timeEspadazoEffect2 += Gdx.graphics.getDeltaTime();
                         batch.draw(EspadaIzquierda, getX(), getY(), getWidth(), getHeight());
+                        batch.draw(current, getX()-(4.5f/Pixels), getY(), getWidth()+(64/Pixels), getHeight());
                         if (EspadazoIzqAnimation.isAnimationFinished(time4)) {
                             iterator = 0;
                             time4 = 0;
-
+                            timeEspadazoEffect2 = 0;
                             impulsoEspadaIzq = false;
                             Espadazo = false;
                         }
@@ -694,8 +716,9 @@ BotonA = new Texture("A.png");
         var1 = body.getPosition().x-(15f)/Pixels;
         var2 = body.getPosition().y-(1.5f)/Pixels;
         var3 = 30/Pixels;
-        var4 = 3/Pixels;
+        var4 = 10/Pixels;
         espadaRec.set(var1,var2,var3,var4);
+
         jugador.set((getX()+(getWidth()/4))-(1/Pixels),getY(),(getWidth()/2)+(1/Pixels),getHeight());
         /**************************************/
         /////////////////detecta movimiento//////////////

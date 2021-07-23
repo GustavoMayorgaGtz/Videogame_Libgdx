@@ -60,7 +60,7 @@ float timeDurationTouch;
                 TmpRight[index0++] = FramesRight[i][j];
             }
         }
-        A1Right = new Animation<TextureRegion>(0.25f,TmpRight);
+        A1Right = new Animation<TextureRegion>(0.2f,TmpRight);
         /////////////////////////////////////
         TextureRegion[][] FramesLeft = TextureRegion.split(AldeanaLeft,AldeanaLeft.getWidth()/c2,AldeanaLeft.getHeight()/r2);
         TextureRegion[] TmpLeft = new TextureRegion[c2 * r2];
@@ -72,7 +72,7 @@ float timeDurationTouch;
                 TmpLeft[index1++] = FramesLeft[i][j];
             }
         }
-        A1Left = new Animation<TextureRegion>(0.25f,TmpLeft);
+        A1Left = new Animation<TextureRegion>(0.2f,TmpLeft);
         /**Bloque Aldeana**/
     }
 

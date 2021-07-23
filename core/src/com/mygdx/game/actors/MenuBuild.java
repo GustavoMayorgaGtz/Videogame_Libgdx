@@ -82,7 +82,21 @@ public class MenuBuild extends Actor implements Disposable
     Texture Casa2Pisos,Casa;
     Sprite Casa2PisosS,CasaS;
     Texture negro;
+    /******Menu3******/
+    public static boolean isCorralVacasBuild,isCorralGallinasBuild;
+    Texture Flecha;
+    Rectangle FlechaR;
+    public static boolean isSelectMenu3;
+    public static float timeFlecha;
+    Texture CorralVacas;
+    Sprite CorralVacasS;
+    Rectangle CorralVacasR;
+    float alphacorralVacas = 1;
 
+    Texture CorralGallinas;
+    Sprite CorralGallinasS;
+    Rectangle CorralGallinasR;
+    float alphacorralGallinas = 1;
 
     public MenuBuild()
     {
@@ -200,6 +214,18 @@ public class MenuBuild extends Actor implements Disposable
         Maceta2R = new Rectangle();
         Arbusto1R = new Rectangle();
         Arbusto2R = new Rectangle();
+
+        /***menu3***/
+        CorralVacas =  new Texture("CorralVacas.png");
+        CorralVacasS = new Sprite(CorralVacas);
+        CorralVacasR = new Rectangle();
+
+        CorralGallinas =  new Texture("CorralGallinas.png");
+        CorralGallinasS = new Sprite(CorralGallinas);
+        CorralGallinasR = new Rectangle();
+
+        Flecha = new Texture("FlechaSiguiente.png");
+        FlechaR = new Rectangle();
     }
 
     @Override
@@ -957,7 +983,41 @@ public class MenuBuild extends Actor implements Disposable
         if(isMenu2)
         {
             MenuBuild.timeCultivos = 0;
+            if(!MenuBuild.isSelectMenu3) {
 
+                Fondo.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 150 / Pixels, 50 / Pixels);
+                Fondo.setAlpha(0.8f);
+                Fondo.draw(batch);
+                CorralVacasS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 150 / Pixels, 50 / Pixels);
+                CorralVacasR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 150 / Pixels, 50 / Pixels);
+                CorralVacasS.setAlpha(alphacorralVacas);
+                CorralVacasS.draw(batch);
+
+                Fondo.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (60 / Pixels), 110 / Pixels, 40 / Pixels);
+                Fondo.setAlpha(0.8f);
+                Fondo.draw(batch);
+                CorralGallinasS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (60 / Pixels), 110 / Pixels, 50 / Pixels);
+                CorralGallinasR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (60 / Pixels), 110 / Pixels, 50 / Pixels);
+                CorralGallinasS.setAlpha(alphacorralGallinas);
+                CorralGallinasS.draw(batch);
+                if(CorralVacasR.overlaps(puntero))
+                {
+                    MenuBuild.isCorralVacasBuild = true;
+                }
+
+            }
+            MenuBuild.timeFlecha += 1 * Gdx.graphics.getDeltaTime();
+            Gdx.app.log("time",""+timeFlecha);            batch.draw(Flecha,AddResources.cam.position.x - 3.8f+ (160/ Pixels), AddResources.cam.position.y - 2 + (60/ Pixels), 20 / Pixels, 20 / Pixels);
+            FlechaR.set(AddResources.cam.position.x - 3.8f+ (160/ Pixels), AddResources.cam.position.y - 2 + (60/ Pixels), 20 / Pixels, 20 / Pixels);
+            if(FlechaR.overlaps(puntero)&& MenuBuild.timeFlecha > 1) {
+                if (isSelectMenu3) {
+                    isSelectMenu3 = false;
+                    MenuBuild.timeFlecha = 0;
+                } else {
+                    isSelectMenu3 = true;
+                    MenuBuild.timeFlecha= 0;
+                }
+            }
 
         }
         /***************************************************************************/
@@ -1155,7 +1215,9 @@ public class MenuBuild extends Actor implements Disposable
         Maceta2.dispose();
         Arbusto1.dispose();
         Arbusto2.dispose();
-
+        CorralVacas.dispose();
+        CorralGallinas.dispose();
+        Flecha.dispose();
         negro.dispose();
     }
 }

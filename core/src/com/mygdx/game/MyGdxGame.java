@@ -147,6 +147,12 @@ public class MyGdxGame extends Game{
 	public static Preferences Arbusto2_1;
 	public static Preferences Arbusto2_2;
 	public static Preferences Arbusto2_3;
+
+	/**CorralVaca**/
+	public static Preferences CorralVacaColocadas;
+	public static Preferences CorralVacas1;
+	public static Preferences CorralVacas2;
+
 	@Override
 	public void create() {
 		Cinematica = Gdx.app.getPreferences("Cinematica");
@@ -331,6 +337,14 @@ public class MyGdxGame extends Game{
 		Arbusto2_2 = Gdx.app.getPreferences("Y24");
 		Arbusto2_3 = Gdx.app.getPreferences("X25");
 		Arbusto2_3 = Gdx.app.getPreferences("Y25");
+		/**Corral Vacas**/
+		CorralVacaColocadas = Gdx.app.getPreferences("Posiciones9");
+		CorralVacas1 = Gdx.app.getPreferences("X26");
+		CorralVacas1 = Gdx.app.getPreferences("Y26");
+		CorralVacas2 = Gdx.app.getPreferences("X27");
+		CorralVacas2 = Gdx.app.getPreferences("Y27");
+
+
 
 
 		if(Cinematica.getInteger("Cinematica")==0)
@@ -498,6 +512,13 @@ public class MyGdxGame extends Game{
 			Arbusto2_3.putFloat("X25",2400);
 			Arbusto2_3.putFloat("Y25",2400);
 			Arbusto2_3.flush();
+
+			CorralVacas1.putFloat("X26",2500);
+			CorralVacas1.putFloat("Y26",2500);
+			CorralVacas1.flush();
+			CorralVacas2.putFloat("X27",2600);
+			CorralVacas2.putFloat("Y27",2600);
+			CorralVacas2.flush();
 		}
 
 
@@ -572,6 +593,7 @@ Gdx.app.getGraphics().getFramesPerSecond();
 		manager.load("HojaRosaCartel.png", Texture.class);
 		manager.load("HojaAzulCartel.png", Texture.class);
 		manager.load("EspadazoEffect.png",Texture.class);
+		manager.load("EspadazoEffectIzq.png",Texture.class);
 		manager.finishLoading();
 
 		this.setScreen(new Intro(this));

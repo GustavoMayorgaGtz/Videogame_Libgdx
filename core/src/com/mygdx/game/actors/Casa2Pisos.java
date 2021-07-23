@@ -53,8 +53,8 @@ public class Casa2Pisos extends Actor implements Disposable {
         /**Bloque Aldeana**/
         random = new Random();
         Aldeana1R = new Rectangle();
-        AldeanaRight = new Texture("Aldeano1WalkRight.png");
-        AldeanaLeft = new Texture("Aldeano1WalkLeft.png");
+        AldeanaRight = new Texture("Aldeana2WalkRight.png");
+        AldeanaLeft = new Texture("Aldeana2WalkLeft.png");
         TextureRegion[][] FramesRight = TextureRegion.split(AldeanaRight,AldeanaRight.getWidth()/c1,AldeanaRight.getHeight()/r1);
         TextureRegion[] TmpRight = new TextureRegion[c1 * r1];
         int index0 = 0;

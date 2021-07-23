@@ -15,6 +15,8 @@ import com.mygdx.game.actors.Casa1;
 import com.mygdx.game.actors.Casa2;
 import com.mygdx.game.actors.Casa2Pisos;
 import com.mygdx.game.actors.Casa2Pisos2;
+import com.mygdx.game.actors.CorralVaca;
+import com.mygdx.game.actors.CorralVaca2;
 import com.mygdx.game.actors.Maceta1_1;
 import com.mygdx.game.actors.Maceta1_2;
 import com.mygdx.game.actors.Maceta1_3;
@@ -62,6 +64,9 @@ public class addActors2 {
     Arbusto2_2 arbusto2_2 = new Arbusto2_2();
     Arbusto2_3 arbusto2_3 = new Arbusto2_3();
 
+    CorralVaca cv = new CorralVaca();
+    CorralVaca2 cv2 = new CorralVaca2();
+
     MenuBuild menuBuild;
     public addActors2(Stage stage)
     {
@@ -79,6 +84,9 @@ public class addActors2 {
         stage.addActor(casa2Pisos2);
         stage.addActor(casa1);
         stage.addActor(casa2);
+
+        stage.addActor(cv);
+        stage.addActor(cv2);
 
         tierra1 = new Tierra1();
         tierra2 = new Tierra2();
