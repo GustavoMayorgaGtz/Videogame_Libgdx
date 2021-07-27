@@ -21,7 +21,7 @@ import static com.mygdx.game.actors.Tierra1.Build;
 import static com.mygdx.game.actors.Tierra1.noBuild;
 
 public class Agua1 extends Actor implements Disposable {
-
+    public static boolean var1= true;
     Rectangle Cuerpo;
     Texture agua;
     Animation<TextureRegion> AguaAnimation;
@@ -85,13 +85,30 @@ public class Agua1 extends Actor implements Disposable {
             if (no.overlaps(Jugador.jugador)) {
                 noToca = false;
             }
+            if(no.overlaps(Cuerpo2))
+            {
+                var1 = false;
+            }
         }
         for(Rectangle yes: Build) {
             if (yes.overlaps(Jugador.jugador)) {
                 noToca = true;
             }
+            if(yes.overlaps(Cuerpo2))
+            {
+                var1 = true;
+            }
         }
 
+
+        for(Rectangle no: noBuild) {
+            for(Rectangle yes: Build) {
+                if(no.overlaps(Cuerpo2)&& yes.overlaps(Cuerpo2))
+                {
+                    var1 = false;
+                }
+            }
+        }
 
     }
 

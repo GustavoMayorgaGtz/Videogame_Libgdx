@@ -9,13 +9,14 @@ import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.tiled.AddResources;
 
-import static com.mygdx.game.MyGdxGame.CorralVacas2;
+import static com.mygdx.game.MyGdxGame.CorralGallinas1;
+
 import static com.mygdx.game.MyGdxGame.Pixels;
 import static com.mygdx.game.actors.Tierra1.Build;
 import static com.mygdx.game.actors.Tierra1.noBuild;
 
-public class CorralVaca2 extends Actor implements Disposable {
-    public static boolean var18= true;
+public class CorralGallinas extends Actor implements Disposable {
+    public static boolean var15= true;
     public static Texture logo;
     public static Rectangle Cuerpo,Cuerpo2;
     public static float x,y;
@@ -23,9 +24,9 @@ public class CorralVaca2 extends Actor implements Disposable {
     boolean cambiarPosicion = false;
 float timeDurationTouch;
 
-    public CorralVaca2()
+    public CorralGallinas()
     {
-        logo = new Texture("CorralVacas.png");
+        logo = new Texture("CorralGallinas.png");
         Cuerpo = new Rectangle();
         Cuerpo2 = new Rectangle();
     }
@@ -33,15 +34,16 @@ float timeDurationTouch;
     @Override
     public void draw(Batch batch, float parentAlpha) {
 
-        batch.draw(logo,x,y,128/Pixels,32/Pixels);
+        batch.draw(logo,x,y,100/Pixels,32/Pixels);
         for(Rectangle no: noBuild) {
             if (no.overlaps(Jugador.jugador)) {
                 noToca = false;
             }
             if(no.overlaps(Cuerpo2))
             {
-                var18 = false;
+                var15 = false;
             }
+
         }
         for(Rectangle yes: Build) {
             if (yes.overlaps(Jugador.jugador)) {
@@ -49,15 +51,14 @@ float timeDurationTouch;
             }
             if(yes.overlaps(Cuerpo2))
             {
-                var18 = true;
+                var15 = true;
             }
         }
-
         for(Rectangle no: noBuild) {
             for(Rectangle yes: Build) {
                 if(no.overlaps(Cuerpo2)&& yes.overlaps(Cuerpo2))
                 {
-                    var18 = false;
+                    var15 = false;
                 }
             }
         }
@@ -66,20 +67,20 @@ float timeDurationTouch;
     @Override
     public void act(float delta) {
         colisiones();
-        if (MyGdxGame.CorralVacaColocadas.getInteger("Posiciones9") == 1 && MenuBuild.isCorralVacasBuild) {
+        if (MyGdxGame.CorralGallinasColocadas.getInteger("Posiciones10") == 0 && MenuBuild.isCorralGallinasBuild) {
             for (Rectangle e : Tierra1.rects) {
                 if (Jugador.jugador.overlaps(e)) {
                     if (noToca) {
-                        MyGdxGame.CorralVacaColocadas.putInteger("Posiciones9", 2);
-                        CorralVacas2.putFloat("X27", Jugador.body.getPosition().x);
+                        MyGdxGame.CorralGallinasColocadas.putInteger("Posiciones10", 1);
+                        CorralGallinas1.putFloat("X28", Jugador.body.getPosition().x);
                         if (AddResources.TouchConfirm) {
-                            CorralVacas2.flush();
+                            CorralGallinas1.flush();
                         }
-                        CorralVacas2.putFloat("Y27", (e.y + (2 / Pixels)));
+                        CorralGallinas1.putFloat("Y28", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
-                            CorralVacas2.flush();
-                            MyGdxGame.CorralVacaColocadas.flush();
-                            MenuBuild.isCorralVacasBuild = false;
+                            CorralGallinas1.flush();
+                            MyGdxGame.CorralGallinasColocadas.flush();
+                            MenuBuild.isCorralGallinasBuild = false;
                             AddResources.TouchConfirm = false;
                             AddResources.TouchCancel = false;
                         }
@@ -88,25 +89,25 @@ float timeDurationTouch;
             }
         }
 
-        if (MyGdxGame.CorralVacaColocadas.getInteger("Posiciones9") == 1 && MenuBuild.isCorralVacasBuild) {
+        if (MyGdxGame.CorralGallinasColocadas.getInteger("Posiciones10") == 0 && MenuBuild.isCorralGallinasBuild) {
             for (Rectangle e : Tierra1.rects) {
 
                 if (Jugador.jugador.overlaps(e)) {
                     y = (e.y + (2 / Pixels));
                     x = Jugador.body.getPosition().x;
-                    Cuerpo2.set(x, y, 128/Pixels,32/Pixels);
+                    Cuerpo2.set(x, y, 100/Pixels,32/Pixels);
 
                 }
             }
         } else {
             if (!cambiarPosicion) {
-                x = CorralVacas2.getFloat("X27");
-                y = CorralVacas2.getFloat("Y27");
-                Cuerpo2.set(x, y, 128/Pixels,32/Pixels);
+                x = CorralGallinas1.getFloat("X28");
+                y = CorralGallinas1.getFloat("Y28");
+                Cuerpo2.set(x, y, 100/Pixels,32/Pixels);
             }
-            if (!MenuBuild.isCorralVacasBuild) {
+            if (!MenuBuild.isCorralGallinasBuild) {
 
-                Cuerpo.set(x, y, 128/Pixels,32/Pixels);
+                Cuerpo.set(x, y, 100/Pixels,32/Pixels);
             } else {
                 Cuerpo.set(0, 0, 0, 0);
             }
@@ -131,15 +132,15 @@ float timeDurationTouch;
                     if (Jugador.jugador.overlaps(e)) {
                         y = (e.y + (2 / Pixels));
                         x = Jugador.body.getPosition().x;
-                        Cuerpo2.set(x, y, 128/Pixels,32/Pixels);
+                        Cuerpo2.set(x, y, 100/Pixels,32/Pixels);
 
-                        CorralVacas2.putFloat("X27", Jugador.body.getPosition().x);
+                        CorralGallinas1.putFloat("X28", Jugador.body.getPosition().x);
                         if (AddResources.TouchConfirm) {
-                            CorralVacas2.flush();
+                            CorralGallinas1.flush();
                         }
-                        CorralVacas2.putFloat("Y27", (e.y + (2 / Pixels)));
+                        CorralGallinas1.putFloat("Y28", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
-                            CorralVacas2.flush();
+                            CorralGallinas1.flush();
                             MenuBuild.BuildMover = false;
                             MenuBuild.isMenu = false;
                             cambiarPosicion = false;
@@ -158,12 +159,12 @@ float timeDurationTouch;
                 ||Cuerpo2.overlaps(Maceta2_1.Cuerpo2)||Cuerpo2.overlaps(Maceta2_2.Cuerpo2)||Cuerpo2.overlaps(Maceta2_3.Cuerpo2)
                 ||Cuerpo2.overlaps(Arbusto1_1.Cuerpo2)||Cuerpo2.overlaps(Arbusto1_2.Cuerpo2)||Cuerpo2.overlaps(Arbusto1_3.Cuerpo2)
                 ||Cuerpo2.overlaps(Arbusto2_1.Cuerpo2)||Cuerpo2.overlaps(Arbusto2_2.Cuerpo2)||Cuerpo2.overlaps(Arbusto2_3.Cuerpo2)
-                ||Cuerpo2.overlaps(CorralVaca.Cuerpo2)||Cuerpo2.overlaps(CorralGallinas.Cuerpo2)||Cuerpo2.overlaps(CorralGallinas2.Cuerpo2))
+                ||Cuerpo2.overlaps(CorralVaca.Cuerpo2)||Cuerpo2.overlaps(CorralVaca2.Cuerpo2)||Cuerpo2.overlaps(CorralGallinas2.Cuerpo2))
         {
-            AddResources.freeCorral2 = false;
+            AddResources.freeCorral3 = false;
         }else
         {
-            AddResources.freeCorral2 = true;
+            AddResources.freeCorral3 = true;
         }
     }
 

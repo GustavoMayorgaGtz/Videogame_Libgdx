@@ -16,8 +16,12 @@ import java.util.Random;
 import static com.mygdx.game.MyGdxGame.Casa1;
 import static com.mygdx.game.MyGdxGame.Casa2;
 import static com.mygdx.game.MyGdxGame.Pixels;
+import static com.mygdx.game.actors.Tierra1.Build;
+import static com.mygdx.game.actors.Tierra1.noBuild;
 
 public class Casa2 extends Actor implements Disposable {
+    public static boolean var12= true;
+    boolean quitar = true;
     public static Texture logo;
     public static Rectangle Cuerpo,Cuerpo2;
     public static float x,y;
@@ -80,14 +84,38 @@ float timeDurationTouch;
     public void draw(Batch batch, float parentAlpha) {
 
         batch.draw(logo,x,y,110/Pixels,110/Pixels);
-        for(Rectangle no: Tierra1.noBuild) {
+
+        for(Rectangle no: noBuild) {
             if (no.overlaps(Jugador.jugador)) {
                 noToca = false;
             }
+            if(quitar) {
+                if (no.overlaps(Cuerpo2)) {
+                    var12 = false;
+                }
+            }
         }
-        for(Rectangle yes: Tierra1.Build) {
+        for(Rectangle yes: Build) {
             if (yes.overlaps(Jugador.jugador)) {
                 noToca = true;
+            }
+            if(quitar) {
+                if (yes.overlaps(Cuerpo2)) {
+                    var12 = true;
+                }
+            }
+        }
+        for(Rectangle no: noBuild) {
+            for(Rectangle yes: Build) {
+                if(no.overlaps(Cuerpo2)&& yes.overlaps(Cuerpo2))
+                {
+                    quitar = false;
+                    var12 = false;
+                }
+                else if(!no.overlaps(Cuerpo2)&& yes.overlaps(Cuerpo2))
+                {
+                    quitar = true;
+                }
             }
         }
 
@@ -200,7 +228,7 @@ float timeDurationTouch;
                 if (Jugador.jugador.overlaps(e)) {
                     y = (e.y + (2 / Pixels)) ;
                     x = Jugador.body.getPosition().x;
-                    Cuerpo2.set(x, y, 110 / Pixels, 170 / Pixels);
+                    Cuerpo2.set(x, y, 110/Pixels,110/Pixels);
 
                 }
             }
@@ -208,11 +236,11 @@ float timeDurationTouch;
             if (!cambiarPosicion) {
                 x = Casa2.getFloat("X13");
                 y = Casa2.getFloat("Y13");
-                Cuerpo2.set(x, y, 110 / Pixels, 170 / Pixels);
+                Cuerpo2.set(x, y, 110/Pixels,110/Pixels);
             }
             if (!MenuBuild.CasasBuild) {
 
-                Cuerpo.set(x, y, 110 / Pixels, 170 / Pixels);
+                Cuerpo.set(x, y, 110/Pixels,110/Pixels);
             } else {
                 Cuerpo.set(0, 0, 0, 0);
             }
@@ -237,7 +265,7 @@ float timeDurationTouch;
                     if (Jugador.jugador.overlaps(e)) {
                         y = (e.y + (2 / Pixels)) ;
                         x = Jugador.body.getPosition().x;
-                        Cuerpo2.set(x, y, 110 / Pixels, 170 / Pixels);
+                        Cuerpo2.set(x, y, 110/Pixels,110/Pixels);
 
                         Casa2.putFloat("X13", Jugador.body.getPosition().x);
                         if (AddResources.TouchConfirm) {
@@ -259,7 +287,11 @@ float timeDurationTouch;
     }
     public void colisiones()
     {
-        if(Cuerpo2.overlaps(Casa2Pisos.Cuerpo2)||Cuerpo2.overlaps(Casa2Pisos2.Cuerpo2)||Cuerpo2.overlaps(com.mygdx.game.actors.Casa1.Cuerpo2))
+        if(Cuerpo2.overlaps(Casa2Pisos.Cuerpo2)||Cuerpo2.overlaps(Casa2Pisos2.Cuerpo2)||Cuerpo2.overlaps(com.mygdx.game.actors.Casa1.Cuerpo2)||Cuerpo2.overlaps(Maceta1_1.Cuerpo2)||Cuerpo2.overlaps(Maceta1_2.Cuerpo2)||Cuerpo2.overlaps(Maceta1_3.Cuerpo2)
+                ||Cuerpo2.overlaps(Maceta2_1.Cuerpo2)||Cuerpo2.overlaps(Maceta2_2.Cuerpo2)||Cuerpo2.overlaps(Maceta2_3.Cuerpo2)
+                ||Cuerpo2.overlaps(Arbusto1_1.Cuerpo2)||Cuerpo2.overlaps(Arbusto1_2.Cuerpo2)||Cuerpo2.overlaps(Arbusto1_3.Cuerpo2)
+                ||Cuerpo2.overlaps(Arbusto2_1.Cuerpo2)||Cuerpo2.overlaps(Arbusto2_2.Cuerpo2)||Cuerpo2.overlaps(Arbusto2_3.Cuerpo2)
+                ||Cuerpo2.overlaps(CorralVaca.Cuerpo2)||Cuerpo2.overlaps(CorralVaca2.Cuerpo2)||Cuerpo2.overlaps(CorralGallinas.Cuerpo2)||Cuerpo2.overlaps(CorralGallinas2.Cuerpo2))
         {
             AddResources.isFreeSpaceTop4 = false;
         }else

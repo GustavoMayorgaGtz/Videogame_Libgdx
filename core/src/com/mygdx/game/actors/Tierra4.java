@@ -13,9 +13,11 @@ import com.mygdx.game.tiled.AddResources;
 import static com.mygdx.game.MyGdxGame.Pixels;
 import static com.mygdx.game.MyGdxGame.tierra2;
 import static com.mygdx.game.MyGdxGame.tierra4;
+import static com.mygdx.game.actors.Tierra1.Build;
+import static com.mygdx.game.actors.Tierra1.noBuild;
 
 public class Tierra4 extends Actor implements Disposable {
-
+    public static boolean var28= true;
     public static Rectangle Cuerpo;
     public static Rectangle Cuerpo2;
     Texture tierra,tierra2;
@@ -272,14 +274,31 @@ public class Tierra4 extends Actor implements Disposable {
             MyGdxGame.tierra4Enable.flush();
         }
 
-      for(Rectangle no: Tierra1.noBuild) {
-          if (no.overlaps(Jugador.jugador)) {
-              noToca = false;
-          }
-      }
-        for(Rectangle yes:  Tierra1.Build) {
+        for(Rectangle no: noBuild) {
+            if (no.overlaps(Jugador.jugador)) {
+                noToca = false;
+            }
+            if(no.overlaps(Cuerpo2))
+            {
+                var28 = false;
+            }
+        }
+        for(Rectangle yes: Build) {
             if (yes.overlaps(Jugador.jugador)) {
                 noToca = true;
+            }
+            if(yes.overlaps(Cuerpo2))
+            {
+                var28 = true;
+            }
+        }
+
+        for(Rectangle no: noBuild) {
+            for(Rectangle yes: Build) {
+                if(no.overlaps(Cuerpo2)&& yes.overlaps(Cuerpo2))
+                {
+                    var28 = false;
+                }
             }
         }
 

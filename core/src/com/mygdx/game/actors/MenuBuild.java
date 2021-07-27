@@ -203,7 +203,7 @@ public class MenuBuild extends Actor implements Disposable
         Casa = new Texture("Casa.png");
         Casa2PisosS = new Sprite(Casa2Pisos);
         CasaS = new Sprite(Casa);
-        Arbusto1 = new Texture("Arbusto1.png");
+        Arbusto1 = new Texture("BoteAguaS.png");
         Arbusto1S = new Sprite(Arbusto1);
         Arbusto2 = new Texture("Arbusto2.png");
         Arbusto2S = new Sprite(Arbusto2);
@@ -1003,6 +1003,10 @@ public class MenuBuild extends Actor implements Disposable
                 if(CorralVacasR.overlaps(puntero))
                 {
                     MenuBuild.isCorralVacasBuild = true;
+                }
+                if(CorralGallinasR.overlaps(puntero))
+                {
+                    MenuBuild.isCorralGallinasBuild  = true;
                 }
 
             }

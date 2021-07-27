@@ -25,7 +25,27 @@ import com.mygdx.game.actors.Agua1;
 import com.mygdx.game.actors.Agua2;
 import com.mygdx.game.actors.Agua3;
 import com.mygdx.game.actors.Agua4;
+import com.mygdx.game.actors.Arbusto1_1;
+import com.mygdx.game.actors.Arbusto1_2;
+import com.mygdx.game.actors.Arbusto1_3;
+import com.mygdx.game.actors.Arbusto2_1;
+import com.mygdx.game.actors.Arbusto2_2;
+import com.mygdx.game.actors.Arbusto2_3;
+import com.mygdx.game.actors.Casa1;
+import com.mygdx.game.actors.Casa2;
+import com.mygdx.game.actors.Casa2Pisos;
+import com.mygdx.game.actors.Casa2Pisos2;
+import com.mygdx.game.actors.CorralGallinas;
+import com.mygdx.game.actors.CorralGallinas2;
+import com.mygdx.game.actors.CorralVaca;
+import com.mygdx.game.actors.CorralVaca2;
 import com.mygdx.game.actors.Jugador;
+import com.mygdx.game.actors.Maceta1_1;
+import com.mygdx.game.actors.Maceta1_2;
+import com.mygdx.game.actors.Maceta1_3;
+import com.mygdx.game.actors.Maceta2_1;
+import com.mygdx.game.actors.Maceta2_2;
+import com.mygdx.game.actors.Maceta2_3;
 import com.mygdx.game.actors.MenuBuild;
 import com.mygdx.game.actors.Tierra1;
 import com.mygdx.game.actors.Tierra2;
@@ -45,9 +65,12 @@ import java.util.Random;
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
 
+import static com.mygdx.game.MyGdxGame.Arbusto1_1;
+import static com.mygdx.game.MyGdxGame.Maceta1_2;
 import static com.mygdx.game.MyGdxGame.Pixels;
 
 public class AddResources {
+    boolean confirmbool;
     public static boolean CamaraY = false;
     public static SpriteBatch batch;
     public static OrthographicCamera cam;
@@ -86,6 +109,9 @@ public class AddResources {
     public static boolean isFreeSpaceTop1,isFreeSpaceTop2,isFreeSpaceTop3,isFreeSpaceTop4,isFreeSpaceTop5,isFreeSpaceTop6,isFreeSpaceTop7;
     public static boolean isFreeSpaceTop8,isFreeSpaceTop9,isFreeSpaceTop10;
     public static boolean free1,free2,free3,free4,free5,free6;
+    public static boolean freeCorral1,freeCorral2,freeCorral3,freeCorral4 = true;
+
+
     /*****Controles*****/
     public static Rectangle puntero, puntero2;
     public static Texture punterot;
@@ -1723,23 +1749,56 @@ freeSpace();
         if(Gdx.input.isTouched(1))
         {
             Gdx.app.log("-----","-------");
-            Gdx.app.log("val:",""+isFreeSpace1);
-            Gdx.app.log("val:",""+isFreeSpace2);
-            Gdx.app.log("val:",""+isFreeSpace3);
-            Gdx.app.log("val:",""+isFreeSpace4);
-            Gdx.app.log("val:",""+isFreeSpace5);
-            Gdx.app.log("val:",""+isFreeSpace6);
-            Gdx.app.log("val:",""+isFreeSpace7);
-            Gdx.app.log("val:",""+isFreeSpace8);
-            Gdx.app.log("val:",""+isFreeSpace9);
+            Gdx.app.log("val1:",""+isFreeSpace1);
+            Gdx.app.log("val2:",""+isFreeSpace2);
+            Gdx.app.log("val3:",""+isFreeSpace3);
+            Gdx.app.log("val4:",""+isFreeSpace4);
+            Gdx.app.log("val5:",""+isFreeSpace5);
+            Gdx.app.log("val6:",""+isFreeSpace6);
+            Gdx.app.log("val7:",""+isFreeSpace7);
+            Gdx.app.log("val8:",""+isFreeSpace8);
+            Gdx.app.log("val9:",""+isFreeSpace9);
+            Gdx.app.log("val10:",""+isFreeSpaceTop1);
+            Gdx.app.log("val11:",""+isFreeSpaceTop2);
+            Gdx.app.log("val12:",""+isFreeSpaceTop3);
+            Gdx.app.log("val13:",""+isFreeSpaceTop4);
+            Gdx.app.log("val14:",""+isFreeSpaceTop5);
+            Gdx.app.log("val15:",""+isFreeSpaceTop6);
+            Gdx.app.log("val16:",""+isFreeSpaceTop7);
+            Gdx.app.log("val17:",""+free1);
+            Gdx.app.log("val18:",""+free2);
+            Gdx.app.log("val19:",""+free3);
+            Gdx.app.log("val20:",""+free4);
+            Gdx.app.log("val:21",""+free5);
+            Gdx.app.log("val:22",""+free6);
+            Gdx.app.log("val:23",""+freeCorral1);
+            Gdx.app.log("val:24",""+freeCorral2);
+            Gdx.app.log("val:25",""+freeCorral3);
+            Gdx.app.log("val:26",""+freeCorral4);
             Gdx.app.log("-----","-------");
         }
+     /*/   if(Agua1.var1&&Agua2.var2&&Agua3.var3&&Agua4.var4&& com.mygdx.game.actors.Arbusto1_1.var5&& Arbusto1_2.var6&& Arbusto1_3.var7
+        && Arbusto2_1.var8&& Arbusto2_2.var9&& Arbusto2_3.var10
+        && Casa1.var11&& Casa2.var12&& Casa2Pisos.var13&& Casa2Pisos2.var14
+        && CorralGallinas.var15&& CorralGallinas2.var16
+        && CorralVaca.var17&& CorralVaca2.var18
+        && Maceta1_1.var19&& com.mygdx.game.actors.Maceta1_2.var20&& Maceta1_3.var21
+        && Maceta2_1.var22&& Maceta2_2.var23&& Maceta2_3.var24
+        &&Tierra1.var25&&Tierra2.var26&&Tierra3.var27&&Tierra4.var28&&Tierra5.var29)*/
 
         if(!isFreeSpace1||!isFreeSpace2||!isFreeSpace3||!isFreeSpace4||!isFreeSpace5||!isFreeSpace6||!isFreeSpace7||!isFreeSpace8||!isFreeSpace9
                 ||!isFreeSpaceTop1||!isFreeSpaceTop2||!isFreeSpaceTop3||!isFreeSpaceTop4
                 ||!isFreeSpaceTop5||!isFreeSpaceTop6||!isFreeSpaceTop7
                 ||!isFreeSpaceTop8||!isFreeSpaceTop9||!isFreeSpaceTop10
-        ||!free1||!free2||!free3||!free4||!free5||!free6){
+                ||!free1||!free2||!free3||!free4||!free5||!free6
+                ||!freeCorral1||!freeCorral2||!freeCorral3||!freeCorral4||!Agua1.var1||!Agua2.var2||!Agua3.var3||!Agua4.var4||! com.mygdx.game.actors.Arbusto1_1.var5||!Arbusto1_2.var6||!Arbusto1_3.var7
+                ||! Arbusto2_1.var8||!Arbusto2_2.var9||! Arbusto2_3.var10
+                ||! Casa1.var11||! Casa2.var12||! Casa2Pisos.var13||! Casa2Pisos2.var14
+                ||! CorralGallinas.var15||! CorralGallinas2.var16
+                ||! CorralVaca.var17||!CorralVaca2.var18
+                ||! Maceta1_1.var19||! com.mygdx.game.actors.Maceta1_2.var20||!Maceta1_3.var21
+                ||! Maceta2_1.var22||!Maceta2_2.var23||! Maceta2_3.var24
+                ||!Tierra1.var25||!Tierra2.var26||!Tierra3.var27||!Tierra4.var28||!Tierra5.var29){
 
             confirm.set(0,0,0,0);
             ConfirmarS.setBounds(0,0,0,0);

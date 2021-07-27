@@ -10,8 +10,11 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.tiled.AddResources;
 
 import static com.mygdx.game.MyGdxGame.Pixels;
+import static com.mygdx.game.actors.Tierra1.Build;
+import static com.mygdx.game.actors.Tierra1.noBuild;
 
 public class Maceta2_3 extends Actor implements Disposable {
+    public static boolean var24= true;
     public static Texture logo;
     public static Rectangle Cuerpo,Cuerpo2;
     public static float x,y;
@@ -30,14 +33,31 @@ float timeDurationTouch;
     public void draw(Batch batch, float parentAlpha) {
 
         batch.draw(logo,x,y,32/Pixels,32/Pixels);
-        for(Rectangle no: Tierra1.noBuild) {
+        for(Rectangle no: noBuild) {
             if (no.overlaps(Jugador.jugador)) {
                 noToca = false;
             }
+            if(no.overlaps(Cuerpo2))
+            {
+                var24 = false;
+            }
         }
-        for(Rectangle yes: Tierra1.Build) {
+        for(Rectangle yes: Build) {
             if (yes.overlaps(Jugador.jugador)) {
                 noToca = true;
+            }
+            if(yes.overlaps(Cuerpo2))
+            {
+                var24 = true;
+            }
+        }
+
+        for(Rectangle no: noBuild) {
+            for(Rectangle yes: Build) {
+                if(no.overlaps(Cuerpo2)&& yes.overlaps(Cuerpo2))
+                {
+                    var24 = false;
+                }
             }
         }
     }
@@ -134,7 +154,11 @@ float timeDurationTouch;
 
     public void colisiones()
     {
-        if(Cuerpo2.overlaps(Casa2Pisos.Cuerpo2)||Cuerpo2.overlaps(Casa2Pisos2.Cuerpo2)||Cuerpo2.overlaps(com.mygdx.game.actors.Casa1.Cuerpo2)||Cuerpo2.overlaps(Casa2.Cuerpo2)||Cuerpo2.overlaps(Maceta1_2.Cuerpo2)||Cuerpo2.overlaps(Maceta1_3.Cuerpo2)||Cuerpo2.overlaps(Maceta1_1.Cuerpo2)||Cuerpo2.overlaps(Maceta2_1.Cuerpo2)||Cuerpo2.overlaps(Maceta2_2.Cuerpo2))
+        if(Cuerpo2.overlaps(Casa2Pisos.Cuerpo2)||Cuerpo2.overlaps(Casa2Pisos2.Cuerpo2)||Cuerpo2.overlaps(Casa1.Cuerpo2)||Cuerpo2.overlaps(Casa2.Cuerpo2)||Cuerpo2.overlaps(Maceta1_1.Cuerpo2)||Cuerpo2.overlaps(Maceta1_2.Cuerpo2) ||Cuerpo2.overlaps(Maceta1_3.Cuerpo2)
+                ||Cuerpo2.overlaps(Maceta2_2.Cuerpo2)||Cuerpo2.overlaps(Maceta2_1.Cuerpo2)
+                ||Cuerpo2.overlaps(Arbusto1_1.Cuerpo2)||Cuerpo2.overlaps(Arbusto1_2.Cuerpo2)||Cuerpo2.overlaps(Arbusto1_3.Cuerpo2)
+                ||Cuerpo2.overlaps(Arbusto2_1.Cuerpo2)||Cuerpo2.overlaps(Arbusto2_2.Cuerpo2)||Cuerpo2.overlaps(Arbusto2_3.Cuerpo2)
+                ||Cuerpo2.overlaps(CorralVaca.Cuerpo2)||Cuerpo2.overlaps(CorralVaca2.Cuerpo2)||Cuerpo2.overlaps(CorralGallinas2.Cuerpo2)||Cuerpo2.overlaps(CorralGallinas.Cuerpo2))
         {
             AddResources.isFreeSpaceTop10 = false;
         }else
