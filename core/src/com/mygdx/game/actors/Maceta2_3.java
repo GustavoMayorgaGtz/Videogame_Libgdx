@@ -75,7 +75,7 @@ float timeDurationTouch;
                         if (AddResources.TouchConfirm) {
                             MyGdxGame.Maceta2_3.flush();
                         }
-                        MyGdxGame.Maceta2_3.putFloat("Y19", (e.y + (5 / Pixels)) - 5 / Pixels);
+                        MyGdxGame.Maceta2_3.putFloat("Y19", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
                             MyGdxGame.Maceta2_3.flush();
                             MyGdxGame.Maceta2Colocadas.flush();
@@ -92,7 +92,7 @@ float timeDurationTouch;
             for (Rectangle e : Tierra1.rects) {
 
                 if (Jugador.jugador.overlaps(e)) {
-                    y = (e.y + (5 / Pixels)) - 5 / Pixels;
+                    y =(e.y + (2 / Pixels));
                     x = Jugador.body.getPosition().x;
                     Cuerpo2.set(x, y, 32/Pixels,32/Pixels);
 
@@ -129,7 +129,7 @@ float timeDurationTouch;
             for (Rectangle e : Tierra1.rects) {
                 if (noToca) {
                     if (Jugador.jugador.overlaps(e)) {
-                        y = (e.y + (5 / Pixels)) - 3 / Pixels;
+                        y = (e.y + (2 / Pixels));
                         x = Jugador.body.getPosition().x;
                         Cuerpo2.set(x, y, 32/Pixels,32/Pixels);
 
@@ -137,7 +137,7 @@ float timeDurationTouch;
                         if (AddResources.TouchConfirm) {
                             MyGdxGame.Maceta2_3.flush();
                         }
-                        MyGdxGame.Maceta2_3.putFloat("Y19", (e.y + (5 / Pixels)) - 3 / Pixels);
+                        MyGdxGame.Maceta2_3.putFloat("Y19", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
                             MyGdxGame.Maceta2_3.flush();
                             MenuBuild.BuildMover = false;

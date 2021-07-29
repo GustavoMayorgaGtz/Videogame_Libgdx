@@ -149,6 +149,8 @@ public class MyGdxGame extends Game{
 	public static Preferences Arbusto2_3;
 
 	/**CorralVaca**/
+	public static Preferences Vaca1,Vaca2,Vaca3,Vaca4;
+	public static Preferences Corral1Vacas,Corral2Vacas;
 	public static Preferences CorralVacaColocadas;
 	public static Preferences CorralVacas1;
 	public static Preferences CorralVacas2;
@@ -347,6 +349,12 @@ public class MyGdxGame extends Game{
 		CorralVacas1 = Gdx.app.getPreferences("Y26");
 		CorralVacas2 = Gdx.app.getPreferences("X27");
 		CorralVacas2 = Gdx.app.getPreferences("Y27");
+		Vaca1 = Gdx.app.getPreferences("Vaca1");
+		Vaca2 = Gdx.app.getPreferences("Vaca2");
+		Vaca3 = Gdx.app.getPreferences("Vaca3");
+		Vaca4 = Gdx.app.getPreferences("Vaca4");
+		Corral1Vacas = Gdx.app.getPreferences("Corral1Vacas");
+		Corral2Vacas = Gdx.app.getPreferences("Corral2Vacas");
 		/**Corral Gallinas**/
 		CorralGallinasColocadas = Gdx.app.getPreferences("Posiciones10");
 		CorralGallinas1 = Gdx.app.getPreferences("X28");

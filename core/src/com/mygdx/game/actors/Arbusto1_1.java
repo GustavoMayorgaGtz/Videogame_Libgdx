@@ -95,7 +95,7 @@ int c = 1, r = 3;
                         if (AddResources.TouchConfirm) {
                             Arbusto1_1.flush();
                         }
-                        Arbusto1_1.putFloat("Y20", (e.y + (5 / Pixels)) - 5 / Pixels);
+                        Arbusto1_1.putFloat("Y20", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
                             Arbusto1_1.flush();
                             MyGdxGame.Arbusto1Colocadas.flush();
@@ -112,7 +112,7 @@ int c = 1, r = 3;
             for (Rectangle e : Tierra1.rects) {
 
                 if (Jugador.jugador.overlaps(e)) {
-                    y = (e.y + (5 / Pixels)) - 5 / Pixels;
+                    y =(e.y + (2 / Pixels));
                     x = Jugador.body.getPosition().x;
                     Cuerpo2.set(x, y, 32/Pixels,32/Pixels);
 
@@ -149,7 +149,7 @@ int c = 1, r = 3;
             for (Rectangle e : Tierra1.rects) {
                 if (noToca) {
                     if (Jugador.jugador.overlaps(e)) {
-                        y = (e.y + (5 / Pixels)) - 3 / Pixels;
+                        y = (e.y + (2 / Pixels));
                         x = Jugador.body.getPosition().x;
                         Cuerpo2.set(x, y, 32/Pixels,32/Pixels);
 
@@ -157,7 +157,7 @@ int c = 1, r = 3;
                         if (AddResources.TouchConfirm) {
                             Arbusto1_1.flush();
                         }
-                        Arbusto1_1.putFloat("Y20", (e.y + (5 / Pixels)) - 3 / Pixels);
+                        Arbusto1_1.putFloat("Y20", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
                             Arbusto1_1.flush();
                             MenuBuild.BuildMover = false;

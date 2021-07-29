@@ -16,6 +16,8 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.tiled.AddResources;
 
 import static com.mygdx.game.MyGdxGame.CasaDosPisos1;
+import static com.mygdx.game.MyGdxGame.CorralGallinasColocadas;
+import static com.mygdx.game.MyGdxGame.CorralVacaColocadas;
 import static com.mygdx.game.MyGdxGame.Pixels;
 import static com.mygdx.game.MyGdxGame.agua1;
 
@@ -83,6 +85,7 @@ public class MenuBuild extends Actor implements Disposable
     Sprite Casa2PisosS,CasaS;
     Texture negro;
     /******Menu3******/
+    public static float timeMenu3 = 0;
     public static boolean isCorralVacasBuild,isCorralGallinasBuild;
     Texture Flecha;
     Rectangle FlechaR;
@@ -91,12 +94,19 @@ public class MenuBuild extends Actor implements Disposable
     Texture CorralVacas;
     Sprite CorralVacasS;
     Rectangle CorralVacasR;
-    float alphacorralVacas = 1;
-
     Texture CorralGallinas;
     Sprite CorralGallinasS;
     Rectangle CorralGallinasR;
-    float alphacorralGallinas = 1;
+
+    public static boolean vacaBuild = false,gallinaBuild = false;
+
+    Texture GallinitaUWU;
+    Sprite GallinaS;
+    Rectangle GallinaR;
+
+    Texture Vaca;
+    Sprite VacaS;
+    Rectangle VacaR;
 
     public MenuBuild()
     {
@@ -226,12 +236,20 @@ public class MenuBuild extends Actor implements Disposable
 
         Flecha = new Texture("FlechaSiguiente.png");
         FlechaR = new Rectangle();
+        GallinitaUWU = new Texture("Gallina.png");
+        GallinaS = new Sprite(GallinitaUWU);
+        GallinaR = new Rectangle();
+
+        Vaca = new Texture("Vaca.png");
+        VacaR = new Rectangle();
+        VacaS = new Sprite(Vaca);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         time += 1 * Gdx.graphics.getDeltaTime();
         timeMenu2 += 1 * Gdx.graphics.getDeltaTime();
+        timeMenu3 += 1 * Gdx.graphics.getDeltaTime();
         Logo.setBounds(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y , 20 / Pixels, 20 / Pixels);
         Logo.setAlpha(MyGdxGame.alpha);
         Fondo2.setBounds(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
@@ -983,13 +1001,32 @@ public class MenuBuild extends Actor implements Disposable
         if(isMenu2)
         {
             MenuBuild.timeCultivos = 0;
-            if(!MenuBuild.isSelectMenu3) {
 
+            if(!MenuBuild.isSelectMenu3) {
+                float alphacorralVacas;
+                float alphacorralGallinas;
+                if(CorralVacaColocadas.getInteger("Posiciones9") == 2)
+                {
+                    alphacorralVacas = .4f;
+                    CorralVacasR.set(0,0,0,0);
+                }else
+                {
+                    alphacorralVacas = 1f;
+                    CorralVacasR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 150 / Pixels, 50 / Pixels);
+                }
+                if(CorralGallinasColocadas.getInteger("Posiciones10") == 2)
+                {
+                    alphacorralGallinas = 0.4f;
+                    CorralGallinasR.set(0,0,0,0);
+                }else
+                {
+                    alphacorralGallinas = 1f;
+                    CorralGallinasR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (60 / Pixels), 110 / Pixels, 50 / Pixels);
+                }
                 Fondo.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 150 / Pixels, 50 / Pixels);
                 Fondo.setAlpha(0.8f);
                 Fondo.draw(batch);
                 CorralVacasS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 150 / Pixels, 50 / Pixels);
-                CorralVacasR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 150 / Pixels, 50 / Pixels);
                 CorralVacasS.setAlpha(alphacorralVacas);
                 CorralVacasS.draw(batch);
 
@@ -997,21 +1034,38 @@ public class MenuBuild extends Actor implements Disposable
                 Fondo.setAlpha(0.8f);
                 Fondo.draw(batch);
                 CorralGallinasS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (60 / Pixels), 110 / Pixels, 50 / Pixels);
-                CorralGallinasR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (60 / Pixels), 110 / Pixels, 50 / Pixels);
                 CorralGallinasS.setAlpha(alphacorralGallinas);
                 CorralGallinasS.draw(batch);
-                if(CorralVacasR.overlaps(puntero))
+            }else
+            {
+                float alphaGallina = 1;
+                float alphaVaca;
+                if(vacaBuild)
                 {
-                    MenuBuild.isCorralVacasBuild = true;
-                }
-                if(CorralGallinasR.overlaps(puntero))
+                    alphaVaca = 0.4f;
+                }else
                 {
-                    MenuBuild.isCorralGallinasBuild  = true;
+                    alphaVaca = 1;
                 }
+
+                GallinaS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32/ Pixels, 32 / Pixels);
+                GallinaS.setAlpha(alphaGallina);
+                GallinaS.draw(batch);
+
+                VacaS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (50 / Pixels), 50/ Pixels, 35 / Pixels);
+                VacaR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (50 / Pixels), 50/ Pixels, 35 / Pixels);
+                VacaS.setAlpha(alphaVaca);
+                VacaS.draw(batch);
+
+                if(VacaR.overlaps(puntero))
+                {
+                    MenuBuild.vacaBuild = true;
+                }
+
 
             }
             MenuBuild.timeFlecha += 1 * Gdx.graphics.getDeltaTime();
-            Gdx.app.log("time",""+timeFlecha);            batch.draw(Flecha,AddResources.cam.position.x - 3.8f+ (160/ Pixels), AddResources.cam.position.y - 2 + (60/ Pixels), 20 / Pixels, 20 / Pixels);
+            batch.draw(Flecha,AddResources.cam.position.x - 3.8f+ (160/ Pixels), AddResources.cam.position.y - 2 + (60/ Pixels), 20 / Pixels, 20 / Pixels);
             FlechaR.set(AddResources.cam.position.x - 3.8f+ (160/ Pixels), AddResources.cam.position.y - 2 + (60/ Pixels), 20 / Pixels, 20 / Pixels);
             if(FlechaR.overlaps(puntero)&& MenuBuild.timeFlecha > 1) {
                 if (isSelectMenu3) {
@@ -1020,6 +1074,19 @@ public class MenuBuild extends Actor implements Disposable
                 } else {
                     isSelectMenu3 = true;
                     MenuBuild.timeFlecha= 0;
+                }
+            }
+
+
+            if(timeMenu3 >= 1) {
+                if (CorralVacasR.overlaps(puntero)) {
+                    MenuBuild.isCorralVacasBuild = true;
+                    MenuBuild.timeMenu3 = 0;
+
+                }
+                if (CorralGallinasR.overlaps(puntero)) {
+                    MenuBuild.isCorralGallinasBuild = true;
+                    MenuBuild.timeMenu3 = 0;
                 }
             }
 
@@ -1043,6 +1110,36 @@ public class MenuBuild extends Actor implements Disposable
         if(isMenu3)
         {
             MenuBuild.timeCultivos = 0;
+            if (MyGdxGame.CasasDosPisosColocadas.getInteger("Posiciones3") < 2) {
+           } else {
+                alphaCasa2 = 0.4f;
+
+            }
+            if (MyGdxGame.CasasColocadas.getInteger("Posiciones4") < 2) {
+            } else {
+                alphaCasa1 = 0.4f;
+            }
+
+            if (MyGdxGame.Maceta1Colocadas.getInteger("Posiciones5") < 3) {
+            } else {
+                alphaMaceta1 = 0.4f;
+            }
+
+            if (MyGdxGame.Maceta2Colocadas.getInteger("Posiciones6") < 3) {
+            } else {
+                alphaMaceta2 = 0.4f;
+            }
+            if (MyGdxGame.Arbusto1Colocadas.getInteger("Posiciones7") < 3) {
+           } else {
+
+                alphaArbusto1 = 0.4f;
+            }
+            if (MyGdxGame.Arbusto2Colocadas.getInteger("Posiciones8") < 3) {
+
+            } else {
+                alphaArbusto2 = 0.4f;
+            }
+
             if(timeMenu2 > 1f) {
                 if (MyGdxGame.CasasDosPisosColocadas.getInteger("Posiciones3") < 2) {
                     Casa2PisosR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);

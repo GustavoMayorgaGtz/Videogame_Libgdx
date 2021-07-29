@@ -3,12 +3,16 @@ package com.mygdx.game.actors;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.tiled.AddResources;
 
+import static com.mygdx.game.MyGdxGame.Corral1Vacas;
 import static com.mygdx.game.MyGdxGame.CorralVacas1;
 import static com.mygdx.game.MyGdxGame.Pixels;
 import static com.mygdx.game.actors.Tierra1.Build;
@@ -21,19 +25,85 @@ public class CorralVaca extends Actor implements Disposable {
     public static float x,y;
     boolean noToca;
     boolean cambiarPosicion = false;
-float timeDurationTouch;
+    float timeDurationTouch;
+
+    /*vacas*/
+    Rectangle Izq,Dere;
+    Rectangle vaca1,vaca2;
+    float x1,x2;
+    boolean vaca1Izq = true,vaca1Dere = false,vaca2Izq = false,vaca2Dere = true;
+    int iteraror1 = 0, iterator2 = 0;
+    boolean sube = true,baja;
+    float abs;
+    Texture FlechaVerde;
+
+    Texture vacaL,vacaR;
+    Animation<TextureRegion> right,left;
+    int c1 = 1,r1 = 6,c2 = 1,r2 = 6;
+    float timeFree;
 
     public CorralVaca()
     {
         logo = new Texture("CorralVacas.png");
         Cuerpo = new Rectangle();
         Cuerpo2 = new Rectangle();
+        Izq = new Rectangle();
+        Dere = new Rectangle();
+        vaca1 = new Rectangle();
+        vaca2 = new Rectangle();
+        FlechaVerde = new Texture("FlechaVerde.png");
+        vacaR= new Texture("VacaWR.png");
+        vacaL= new Texture("VacaWL.png");
+        TextureRegion[][] FramesR = TextureRegion.split(vacaR,vacaR.getWidth()/c1,vacaR.getHeight()/r1);
+        TextureRegion[] TmpR = new TextureRegion[c1 * r1];
+        int index1 = 0;
+        for(int i= 0; i < r1; i++)
+        {
+            for(int j = 0; j < c1; j++)
+            {
+                TmpR[index1++] = FramesR[i][j] ;
+            }
+        }
+        right = new Animation<TextureRegion>(0.6f,TmpR);
+        /*******************************/
+        TextureRegion[][] FramesL = TextureRegion.split(vacaL,vacaL.getWidth()/c2,vacaL.getHeight()/r2);
+        TextureRegion[] TmpL = new TextureRegion[c2* r2];
+        int index2 = 0;
+        for(int i= 0; i < r2; i++)
+        {
+            for(int j = 0; j < c2; j++)
+            {
+                TmpL[index2++] = FramesL[i][j] ;
+            }
+        }
+        left = new Animation<TextureRegion>(0.6f,TmpL);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        timeFree += Gdx.graphics.getDeltaTime();
 
         batch.draw(logo,x,y,128/Pixels,32/Pixels);
+        /***************/
+        if(sube) {
+            if (abs < 5) {
+                abs += 15 * Gdx.graphics.getDeltaTime();
+            }else {
+                baja = true;
+                sube = false;
+            }
+        }
+        if(baja) {
+            if (abs > 1) {
+                abs -= 15 * Gdx.graphics.getDeltaTime();
+            }else
+            {
+                baja = false;
+                sube = true;
+            }
+        }
+/***************/
+
         for(Rectangle no: noBuild) {
             if (no.overlaps(Jugador.jugador)) {
                 noToca = false;
@@ -60,6 +130,152 @@ float timeDurationTouch;
                     var17 = false;
                 }
             }
+        }
+        /*************/
+        Izq.set(x,y,5/Pixels,32/Pixels);
+        Dere.set(x+(128/Pixels),y,10/Pixels,32/Pixels);
+        if(Jugador.jugador.overlaps(Cuerpo2)&&MenuBuild.vacaBuild&&!MenuBuild.isMenu)
+        {
+            batch.draw(FlechaVerde,x+(60/Pixels),y+(32/Pixels)+(abs/Pixels),32/Pixels,32/Pixels);
+            if(AddResources.puntero.overlaps(Cuerpo2)) {
+                if(MenuBuild.vacaBuild) {
+                    if (Corral1Vacas.getInteger("Corral1Vacas") == 0) {
+                        Corral1Vacas.putInteger("Corral1Vacas", 1);
+                        Corral1Vacas.flush();
+                        MenuBuild.vacaBuild = false;
+                    }
+                }
+                if(MenuBuild.vacaBuild) {
+                    if (Corral1Vacas.getInteger("Corral1Vacas") == 1) {
+                        Corral1Vacas.putInteger("Corral1Vacas", 2);
+                        Corral1Vacas.flush();
+                        MenuBuild.vacaBuild = false;
+                    }
+                }
+            }
+        }
+        if (Corral1Vacas.getInteger("Corral1Vacas") >= 1)
+        {
+             Vaca1(batch);
+        }
+        if (Corral1Vacas.getInteger("Corral1Vacas") >= 2)
+        {
+             Vaca2(batch);
+        }
+        /************/
+    }
+
+    public void Vaca1(Batch batch)
+    {
+        TextureRegion Right = right.getKeyFrame(timeFree,true);
+        TextureRegion Left = left.getKeyFrame(timeFree,true);
+        vaca1.set(x1,y,32/Pixels,32/Pixels);
+        if(vaca1.overlaps(vaca2))
+        {
+            if(vaca2Dere) {
+                vaca2Dere = false;
+                vaca2Izq = true;
+            }else
+            {
+                vaca2Dere = true;
+                vaca2Izq = false;
+            }
+
+
+            if(vaca1Dere) {
+                vaca1Dere = false;
+                vaca1Izq = true;
+            }else
+            {
+                vaca1Dere = true;
+                vaca1Izq = false;
+            }
+        }
+        if(iteraror1 == 0)
+        {
+            x1 = x + (32/Pixels);
+            iteraror1++;
+        }
+        if(vaca1Dere)
+        {
+            x1 += (10 * Gdx.graphics.getDeltaTime())/Pixels;
+            batch.draw(Right,vaca1.x,vaca1.y,vaca1.width,vaca1.height);
+
+            vaca1.setX(x1);
+        }
+        if(vaca1Izq)
+        {
+            x1 -= (10 * Gdx.graphics.getDeltaTime())/Pixels;
+            batch.draw(Left,vaca1.x,vaca1.y,vaca1.width,vaca1.height);
+
+            vaca1.setX(x1);
+        }
+        if(Izq.overlaps(vaca1))
+        {
+            vaca1Dere = true;
+            vaca1Izq = false;
+        }
+        if(Dere.overlaps(vaca1))
+        {
+            vaca1Izq = true;
+            vaca1Dere = false;
+        }
+    }
+
+    public void Vaca2(Batch batch)
+    {
+        TextureRegion Right = right.getKeyFrame(timeFree,true);
+        TextureRegion Left = left.getKeyFrame(timeFree,true);
+        vaca2.set(x2,y,24/Pixels,24/Pixels);
+        if(vaca1.overlaps(vaca2))
+        {
+            if(vaca2Dere) {
+                vaca2Dere = false;
+                vaca2Izq = true;
+            }else
+            {
+                vaca2Dere = true;
+                vaca2Izq = false;
+            }
+
+
+            if(vaca1Dere) {
+                vaca1Dere = false;
+                vaca1Izq = true;
+            }else
+            {
+                vaca1Dere = true;
+                vaca1Izq = false;
+            }
+        }
+        if(iterator2 == 0)
+        {
+            x2 = x + (32/Pixels);
+            iterator2++;
+        }
+        if(vaca2Dere)
+        {
+            x2 += (8 * Gdx.graphics.getDeltaTime())/Pixels;
+            batch.draw(Right,vaca2.x,vaca2.y,vaca2.width,vaca2.height);
+            vaca2.setX(x2);
+
+        }
+        if(vaca2Izq)
+        {
+            x2 -= (8 * Gdx.graphics.getDeltaTime())/Pixels;
+            batch.draw(Left,vaca2.x,vaca2.y,vaca2.width,vaca2.height);
+            vaca2.setX(x2);
+
+        }
+        if(Izq.overlaps(vaca2))
+        {
+            vaca2Dere = true;
+            vaca2Izq = false;
+        }
+        if(Dere.overlaps(vaca2))
+        {
+            vaca2Izq = true;
+            vaca2Dere = false;
         }
     }
 
@@ -170,5 +386,8 @@ float timeDurationTouch;
     @Override
     public void dispose() {
       logo.dispose();
+      FlechaVerde.dispose();
+      vacaL.dispose();
+      vacaR.dispose();
     }
 }

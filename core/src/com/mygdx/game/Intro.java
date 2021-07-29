@@ -54,7 +54,7 @@ public class Intro implements Screen
         MyGdxGame.Cinematica.flush();
         state += Gdx.graphics.getDeltaTime();
         TextureRegion current = Logo.getKeyFrame(state,true);
-        Gdx.gl.glClearColor(0,0,0,0);
+        Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         camera.update();
@@ -67,7 +67,7 @@ public class Intro implements Screen
         if(time >= 5)
         {
             intro.stop();
-            game.setScreen(new Casa(game));
+            game.setScreen(new Menu(game));
         }
     }
 
