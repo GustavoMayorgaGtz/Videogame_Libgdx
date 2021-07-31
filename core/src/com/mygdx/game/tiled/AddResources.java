@@ -703,7 +703,7 @@ batch.begin();
                 /**************************/
                 if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.CasasDosPisosBuild
                         &&!MenuBuild.CasasBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build&&!MenuBuild.Arbusto1Build
-                        &&!MenuBuild.Arbusto2Build&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.isCorralGallinasBuild) {
+                        &&!MenuBuild.Arbusto2Build&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.isCorralGallinasBuild&&!MenuBuild.buildMaquinaComida) {
                     if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection) {
                         if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
                             cancel.set(0,0,0,0);
@@ -1731,6 +1731,7 @@ batch.begin();
             MenuBuild.Arbusto2Build = false;
             MenuBuild.isCorralVacasBuild = false;
             MenuBuild.isCorralGallinasBuild = false;
+            MenuBuild.buildMaquinaComida = false;
         }
 freeSpace();
        ConfirmarS.draw(batch);

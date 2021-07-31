@@ -97,6 +97,13 @@ public class MenuBuild extends Actor implements Disposable
     Texture CorralGallinas;
     Sprite CorralGallinasS;
     Rectangle CorralGallinasR;
+    /**Menu4**/
+    public static boolean buildMaquinaComida;
+    float alphaMaquina = 1;
+    Sprite MaquinaComidaS;
+    Texture MaquinaComida;
+    Rectangle MaquinaComidaR;
+
 
     public static boolean vacaBuild = false,gallinaBuild = false;
 
@@ -243,6 +250,11 @@ public class MenuBuild extends Actor implements Disposable
         Vaca = new Texture("Vaca.png");
         VacaR = new Rectangle();
         VacaS = new Sprite(Vaca);
+
+        /**Menu4**/
+        MaquinaComida = new Texture("MaquinaComida.png");
+        MaquinaComidaS = new Sprite(MaquinaComida);
+        MaquinaComidaR = new Rectangle();
     }
 
     @Override
@@ -1048,6 +1060,16 @@ public class MenuBuild extends Actor implements Disposable
                     alphaVaca = 1;
                 }
 
+                if(gallinaBuild)
+                {
+                    alphaGallina = 0.4f;
+                }else
+                {
+                    alphaGallina = 1;
+                }
+
+
+                GallinaR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32/ Pixels, 32 / Pixels);
                 GallinaS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32/ Pixels, 32 / Pixels);
                 GallinaS.setAlpha(alphaGallina);
                 GallinaS.draw(batch);
@@ -1060,6 +1082,11 @@ public class MenuBuild extends Actor implements Disposable
                 if(VacaR.overlaps(puntero))
                 {
                     MenuBuild.vacaBuild = true;
+                }
+
+                if(GallinaR.overlaps(puntero))
+                {
+                    MenuBuild.gallinaBuild = true;
                 }
 
 
@@ -1282,6 +1309,15 @@ public class MenuBuild extends Actor implements Disposable
         if(isMenu4)
         {
             MenuBuild.timeCultivos = 0;
+
+            MaquinaComidaR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (50 / Pixels), 50/ Pixels, 35 / Pixels);
+            MaquinaComidaS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (50 / Pixels), 50/ Pixels, 35 / Pixels);
+            MaquinaComidaS.setAlpha(alphaMaquina);
+            MaquinaComidaS.draw(batch);
+            if(MaquinaComidaR.overlaps(puntero))
+            {
+                buildMaquinaComida = true;
+            }
         }
     }
 

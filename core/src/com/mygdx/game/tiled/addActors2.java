@@ -25,6 +25,7 @@ import com.mygdx.game.actors.Maceta1_3;
 import com.mygdx.game.actors.Maceta2_1;
 import com.mygdx.game.actors.Maceta2_2;
 import com.mygdx.game.actors.Maceta2_3;
+import com.mygdx.game.actors.MaquinaComida1;
 import com.mygdx.game.actors.MenuBuild;
 import com.mygdx.game.actors.Tierra1;
 import com.mygdx.game.actors.Tierra2;
@@ -72,9 +73,13 @@ public class addActors2 {
     CorralGallinas cg = new CorralGallinas();
     CorralGallinas2 cg2 = new CorralGallinas2();
 
+    MaquinaComida1 maquinaC1 = new MaquinaComida1();
+
     MenuBuild menuBuild;
     public addActors2(Stage stage)
     {
+        stage.addActor(maquinaC1);
+
         stage.addActor(arbusto1_1);
         stage.addActor(arbusto1_2);
         stage.addActor(arbusto1_3);

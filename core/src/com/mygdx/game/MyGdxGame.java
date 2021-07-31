@@ -149,15 +149,19 @@ public class MyGdxGame extends Game{
 	public static Preferences Arbusto2_3;
 
 	/**CorralVaca**/
-	public static Preferences Vaca1,Vaca2,Vaca3,Vaca4;
 	public static Preferences Corral1Vacas,Corral2Vacas;
 	public static Preferences CorralVacaColocadas;
 	public static Preferences CorralVacas1;
 	public static Preferences CorralVacas2;
 	/**CorralGallinas**/
+	public static Preferences Corral1Gallinas,Corral2Gallinas;
 	public static Preferences CorralGallinasColocadas;
 	public static Preferences CorralGallinas1;
 	public static Preferences CorralGallinas2;
+	/**Maquina de Comida**/
+	public static Preferences MaquinaComidaColocadas;
+	public static Preferences MaquinasComida1;
+	public static Preferences MaquinasComida2;
 
 	@Override
 	public void create() {
@@ -349,10 +353,6 @@ public class MyGdxGame extends Game{
 		CorralVacas1 = Gdx.app.getPreferences("Y26");
 		CorralVacas2 = Gdx.app.getPreferences("X27");
 		CorralVacas2 = Gdx.app.getPreferences("Y27");
-		Vaca1 = Gdx.app.getPreferences("Vaca1");
-		Vaca2 = Gdx.app.getPreferences("Vaca2");
-		Vaca3 = Gdx.app.getPreferences("Vaca3");
-		Vaca4 = Gdx.app.getPreferences("Vaca4");
 		Corral1Vacas = Gdx.app.getPreferences("Corral1Vacas");
 		Corral2Vacas = Gdx.app.getPreferences("Corral2Vacas");
 		/**Corral Gallinas**/
@@ -361,7 +361,14 @@ public class MyGdxGame extends Game{
 		CorralGallinas1 = Gdx.app.getPreferences("Y28");
 		CorralGallinas2 = Gdx.app.getPreferences("X29");
 		CorralGallinas2 = Gdx.app.getPreferences("Y29");
-
+		Corral1Gallinas = Gdx.app.getPreferences("Corral1Gallinas");
+		Corral2Gallinas = Gdx.app.getPreferences("Corral2Gallinas");
+		/**Maquinas**/
+		MaquinaComidaColocadas = Gdx.app.getPreferences("MaquinaComida");
+		MaquinasComida1 = Gdx.app.getPreferences("X30");
+		MaquinasComida1 = Gdx.app.getPreferences("Y30");
+		MaquinasComida2 = Gdx.app.getPreferences("X31");
+		MaquinasComida2 = Gdx.app.getPreferences("Y31");
 
 
 		if(Cinematica.getInteger("Cinematica")==0)
@@ -543,6 +550,14 @@ public class MyGdxGame extends Game{
 			CorralGallinas2.putFloat("X29",2800);
 			CorralGallinas2.putFloat("Y29",2800);
 			CorralGallinas2.flush();
+
+
+			MaquinasComida1.putFloat("X30",2900);
+			MaquinasComida1.putFloat("Y30",2900);
+			MaquinasComida1.flush();
+			MaquinasComida2.putFloat("X31",3000);
+			MaquinasComida2.putFloat("Y31",3000);
+			MaquinasComida2.flush();
 		}
 
 

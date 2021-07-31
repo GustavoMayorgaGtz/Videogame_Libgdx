@@ -21,6 +21,7 @@ import static com.mygdx.game.actors.Tierra1.noBuild;
 public class CorralVaca extends Actor implements Disposable {
     public static boolean var17= true;
     public static Texture logo;
+
     public static Rectangle Cuerpo,Cuerpo2;
     public static float x,y;
     boolean noToca;
@@ -134,7 +135,7 @@ public class CorralVaca extends Actor implements Disposable {
         /*************/
         Izq.set(x,y,5/Pixels,32/Pixels);
         Dere.set(x+(128/Pixels),y,10/Pixels,32/Pixels);
-        if(Jugador.jugador.overlaps(Cuerpo2)&&MenuBuild.vacaBuild&&!MenuBuild.isMenu)
+        if(Jugador.jugador.overlaps(Cuerpo2)&&MenuBuild.vacaBuild&&!MenuBuild.isMenu&&Corral1Vacas.getInteger("Corral1Vacas")!=2)
         {
             batch.draw(FlechaVerde,x+(60/Pixels),y+(32/Pixels)+(abs/Pixels),32/Pixels,32/Pixels);
             if(AddResources.puntero.overlaps(Cuerpo2)) {
@@ -169,7 +170,7 @@ public class CorralVaca extends Actor implements Disposable {
     {
         TextureRegion Right = right.getKeyFrame(timeFree,true);
         TextureRegion Left = left.getKeyFrame(timeFree,true);
-        vaca1.set(x1,y,32/Pixels,32/Pixels);
+        vaca1.set(x1,y,30/Pixels,24/Pixels);
         if(vaca1.overlaps(vaca2))
         {
             if(vaca2Dere) {
@@ -226,7 +227,7 @@ public class CorralVaca extends Actor implements Disposable {
     {
         TextureRegion Right = right.getKeyFrame(timeFree,true);
         TextureRegion Left = left.getKeyFrame(timeFree,true);
-        vaca2.set(x2,y,24/Pixels,24/Pixels);
+        vaca2.set(x2,y,40/Pixels,32/Pixels);
         if(vaca1.overlaps(vaca2))
         {
             if(vaca2Dere) {
