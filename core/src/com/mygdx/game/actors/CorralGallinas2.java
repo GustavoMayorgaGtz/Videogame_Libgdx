@@ -341,6 +341,8 @@ float timeDurationTouch;
         }
 
         if (cambiarPosicion) {
+            iteraror1 = 0;
+            iterator2 = 0;
             MenuBuild.BuildMover = true;
             for (Rectangle e : Tierra1.rects) {
                 if (noToca) {
@@ -355,6 +357,8 @@ float timeDurationTouch;
                         }
                         CorralGallinas2.putFloat("Y29", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
+                            iteraror1 = 0;
+                            iterator2 = 0;
                             CorralGallinas2.flush();
                             MenuBuild.BuildMover = false;
                             MenuBuild.isMenu = false;

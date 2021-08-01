@@ -367,7 +367,7 @@ float timeDurationTouch;
         }
 
         if (cambiarPosicion) {
-            iterator2 = 0;
+            iteraror1 = 0;
             iterator2 = 0;
             MenuBuild.BuildMover = true;
             for (Rectangle e : Tierra1.rects) {
@@ -383,6 +383,8 @@ float timeDurationTouch;
                         }
                         CorralVacas2.putFloat("Y27", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
+                            iteraror1 = 0;
+                            iterator2 = 0;
                             CorralVacas2.flush();
                             MenuBuild.BuildMover = false;
                             MenuBuild.isMenu = false;

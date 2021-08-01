@@ -1,6 +1,12 @@
 package com.mygdx.game.tiled;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.actors.Agua1;
 import com.mygdx.game.actors.Agua2;
 import com.mygdx.game.actors.Agua3;
@@ -26,6 +32,7 @@ import com.mygdx.game.actors.Maceta2_1;
 import com.mygdx.game.actors.Maceta2_2;
 import com.mygdx.game.actors.Maceta2_3;
 import com.mygdx.game.actors.MaquinaComida1;
+import com.mygdx.game.actors.MaquinaComida2;
 import com.mygdx.game.actors.MenuBuild;
 import com.mygdx.game.actors.Tierra1;
 import com.mygdx.game.actors.Tierra2;
@@ -33,7 +40,9 @@ import com.mygdx.game.actors.Tierra3;
 import com.mygdx.game.actors.Tierra4;
 import com.mygdx.game.actors.Tierra5;
 
-public class addActors2 {
+import static com.mygdx.game.MyGdxGame.Pixels;
+
+public class addActors2 implements Disposable {
     Tierra1 tierra1;
     Tierra2 tierra2;
     Tierra3 tierra3;
@@ -74,11 +83,19 @@ public class addActors2 {
     CorralGallinas2 cg2 = new CorralGallinas2();
 
     MaquinaComida1 maquinaC1 = new MaquinaComida1();
+    MaquinaComida2 maquinaC2 = new MaquinaComida2();
 
     MenuBuild menuBuild;
+    public static Label label;
+    public static Container<Label> container;
     public addActors2(Stage stage)
     {
+
+        label = new Label("AAAAAAAA",new Label.LabelStyle(new BitmapFont(), Color.BROWN));
+        container=new Container<Label>(label);
+        container.setTransform(true);
         stage.addActor(maquinaC1);
+        stage.addActor(maquinaC2);
 
         stage.addActor(arbusto1_1);
         stage.addActor(arbusto1_2);
@@ -92,6 +109,7 @@ public class addActors2 {
         stage.addActor(casa2Pisos1);
         casa2Pisos2 = new Casa2Pisos2();
         stage.addActor(casa2Pisos2);
+
         stage.addActor(casa1);
         stage.addActor(casa2);
 
@@ -133,11 +151,18 @@ public class addActors2 {
         stage.addActor(maceta2_2);
         stage.addActor(maceta2_3);
 
+        stage.addActor(container);
 
 
            menuBuild = new MenuBuild();
         stage.addActor(menuBuild );
 
+
+
+    }
+
+    @Override
+    public void dispose() {
 
     }
 }

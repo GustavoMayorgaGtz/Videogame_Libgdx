@@ -26,8 +26,8 @@ public class MenuBuild extends Actor implements Disposable
 
     Texture logo;
      public static Sprite Logo;
-    Rectangle Cuadro;
-    float time,time2;
+    public static Rectangle Cuadro;
+    float time;
     public static boolean isMenu;
 
     /*****Menu****/
@@ -35,7 +35,7 @@ public class MenuBuild extends Actor implements Disposable
     Texture equis;
     Texture fondo,logo1,logo2,logo3,logo4;
     public static Rectangle Menu1,Menu2,Menu3,Menu4,Salir;
-    public static Sprite Fondo,Fondo2,Logo1,Logo2,Logo3,Logo4;
+    public static Sprite Fondo,Fondo2,Fondo3,Logo1,Logo2,Logo3,Logo4;
     public static boolean isMenu1 = true,isMenu2,isMenu3,isMenu4;
     float alpha1,alpha2,alpha3,alpha4;
 
@@ -56,7 +56,14 @@ public class MenuBuild extends Actor implements Disposable
    public static Sprite moverS;
    public static boolean isMover;
     float moverTime;
-    float alphaMover = 0.2f;
+    float alphaMover = 0f;
+    /****AlmacenButton****/
+    Texture Almacen;
+    public static Rectangle AlmacenR;
+    public static Sprite AlmacenS;
+    public static boolean isAlmacen;
+    float AlmacenTime;
+    float alphaAlmacen = 0f;
     /******Cultivos******/
     public static float timeCultivos;
 
@@ -162,6 +169,7 @@ public class MenuBuild extends Actor implements Disposable
         fondo = new Texture("cuadradoNegro.png");
         Fondo = new Sprite(fondo);
         Fondo2 = new Sprite(fondo);
+        Fondo3 = new Sprite(fondo);
 
 
         Menu1 = new Rectangle();
@@ -255,6 +263,11 @@ public class MenuBuild extends Actor implements Disposable
         MaquinaComida = new Texture("MaquinaComida.png");
         MaquinaComidaS = new Sprite(MaquinaComida);
         MaquinaComidaR = new Rectangle();
+        /**AlmacenButton**/
+        Almacen = new Texture("Almacen.png");
+        AlmacenS = new Sprite(Almacen);
+        AlmacenR = new Rectangle();
+
     }
 
     @Override
@@ -263,18 +276,18 @@ public class MenuBuild extends Actor implements Disposable
         timeMenu2 += 1 * Gdx.graphics.getDeltaTime();
         timeMenu3 += 1 * Gdx.graphics.getDeltaTime();
         Logo.setBounds(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y , 20 / Pixels, 20 / Pixels);
-        Logo.setAlpha(MyGdxGame.alpha);
+        Logo.setAlpha(.8f);
         Fondo2.setBounds(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
         Fondo2.setAlpha(alphaMover);
         moverS.setBounds(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
-        moverS.setAlpha(MyGdxGame.alpha+.2f);
+        moverS.setAlpha(.8f);
         moverTime += 1 * Gdx.graphics.getDeltaTime();
         if(moverTime > 1) {
             if (moverR.overlaps(AddResources.puntero)) {
                 if(isMover)
                 {
                     isMover = false;
-                    alphaMover = 0.2f;
+                    alphaMover = 0f;
                 }else
                 {
                     isMover = true;
@@ -285,7 +298,30 @@ public class MenuBuild extends Actor implements Disposable
 
             }
         }
-        Cuadro.set(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y , 20 / Pixels, 20 / Pixels);
+        Fondo3.setBounds(AddResources.cam.position.x  +3, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
+        Fondo3.setAlpha(alphaAlmacen);
+        AlmacenS.setBounds(AddResources.cam.position.x +3, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
+        AlmacenS.setAlpha(.8f);
+        AlmacenTime += 1 * Gdx.graphics.getDeltaTime();
+        if(AlmacenTime > 1) {
+            if (AlmacenR.overlaps(AddResources.puntero)) {
+                if(isAlmacen)
+                {
+                    isAlmacen = false;
+                    alphaAlmacen = 0f;
+                }else
+                {
+                    isAlmacen = true;
+                    alphaAlmacen = 0.8f;
+                }
+
+                AlmacenTime = 0;
+
+            }
+        }
+        if(!isMenuSeedSelection) {
+            Cuadro.set(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y, 20 / Pixels, 20 / Pixels);
+        }
         if(time > 1 && Cuadro.overlaps(AddResources.puntero))
         {
                 isMenu = true;
@@ -305,6 +341,7 @@ public class MenuBuild extends Actor implements Disposable
             timeRetrasar = 0;
         }
         MenuSeeds(batch);
+
     }
 
     public void MenuSeeds(Batch batch) {
@@ -499,11 +536,11 @@ public class MenuBuild extends Actor implements Disposable
         if(isMenuSeedSelection) {
             MenuBuild.isMenu = false;
             MenuBuild.timeQuitar += 1 * Gdx.graphics.getDeltaTime();
-            Fondo.setBounds(AddResources.cam.position.x - 3.8f + (30 / Pixels), AddResources.cam.position.y - 2 + (5 / Pixels), 190 / Pixels, 100 / Pixels);
+            Fondo.setBounds(AddResources.cam.position.x - 3.8f + (30 / Pixels), AddResources.cam.position.y - 2 + (5 / Pixels), 138 / Pixels, 100 / Pixels);
             Fondo.setAlpha(0.8f);
             Fondo.draw(batch);
-            batch.draw(equis, AddResources.cam.position.x - 3.8f + (205 / Pixels), AddResources.cam.position.y - 2 + (90 / Pixels), 10 / Pixels, 10 / Pixels);
-            Salir.set(AddResources.cam.position.x - 3.8f + (205 / Pixels), AddResources.cam.position.y - 2 + (90 / Pixels), 10 / Pixels, 10 / Pixels);
+            batch.draw(equis, AddResources.cam.position.x - 3.8f + (155 / Pixels), AddResources.cam.position.y - 2 + (90 / Pixels), 10 / Pixels, 10 / Pixels);
+            Salir.set(AddResources.cam.position.x - 3.8f + (155/ Pixels), AddResources.cam.position.y - 2 + (90 / Pixels), 10 / Pixels, 10 / Pixels);
 
             if(MyGdxGame.Trigo.getInteger("Trigo")>0)
             {
@@ -805,6 +842,15 @@ public class MenuBuild extends Actor implements Disposable
             zanahoriaR2.set(0,0,0,0);
             canaR2.set(0,0,0,0);
             algodonR2.set(0,0,0,0);
+        }
+    }
+
+    public static void Almacen(Batch batch)
+    {
+        if(isAlmacen) {
+            Fondo.setBounds(AddResources.cam.position.x - 3.8f + (30 / Pixels), AddResources.cam.position.y - 2 , 160 / Pixels, 100 / Pixels);
+            Fondo.setAlpha(0.8f);
+            Fondo.draw(batch);
         }
     }
 

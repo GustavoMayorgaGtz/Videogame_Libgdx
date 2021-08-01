@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -46,6 +47,8 @@ import com.mygdx.game.actors.Maceta1_3;
 import com.mygdx.game.actors.Maceta2_1;
 import com.mygdx.game.actors.Maceta2_2;
 import com.mygdx.game.actors.Maceta2_3;
+import com.mygdx.game.actors.MaquinaComida1;
+import com.mygdx.game.actors.MaquinaComida2;
 import com.mygdx.game.actors.MenuBuild;
 import com.mygdx.game.actors.Tierra1;
 import com.mygdx.game.actors.Tierra2;
@@ -67,7 +70,9 @@ import box2dLight.RayHandler;
 
 import static com.mygdx.game.MyGdxGame.Arbusto1_1;
 import static com.mygdx.game.MyGdxGame.Maceta1_2;
+import static com.mygdx.game.MyGdxGame.MaquinasComida1;
 import static com.mygdx.game.MyGdxGame.Pixels;
+import static com.mygdx.game.MyGdxGame.isIsNivelProgress2;
 
 public class AddResources {
     boolean confirmbool;
@@ -110,6 +115,7 @@ public class AddResources {
     public static boolean isFreeSpaceTop8,isFreeSpaceTop9,isFreeSpaceTop10;
     public static boolean free1,free2,free3,free4,free5,free6;
     public static boolean freeCorral1,freeCorral2,freeCorral3,freeCorral4 = true;
+    public static boolean freeMaquina1,freeMaquina2;
 
 
     /*****Controles*****/
@@ -677,8 +683,6 @@ batch.begin();
                 }
                 batch.draw(moneda, cam.position.x - 2f + (26 / Pixels), cam.position.y + 1.9f, 10 / Pixels, 10 / Pixels);
 /************************************************/
-
-
                 switch (MyGdxGame.Alpha.getInteger("Alpha")) {
                     case 0: {
                         MyGdxGame.alpha = 0.2f;
@@ -693,7 +697,6 @@ batch.begin();
                         break;
                     }
                 }
-
                 /**************************/
                 /**************************/
                 /**************************/
@@ -704,8 +707,17 @@ batch.begin();
                 if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.CasasDosPisosBuild
                         &&!MenuBuild.CasasBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build&&!MenuBuild.Arbusto1Build
                         &&!MenuBuild.Arbusto2Build&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.isCorralGallinasBuild&&!MenuBuild.buildMaquinaComida) {
-                    if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection) {
+                    if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isAlmacen) {
                         if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
+                            /*addActors2.label.setPosition(puntero.x,puntero.y-10);
+
+                            addActors2.label.setScale(0.03f);
+                            addActors2.label.setFontScale(0.03f);
+                            addActors2.label.draw(batch,1);*/
+                            addActors2.label.setWrap(true);
+                            addActors2.container.setBounds(puntero.x,puntero.y,10/Pixels,10/Pixels);
+                            addActors2.container.setScale(.03f);
+                            cam.zoom = 1.5f;
                             cancel.set(0,0,0,0);
                             confirm.set(0,0,0,0);
                             TouchCancel = false;
@@ -823,40 +835,53 @@ batch.begin();
                             MenuBuild.Fondo2.draw(batch);
                             MenuBuild.moverS.draw(batch);
                             MenuBuild.moverR.set(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
-
+                            MenuBuild.Fondo3.draw(batch);
+                            MenuBuild.AlmacenS.draw(batch);
+                            MenuBuild.AlmacenR.set(AddResources.cam.position.x  +3, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
                         }
                     } else {
+                        if(MenuBuild.isAlmacen)
+                        {
+                            MenuBuild.AlmacenS.draw(batch);
+                            MenuBuild.Almacen(batch);
+                            MenuBuild.AlmacenR.set(AddResources.cam.position.x  +3, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
+                            MenuBuild.moverR.set(0, 0, 0, 0);
+                            MenuBuild.isMenu = false;
+                            DereRect.set(0, 0, 0, 0);
+                            IzqRect.set(0, 0, 0, 0);
+                            SaltoRect.set(0, 0, 0, 0);
+                            AttackRect.set(0, 0, 0, 0);
+                            SpeedRect.set(0, 0, 0, 0);
+                            PauseRect.set(0, 0, 0, 0);
+                        }
                         if (MenuBuild.isMenu) {
                             MenuBuild m = new MenuBuild();
                             m.MenuDraw(batch, cam);
                             MenuBuild.moverR.set(0, 0, 0, 0);
+                            MenuBuild.AlmacenR.set(0,0,0,0);
                             if (AddResources.puntero.overlaps(MenuBuild.Menu1)) {
                                 MenuBuild.isMenu1 = true;
                                 MenuBuild.isMenu2 = false;
                                 MenuBuild.isMenu3 = false;
                                 MenuBuild.isMenu4 = false;
-
                             }
                             if (AddResources.puntero.overlaps(MenuBuild.Menu2)) {
                                 MenuBuild.isMenu1 = false;
                                 MenuBuild.isMenu2 = true;
                                 MenuBuild.isMenu3 = false;
                                 MenuBuild.isMenu4 = false;
-
                             }
                             if (AddResources.puntero.overlaps(MenuBuild.Menu3)) {
                                 MenuBuild.isMenu1 = false;
                                 MenuBuild.isMenu2 = false;
                                 MenuBuild.isMenu3 = true;
                                 MenuBuild.isMenu4 = false;
-
                             }
                             if (AddResources.puntero.overlaps(MenuBuild.Menu4)) {
                                 MenuBuild.isMenu1 = false;
                                 MenuBuild.isMenu2 = false;
                                 MenuBuild.isMenu3 = false;
                                 MenuBuild.isMenu4 = true;
-
                             }
                             if (AddResources.puntero.overlaps(MenuBuild.Salir)) {
                                 MenuBuild.isMenu = false;
@@ -873,15 +898,19 @@ batch.begin();
                         }
                     }
                     if (MenuBuild.isMenuSeedSelection) {
+                        MenuBuild.Cuadro.set(0,0,0,0);
                         MenuBuild m = new MenuBuild();
+                        m.isMenu = false;
                         m.MenuSeedsSelection(batch);
                         MenuBuild.moverR.set(0, 0, 0, 0);
+                        MenuBuild.AlmacenR.set(0,0,0,0);
                         DereRect.set(0, 0, 0, 0);
                         IzqRect.set(0, 0, 0, 0);
                         SaltoRect.set(0, 0, 0, 0);
                         AttackRect.set(0, 0, 0, 0);
                         SpeedRect.set(0, 0, 0, 0);
                         PauseRect.set(0, 0, 0, 0);
+
                         if (AddResources.puntero.overlaps(MenuBuild.Salir)) {
                             MenuBuild.isMenu = false;
                             MenuBuild.isMenuSeedSelection = false;
@@ -968,9 +997,8 @@ batch.begin();
                         Jugador.isMenu = false;
                         Gdx.input.vibrate(100);
                     }
-                    CantFertilizante();
-                    CantHojaVerde();
-
+                        CantFertilizante();
+                        CantHojaVerde();
                     if (MyGdxGame.coins.getInteger("Coins") > 99) {
                         MyGdxGame.coins.putInteger("Coins", 99);
                         MyGdxGame.coins.flush();
@@ -1070,7 +1098,9 @@ batch.begin();
 
                     }
                 } else {
-                    UI(3.8f);
+                    if(!isIsNivelProgress2) {
+                        UI(3.8f);
+                    }
                     timeHome += .2f *Gdx.graphics.getDeltaTime();
                 }
 
@@ -1792,6 +1822,7 @@ freeSpace();
                 ||!isFreeSpaceTop5||!isFreeSpaceTop6||!isFreeSpaceTop7
                 ||!isFreeSpaceTop8||!isFreeSpaceTop9||!isFreeSpaceTop10
                 ||!free1||!free2||!free3||!free4||!free5||!free6
+                ||!freeMaquina1||!freeMaquina2
                 ||!freeCorral1||!freeCorral2||!freeCorral3||!freeCorral4||!Agua1.var1||!Agua2.var2||!Agua3.var3||!Agua4.var4||! com.mygdx.game.actors.Arbusto1_1.var5||!Arbusto1_2.var6||!Arbusto1_3.var7
                 ||! Arbusto2_1.var8||!Arbusto2_2.var9||! Arbusto2_3.var10
                 ||! Casa1.var11||! Casa2.var12||! Casa2Pisos.var13||! Casa2Pisos2.var14
@@ -1799,7 +1830,7 @@ freeSpace();
                 ||! CorralVaca.var17||!CorralVaca2.var18
                 ||! Maceta1_1.var19||! com.mygdx.game.actors.Maceta1_2.var20||!Maceta1_3.var21
                 ||! Maceta2_1.var22||!Maceta2_2.var23||! Maceta2_3.var24
-                ||!Tierra1.var25||!Tierra2.var26||!Tierra3.var27||!Tierra4.var28||!Tierra5.var29){
+                ||!Tierra1.var25||!Tierra2.var26||!Tierra3.var27||!Tierra4.var28||!Tierra5.var29||!MaquinaComida1.var30||!MaquinaComida2.var31){
 
             confirm.set(0,0,0,0);
             ConfirmarS.setBounds(0,0,0,0);

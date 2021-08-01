@@ -342,6 +342,8 @@ public class CorralVaca extends Actor implements Disposable {
         }
 
         if (cambiarPosicion) {
+            iteraror1 = 0;
+            iterator2 = 0;
             MenuBuild.BuildMover = true;
             for (Rectangle e : Tierra1.rects) {
                 if (noToca) {
@@ -356,6 +358,8 @@ public class CorralVaca extends Actor implements Disposable {
                         }
                         CorralVacas1.putFloat("Y26", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
+                            iteraror1 = 0;
+                            iterator2 = 0;
                             CorralVacas1.flush();
                             MenuBuild.BuildMover = false;
                             MenuBuild.isMenu = false;
