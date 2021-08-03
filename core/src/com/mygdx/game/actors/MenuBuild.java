@@ -1,15 +1,19 @@
 package com.mygdx.game.actors;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.Menu;
 import com.mygdx.game.MyGdxGame;
@@ -110,6 +114,13 @@ public class MenuBuild extends Actor implements Disposable
     Sprite MaquinaComidaS;
     Texture MaquinaComida;
     Rectangle MaquinaComidaR;
+
+    /**ALmacen de Recursos**/
+    public static Texture TrigoA,MaizA,SojaA,ZanahoriaA,CanaA,AlgodonA,LecheA,HuevosA,ComidaVaca,ComidaGallina;
+    public static Sprite w;
+    Texture Blanco;
+    public static Container c1,c2,c3,c4,c5,c6,c7,c8,c9,c10;
+    public static Label l1,l2,l3,l4,l5,l6,l7,l8,l9,l10;
 
 
     public static boolean vacaBuild = false,gallinaBuild = false;
@@ -267,6 +278,48 @@ public class MenuBuild extends Actor implements Disposable
         Almacen = new Texture("Almacen.png");
         AlmacenS = new Sprite(Almacen);
         AlmacenR = new Rectangle();
+        TrigoA = new Texture("Almacen/TrigoS.png");
+        MaizA = new Texture("Almacen/MaizS.png");
+        SojaA = new Texture("Almacen/SojaS.png");
+        ZanahoriaA = new Texture("Almacen/ZanahoriaS.png");
+        CanaA = new Texture("Almacen/CañaS.png");
+        AlgodonA = new Texture("Almacen/AlgodonS.png");
+        LecheA = new Texture("Almacen/Leche.png");
+        HuevosA = new Texture("Almacen/Huevos.png");
+        ComidaVaca = new Texture("Almacen/ComidaVaca.png");
+        ComidaGallina = new Texture("Almacen/ComidaGallina.png");
+        Blanco = new Texture("Blanco.png");
+         w = new Sprite(Blanco);
+        l1 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        l2 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        l3 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        l4 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        l5 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        l6 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        l7 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        l8 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        l9 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        l10= new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        c1 = new Container<Label>(l1);
+        c2 = new Container<Label>(l2);
+        c3 = new Container<Label>(l3);
+        c4 = new Container<Label>(l4);
+        c5 = new Container<Label>(l5);
+        c6 = new Container<Label>(l6);
+        c7 = new Container<Label>(l7);
+        c8 = new Container<Label>(l8);
+        c9 = new Container<Label>(l9);
+        c10 = new Container<Label>(l10);
+        c1.setTransform(true);
+        c2.setTransform(true);
+        c3.setTransform(true);
+        c4.setTransform(true);
+        c5.setTransform(true);
+        c6.setTransform(true);
+        c7.setTransform(true);
+        c8.setTransform(true);
+        c9.setTransform(true);
+       c10.setTransform(true);
 
     }
 
@@ -848,9 +901,67 @@ public class MenuBuild extends Actor implements Disposable
     public static void Almacen(Batch batch)
     {
         if(isAlmacen) {
-            Fondo.setBounds(AddResources.cam.position.x - 3.8f + (30 / Pixels), AddResources.cam.position.y - 2 , 160 / Pixels, 100 / Pixels);
+            Fondo.setBounds(AddResources.cam.position.x - 3.8f + (10 / Pixels), AddResources.cam.position.y - 2 , 180 / Pixels, (110/ Pixels));
             Fondo.setAlpha(0.8f);
             Fondo.draw(batch);
+            /****/
+            w.setAlpha(0.2f);
+            w.setBounds(AddResources.cam.position.x - 3.8f + (22 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels),28/Pixels,10/Pixels);
+            w.draw(batch);
+            l1.setText("X"+MyGdxGame.coins.getInteger("Coins"));
+            l1.setWrap(true);
+            l1.setPosition(AddResources.cam.position.x - 3.8f + (22 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels));
+            c1.setBounds(AddResources.cam.position.x - 3.8f + (22 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels),28/Pixels,10/Pixels);
+            c1.setPosition(AddResources.cam.position.x - 3.8f + (22 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels));
+            c1.setScale(.02f);
+            AddResources.stage.addActor(c1);
+            batch.draw(TrigoA,AddResources.cam.position.x - 3.8f + (20 / Pixels),AddResources.cam.position.y - 2 + (20 / Pixels),32/Pixels,32/Pixels);
+            /****/
+            w.setAlpha(0.2f);
+            w.setBounds(AddResources.cam.position.x - 3.8f + (54 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels),28/Pixels,10/Pixels);
+            w.draw(batch);
+            batch.draw(MaizA,AddResources.cam.position.x - 3.8f + (52 / Pixels),AddResources.cam.position.y - 2 + (20 / Pixels),32/Pixels,32/Pixels);
+            /****/
+            w.setAlpha(0.2f);
+            w.setBounds(AddResources.cam.position.x - 3.8f + (86 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels),28/Pixels,10/Pixels);
+            w.draw(batch);
+            batch.draw(SojaA,AddResources.cam.position.x - 3.8f + (84 / Pixels),AddResources.cam.position.y - 2 + (20 / Pixels),32/Pixels,32/Pixels);
+            /****/
+            w.setAlpha(0.2f);
+            w.setBounds(AddResources.cam.position.x - 3.8f + (118 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels),28/Pixels,10/Pixels);
+            w.draw(batch);
+            batch.draw(ZanahoriaA,AddResources.cam.position.x - 3.8f + (116 / Pixels),AddResources.cam.position.y - 2 + (20 / Pixels),32/Pixels,32/Pixels);
+            /****/
+            w.setAlpha(0.2f);
+            w.setBounds(AddResources.cam.position.x - 3.8f + (150 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels),28/Pixels,10/Pixels);
+            w.draw(batch);
+            batch.draw(CanaA,AddResources.cam.position.x - 3.8f + (148 / Pixels),AddResources.cam.position.y - 2 + (20 / Pixels),32/Pixels,32/Pixels);
+            /****/
+            w.setAlpha(0.2f);
+            w.setBounds(AddResources.cam.position.x - 3.8f + (22 / Pixels),AddResources.cam.position.y - 2 + (58 / Pixels),28/Pixels,10/Pixels);
+            w.draw(batch);
+            batch.draw(AlgodonA,AddResources.cam.position.x - 3.8f + (20/ Pixels),AddResources.cam.position.y - 2 + (68 / Pixels),32/Pixels,32/Pixels);
+            /****/
+            w.setAlpha(0.2f);
+            w.setBounds(AddResources.cam.position.x - 3.8f + (54 / Pixels),AddResources.cam.position.y - 2 + (58 / Pixels),28/Pixels,10/Pixels);
+            w.draw(batch);
+            batch.draw(HuevosA,AddResources.cam.position.x - 3.8f + (52 / Pixels),AddResources.cam.position.y - 2 + (68 / Pixels),32/Pixels,32/Pixels);
+            /****/
+            w.setAlpha(0.2f);
+            w.setBounds(AddResources.cam.position.x - 3.8f + (86 / Pixels),AddResources.cam.position.y - 2 + (58 / Pixels),28/Pixels,10/Pixels);
+            w.draw(batch);
+            batch.draw(LecheA,AddResources.cam.position.x - 3.8f + (84 / Pixels),AddResources.cam.position.y - 2 + (70 / Pixels),32/Pixels,30/Pixels);
+            /****/
+            w.setAlpha(0.2f);
+            w.setBounds(AddResources.cam.position.x - 3.8f + (118 / Pixels),AddResources.cam.position.y - 2 + (58 / Pixels),28/Pixels,10/Pixels);
+            w.draw(batch);
+            batch.draw(ComidaGallina,AddResources.cam.position.x - 3.8f + (116 / Pixels),AddResources.cam.position.y - 2 + (68 / Pixels),32/Pixels,32/Pixels);
+            /****/
+            w.setAlpha(0.2f);
+            w.setBounds(AddResources.cam.position.x - 3.8f + (150 / Pixels),AddResources.cam.position.y - 2 + (58 / Pixels),28/Pixels,10/Pixels);
+            w.draw(batch);
+            batch.draw(ComidaVaca,AddResources.cam.position.x - 3.8f + (148 / Pixels),AddResources.cam.position.y - 2 + (68 / Pixels),32/Pixels,32/Pixels);
+            /****/
         }
     }
 
@@ -1402,5 +1513,16 @@ public class MenuBuild extends Actor implements Disposable
         CorralGallinas.dispose();
         Flecha.dispose();
         negro.dispose();
+        TrigoA.dispose();
+        MaizA.dispose();
+        SojaA.dispose();
+        ZanahoriaA.dispose();
+        CanaA.dispose();
+        AlgodonA.dispose();
+        LecheA.dispose();
+        HuevosA.dispose();
+        ComidaVaca.dispose();
+        ComidaGallina.dispose();
+        Blanco.dispose();
     }
 }

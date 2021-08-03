@@ -86,14 +86,12 @@ public class addActors2 implements Disposable {
     MaquinaComida2 maquinaC2 = new MaquinaComida2();
 
     MenuBuild menuBuild;
-    public static Label label;
-    public static Container<Label> container;
+
+
     public addActors2(Stage stage)
     {
 
-        label = new Label("AAAAAAAA",new Label.LabelStyle(new BitmapFont(), Color.BROWN));
-        container=new Container<Label>(label);
-        container.setTransform(true);
+
         stage.addActor(maquinaC1);
         stage.addActor(maquinaC2);
 
@@ -151,7 +149,7 @@ public class addActors2 implements Disposable {
         stage.addActor(maceta2_2);
         stage.addActor(maceta2_3);
 
-        stage.addActor(container);
+
 
 
            menuBuild = new MenuBuild();

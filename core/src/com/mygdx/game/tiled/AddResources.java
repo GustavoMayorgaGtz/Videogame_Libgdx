@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,6 +17,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -207,12 +210,18 @@ public class AddResources {
     boolean is02,is12,is22;
     int valoractual2;
 
-
+/**Labels**/
+public static Label monedasLabel;
+    public static Container<Label> container1;
 
 
 
     public AddResources()
     {
+
+        monedasLabel = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        container1=new Container<Label>(monedasLabel);
+        container1.setTransform(true);
         rectangulosY = new ArrayList<Rectangle>();
         rectangulosNoY = new ArrayList<Rectangle>();
         rectangulosNoX = new ArrayList<Rectangle>();
@@ -564,7 +573,12 @@ if(tocoPiso) {
         puntero2.set(PunteroPosition2.x-(5f/Pixels),PunteroPosition2.y-(5f/Pixels),10/Pixels,10/Pixels);
 
 
-
+        monedasLabel.setText(""+MyGdxGame.coins.getInteger("Coins"));
+        monedasLabel.setWrap(true);
+        container1.setDebug(true);
+        container1.setBounds(cam.position.x - 2, cam.position.y + 1.9f,10/Pixels,10/Pixels);
+        container1.setScale(.03f);
+        stage.addActor(container1);
         batch.end();
 
     }
@@ -708,16 +722,10 @@ batch.begin();
                         &&!MenuBuild.CasasBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build&&!MenuBuild.Arbusto1Build
                         &&!MenuBuild.Arbusto2Build&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.isCorralGallinasBuild&&!MenuBuild.buildMaquinaComida) {
                     if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isAlmacen) {
+                        MenuBuild.c1.setPosition(0,0);
                         if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
-                            /*addActors2.label.setPosition(puntero.x,puntero.y-10);
 
-                            addActors2.label.setScale(0.03f);
-                            addActors2.label.setFontScale(0.03f);
-                            addActors2.label.draw(batch,1);*/
-                            addActors2.label.setWrap(true);
-                            addActors2.container.setBounds(puntero.x,puntero.y,10/Pixels,10/Pixels);
-                            addActors2.container.setScale(.03f);
-                            cam.zoom = 1.5f;
+
                             cancel.set(0,0,0,0);
                             confirm.set(0,0,0,0);
                             TouchCancel = false;
@@ -1118,6 +1126,7 @@ batch.begin();
     {
         /********Monedas******************/
         int datos0 =  MyGdxGame.coins.getInteger("Coins");
+
         String datos = String.valueOf(datos0);
         if(datos0 != valoractual)
         {
