@@ -85,7 +85,7 @@
          Gdx.gl.glBlendFunc(GL30.GL_SRC_ALPHA, GL30.GL_ONE_MINUS_SRC_ALPHA);
          batch.begin();
          MyGdxGame.isNivelProgress1 = false;
-         game.isIsNivelProgress2 = false;
+         MyGdxGame.isIsNivelProgress2 = false;
          TextureRegion fondoA = fondoAnimation.getKeyFrame(time,true);
 
 
@@ -93,7 +93,7 @@
          batch.end();
          renderer2.render();
          addR.addRender(delta);
-
+         addR.stage.draw();
          renderer.render();
 
          addR.batchFunctions();

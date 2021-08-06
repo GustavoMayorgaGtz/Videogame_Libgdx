@@ -88,7 +88,7 @@
          Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
          batch.begin();
          MyGdxGame.isNivelProgress1 = false;
-         game.isIsNivelProgress2 = false;
+         MyGdxGame.isIsNivelProgress2 = false;
          if(Jugador.Espadazo) {
              renderer.getBatch().setShader(shader);
              renderer2.getBatch().setShader(shader);
@@ -108,6 +108,7 @@
          update(delta);
          renderer2.render();
          addR.addRender(delta);
+         addR.stage.draw();
          renderer.render();
          addR.batchFunctions();
          if(!MyGdxGame.NoSeguirFondo&&!Jugador.Muerto) {

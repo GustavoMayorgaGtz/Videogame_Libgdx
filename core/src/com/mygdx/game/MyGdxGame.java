@@ -162,7 +162,17 @@ public class MyGdxGame extends Game{
 	public static Preferences MaquinaComidaColocadas;
 	public static Preferences MaquinasComida1;
 	public static Preferences MaquinasComida2;
-
+	/**Almacen**/
+	public static Preferences ComidaVacaStocks;
+	public static Preferences ComidaGallinaStocks;
+	public static Preferences LecheStocks;
+	public static Preferences HuevosStocks;
+	public static Preferences TrigoStocks;
+	public static Preferences MaizStocks;
+	public static Preferences SojaStocks;
+	public static Preferences ZanahoriaStocks;
+	public static Preferences CanaStocks;
+	public static Preferences AlgodonStocks;
 	@Override
 	public void create() {
 		Cinematica = Gdx.app.getPreferences("Cinematica");
@@ -369,6 +379,18 @@ public class MyGdxGame extends Game{
 		MaquinasComida1 = Gdx.app.getPreferences("Y30");
 		MaquinasComida2 = Gdx.app.getPreferences("X31");
 		MaquinasComida2 = Gdx.app.getPreferences("Y31");
+
+		/**Alamcen**/
+		ComidaVacaStocks = Gdx.app.getPreferences("ComidaVacaStocks");
+		ComidaGallinaStocks = Gdx.app.getPreferences("ComidaGallinaStock");
+		LecheStocks = Gdx.app.getPreferences("LecheStock");
+		HuevosStocks  = Gdx.app.getPreferences("HuevosStocks");
+		TrigoStocks = Gdx.app.getPreferences("TrigoStocks");
+		MaizStocks = Gdx.app.getPreferences("MaizStocks");
+		SojaStocks = Gdx.app.getPreferences("SojaStocks");
+		ZanahoriaStocks = Gdx.app.getPreferences("ZanahoriaStocks");
+		CanaStocks = Gdx.app.getPreferences("CanaStocks");
+		AlgodonStocks = Gdx.app.getPreferences("AlgodonStocks");
 
 
 		if(Cinematica.getInteger("Cinematica")==0)

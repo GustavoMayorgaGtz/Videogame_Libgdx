@@ -107,13 +107,13 @@
 
 
          batch.end();
-
-         update();
          renderer.render();
          addR.addRender(delta);
-
+         addR.stage.draw();
          renderer2.render();
          addR.batchFunctions();
+         addR.stage2.draw();
+
          update();
 
          if(!MyGdxGame.NoSeguirFondo&&!Jugador.Muerto) {

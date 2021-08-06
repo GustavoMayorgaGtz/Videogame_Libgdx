@@ -76,7 +76,7 @@
          Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
          batch.begin();
          MyGdxGame.isNivelProgress1 = false;
-         game.isIsNivelProgress2 = false;
+         MyGdxGame.isIsNivelProgress2 = false;
          TextureRegion fondoA = fondoAnimation.getKeyFrame(time,true);
 
          batch.draw(fondoA,(addR.cam.position.x-100)+x,addR.cam.position.y-50,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
@@ -84,6 +84,7 @@
          update(delta);
        //  renderer2.render();
          addR.addRender(delta);
+         addR.stage.draw();
          renderer.render();
          addR.batchFunctions();
 
@@ -100,7 +101,7 @@
 
      @Override
      public void resize(int width, int height) {
-         addR.viewport.update(width, height, false);
+      //   addR.viewport.update(width, height, false);
      }
 
      @Override

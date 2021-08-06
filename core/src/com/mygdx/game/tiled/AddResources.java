@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Casa;
 import com.mygdx.game.Menu;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Nivel2Progresion;
 import com.mygdx.game.actors.Agua1;
 import com.mygdx.game.actors.Agua2;
 import com.mygdx.game.actors.Agua3;
@@ -82,7 +83,7 @@ public class AddResources {
     public static boolean CamaraY = false;
     public static SpriteBatch batch;
     public static OrthographicCamera cam;
-    public static Stage stage;
+    public static Stage stage,stage2;
     public static World world;
     private Box2DDebugRenderer render;
     private int iterator2 = 0;
@@ -228,8 +229,10 @@ public static Label monedasLabel;
         rectangulosX = new ArrayList<Rectangle>();
         batch = new SpriteBatch();
         cam = new OrthographicCamera();
-        viewport = new FitViewport(240/ Pixels, 140/Pixels, cam);//240,140
+        cam.setToOrtho(false,240/ Pixels, 140/Pixels);
+        FitViewport viewport = new FitViewport(240/ Pixels, 140/Pixels, cam);//240,140
         stage = new Stage(viewport,batch);//65
+        stage2 = new Stage(viewport,batch);//65
         world = new World(new Vector2(0, -12), true);
         world.setContactListener(new WorldContactListener());
         shape = new ShapeRenderer();
@@ -427,8 +430,7 @@ public static Label monedasLabel;
     public void addRender(float delta)
     {
 
-
-        batch.enableBlending();
+       // batch.enableBlending();
         if (iterator2 == 0) {
             MyGdxGame.CoinObjects = 0;
             iterator2++;
@@ -463,7 +465,7 @@ public static Label monedasLabel;
             PunteroPosition2.x = -10000;
             PunteroPosition2.y = -10000;
         }
-        cam.update();
+
         if(ConfigurarCamara <= 50) {
             try {
                 cam.position.x = (add.player.getX() + .4f);
@@ -527,7 +529,6 @@ if(tocoPiso) {
         cam.position.y += .5f * Gdx.graphics.getDeltaTime();
     } else {
         if (itcam == 0) {
-        //    Gdx.app.log("SE activooooo","HIHIHOIJOI");
             cam.position.y = add.player.getY() + .5f;
             tocoPiso = false;
             itcam = 1;
@@ -539,10 +540,12 @@ if(tocoPiso) {
 
             }
         }
-        cam.update();
-        stage.act(delta);
-        world.step(delta,6,2);
-        stage.draw();
+/******/
+        batch.setProjectionMatrix(stage.getCamera().combined);
+        world.step(delta,6,10);//2 in position iterations
+
+
+/******/
 
             if (!Jugador.isMenu) {
                 over();
@@ -566,20 +569,13 @@ if(tocoPiso) {
                 } else {
                     iterator = true;
                 }
-
             }
 
        puntero.set(PunteroPosition.x-(5/Pixels),PunteroPosition.y-(5/Pixels),10/Pixels,10/Pixels);
         puntero2.set(PunteroPosition2.x-(5f/Pixels),PunteroPosition2.y-(5f/Pixels),10/Pixels,10/Pixels);
-
-
-        monedasLabel.setText(""+MyGdxGame.coins.getInteger("Coins"));
-        monedasLabel.setWrap(true);
-        container1.setDebug(true);
-        container1.setBounds(cam.position.x - 2, cam.position.y + 1.9f,10/Pixels,10/Pixels);
-        container1.setScale(.03f);
-        stage.addActor(container1);
         batch.end();
+        stage.act(delta);
+        stage2.act(delta);
 
     }
 
@@ -718,11 +714,23 @@ batch.begin();
                 /**************************/
                 /**************************/
                 /**************************/
+
                 if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.CasasDosPisosBuild
                         &&!MenuBuild.CasasBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build&&!MenuBuild.Arbusto1Build
                         &&!MenuBuild.Arbusto2Build&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.isCorralGallinasBuild&&!MenuBuild.buildMaquinaComida) {
                     if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isAlmacen) {
-                        MenuBuild.c1.setPosition(0,0);
+                        if(isIsNivelProgress2) {
+                            MenuBuild.c1.setPosition(0, 0);
+                            MenuBuild.c2.setPosition(0, 0);
+                            MenuBuild.c3.setPosition(0, 0);
+                            MenuBuild.c4.setPosition(0, 0);
+                            MenuBuild.c5.setPosition(0, 0);
+                            MenuBuild.c6.setPosition(0, 0);
+                            MenuBuild.c7.setPosition(0, 0);
+                            MenuBuild.c8.setPosition(0, 0);
+                            MenuBuild.c9.setPosition(0, 0);
+                            MenuBuild.c10.setPosition(0, 0);
+                        }
                         if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
 
 
@@ -851,7 +859,6 @@ batch.begin();
                         if(MenuBuild.isAlmacen)
                         {
                             MenuBuild.AlmacenS.draw(batch);
-                            MenuBuild.Almacen(batch);
                             MenuBuild.AlmacenR.set(AddResources.cam.position.x  +3, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
                             MenuBuild.moverR.set(0, 0, 0, 0);
                             MenuBuild.isMenu = false;
@@ -861,6 +868,7 @@ batch.begin();
                             AttackRect.set(0, 0, 0, 0);
                             SpeedRect.set(0, 0, 0, 0);
                             PauseRect.set(0, 0, 0, 0);
+                            MenuBuild.Almacen(batch);
                         }
                         if (MenuBuild.isMenu) {
                             MenuBuild m = new MenuBuild();
@@ -1120,6 +1128,12 @@ batch.begin();
             timeHome += 1f *Gdx.graphics.getDeltaTime();
         }
         batch.end();
+        monedasLabel.setText(""+MyGdxGame.coins.getInteger("Coins"));
+        monedasLabel.setWrap(true);
+        container1.setDebug(true);
+        container1.setBounds(stage.getCamera().position.x - 2, stage.getCamera().position.y + 1.9f,10/Pixels,10/Pixels);
+        container1.setScale(.03f);
+        stage2.addActor(container1);
     }
 
     public void actualizarDatos()
@@ -1597,6 +1611,7 @@ batch.begin();
     {
         batch.dispose();
         stage.dispose();
+        stage2.dispose();
         world.dispose();
         render.dispose();
         ray.dispose();

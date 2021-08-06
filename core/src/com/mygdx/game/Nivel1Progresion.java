@@ -111,6 +111,7 @@
          update();
          renderer.render();
          addR.addRender(delta);
+         addR.stage.draw();
          renderer2.render();
          addR.batchFunctions();
          update();

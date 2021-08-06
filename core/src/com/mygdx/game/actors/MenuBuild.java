@@ -908,60 +908,124 @@ public class MenuBuild extends Actor implements Disposable
             w.setAlpha(0.2f);
             w.setBounds(AddResources.cam.position.x - 3.8f + (22 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels),28/Pixels,10/Pixels);
             w.draw(batch);
-            l1.setText("X"+MyGdxGame.coins.getInteger("Coins"));
-            l1.setWrap(true);
-            l1.setPosition(AddResources.cam.position.x - 3.8f + (22 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels));
-            c1.setBounds(AddResources.cam.position.x - 3.8f + (22 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels),28/Pixels,10/Pixels);
-            c1.setPosition(AddResources.cam.position.x - 3.8f + (22 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels));
-            c1.setScale(.02f);
-            AddResources.stage.addActor(c1);
             batch.draw(TrigoA,AddResources.cam.position.x - 3.8f + (20 / Pixels),AddResources.cam.position.y - 2 + (20 / Pixels),32/Pixels,32/Pixels);
+            l1.setText("X"+MyGdxGame.TrigoStocks.getInteger("TrigoStocks"));
+            l1.setWrap(true);
+            l1.setPosition(AddResources.cam.position.x - 3.8f + (29 / Pixels),AddResources.cam.position.y - 2 + (15/ Pixels));
+            c1.setBounds(AddResources.cam.position.x - 3.8f + (29 / Pixels),AddResources.cam.position.y - 2 + (15 / Pixels),28/Pixels,10/Pixels);
+            c1.setPosition(AddResources.cam.position.x - 3.8f + (29 / Pixels),AddResources.cam.position.y - 2 + (15 / Pixels));//+5,+3,7,5
+            c1.setScale(.02f);
+            AddResources.stage2.addActor(c1);
             /****/
             w.setAlpha(0.2f);
             w.setBounds(AddResources.cam.position.x - 3.8f + (54 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels),28/Pixels,10/Pixels);
             w.draw(batch);
             batch.draw(MaizA,AddResources.cam.position.x - 3.8f + (52 / Pixels),AddResources.cam.position.y - 2 + (20 / Pixels),32/Pixels,32/Pixels);
+            l2.setText("X"+MyGdxGame.MaizStocks.getInteger("MaizStocks"));
+            l2.setWrap(true);
+            l2.setPosition((AddResources.cam.position.x - 3.8f) + (61 / Pixels),AddResources.cam.position.y - 2 + (15 / Pixels));
+            c2.setBounds(AddResources.cam.position.x - 3.8f + (61 / Pixels),AddResources.cam.position.y - 2 + (15 / Pixels),28/Pixels,10/Pixels);
+            c2.setPosition(AddResources.cam.position.x - 3.8f + (61 / Pixels),AddResources.cam.position.y - 2 + (15 / Pixels));//+5,+3,7,5
+            c2.setScale(.02f);
+            AddResources.stage2.addActor(c2);
             /****/
             w.setAlpha(0.2f);
             w.setBounds(AddResources.cam.position.x - 3.8f + (86 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels),28/Pixels,10/Pixels);
             w.draw(batch);
             batch.draw(SojaA,AddResources.cam.position.x - 3.8f + (84 / Pixels),AddResources.cam.position.y - 2 + (20 / Pixels),32/Pixels,32/Pixels);
+            l3.setText("X"+MyGdxGame.SojaStocks.getInteger("SojaStocks"));
+            l3.setWrap(true);
+            l3.setPosition(AddResources.cam.position.x - 3.8f + (91 / Pixels),AddResources.cam.position.y - 2 + (15/ Pixels));
+            c3.setBounds(AddResources.cam.position.x - 3.8f + (91 / Pixels),AddResources.cam.position.y - 2 + (15 / Pixels),28/Pixels,10/Pixels);
+            c3.setPosition(AddResources.cam.position.x - 3.8f + (91 / Pixels),AddResources.cam.position.y - 2 + (15 / Pixels));//+5,+3,7,5
+            c3.setScale(.02f);
+            AddResources.stage2.addActor(c3);
             /****/
             w.setAlpha(0.2f);
             w.setBounds(AddResources.cam.position.x - 3.8f + (118 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels),28/Pixels,10/Pixels);
             w.draw(batch);
             batch.draw(ZanahoriaA,AddResources.cam.position.x - 3.8f + (116 / Pixels),AddResources.cam.position.y - 2 + (20 / Pixels),32/Pixels,32/Pixels);
+            l4.setText("X"+MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks"));
+            l4.setWrap(true);
+            l4.setPosition(AddResources.cam.position.x - 3.8f + (125 / Pixels),AddResources.cam.position.y - 2 + (15 / Pixels));
+            c4.setBounds(AddResources.cam.position.x - 3.8f + (125 / Pixels),AddResources.cam.position.y - 2 + (15 / Pixels),28/Pixels,10/Pixels);
+            c4.setPosition(AddResources.cam.position.x - 3.8f + (125 / Pixels),AddResources.cam.position.y - 2 + (15 / Pixels));//+5,+3,7,5
+            c4.setScale(.02f);
+            AddResources.stage2.addActor(c4);
             /****/
             w.setAlpha(0.2f);
             w.setBounds(AddResources.cam.position.x - 3.8f + (150 / Pixels),AddResources.cam.position.y - 2 + (10 / Pixels),28/Pixels,10/Pixels);
             w.draw(batch);
             batch.draw(CanaA,AddResources.cam.position.x - 3.8f + (148 / Pixels),AddResources.cam.position.y - 2 + (20 / Pixels),32/Pixels,32/Pixels);
+            l5.setText("X"+MyGdxGame.CanaStocks.getInteger("CanaStocks"));
+            l5.setWrap(true);
+            l5.setPosition(AddResources.cam.position.x - 3.8f + (157 / Pixels),AddResources.cam.position.y - 2 + (15 / Pixels));
+            c5.setBounds(AddResources.cam.position.x - 3.8f + (157 / Pixels),AddResources.cam.position.y - 2 + (15 / Pixels),28/Pixels,10/Pixels);
+            c5.setPosition(AddResources.cam.position.x - 3.8f + (157 / Pixels),AddResources.cam.position.y - 2 + (15 / Pixels));//+5,+3,7,5
+            c5.setScale(.02f);
+            AddResources.stage2.addActor(c5);
             /****/
             w.setAlpha(0.2f);
             w.setBounds(AddResources.cam.position.x - 3.8f + (22 / Pixels),AddResources.cam.position.y - 2 + (58 / Pixels),28/Pixels,10/Pixels);
             w.draw(batch);
             batch.draw(AlgodonA,AddResources.cam.position.x - 3.8f + (20/ Pixels),AddResources.cam.position.y - 2 + (68 / Pixels),32/Pixels,32/Pixels);
+            l6.setText("X"+MyGdxGame.AlgodonStocks.getInteger("AlgodonStocks"));
+            l6.setWrap(true);
+            l6.setPosition(AddResources.cam.position.x - 3.8f + (29 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels));
+            c6.setBounds(AddResources.cam.position.x - 3.8f + (29 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels),28/Pixels,10/Pixels);
+            c6.setPosition(AddResources.cam.position.x - 3.8f + (29 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels));//+5,+3,7,5
+            c6.setScale(.02f);
+            AddResources.stage2.addActor(c6);
             /****/
             w.setAlpha(0.2f);
             w.setBounds(AddResources.cam.position.x - 3.8f + (54 / Pixels),AddResources.cam.position.y - 2 + (58 / Pixels),28/Pixels,10/Pixels);
             w.draw(batch);
             batch.draw(HuevosA,AddResources.cam.position.x - 3.8f + (52 / Pixels),AddResources.cam.position.y - 2 + (68 / Pixels),32/Pixels,32/Pixels);
+            l7.setText("X"+MyGdxGame.HuevosStocks.getInteger("HuevosStocks"));
+            l7.setWrap(true);
+            l7.setPosition(AddResources.cam.position.x - 3.8f + (61 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels));
+            c7.setBounds(AddResources.cam.position.x - 3.8f + (61 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels),28/Pixels,10/Pixels);
+            c7.setPosition(AddResources.cam.position.x - 3.8f + (61 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels));//+5,+3,7,5
+            c7.setScale(.02f);
+            AddResources.stage2.addActor(c7);
             /****/
             w.setAlpha(0.2f);
             w.setBounds(AddResources.cam.position.x - 3.8f + (86 / Pixels),AddResources.cam.position.y - 2 + (58 / Pixels),28/Pixels,10/Pixels);
             w.draw(batch);
             batch.draw(LecheA,AddResources.cam.position.x - 3.8f + (84 / Pixels),AddResources.cam.position.y - 2 + (70 / Pixels),32/Pixels,30/Pixels);
+            l8.setText("X"+MyGdxGame.LecheStocks.getInteger("LecheStocks"));
+            l8.setWrap(true);
+            l8.setPosition(AddResources.cam.position.x - 3.8f + (93 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels));
+            c8.setBounds(AddResources.cam.position.x - 3.8f + (93 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels),28/Pixels,10/Pixels);
+            c8.setPosition(AddResources.cam.position.x - 3.8f + (93 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels));//+5,+3,7,5
+            c8.setScale(.02f);
+            AddResources.stage2.addActor(c8);
             /****/
             w.setAlpha(0.2f);
             w.setBounds(AddResources.cam.position.x - 3.8f + (118 / Pixels),AddResources.cam.position.y - 2 + (58 / Pixels),28/Pixels,10/Pixels);
             w.draw(batch);
             batch.draw(ComidaGallina,AddResources.cam.position.x - 3.8f + (116 / Pixels),AddResources.cam.position.y - 2 + (68 / Pixels),32/Pixels,32/Pixels);
+            l9.setText("X"+MyGdxGame.ComidaGallinaStocks.getInteger("ComidaGallinaStocks"));
+            l9.setWrap(true);
+            l9.setPosition(AddResources.cam.position.x - 3.8f + (125 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels));
+            c9.setBounds(AddResources.cam.position.x - 3.8f + (125 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels),28/Pixels,10/Pixels);
+            c9.setPosition(AddResources.cam.position.x - 3.8f + (125 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels));//+5,+3,7,5
+            c9.setScale(.02f);
+            AddResources.stage2.addActor(c9);
             /****/
             w.setAlpha(0.2f);
             w.setBounds(AddResources.cam.position.x - 3.8f + (150 / Pixels),AddResources.cam.position.y - 2 + (58 / Pixels),28/Pixels,10/Pixels);
             w.draw(batch);
             batch.draw(ComidaVaca,AddResources.cam.position.x - 3.8f + (148 / Pixels),AddResources.cam.position.y - 2 + (68 / Pixels),32/Pixels,32/Pixels);
+            l10.setText("X"+MyGdxGame.ComidaVacaStocks.getInteger("ComidaVacaStocks"));
+            l10.setWrap(true);
+            l10.setPosition(AddResources.cam.position.x - 3.8f + (157 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels));
+            c10.setBounds(AddResources.cam.position.x - 3.8f + (157 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels),28/Pixels,10/Pixels);
+            c10.setPosition(AddResources.cam.position.x - 3.8f + (157 / Pixels),AddResources.cam.position.y - 2 + (63 / Pixels));//+5,+3,7,5
+            c10.setScale(.02f);
+            AddResources.stage2.addActor(c10);
             /****/
+
         }
     }
 

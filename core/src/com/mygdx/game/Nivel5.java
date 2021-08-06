@@ -81,6 +81,7 @@
          Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
          batch.begin();
          MyGdxGame.isNivelProgress1 = false;
+         MyGdxGame.isIsNivelProgress2 = false;
          TextureRegion fondoA = fondoAnimation.getKeyFrame(time,true);
 
 
@@ -89,6 +90,7 @@
          update(delta);
          renderer2.render();
          addR.addRender(delta);
+         addR.stage.draw();
          renderer.render();
          addR.batchFunctions();
 
