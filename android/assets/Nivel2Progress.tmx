@@ -475,17 +475,17 @@
   <object id="646" x="6159" y="953.167" width="240.667" height="72.1667"/>
   <object id="648" x="5546" y="943.667" width="4.6667" height="33"/>
   <object id="649" x="5423.33" y="944" width="3.33333" height="32.6667"/>
-  <object id="650" x="5423" y="945" width="1.3333" height="97.6667"/>
-  <object id="657" x="5552" y="991" width="10.3333" height="35.3333"/>
-  <object id="662" x="4759.5" y="961" width="32" height="80.5"/>
+  <object id="650" x="5419.63" y="945" width="4.7083" height="97.6667"/>
+  <object id="657" x="5552" y="982.75" width="10.5833" height="43.5833"/>
+  <object id="662" x="4755.63" y="961" width="35.875" height="80.5"/>
   <object id="664" x="4625" y="932" width="123" height="26.5"/>
-  <object id="665" x="4272.5" y="991.25" width="62.5" height="90"/>
+  <object id="665" x="4272.5" y="960.75" width="56" height="120.5"/>
  </objectgroup>
  <objectgroup id="69" name="Build">
   <object id="652" x="4793.17" y="1004.67" width="627" height="66.5"/>
   <object id="653" x="5429.5" y="942.667" width="115.333" height="34.6667"/>
-  <object id="654" x="5567.84" y="991.667" width="589.666" height="33"/>
-  <object id="663" x="4339.76" y="970.157" width="414.467" height="85.761" rotation="359.99"/>
+  <object id="654" x="5563.47" y="991.917" width="594.041" height="33"/>
+  <object id="663" x="4329.39" y="957.282" width="424.84" height="98.6378" rotation="359.99"/>
   <object id="666" x="4091.76" y="966.578" width="179.221" height="85.761" rotation="359.99"/>
  </objectgroup>
  <layer id="1" name="Capa de patrones 1" width="400" height="80">

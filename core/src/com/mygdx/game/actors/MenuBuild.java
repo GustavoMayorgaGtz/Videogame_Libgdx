@@ -24,6 +24,7 @@ import static com.mygdx.game.MyGdxGame.CorralGallinasColocadas;
 import static com.mygdx.game.MyGdxGame.CorralVacaColocadas;
 import static com.mygdx.game.MyGdxGame.Pixels;
 import static com.mygdx.game.MyGdxGame.agua1;
+import static com.mygdx.game.MyGdxGame.tierra1Maiz;
 
 public class MenuBuild extends Actor implements Disposable
 {
@@ -117,8 +118,9 @@ public class MenuBuild extends Actor implements Disposable
 
     /**ALmacen de Recursos**/
     public static Texture TrigoA,MaizA,SojaA,ZanahoriaA,CanaA,AlgodonA,LecheA,HuevosA,ComidaVaca,ComidaGallina;
+
     public static Sprite w;
-    Texture Blanco;
+    public static Texture Blanco;
     public static Container c1,c2,c3,c4,c5,c6,c7,c8,c9,c10;
     public static Label l1,l2,l3,l4,l5,l6,l7,l8,l9,l10;
 
@@ -132,6 +134,13 @@ public class MenuBuild extends Actor implements Disposable
     Texture Vaca;
     Sprite VacaS;
     Rectangle VacaR;
+
+    /**MandarAlmacen**/
+    public static float FiguraX,FiguraY,diferencia,AlmacenX = 4, EY;
+    public static boolean TrigoB,MaizB,SojaB,ZanahoriaB,CanaB,AlgodonB,LecheB,HuevosB,ComidaVacaB,ComidaGallinaB;
+    public static int iteratorAlmacen = 0;
+    public static boolean MandarAlmacen;
+    public static Rectangle Figura;
 
     public MenuBuild()
     {
@@ -321,6 +330,9 @@ public class MenuBuild extends Actor implements Disposable
         c9.setTransform(true);
        c10.setTransform(true);
 
+       //MandarAlmacen//
+        Figura = new Rectangle();
+
     }
 
     @Override
@@ -384,7 +396,7 @@ public class MenuBuild extends Actor implements Disposable
         if(isMenu) {
             timeCultivos += 1 * Gdx.graphics.getDeltaTime();
             timeRetrasar = timeRetrasar + 1 * Gdx.graphics.getDeltaTime();
-          //   Gdx.app.log("timeCultivos", "" + timeCultivos);
+
         }else
         {
             timeRetrasar = 0;
@@ -394,9 +406,85 @@ public class MenuBuild extends Actor implements Disposable
             timeRetrasar = 0;
         }
         MenuSeeds(batch);
-
+        /*if(Gdx.input.isTouched()) {
+            MandarAlmacen = true;
+            FiguraX = Tierra1.Cuerpo.x + (10 / Pixels);
+            FiguraY = Tierra1.Cuerpo.y + (32 / Pixels);
+        }*/
     }
 
+    public static void MandarAlmacen(Batch batch,float Iy)
+    {
+        if(MenuBuild.FiguraX < AddResources.cam.position.x +3)
+        {
+            MenuBuild.FiguraX += (180/Pixels)*Gdx.graphics.getDeltaTime();
+        }else
+        {
+            MenuBuild.FiguraX = AddResources.cam.position.x +3;
+        }
+        MenuBuild.AlmacenX = AlmacenX + (Gdx.graphics.getDeltaTime());
+        MenuBuild.EY = (float) Math.pow(.90f*(MenuBuild.AlmacenX),2);
+          if(MenuBuild.iteratorAlmacen == 0) {
+
+              MenuBuild.diferencia = MenuBuild.EY - MenuBuild.FiguraY;
+              MenuBuild.iteratorAlmacen++;
+          }
+        MenuBuild.EY = MenuBuild.EY - MenuBuild.diferencia;
+          if(MenuBuild.EY < AddResources.cam.position.y+(25/Pixels) ) {
+
+          }else
+          {
+              EY = AddResources.cam.position.y+(25/Pixels);
+          }
+
+          /*if(Gdx.input.isTouched()) {
+              Gdx.app.log("EY", "" + EY);
+              Gdx.app.log("AlmacenX", "" + MenuBuild.AlmacenX);
+              Gdx.app.log("resources", "" + AddResources.cam.position.y + (25 / Pixels));
+              Gdx.app.log("Diferencia", "" + MenuBuild.diferencia);
+          }*/
+          Figura.set(FiguraX,EY,5/Pixels,5/Pixels);
+          if(TrigoB)
+          {
+              batch.draw(MenuBuild. TrigoA,FiguraX,EY,15/Pixels,15/Pixels);
+          }else if(MaizB)
+          {
+              batch.draw(MenuBuild. MaizA,FiguraX,EY,15/Pixels,15/Pixels);
+          }else if(SojaB)
+          {
+              batch.draw(MenuBuild. SojaA,FiguraX,EY,15/Pixels,15/Pixels);
+          }else if(ZanahoriaB)
+          {
+              batch.draw(MenuBuild. ZanahoriaA,FiguraX,EY,15/Pixels,15/Pixels);
+          }else if(CanaB)
+          {
+              batch.draw(MenuBuild. CanaA,FiguraX,EY,15/Pixels,15/Pixels);
+          }else if(AlgodonB)
+          {
+              batch.draw(MenuBuild. AlgodonA,FiguraX,EY,15/Pixels,15/Pixels);
+          }
+          else if(LecheB)
+          {
+              batch.draw(MenuBuild. LecheA,FiguraX,EY,15/Pixels,15/Pixels);
+          }
+          else if(HuevosB)
+          {
+              batch.draw(MenuBuild. HuevosA,FiguraX,EY,15/Pixels,15/Pixels);
+          }
+          else if(ComidaVacaB)
+          {
+              batch.draw(MenuBuild. ComidaVaca,FiguraX,EY,15/Pixels,15/Pixels);
+          }
+          else if(ComidaGallinaB)
+          {
+              batch.draw(MenuBuild. ComidaGallina,FiguraX,EY,15/Pixels,15/Pixels);
+          }
+
+if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
+{
+    MenuBuild.MandarAlmacen = false;
+}
+    }
     public void MenuSeeds(Batch batch) {
         if(sube) {
             if (abs < 5) {
@@ -433,6 +521,7 @@ public class MenuBuild extends Actor implements Disposable
                                 isTierra4 = false;
                                 isTierra5 = false;
                                 isMenuSeedSelection = true;
+
                             }
                         }
                     }
@@ -444,7 +533,64 @@ public class MenuBuild extends Actor implements Disposable
                         float y = (Tierra1.Cuerpo.y + Tierra1.Cuerpo.height) + (abs / Pixels);
                         batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
                         if (Tierra1.Cuerpo.overlaps(AddResources.puntero)) {
+                            if(MyGdxGame.tierra1Trigo.getBoolean("tierra11"))
+                            {
+                                TrigoB = true;
+                                int actual  = MyGdxGame.TrigoStocks.getInteger("TrigoStocks");
+                                actual += 3;
+                                MyGdxGame.TrigoStocks.putInteger("TrigoStocks",actual);
+                                MyGdxGame.TrigoStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra1Maiz.getBoolean("tierra12"))
+                            {
+                                MaizB = true;
+                                int actual  = MyGdxGame.MaizStocks.getInteger("MaizStocks");
+                                actual += 3;
+                                MyGdxGame.MaizStocks.putInteger("MaizStocks",actual);
+                                MyGdxGame.MaizStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra1Soja.getBoolean("tierra13"))
+                            {
+                                SojaB = true;
+                                int actual  = MyGdxGame.SojaStocks.getInteger("SojaStocks");
+                                actual += 3;
+                                MyGdxGame.SojaStocks.putInteger("SojaStocks",actual);
+                                MyGdxGame.SojaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra1Zanahoria.getBoolean("tierra14"))
+                            {
+                                ZanahoriaB = true;
+                                int actual  = MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks");
+                                actual += 3;
+                                MyGdxGame.ZanahoriaStocks.putInteger("ZanahoriaStocks",actual);
+                                MyGdxGame.ZanahoriaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra1Cana.getBoolean("tierra15"))
+                            {
+                                CanaB = true;
+                                int actual  = MyGdxGame.CanaStocks.getInteger("CanaStocks");
+                                actual += 3;
+                                MyGdxGame.CanaStocks.putInteger("CanaStocks",actual);
+                                MyGdxGame.CanaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra1Algodon.getBoolean("tierra16"))
+                            {
+                                AlgodonB = true;
+                                int actual  = MyGdxGame.AlgodonStocks.getInteger("AlgodonStocks");
+                                actual += 3;
+                                MyGdxGame.AlgodonStocks.putInteger("AlgodonStocks",actual);
+                                MyGdxGame.AlgodonStocks.flush();
+                            }
+                            MandarAlmacen = true;
+                            FiguraX = Tierra1.Cuerpo.x+(10/Pixels);
+                            FiguraY = Tierra1.Cuerpo.y+(32/Pixels);
                             Tierra1.reiniciar = true;
+
 
                         }
                     }
@@ -477,6 +623,61 @@ public class MenuBuild extends Actor implements Disposable
                         float y = (Tierra2.Cuerpo.y + Tierra2.Cuerpo.height) + (abs / Pixels);
                         batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
                         if (Tierra2.Cuerpo.overlaps(AddResources.puntero)) {
+                            if(MyGdxGame.tierra2Trigo.getBoolean("tierra21"))
+                            {
+                                TrigoB = true;
+                                int actual  = MyGdxGame.TrigoStocks.getInteger("TrigoStocks");
+                                actual += 3;
+                                MyGdxGame.TrigoStocks.putInteger("TrigoStocks",actual);
+                                MyGdxGame.TrigoStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra2Maiz.getBoolean("tierra22"))
+                            {
+                                MaizB = true;
+                                int actual  = MyGdxGame.MaizStocks.getInteger("MaizStocks");
+                                actual += 3;
+                                MyGdxGame.MaizStocks.putInteger("MaizStocks",actual);
+                                MyGdxGame.MaizStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra2Soja.getBoolean("tierra23"))
+                            {
+                                SojaB = true;
+                                int actual  = MyGdxGame.SojaStocks.getInteger("SojaStocks");
+                                actual += 3;
+                                MyGdxGame.SojaStocks.putInteger("SojaStocks",actual);
+                                MyGdxGame.SojaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra2Zanahoria.getBoolean("tierra24"))
+                            {
+                                ZanahoriaB = true;
+                                int actual  = MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks");
+                                actual += 3;
+                                MyGdxGame.ZanahoriaStocks.putInteger("ZanahoriaStocks",actual);
+                                MyGdxGame.ZanahoriaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra2Cana.getBoolean("tierra25"))
+                            {
+                                CanaB = true;
+                                int actual  = MyGdxGame.CanaStocks.getInteger("CanaStocks");
+                                actual += 3;
+                                MyGdxGame.CanaStocks.putInteger("CanaStocks",actual);
+                                MyGdxGame.CanaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra2Algodon.getBoolean("tierra26"))        {
+                                AlgodonB = true;
+                                int actual  = MyGdxGame.AlgodonStocks.getInteger("AlgodonStocks");
+                                actual += 3;
+                                MyGdxGame.AlgodonStocks.putInteger("AlgodonStocks",actual);
+                                MyGdxGame.AlgodonStocks.flush();
+                            }
+                            MandarAlmacen = true;
+                            FiguraX = Tierra2.Cuerpo.x+(10/Pixels);
+                            FiguraY = Tierra2.Cuerpo.y+(32/Pixels);
                             Tierra2.reiniciar = true;
 
                         }
@@ -510,6 +711,61 @@ public class MenuBuild extends Actor implements Disposable
                         float y = (Tierra3.Cuerpo.y + Tierra3.Cuerpo.height) + (abs / Pixels);
                         batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
                         if (Tierra3.Cuerpo.overlaps(AddResources.puntero)) {
+                            if(MyGdxGame.tierra3Trigo.getBoolean("tierra31"))
+                            {
+                                TrigoB = true;
+                                int actual  = MyGdxGame.TrigoStocks.getInteger("TrigoStocks");
+                                actual += 3;
+                                MyGdxGame.TrigoStocks.putInteger("TrigoStocks",actual);
+                                MyGdxGame.TrigoStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra3Maiz.getBoolean("tierra32"))
+                            {
+                                MaizB = true;
+                                int actual  = MyGdxGame.MaizStocks.getInteger("MaizStocks");
+                                actual += 3;
+                                MyGdxGame.MaizStocks.putInteger("MaizStocks",actual);
+                                MyGdxGame.MaizStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra3Soja.getBoolean("tierra33"))
+                            {
+                                SojaB = true;
+                                int actual  = MyGdxGame.SojaStocks.getInteger("SojaStocks");
+                                actual += 3;
+                                MyGdxGame.SojaStocks.putInteger("SojaStocks",actual);
+                                MyGdxGame.SojaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra3Zanahoria.getBoolean("tierra34"))
+                            {
+                                ZanahoriaB = true;
+                                int actual  = MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks");
+                                actual += 3;
+                                MyGdxGame.ZanahoriaStocks.putInteger("ZanahoriaStocks",actual);
+                                MyGdxGame.ZanahoriaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra3Cana.getBoolean("tierra35"))
+                            {
+                                CanaB = true;
+                                int actual  = MyGdxGame.CanaStocks.getInteger("CanaStocks");
+                                actual += 3;
+                                MyGdxGame.CanaStocks.putInteger("CanaStocks",actual);
+                                MyGdxGame.CanaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra3Algodon.getBoolean("tierra36"))        {
+                                AlgodonB = true;
+                                int actual  = MyGdxGame.AlgodonStocks.getInteger("AlgodonStocks");
+                                actual += 3;
+                                MyGdxGame.AlgodonStocks.putInteger("AlgodonStocks",actual);
+                                MyGdxGame.AlgodonStocks.flush();
+                            }
+                            MandarAlmacen = true;
+                            FiguraX = Tierra3.Cuerpo.x+(10/Pixels);
+                            FiguraY = Tierra3.Cuerpo.y+(32/Pixels);
                             Tierra3.reiniciar = true;
                         }
                     }
@@ -543,6 +799,61 @@ public class MenuBuild extends Actor implements Disposable
                         float y = (Tierra4.Cuerpo.y + Tierra4.Cuerpo.height) + (abs / Pixels);
                         batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
                         if (Tierra4.Cuerpo.overlaps(AddResources.puntero)) {
+                            if(MyGdxGame.tierra4Trigo.getBoolean("tierra41"))
+                            {
+                                TrigoB = true;
+                                int actual  = MyGdxGame.TrigoStocks.getInteger("TrigoStocks");
+                                actual += 3;
+                                MyGdxGame.TrigoStocks.putInteger("TrigoStocks",actual);
+                                MyGdxGame.TrigoStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra4Maiz.getBoolean("tierra42"))
+                            {
+                                MaizB = true;
+                                int actual  = MyGdxGame.MaizStocks.getInteger("MaizStocks");
+                                actual += 3;
+                                MyGdxGame.MaizStocks.putInteger("MaizStocks",actual);
+                                MyGdxGame.MaizStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra4Soja.getBoolean("tierra43"))
+                            {
+                                SojaB = true;
+                                int actual  = MyGdxGame.SojaStocks.getInteger("SojaStocks");
+                                actual += 3;
+                                MyGdxGame.SojaStocks.putInteger("SojaStocks",actual);
+                                MyGdxGame.SojaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra4Zanahoria.getBoolean("tierra44"))
+                            {
+                                ZanahoriaB = true;
+                                int actual  = MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks");
+                                actual += 3;
+                                MyGdxGame.ZanahoriaStocks.putInteger("ZanahoriaStocks",actual);
+                                MyGdxGame.ZanahoriaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra4Cana.getBoolean("tierra45"))
+                            {
+                                CanaB = true;
+                                int actual  = MyGdxGame.CanaStocks.getInteger("CanaStocks");
+                                actual += 3;
+                                MyGdxGame.CanaStocks.putInteger("CanaStocks",actual);
+                                MyGdxGame.CanaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra4Algodon.getBoolean("tierra46"))        {
+                                AlgodonB = true;
+                                int actual  = MyGdxGame.AlgodonStocks.getInteger("AlgodonStocks");
+                                actual += 3;
+                                MyGdxGame.AlgodonStocks.putInteger("AlgodonStocks",actual);
+                                MyGdxGame.AlgodonStocks.flush();
+                            }
+                            MandarAlmacen = true;
+                            FiguraX = Tierra4.Cuerpo.x+(10/Pixels);
+                            FiguraY = Tierra4.Cuerpo.y+(32/Pixels);
                             Tierra4.reiniciar = true;
                         }
                     }
@@ -575,6 +886,61 @@ public class MenuBuild extends Actor implements Disposable
                         float y = (Tierra5.Cuerpo.y + Tierra5.Cuerpo.height) + (abs / Pixels);
                         batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
                         if (Tierra5.Cuerpo.overlaps(AddResources.puntero)) {
+                            if(MyGdxGame.tierra5Trigo.getBoolean("tierra51"))
+                            {
+                                TrigoB  = true;
+                                int actual  = MyGdxGame.TrigoStocks.getInteger("TrigoStocks");
+                                actual += 3;
+                                MyGdxGame.TrigoStocks.putInteger("TrigoStocks",actual);
+                                MyGdxGame.TrigoStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra5Maiz.getBoolean("tierra52"))
+                            {
+                                MaizB = true;
+                                int actual  = MyGdxGame.MaizStocks.getInteger("MaizStocks");
+                                actual += 3;
+                                MyGdxGame.MaizStocks.putInteger("MaizStocks",actual);
+                                MyGdxGame.MaizStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra5Soja.getBoolean("tierra53"))
+                            {
+                                SojaB = true;
+                                int actual  = MyGdxGame.SojaStocks.getInteger("SojaStocks");
+                                actual += 3;
+                                MyGdxGame.SojaStocks.putInteger("SojaStocks",actual);
+                                MyGdxGame.SojaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra5Zanahoria.getBoolean("tierra54"))
+                            {
+                                ZanahoriaB = true;
+                                int actual  = MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks");
+                                actual += 3;
+                                MyGdxGame.ZanahoriaStocks.putInteger("ZanahoriaStocks",actual);
+                                MyGdxGame.ZanahoriaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra5Cana.getBoolean("tierra55"))
+                            {
+                                CanaB = true;
+                                int actual  = MyGdxGame.CanaStocks.getInteger("CanaStocks");
+                                actual += 3;
+                                MyGdxGame.CanaStocks.putInteger("CanaStocks",actual);
+                                MyGdxGame.CanaStocks.flush();
+                            }
+
+                            if(MyGdxGame.tierra5Algodon.getBoolean("tierra56"))        {
+                                AlgodonB = true;
+                                int actual  = MyGdxGame.AlgodonStocks.getInteger("AlgodonStocks");
+                                actual += 3;
+                                MyGdxGame.AlgodonStocks.putInteger("AlgodonStocks",actual);
+                                MyGdxGame.AlgodonStocks.flush();
+                            }
+                            MandarAlmacen = true;
+                            FiguraX = Tierra5.Cuerpo.x+(10/Pixels);
+                            FiguraY = Tierra5.Cuerpo.y+(32/Pixels);
                             Tierra5.reiniciar = true;
                         }
                     }

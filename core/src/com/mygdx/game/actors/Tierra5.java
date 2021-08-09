@@ -11,6 +11,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.tiled.AddResources;
 
 import static com.mygdx.game.MyGdxGame.Pixels;
+import static com.mygdx.game.MyGdxGame.tierra1;
 import static com.mygdx.game.MyGdxGame.tierra2;
 import static com.mygdx.game.MyGdxGame.tierra5;
 import static com.mygdx.game.actors.Tierra1.Build;
@@ -347,7 +348,7 @@ if(MenuBuild.BuildTierra&&MyGdxGame.TierrasColocadas.getInteger("Posiciones") ==
     }
     if(!MenuBuild.BuildTierra) {
 
-        Cuerpo.set(x, y, 32 / Pixels, 32 / Pixels);
+        Cuerpo.set(x, y, 32 / Pixels, 40/ Pixels);
     }else
     {
         Cuerpo.set(0,0,0,0);
@@ -369,28 +370,35 @@ if(MenuBuild.isMover) {
 
 {
     MenuBuild.BuildMover = true;
-    for (Rectangle e :  Tierra1.rects) {
-        if (Jugador.jugador.overlaps(e)) {
-            if (noToca) {
+    for (Rectangle e : Tierra1.rects) {
+        if (noToca) {
+            if (Jugador.jugador.overlaps(e)) {
                 y = (e.y + (5 / Pixels)) - 32 / Pixels;
                 x = Jugador.body.getPosition().x;
                 Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
+            }
+        }
+    }
+    for (Rectangle e : Tierra1.rects) {
+        if (Jugador.jugador.overlaps(e)) {
+            if (noToca) {
                 tierra5.putFloat("X5", Jugador.body.getPosition().x);
                 if(AddResources.TouchConfirm) {
                     tierra5.flush();
+
                 }
                 tierra5.putFloat("Y5", (e.y + (5 / Pixels)) - 32 / Pixels);
                 if(AddResources.TouchConfirm) {
                     tierra5.flush();
                     MenuBuild.BuildMover = false;
                     MenuBuild.isMenu = false;
+
                     cambiarPosicion = false;
                     timeDurationTouch = 0;
                 }
             }
         }
     }
-
 }else
         {
             cambiarPosicion = false;

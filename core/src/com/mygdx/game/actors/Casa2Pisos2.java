@@ -117,16 +117,17 @@ public class Casa2Pisos2 extends Actor implements Disposable {
         /**Bloque Aldeana**/
         if(MyGdxGame.CasasDosPisosColocadas.getInteger("Posiciones3") >= 2)
         {
-            for(Rectangle no: Tierra1.noBuild) {
-                if (no.overlaps(Aldeana1R)) {
-                    noToca2 = false;
-                }
-            }
             for(Rectangle yes: Tierra1.Build) {
                 if (yes.overlaps(Aldeana1R)) {
                     noToca2 = true;
                 }
             }
+            for(Rectangle no: Tierra1.noBuild) {
+                if (no.overlaps(Aldeana1R)) {
+                    noToca2 = false;
+                }
+            }
+
             if(iterator == 0) {
                 A1X = x;
                 A1Y = y;
@@ -143,7 +144,7 @@ public class Casa2Pisos2 extends Actor implements Disposable {
                 espera += 1 * Gdx.graphics.getDeltaTime();
                 A1X = A1X + (10 * Gdx.graphics.getDeltaTime() / Pixels);
             }
-            if(espera > 0.5f) {
+            if(espera > 1f) {
                 if (!noToca2) {
                     if (!isRight) {
                         espera = 0;
@@ -178,7 +179,7 @@ public class Casa2Pisos2 extends Actor implements Disposable {
                 }
             }
 
-            Aldeana1R.set(A1X,A1Y,28/Pixels,24/Pixels);
+            Aldeana1R.set(A1X+(5/Pixels),A1Y,18/Pixels,24/Pixels);
             if(isLeft)
             {
                 batch.draw(izquierda, A1X,A1Y,28/Pixels,24/Pixels);

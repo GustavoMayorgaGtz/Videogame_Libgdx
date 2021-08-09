@@ -51,6 +51,7 @@ public class Tierra1 extends Actor implements Disposable {
     Texture CanaFase1,CanaFase2;
     Texture AlgoFase1,AlgoFase2;
     public static int isOld;
+
     public Tierra1()
     {
             rango = new Texture("cuadradoNegro.png");
