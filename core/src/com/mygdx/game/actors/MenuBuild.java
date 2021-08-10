@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.Menu;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.tiled.AddActors;
 import com.mygdx.game.tiled.AddResources;
 
 import static com.mygdx.game.MyGdxGame.CasaDosPisos1;
@@ -25,10 +26,11 @@ import static com.mygdx.game.MyGdxGame.CorralVacaColocadas;
 import static com.mygdx.game.MyGdxGame.Pixels;
 import static com.mygdx.game.MyGdxGame.agua1;
 import static com.mygdx.game.MyGdxGame.tierra1Maiz;
+import static com.mygdx.game.tiled.AddResources.puntero;
 
 public class MenuBuild extends Actor implements Disposable
 {
-
+   MyGdxGame game = new MyGdxGame();
     Texture logo;
      public static Sprite Logo;
     public static Rectangle Cuadro;
@@ -37,7 +39,7 @@ public class MenuBuild extends Actor implements Disposable
 
     /*****Menu****/
     public static float timeRetrasar; //retrasa la seleccion para no seleccionar un menu por accidente
-    Texture equis;
+    public static Texture equis;
     Texture fondo,logo1,logo2,logo3,logo4;
     public static Rectangle Menu1,Menu2,Menu3,Menu4,Salir;
     public static Sprite Fondo,Fondo2,Fondo3,Logo1,Logo2,Logo3,Logo4;
@@ -118,12 +120,12 @@ public class MenuBuild extends Actor implements Disposable
 
     /**ALmacen de Recursos**/
     public static Texture TrigoA,MaizA,SojaA,ZanahoriaA,CanaA,AlgodonA,LecheA,HuevosA,ComidaVaca,ComidaGallina;
-
     public static Sprite w;
     public static Texture Blanco;
     public static Container c1,c2,c3,c4,c5,c6,c7,c8,c9,c10;
     public static Label l1,l2,l3,l4,l5,l6,l7,l8,l9,l10;
-
+    public static Label MaizMenu1,MaizMenu2,SojaMenu1,SojaMenu2,TrigoMenu,ZanahoriaMenu;
+    public static Container MaizMenuC1,MaizMenuC2,SojaMenuC1,SojaMenuC2,TrigoMenuC,ZanahoriaMenuC;
 
     public static boolean vacaBuild = false,gallinaBuild = false;
 
@@ -141,52 +143,28 @@ public class MenuBuild extends Actor implements Disposable
     public static int iteratorAlmacen = 0;
     public static boolean MandarAlmacen;
     public static Rectangle Figura;
+    public static Rectangle ComidaGallinaR,ComidaVacaR;
+    public static float alphaS1,alphaS2,alphaS3,alphaS4,alphaS5,alphas6;
 
     public MenuBuild()
     {
-        negro = new Texture("White.png");
-        equis= new Texture("X.png");
-        switch(MyGdxGame.ColorControl.getInteger("Color")) {
-            case 0: {
-                logo = new Texture("controles/Blanco/Inicia.png");
-                break;
-            }
-            case 1:
-            {
-                logo = new Texture("controles/Inicia.png");
-                break;
-            }
-            case 2: {
-                logo = new Texture("controles/Azul/Inicia.png");
 
-                break;
-            }
-            case 3: {
-                logo = new Texture("controles/Amarillo/Inicia.png");
-                break;
-            }
-            case 4: {
-                logo = new Texture("controles/Rosa/Inicia.png");
-                break;
-            }
-            case 5: {
-                logo = new Texture("controles/Verde/Inicia.png");
-                break;
-            }
-        }
+        negro = MyGdxGame.getManager().get("White.png");
+        equis= MyGdxGame.getManager().get("X.png");
+        logo =MyGdxGame.getManager().get("Inicia.png");
         Cuadro = new Rectangle();
         Logo = new Sprite(logo);
 
         /*****Menu*****/
-        logo1 = new Texture("Logo1.png");
+        logo1 = MyGdxGame.getManager().get("Logo1.png");
         Logo1 = new Sprite(logo1);
-        logo2 = new Texture("Logo2.png");
+        logo2 =MyGdxGame.getManager().get("Logo2.png");
         Logo2 = new Sprite(logo2);
-        logo3 = new Texture("Logo3.png");
+        logo3 =MyGdxGame.getManager().get("Logo3.png");
         Logo3 = new Sprite(logo3);
-        logo4 = new Texture("Logo4.png");
+        logo4 =MyGdxGame.getManager().get("Logo4.png");
         Logo4 = new Sprite(logo4);
-        fondo = new Texture("cuadradoNegro.png");
+        fondo = MyGdxGame.getManager().get("cuadradoNegro.png");
         Fondo = new Sprite(fondo);
         Fondo2 = new Sprite(fondo);
         Fondo3 = new Sprite(fondo);
@@ -198,14 +176,14 @@ public class MenuBuild extends Actor implements Disposable
         Menu4 = new Rectangle();
         Salir = new Rectangle();
 
-        Tierra = new Texture("Tierral.png");
-        Agua = new Texture("Agua.png");
-        Trigo = new Texture("Trigo.png");
-        Maiz = new Texture("Maiz.png");
-        Soja = new Texture("Soja.png");
-        Zanahoria = new Texture("Zanahoria.png");
-        Cana = new Texture("Caña.png");
-        Algodon = new Texture("Algodon.png");
+        Tierra = MyGdxGame.getManager().get("Tierral.png");
+        Agua =MyGdxGame.getManager().get("Agua.png");
+        Trigo = MyGdxGame.getManager().get("Trigo.png");
+        Maiz = MyGdxGame.getManager().get("Maiz.png");
+        Soja = MyGdxGame.getManager().get("Soja.png");
+        Zanahoria =MyGdxGame.getManager().get("Zanahoria.png");
+        Cana = MyGdxGame.getManager().get("Caña.png");
+        Algodon = MyGdxGame.getManager().get("Algodon.png");
 
         TierraS = new Sprite(Tierra);
         AguaS = new Sprite(Agua);
@@ -216,8 +194,8 @@ public class MenuBuild extends Actor implements Disposable
         CanaS = new Sprite(Cana);
         AlgodonS = new Sprite(Algodon);
 
-        flechaVerde = new Texture("FlechaVerde.png");
-        flechaRoja = new Texture("FlechaRoja.png");
+        flechaVerde = MyGdxGame.getManager().get("FlechaVerde.png");
+        flechaRoja = MyGdxGame.getManager().get("FlechaRoja.png");
 
         tierraR = new Rectangle();
         aguaR  = new Rectangle();
@@ -236,21 +214,21 @@ public class MenuBuild extends Actor implements Disposable
         canaR2 = new Rectangle();
         algodonR2 = new Rectangle();
 
-        mover = new Texture("MoveOn.png");
+        mover = MyGdxGame.getManager().get("MoveOn.png");
         moverR = new Rectangle();
         moverS = new Sprite(mover);
 
-        Maceta1 = new Texture("Maceta1.png");
-        Maceta2 = new Texture("Maceta2.png");
+        Maceta1 = MyGdxGame.getManager().get("Maceta1.png");
+        Maceta2 = MyGdxGame.getManager().get("Maceta2.png");
         Maceta1S = new Sprite(Maceta1);
         Maceta2S = new Sprite(Maceta2);
-        Casa2Pisos = new Texture("CasaDosPisos.png");
-        Casa = new Texture("Casa.png");
+        Casa2Pisos =MyGdxGame.getManager().get("CasaDosPisos.png");
+        Casa = MyGdxGame.getManager().get("Casa.png");
         Casa2PisosS = new Sprite(Casa2Pisos);
         CasaS = new Sprite(Casa);
-        Arbusto1 = new Texture("BoteAguaS.png");
+        Arbusto1 = MyGdxGame.getManager().get("BoteAguaS.png");
         Arbusto1S = new Sprite(Arbusto1);
-        Arbusto2 = new Texture("Arbusto2.png");
+        Arbusto2 = MyGdxGame.getManager().get("Arbusto2.png");
         Arbusto2S = new Sprite(Arbusto2);
 
         Casa2PisosR = new Rectangle();
@@ -261,43 +239,43 @@ public class MenuBuild extends Actor implements Disposable
         Arbusto2R = new Rectangle();
 
         /***menu3***/
-        CorralVacas =  new Texture("CorralVacas.png");
+        CorralVacas = MyGdxGame.getManager().get("CorralVacas.png");
         CorralVacasS = new Sprite(CorralVacas);
         CorralVacasR = new Rectangle();
 
-        CorralGallinas =  new Texture("CorralGallinas.png");
+        CorralGallinas =  MyGdxGame.getManager().get("CorralGallinas.png");
         CorralGallinasS = new Sprite(CorralGallinas);
         CorralGallinasR = new Rectangle();
 
-        Flecha = new Texture("FlechaSiguiente.png");
+        Flecha = MyGdxGame.getManager().get("FlechaSiguiente.png");
         FlechaR = new Rectangle();
-        GallinitaUWU = new Texture("Gallina.png");
+        GallinitaUWU = MyGdxGame.getManager().get("Gallina.png");
         GallinaS = new Sprite(GallinitaUWU);
         GallinaR = new Rectangle();
 
-        Vaca = new Texture("Vaca.png");
+        Vaca = MyGdxGame.getManager().get("Vaca.png");
         VacaR = new Rectangle();
         VacaS = new Sprite(Vaca);
 
         /**Menu4**/
-        MaquinaComida = new Texture("MaquinaComida.png");
+        MaquinaComida = MyGdxGame.getManager().get("MaquinaComida.png");
         MaquinaComidaS = new Sprite(MaquinaComida);
         MaquinaComidaR = new Rectangle();
         /**AlmacenButton**/
-        Almacen = new Texture("Almacen.png");
+        Almacen = MyGdxGame.getManager().get("Almacen.png");
         AlmacenS = new Sprite(Almacen);
         AlmacenR = new Rectangle();
-        TrigoA = new Texture("Almacen/TrigoS.png");
-        MaizA = new Texture("Almacen/MaizS.png");
-        SojaA = new Texture("Almacen/SojaS.png");
-        ZanahoriaA = new Texture("Almacen/ZanahoriaS.png");
-        CanaA = new Texture("Almacen/CañaS.png");
-        AlgodonA = new Texture("Almacen/AlgodonS.png");
-        LecheA = new Texture("Almacen/Leche.png");
-        HuevosA = new Texture("Almacen/Huevos.png");
-        ComidaVaca = new Texture("Almacen/ComidaVaca.png");
-        ComidaGallina = new Texture("Almacen/ComidaGallina.png");
-        Blanco = new Texture("Blanco.png");
+        TrigoA = MyGdxGame.getManager().get("Almacen/TrigoS.png");
+        MaizA = MyGdxGame.getManager().get("Almacen/MaizS.png");
+        SojaA =MyGdxGame.getManager().get("Almacen/SojaS.png");
+        ZanahoriaA = MyGdxGame.getManager().get("Almacen/ZanahoriaS.png");
+        CanaA = MyGdxGame.getManager().get("Almacen/CañaS.png");
+        AlgodonA = MyGdxGame.getManager().get("Almacen/AlgodonS.png");
+        LecheA =MyGdxGame.getManager().get("Almacen/Leche.png");
+        HuevosA = MyGdxGame.getManager().get("Almacen/Huevos.png");
+        ComidaVaca = MyGdxGame.getManager().get("Almacen/ComidaVaca.png");
+        ComidaGallina = MyGdxGame.getManager().get("Almacen/ComidaGallina.png");
+        Blanco =MyGdxGame.getManager().get("Blanco.png");
          w = new Sprite(Blanco);
         l1 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         l2 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -329,7 +307,26 @@ public class MenuBuild extends Actor implements Disposable
         c8.setTransform(true);
         c9.setTransform(true);
        c10.setTransform(true);
-
+       MaizMenu1 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+       SojaMenu1 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        MaizMenu2= new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        SojaMenu2= new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+       TrigoMenu = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+       ZanahoriaMenu = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+       MaizMenuC1 = new Container<Label>(MaizMenu1);
+       SojaMenuC1  = new Container<Label>(SojaMenu1);
+        MaizMenuC2 = new Container<Label>(MaizMenu2);
+        SojaMenuC2  = new Container<Label>(SojaMenu2);
+       TrigoMenuC = new Container<Label>(TrigoMenu);
+       ZanahoriaMenuC  = new Container<Label>(ZanahoriaMenu);
+       MaizMenuC1.setTransform(true);
+       SojaMenuC1.setTransform(true);
+        MaizMenuC2.setTransform(true);
+        SojaMenuC2.setTransform(true);
+       TrigoMenuC .setTransform(true);
+       ZanahoriaMenuC.setTransform(true);
+        ComidaGallinaR = new Rectangle();
+        ComidaVacaR = new Rectangle();
        //MandarAlmacen//
         Figura = new Rectangle();
 
@@ -348,7 +345,7 @@ public class MenuBuild extends Actor implements Disposable
         moverS.setAlpha(.8f);
         moverTime += 1 * Gdx.graphics.getDeltaTime();
         if(moverTime > 1) {
-            if (moverR.overlaps(AddResources.puntero)) {
+            if (moverR.overlaps(puntero)) {
                 if(isMover)
                 {
                     isMover = false;
@@ -369,7 +366,7 @@ public class MenuBuild extends Actor implements Disposable
         AlmacenS.setAlpha(.8f);
         AlmacenTime += 1 * Gdx.graphics.getDeltaTime();
         if(AlmacenTime > 1) {
-            if (AlmacenR.overlaps(AddResources.puntero)) {
+            if (AlmacenR.overlaps(puntero)) {
                 if(isAlmacen)
                 {
                     isAlmacen = false;
@@ -387,7 +384,7 @@ public class MenuBuild extends Actor implements Disposable
         if(!isMenuSeedSelection) {
             Cuadro.set(AddResources.cam.position.x - 3.8f, AddResources.cam.position.y, 20 / Pixels, 20 / Pixels);
         }
-        if(time > 1 && Cuadro.overlaps(AddResources.puntero))
+        if(time > 1 && Cuadro.overlaps(puntero))
         {
                 isMenu = true;
                 time = 0;
@@ -406,11 +403,251 @@ public class MenuBuild extends Actor implements Disposable
             timeRetrasar = 0;
         }
         MenuSeeds(batch);
-        /*if(Gdx.input.isTouched()) {
-            MandarAlmacen = true;
-            FiguraX = Tierra1.Cuerpo.x + (10 / Pixels);
-            FiguraY = Tierra1.Cuerpo.y + (32 / Pixels);
-        }*/
+
+    }
+
+
+
+    public static void MaquinaComidaMenu(Batch batch)
+    {
+        MenuBuild.isMenu = false;
+        MenuBuild.isAlmacen = false;
+        MenuBuild.isMenuSeedSelection = false;
+        Fondo.setBounds(AddResources.cam.position.x - 3.8f + (30 / Pixels), AddResources.cam.position.y - 2 + (5 / Pixels), 158 / Pixels, 100 / Pixels);
+        Fondo.setAlpha(0.8f);
+        Fondo.draw(batch);
+        batch.draw(MenuBuild.equis, AddResources.cam.position.x - 3.8f + (175 / Pixels), AddResources.cam.position.y - 2 + (90 / Pixels), 10 / Pixels, 10 / Pixels);
+        Salir.set(AddResources.cam.position.x - 3.8f + (175/ Pixels), AddResources.cam.position.y - 2 + (90 / Pixels), 10 / Pixels, 10 / Pixels);
+        if(puntero.overlaps(Salir))
+        {
+            MaquinaComida1.isActive = false;
+            MaquinaComida2.isActive = false;
+        }
+        if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>3&&MyGdxGame.TrigoStocks.getInteger("TrigoStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
+            alphaS5 = 1;
+        }else {
+            alphaS5 = 0.4f;
+        }
+        if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>3&&MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
+           alphas6 = 1;
+        }else
+        {
+            alphas6 = 0.4f;
+        }
+
+        Sprite gallina = new Sprite(ComidaGallina);
+        gallina.setAlpha(alphaS5);
+        gallina.setBounds(AddResources.cam.position.x - 3.8f + (50 / Pixels), AddResources.cam.position.y - 2 + (65 / Pixels),32/Pixels,32/Pixels);
+        gallina.draw(batch);
+
+        ComidaGallinaR.set(AddResources.cam.position.x - 3.8f + (50 / Pixels), AddResources.cam.position.y - 2 + (65 / Pixels),32/Pixels,32/Pixels);
+        if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>=3)
+        {
+            alphaS1 = 1;
+        }else
+        {
+            alphaS1 = 0.4f;
+        }
+
+        if(MyGdxGame.TrigoStocks.getInteger("TrigoStocks") >= 6)
+        {
+            alphaS2 = 1;
+        }else
+        {
+            alphaS2 = 0.4f;
+        }
+        if(MyGdxGame.SojaStocks.getInteger("SojaStocks") >= 3)
+        {
+            alphaS3 = 1;
+        }else
+        {
+            alphaS3 = 0.4f;
+        }
+        if(MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks") >=6)
+        {
+            alphaS4 = 1;
+        }else
+        {
+            alphaS4 = 0.4f;
+        }
+/**************/
+        Sprite Maiz = new Sprite(MaizA);
+        Maiz.setAlpha(alphaS1);
+        Maiz.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (45 / Pixels),12/Pixels,12/Pixels);
+        Maiz.draw(batch);
+        MaizMenu1.setText("X3");
+        MaizMenu1.setWrap(true);
+        MaizMenuC1.setPosition(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (35 / Pixels));
+        MaizMenuC1.setScale(.02f);
+        AddResources.stage2.addActor(MaizMenuC1);
+/**************/
+        Sprite Trigo = new Sprite(TrigoA);
+        Trigo.setAlpha(alphaS2);
+        Trigo.setBounds(AddResources.cam.position.x - 3.8f + (60 / Pixels), AddResources.cam.position.y - 2 + (45 / Pixels),12/Pixels,12/Pixels);
+        Trigo.draw(batch);
+        TrigoMenu.setText("X6");
+        TrigoMenu.setWrap(true);
+        TrigoMenuC.setPosition(AddResources.cam.position.x - 3.8f + (60 / Pixels), AddResources.cam.position.y - 2 + (35 / Pixels));
+        TrigoMenuC.setScale(.02f);
+        AddResources.stage2.addActor(TrigoMenuC);
+/**************/
+        Sprite Soja = new Sprite(SojaA);
+        Soja.setAlpha(alphaS3);
+        Soja.setBounds(AddResources.cam.position.x - 3.8f + (80 / Pixels), AddResources.cam.position.y - 2 + (45 / Pixels),12/Pixels,12/Pixels);
+        Soja.draw(batch);
+
+        SojaMenu1.setText("X3");
+        SojaMenu1.setWrap(true);
+        SojaMenuC1.setPosition(AddResources.cam.position.x - 3.8f + (80 / Pixels), AddResources.cam.position.y - 2 + (35 / Pixels));
+        SojaMenuC1.setScale(.02f);
+        AddResources.stage2.addActor(SojaMenuC1);
+        //
+        Sprite b = new Sprite(Blanco);
+        b.setAlpha(0.3f);
+        b.setBounds(AddResources.cam.position.x - 3.8f + (100 / Pixels), AddResources.cam.position.y - 2 + (5 / Pixels),10/Pixels,100/Pixels);
+        b.draw(batch);
+        //
+        Sprite vaca = new Sprite(ComidaVaca);
+        vaca.setAlpha(alphas6);
+        vaca.setBounds(AddResources.cam.position.x - 3.8f + (130 / Pixels), AddResources.cam.position.y - 2 + (65 / Pixels),32/Pixels,32/Pixels);
+        vaca.draw(batch);
+        ComidaVacaR.set(AddResources.cam.position.x - 3.8f + (130 / Pixels), AddResources.cam.position.y - 2 + (65 / Pixels),32/Pixels,32/Pixels);
+/**************/
+        Sprite Maiz2 = new Sprite(MaizA);
+        Maiz2.setAlpha(alphaS1);
+        Maiz2.setBounds(AddResources.cam.position.x - 3.8f + (120 / Pixels), AddResources.cam.position.y - 2 + (45 / Pixels),12/Pixels,12/Pixels);
+        Maiz2.draw(batch);
+
+        MaizMenu2.setText("X3");
+        MaizMenu2.setWrap(true);
+        MaizMenuC2.setPosition(AddResources.cam.position.x - 3.8f + (120 / Pixels), AddResources.cam.position.y - 2 + (35 / Pixels));
+        MaizMenuC2.setScale(.02f);
+        AddResources.stage2.addActor(MaizMenuC2);
+/**************/
+        Sprite Zanahoria = new Sprite(ZanahoriaA);
+        Zanahoria.setAlpha(alphaS4);
+        Zanahoria.setBounds(AddResources.cam.position.x - 3.8f + (140 / Pixels), AddResources.cam.position.y - 2 + (45 / Pixels),12/Pixels,12/Pixels);
+        Zanahoria.draw(batch);
+        ZanahoriaMenu.setText("X6");
+        ZanahoriaMenu.setWrap(true);
+        ZanahoriaMenuC.setPosition(AddResources.cam.position.x - 3.8f + (140 / Pixels), AddResources.cam.position.y - 2 + (35 / Pixels));
+        ZanahoriaMenuC.setScale(.02f);
+        AddResources.stage2.addActor(ZanahoriaMenuC);
+/**************/
+        Sprite Soja2 = new Sprite(SojaA);
+        Soja2.setAlpha(alphaS3);
+        Soja2.setBounds(AddResources.cam.position.x - 3.8f + (160 / Pixels), AddResources.cam.position.y - 2 + (45 / Pixels),12/Pixels,12/Pixels);
+        Soja2.draw(batch);
+        SojaMenu2.setText("X3");
+        SojaMenu2.setWrap(true);
+        SojaMenuC2.setPosition(AddResources.cam.position.x - 3.8f + (160 / Pixels), AddResources.cam.position.y - 2 + (35 / Pixels));
+        SojaMenuC2.setScale(.02f);
+        AddResources.stage2.addActor(SojaMenuC2);
+
+        if(MaquinaComida1.isActive)
+        {
+            MaquinaComida2.isActive = false;
+            if(puntero.overlaps(ComidaGallinaR))
+            {
+                if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>3&&MyGdxGame.TrigoStocks.getInteger("TrigoStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
+                MyGdxGame.Maquina1Gallina.putBoolean("Maquina1Gallina",true);
+                MyGdxGame.Maquina1Vaca.putBoolean("Maquina1Vaca",false);
+                MyGdxGame.Maquina1Gallina.flush();
+                MyGdxGame.Maquina1Vaca.flush();
+                    int maiz = MyGdxGame.MaizStocks.getInteger("MaizStocks");
+                    int trigo = MyGdxGame.TrigoStocks.getInteger("TrigoStocks");
+                    int soja = MyGdxGame.SojaStocks.getInteger("SojaStocks");
+                    maiz -= 3;
+                    trigo -= 6;
+                    soja -= 3;
+                    MyGdxGame.MaizStocks.putInteger("MaizStocks",maiz);
+                    MyGdxGame.TrigoStocks.putInteger("TrigoStocks",trigo);
+                    MyGdxGame.SojaStocks.putInteger("SojaStocks",soja);
+                    MyGdxGame.MaizStocks.flush();
+                    MyGdxGame.TrigoStocks.flush();
+                    MyGdxGame.SojaStocks.flush();
+                    MaquinaComida1.isActive = false;
+                    MaquinaComida2.isActive = false;
+                }
+
+            }
+            if(puntero.overlaps(ComidaVacaR))
+            {
+                if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>3&&MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
+                    MyGdxGame.Maquina1Gallina.putBoolean("Maquina1Gallina", false);
+                    MyGdxGame.Maquina1Vaca.putBoolean("Maquina1Vaca", true);
+                    MyGdxGame.Maquina1Gallina.flush();
+                    MyGdxGame.Maquina1Vaca.flush();
+                    int maiz = MyGdxGame.MaizStocks.getInteger("MaizStocks");
+                    int zanahoria = MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks");
+                    int soja = MyGdxGame.SojaStocks.getInteger("SojaStocks");
+                    maiz -= 3;
+                    zanahoria -= 6;
+                    soja -= 3;
+                    MyGdxGame.MaizStocks.putInteger("MaizStocks",maiz);
+                    MyGdxGame.ZanahoriaStocks.putInteger("ZanahoriaStocks",zanahoria);
+                    MyGdxGame.SojaStocks.putInteger("SojaStocks",soja);
+                    MyGdxGame.MaizStocks.flush();
+                    MyGdxGame.ZanahoriaStocks.flush();
+                    MyGdxGame.SojaStocks.flush();
+                    MaquinaComida1.isActive = false;
+                    MaquinaComida2.isActive = false;
+                }
+            }
+        }
+
+        if(MaquinaComida2.isActive)
+        {
+            MaquinaComida1.isActive = false;
+            if(puntero.overlaps(ComidaGallinaR))
+            {
+                Gdx.app.log("I","Touch");
+                if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>3&&MyGdxGame.TrigoStocks.getInteger("TrigoStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
+                    MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", true);
+                    MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", false);
+                    MyGdxGame.Maquina2Gallina.flush();
+                    MyGdxGame.Maquina2Vaca.flush();
+                    int maiz = MyGdxGame.MaizStocks.getInteger("MaizStocks");
+                    int trigo = MyGdxGame.TrigoStocks.getInteger("TrigoStocks");
+                    int soja = MyGdxGame.SojaStocks.getInteger("SojaStocks");
+                    maiz -= 3;
+                    trigo -= 6;
+                    soja -= 3;
+                    MyGdxGame.MaizStocks.putInteger("MaizStocks",maiz);
+                    MyGdxGame.TrigoStocks.putInteger("TrigoStocks",trigo);
+                    MyGdxGame.SojaStocks.putInteger("SojaStocks",soja);
+                    MyGdxGame.MaizStocks.flush();
+                    MyGdxGame.TrigoStocks.flush();
+                    MyGdxGame.SojaStocks.flush();
+                    MaquinaComida2.isActive = false;
+                    MaquinaComida1.isActive = false;
+                }
+            }
+            if(puntero.overlaps(ComidaVacaR))
+            {
+                if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>3&&MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
+                    MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", false);
+                    MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", true);
+                    MyGdxGame.Maquina2Gallina.flush();
+                    MyGdxGame.Maquina2Vaca.flush();
+                    int maiz = MyGdxGame.MaizStocks.getInteger("MaizStocks");
+                    int zanahoria = MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks");
+                    int soja = MyGdxGame.SojaStocks.getInteger("SojaStocks");
+                    maiz -= 3;
+                    zanahoria -= 6;
+                    soja -= 3;
+                    MyGdxGame.MaizStocks.putInteger("MaizStocks",maiz);
+                    MyGdxGame.ZanahoriaStocks.putInteger("ZanahoriaStocks",zanahoria);
+                    MyGdxGame.SojaStocks.putInteger("SojaStocks",soja);
+                    MyGdxGame.MaizStocks.flush();
+                    MyGdxGame.ZanahoriaStocks.flush();
+                    MyGdxGame.SojaStocks.flush();
+                    MaquinaComida2.isActive = false;
+                    MaquinaComida1.isActive = false;
+                }
+            }
+        }
+
     }
 
     public static void MandarAlmacen(Batch batch,float Iy)
@@ -514,7 +751,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
 
                         batch.draw(flechaVerde, x, y, 32 / Pixels, 32 / Pixels);
                         if (Tierra1.reiniciarTime > 1) {
-                            if (AddResources.puntero.overlaps(Tierra1.Cuerpo)) {
+                            if (puntero.overlaps(Tierra1.Cuerpo)) {
                                 isTierra1 = true;
                                 isTierra2 = false;
                                 isTierra3 = false;
@@ -532,7 +769,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                         float x = Tierra1.Cuerpo.x;
                         float y = (Tierra1.Cuerpo.y + Tierra1.Cuerpo.height) + (abs / Pixels);
                         batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
-                        if (Tierra1.Cuerpo.overlaps(AddResources.puntero)) {
+                        if (Tierra1.Cuerpo.overlaps(puntero)) {
                             if(MyGdxGame.tierra1Trigo.getBoolean("tierra11"))
                             {
                                 TrigoB = true;
@@ -605,7 +842,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                         float y = (Tierra2.Cuerpo.y + Tierra2.Cuerpo.height) + (abs / Pixels);
                         batch.draw(flechaVerde, x, y, 32 / Pixels, 32 / Pixels);
                         if (Tierra2.reiniciarTime > 1) {
-                            if (AddResources.puntero.overlaps(Tierra2.Cuerpo)) {
+                            if (puntero.overlaps(Tierra2.Cuerpo)) {
                                 isTierra1 = false;
                                 isTierra2 = true;
                                 isTierra3 = false;
@@ -622,7 +859,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                         float x = Tierra2.Cuerpo.x;
                         float y = (Tierra2.Cuerpo.y + Tierra2.Cuerpo.height) + (abs / Pixels);
                         batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
-                        if (Tierra2.Cuerpo.overlaps(AddResources.puntero)) {
+                        if (Tierra2.Cuerpo.overlaps(puntero)) {
                             if(MyGdxGame.tierra2Trigo.getBoolean("tierra21"))
                             {
                                 TrigoB = true;
@@ -693,7 +930,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                         float y = (Tierra3.Cuerpo.y + Tierra3.Cuerpo.height) + (abs / Pixels);
                         batch.draw(flechaVerde, x, y, 32 / Pixels, 32 / Pixels);
                         if (Tierra3.reiniciarTime > 1) {
-                            if (AddResources.puntero.overlaps(Tierra3.Cuerpo)) {
+                            if (puntero.overlaps(Tierra3.Cuerpo)) {
                                 isTierra1 = false;
                                 isTierra2 = false;
                                 isTierra3 = true;
@@ -710,7 +947,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                         float x = Tierra3.Cuerpo.x;
                         float y = (Tierra3.Cuerpo.y + Tierra3.Cuerpo.height) + (abs / Pixels);
                         batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
-                        if (Tierra3.Cuerpo.overlaps(AddResources.puntero)) {
+                        if (Tierra3.Cuerpo.overlaps(puntero)) {
                             if(MyGdxGame.tierra3Trigo.getBoolean("tierra31"))
                             {
                                 TrigoB = true;
@@ -781,7 +1018,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                         Gdx.app.log("y",""+Tierra4.Cuerpo.height+" Y2: "+Tierra4.Cuerpo2.y);
                         batch.draw(flechaVerde, x, y, 32 / Pixels, 32 / Pixels);
                         if (Tierra4.reiniciarTime > 1) {
-                            if (AddResources.puntero.overlaps(Tierra4.Cuerpo)) {
+                            if (puntero.overlaps(Tierra4.Cuerpo)) {
                                 isTierra1 = false;
                                 isTierra2 = false;
                                 isTierra3 = false;
@@ -798,7 +1035,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                         float x = Tierra4.Cuerpo.x;
                         float y = (Tierra4.Cuerpo.y + Tierra4.Cuerpo.height) + (abs / Pixels);
                         batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
-                        if (Tierra4.Cuerpo.overlaps(AddResources.puntero)) {
+                        if (Tierra4.Cuerpo.overlaps(puntero)) {
                             if(MyGdxGame.tierra4Trigo.getBoolean("tierra41"))
                             {
                                 TrigoB = true;
@@ -868,7 +1105,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                         float y = (Tierra5.Cuerpo.y + Tierra5.Cuerpo.height) + (abs / Pixels);
                         batch.draw(flechaVerde, x, y, 32 / Pixels, 32 / Pixels);
                         if (Tierra5.reiniciarTime > 1) {
-                            if (AddResources.puntero.overlaps(Tierra5.Cuerpo)) {
+                            if (puntero.overlaps(Tierra5.Cuerpo)) {
                                 isTierra1 = false;
                                 isTierra2 = false;
                                 isTierra3 = false;
@@ -885,7 +1122,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                         float x = Tierra5.Cuerpo.x;
                         float y = (Tierra5.Cuerpo.y + Tierra5.Cuerpo.height) + (abs / Pixels);
                         batch.draw(flechaRoja, x, y, 32 / Pixels, 32 / Pixels);
-                        if (Tierra5.Cuerpo.overlaps(AddResources.puntero)) {
+                        if (Tierra5.Cuerpo.overlaps(puntero)) {
                             if(MyGdxGame.tierra5Trigo.getBoolean("tierra51"))
                             {
                                 TrigoB  = true;
@@ -954,6 +1191,8 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
     {
         if(isMenuSeedSelection) {
             MenuBuild.isMenu = false;
+            MenuBuild.isAlmacen = false;
+
             MenuBuild.timeQuitar += 1 * Gdx.graphics.getDeltaTime();
             Fondo.setBounds(AddResources.cam.position.x - 3.8f + (30 / Pixels), AddResources.cam.position.y - 2 + (5 / Pixels), 138 / Pixels, 100 / Pixels);
             Fondo.setAlpha(0.8f);
@@ -1044,7 +1283,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
             AlgodonS.draw(batch);
             if(MenuBuild.timeQuitar > 1)
             {
-                if (trigoR2.overlaps(AddResources.puntero)) {
+                if (trigoR2.overlaps(puntero)) {
                     int valorActual = MyGdxGame.Trigo.getInteger("Trigo");
                     valorActual--;
                     MyGdxGame.Trigo.putInteger("Trigo", valorActual);
@@ -1079,7 +1318,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                     MenuBuild.isMenuSeedSelection = false;
                     MenuBuild.timeQuitar = 0;
                 }
-                if (maizR2.overlaps(AddResources.puntero)) {
+                if (maizR2.overlaps(puntero)) {
                     int valorActual = MyGdxGame.Maiz.getInteger("Maiz");
                     valorActual--;
                     MyGdxGame.Maiz.putInteger("Maiz", valorActual);
@@ -1114,7 +1353,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                     MenuBuild.isMenuSeedSelection = false;
                     MenuBuild.timeQuitar = 0;
                 }
-                if (sojaR2.overlaps(AddResources.puntero)) {
+                if (sojaR2.overlaps(puntero)) {
                     int valorActual = MyGdxGame.Soja.getInteger("Soja");
                     valorActual--;
                     MyGdxGame.Soja.putInteger("Soja", valorActual);
@@ -1148,7 +1387,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                     }
                     MenuBuild.isMenuSeedSelection = false;
                 }
-                if (zanahoriaR2.overlaps(AddResources.puntero)) {
+                if (zanahoriaR2.overlaps(puntero)) {
                     int valorActual = MyGdxGame.Zanahoria.getInteger("Zanahoria");
                     valorActual--;
                     MyGdxGame.Zanahoria.putInteger("Zanahoria", valorActual);
@@ -1182,7 +1421,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                     }
                     MenuBuild.isMenuSeedSelection = false;
                 }
-                if (canaR2.overlaps(AddResources.puntero)) {
+                if (canaR2.overlaps(puntero)) {
                     int valorActual = MyGdxGame.Cana.getInteger("Cana");
                     valorActual--;
                     MyGdxGame.Cana.putInteger("Cana", valorActual);
@@ -1216,7 +1455,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                     }
                     MenuBuild.isMenuSeedSelection = false;
                 }
-                if (algodonR2.overlaps(AddResources.puntero)) {
+                if (algodonR2.overlaps(puntero)) {
                     int valorActual = MyGdxGame.Algodon.getInteger("Algodon");
                     valorActual--;
                     MyGdxGame.Algodon.putInteger("Algodon", valorActual);
@@ -1453,7 +1692,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
            Logo4.draw(batch);
            Fondo.draw(batch);
 
-           MenuItems(batch, AddResources.puntero);
+           MenuItems(batch, puntero);
 
         }else
         {
@@ -1824,61 +2063,6 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
             Arbusto2S .setAlpha(alphaArbusto2);
             Arbusto2S.draw(batch);
 
-            if(Casa2PisosR.overlaps(puntero))
-            {
-                MenuBuild.CasasDosPisosBuild = true;
-                MenuBuild.CasasBuild = false;
-                MenuBuild.Maceta1Build = false;
-                MenuBuild.Maceta2Build = false;
-                MenuBuild.Arbusto1Build = false;
-                MenuBuild.Arbusto2Build = false;
-            }
-            if(CasaR.overlaps(puntero))
-            {
-                MenuBuild.CasasDosPisosBuild = false;
-                MenuBuild.CasasBuild = true;
-                MenuBuild.Maceta1Build = false;
-                MenuBuild.Maceta2Build = false;
-                MenuBuild.Arbusto1Build = false;
-                MenuBuild.Arbusto2Build = false;
-            }
-            if(Maceta1R.overlaps(puntero))
-            {
-                MenuBuild.CasasDosPisosBuild = false;
-                MenuBuild.CasasBuild = false;
-                MenuBuild.Maceta1Build = true;
-                MenuBuild.Maceta2Build = false;
-                MenuBuild.Arbusto1Build = false;
-                MenuBuild.Arbusto2Build = false;
-            }
-            if(Maceta2R.overlaps(puntero))
-            {
-                MenuBuild.CasasDosPisosBuild = false;
-                MenuBuild.CasasBuild = false;
-                MenuBuild.Maceta1Build = false;
-                MenuBuild.Maceta2Build = true;
-                MenuBuild.Arbusto1Build = false;
-                MenuBuild.Arbusto2Build = false;
-            }
-
-            if(Arbusto1R.overlaps(puntero))
-            {
-                MenuBuild.CasasDosPisosBuild = false;
-                MenuBuild.CasasBuild = false;
-                MenuBuild.Maceta1Build = false;
-                MenuBuild.Maceta2Build = false;
-                MenuBuild.Arbusto1Build = true;
-                MenuBuild.Arbusto2Build = false;
-            }
-            if(Arbusto2R.overlaps(puntero))
-            {
-                MenuBuild.CasasDosPisosBuild = false;
-                MenuBuild.CasasBuild = false;
-                MenuBuild.Maceta1Build = false;
-                MenuBuild.Maceta2Build = false;
-                MenuBuild.Arbusto1Build = false;
-                MenuBuild.Arbusto2Build = true;
-            }
         }
         /***************************************************************************/
         /***************************************************************************/

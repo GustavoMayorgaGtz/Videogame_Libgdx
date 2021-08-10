@@ -88,6 +88,7 @@ import static com.mygdx.game.MyGdxGame.SojaStocks;
 import static com.mygdx.game.MyGdxGame.Zanahoria;
 import static com.mygdx.game.MyGdxGame.ZanahoriaStocks;
 import static com.mygdx.game.MyGdxGame.isIsNivelProgress2;
+import static com.mygdx.game.tiled.AddActors.game;
 
 public class AddResources {
     boolean confirmbool;
@@ -218,8 +219,8 @@ public class AddResources {
     boolean is02,is12,is22;
     int valoractual2;
 
-/**Labels**/
-public static Label monedasLabel;
+    /**Labels**/
+    public static Label monedasLabel;
     public static Container<Label> container1;
 
 
@@ -628,7 +629,7 @@ batch.begin();
                 if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.CasasDosPisosBuild
                         &&!MenuBuild.CasasBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build&&!MenuBuild.Arbusto1Build
                         &&!MenuBuild.Arbusto2Build&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.isCorralGallinasBuild&&!MenuBuild.buildMaquinaComida) {
-                    if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isAlmacen) {
+                    if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isAlmacen&&!MaquinaComida1.isActive&&!MaquinaComida2.isActive) {
                         if(isIsNivelProgress2) {
                             if(MyGdxGame.TrigoStocks.getInteger("TrigoStocks") > 999)
                             {
@@ -693,6 +694,13 @@ batch.begin();
                             MenuBuild.c8.setPosition(0, 0);
                             MenuBuild.c9.setPosition(0, 0);
                             MenuBuild.c10.setPosition(0, 0);
+                            MenuBuild.MaizMenuC1.setPosition(0,0);
+                            MenuBuild.MaizMenuC2.setPosition(0,0);
+                            MenuBuild.TrigoMenuC.setPosition(0,0);
+                            MenuBuild.ZanahoriaMenuC.setPosition(0,0);
+                            MenuBuild.SojaMenuC1.setPosition(0,0);
+                            MenuBuild.SojaMenuC2.setPosition(0,0);
+
                             if(MenuBuild.MandarAlmacen)
                             {
                                 MenuBuild.MandarAlmacen(batch,MenuBuild.FiguraY);
@@ -711,6 +719,7 @@ batch.begin();
                                 MenuBuild.ComidaGallinaB = false;
                                 MenuBuild.ComidaVacaB = false;
                             }
+
                         }
                         if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
 
@@ -837,6 +846,18 @@ batch.begin();
                             MenuBuild.AlmacenR.set(AddResources.cam.position.x  +3, AddResources.cam.position.y+(25/Pixels) , 20 / Pixels, 20 / Pixels);
                         }
                     } else {
+                        if(MaquinaComida1.isActive||MaquinaComida2.isActive)
+                        {
+                            MenuBuild.MaquinaComidaMenu(batch);
+                            MenuBuild.moverR.set(0, 0, 0, 0);
+                            MenuBuild.AlmacenR.set(0,0,0,0);
+                            DereRect.set(0, 0, 0, 0);
+                            IzqRect.set(0, 0, 0, 0);
+                            SaltoRect.set(0, 0, 0, 0);
+                            AttackRect.set(0, 0, 0, 0);
+                            SpeedRect.set(0, 0, 0, 0);
+                            PauseRect.set(0, 0, 0, 0);
+                        }
                         if(MenuBuild.isAlmacen)
                         {
                             MenuBuild.AlmacenS.draw(batch);
@@ -1529,8 +1550,8 @@ batch.begin();
                     Jugador.istouchTienda4 = false;
 
                     Menu.id = 1;
-                    MyGdxGame.isNivelProgress1 = false
-                    ;
+                    MyGdxGame.isNivelProgress1 = false;
+                    isIsNivelProgress2 = false;
                     Tienda.stop = true;
                     AddResourcesOfMenu.game.setScreen(new Menu(AddResourcesOfMenu.game));
                     pause = true;

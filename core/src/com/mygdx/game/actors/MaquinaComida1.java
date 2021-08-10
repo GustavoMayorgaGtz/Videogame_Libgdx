@@ -31,7 +31,7 @@ Texture on,off;
 Animation<TextureRegion> On;
 int c = 1, r = 4;
 float timeFree;
-boolean isActive;
+public static boolean isActive;
 /***/
     boolean sube = true,baja;
     float abs;
@@ -106,21 +106,28 @@ boolean isActive;
             }
         }
         /******/
-        if (isActive) {
+        if(MyGdxGame.Maquina1Vaca.getBoolean("Maquina1Vaca")||MyGdxGame.Maquina1Gallina.getBoolean("Maquina1Gallina"))
+        {
             TextureRegion current = On.getKeyFrame(timeFree, true);
             batch.draw(current, x, y, 64 / Pixels, 64 / Pixels);
-        } else {
 
+
+        }else
+        {
             batch.draw(off, x, y, 64 / Pixels, 64 / Pixels);
 
-            if (Jugador.jugador.overlaps(Cuerpo2) && !MenuBuild.isMenu) {
-                if(AddResources.puntero.overlaps(Cuerpo2))
-                {
-                    isActive = true;
+            if (!isActive) {
+                if (Jugador.jugador.overlaps(Cuerpo) && !MenuBuild.isMenu) {
+                    batch.draw(FlechaVerde, x + (16 / Pixels), y + (32 / Pixels) + (abs / Pixels), 32 / Pixels, 32 / Pixels);
+                    if(AddResources.puntero.overlaps(Cuerpo2))
+                    {
+                        isActive = true;
+                    }
                 }
-                batch.draw(FlechaVerde, x + (16 / Pixels), y + (32 / Pixels) + (abs / Pixels), 32 / Pixels, 32 / Pixels);
             }
         }
+
+
     }
 
     @Override
@@ -164,7 +171,9 @@ boolean isActive;
                 y = MaquinasComida1.getFloat("Y30");
                 Cuerpo2.set(x, y, 32/Pixels,32/Pixels);
             }
-            if (!MenuBuild.buildMaquinaComida) {
+            if (!MenuBuild.buildMaquinaComida&&!MenuBuild.isAlmacen&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isMenu&&!MenuBuild.isCorralGallinasBuild&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.gallinaBuild&&!MenuBuild.vacaBuild
+                    &&!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.Arbusto1Build&&!MenuBuild.Arbusto2Build
+                    &&!MenuBuild.CasasBuild&&!MenuBuild.CasasDosPisosBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build) {
 
                 Cuerpo.set(x, y, 32/Pixels,32/Pixels);
             } else {

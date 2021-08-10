@@ -18,7 +18,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.actors.Casa2Pisos;
 
 public class MyGdxGame extends Game{
-	private AssetManager manager;
+	public static AssetManager manager;
 	public static Preferences coins;
  	public static  int CoinObjects;
     public static Preferences NivelisComplete;
@@ -159,6 +159,7 @@ public class MyGdxGame extends Game{
 	public static Preferences CorralGallinas1;
 	public static Preferences CorralGallinas2;
 	/**Maquina de Comida**/
+	public static Preferences Maquina1Gallina,Maquina1Vaca,Maquina2Gallina,Maquina2Vaca;
 	public static Preferences MaquinaComidaColocadas;
 	public static Preferences MaquinasComida1;
 	public static Preferences MaquinasComida2;
@@ -379,6 +380,10 @@ public class MyGdxGame extends Game{
 		MaquinasComida1 = Gdx.app.getPreferences("Y30");
 		MaquinasComida2 = Gdx.app.getPreferences("X31");
 		MaquinasComida2 = Gdx.app.getPreferences("Y31");
+		Maquina1Gallina = Gdx.app.getPreferences("Maquina1Gallina");
+		Maquina2Gallina = Gdx.app.getPreferences("Maquina2Gallina");
+		Maquina1Vaca = Gdx.app.getPreferences("Maquina1Vaca");
+		Maquina2Vaca = Gdx.app.getPreferences("Maquina2Vaca");
 
 		/**Alamcen**/
 		ComidaVacaStocks = Gdx.app.getPreferences("ComidaVacaStocks");
@@ -655,6 +660,50 @@ Gdx.app.getGraphics().getFramesPerSecond();
 		manager.load("HojaAzulCartel.png", Texture.class);
 		manager.load("EspadazoEffect.png",Texture.class);
 		manager.load("EspadazoEffectIzq.png",Texture.class);
+		/***/
+		manager.load("White.png",Texture.class);//
+		manager.load("X.png",Texture.class);
+		manager.load("Inicia.png",Texture.class);
+		manager.load("Logo1.png",Texture.class);
+		manager.load("Logo2.png",Texture.class);
+		manager.load("Logo3.png",Texture.class);
+		manager.load("Logo4.png",Texture.class);
+		manager.load("cuadradoNegro.png",Texture.class);
+		manager.load("Tierral.png",Texture.class);
+		manager.load("Agua.png",Texture.class);
+		manager.load("Trigo.png",Texture.class);
+		manager.load("Maiz.png",Texture.class);
+		manager.load("Soja.png",Texture.class);
+		manager.load("Zanahoria.png",Texture.class);
+		manager.load("Caña.png",Texture.class);
+		manager.load("Algodon.png",Texture.class);
+		manager.load("FlechaVerde.png",Texture.class);
+		manager.load("FlechaRoja.png",Texture.class);
+		manager.load("MoveOn.png",Texture.class);
+		manager.load("Maceta1.png",Texture.class);
+		manager.load("Maceta2.png",Texture.class);
+		manager.load("CasaDosPisos.png",Texture.class);
+		manager.load("Casa.png",Texture.class);
+		manager.load("BoteAguaS.png",Texture.class);
+		manager.load("Arbusto2.png",Texture.class);
+		manager.load("CorralVacas.png",Texture.class);
+		manager.load("CorralGallinas.png",Texture.class);
+		manager.load("FlechaSiguiente.png",Texture.class);
+		manager.load("Gallina.png",Texture.class);
+		manager.load("Vaca.png",Texture.class);
+		manager.load("MaquinaComida.png",Texture.class);
+		manager.load("Almacen.png",Texture.class);
+		manager.load("Almacen/TrigoS.png",Texture.class);
+		manager.load("Almacen/MaizS.png",Texture.class);
+		manager.load("Almacen/SojaS.png",Texture.class);
+		manager.load("Almacen/ZanahoriaS.png",Texture.class);
+		manager.load("Almacen/CañaS.png",Texture.class);
+		manager.load("Almacen/AlgodonS.png",Texture.class);
+		manager.load("Almacen/Leche.png",Texture.class);
+		manager.load("Almacen/Huevos.png",Texture.class);
+		manager.load("Almacen/ComidaVaca.png",Texture.class);
+		manager.load("Almacen/ComidaGallina.png",Texture.class);
+		manager.load("Blanco.png",Texture.class);
 		manager.finishLoading();
 
 		this.setScreen(new Intro(this));
@@ -665,9 +714,9 @@ Gdx.app.getGraphics().getFramesPerSecond();
 	super.render();
 	}
 
-	public AssetManager getManager()
+	public static  AssetManager getManager()
 	{
-		return manager;
+		return MyGdxGame.manager;
 	}
 
 	@Override

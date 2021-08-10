@@ -234,8 +234,9 @@ public class Casa2Pisos2 extends Actor implements Disposable {
                 y = CasaDosPisos2.getFloat("Y11");
                 Cuerpo2.set(x, y, 110 / Pixels, 170 / Pixels);
             }
-            if (!MenuBuild.CasasDosPisosBuild) {
-
+                if (!MenuBuild.buildMaquinaComida&&!MenuBuild.isAlmacen&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isMenu&&!MenuBuild.isCorralGallinasBuild&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.gallinaBuild&&!MenuBuild.vacaBuild
+                        &&!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.Arbusto1Build&&!MenuBuild.Arbusto2Build
+                        &&!MenuBuild.CasasBuild&&!MenuBuild.CasasDosPisosBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build) {
                 Cuerpo.set(x, y, 110 / Pixels, 170 / Pixels);
             } else {
                 Cuerpo.set(0, 0, 0, 0);

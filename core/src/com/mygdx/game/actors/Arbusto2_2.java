@@ -104,7 +104,9 @@ float timeDurationTouch;
                 y = Arbusto2_2.getFloat("Y24");
                 Cuerpo2.set(x, y, 32/Pixels,32/Pixels);
             }
-            if (!MenuBuild.Arbusto2Build) {
+            if (!MenuBuild.buildMaquinaComida&&!MenuBuild.isAlmacen&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isMenu&&!MenuBuild.isCorralGallinasBuild&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.gallinaBuild&&!MenuBuild.vacaBuild
+                    &&!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.Arbusto1Build&&!MenuBuild.Arbusto2Build
+                    &&!MenuBuild.CasasBuild&&!MenuBuild.CasasDosPisosBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build) {
 
                 Cuerpo.set(x, y, 32/Pixels,32/Pixels);
             } else {

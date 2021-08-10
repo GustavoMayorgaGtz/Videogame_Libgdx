@@ -150,7 +150,9 @@ public class Agua3 extends Actor implements Disposable {
                 y = agua3.getFloat("Y8");
                 Cuerpo2.set(x, y, 32 / Pixels, 32 / Pixels);
             }
-            if(!MenuBuild.BuildAgua) {
+            if (!MenuBuild.buildMaquinaComida&&!MenuBuild.isAlmacen&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isMenu&&!MenuBuild.isCorralGallinasBuild&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.gallinaBuild&&!MenuBuild.vacaBuild
+                    &&!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.Arbusto1Build&&!MenuBuild.Arbusto2Build
+                    &&!MenuBuild.CasasBuild&&!MenuBuild.CasasDosPisosBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build) {
 
                 Cuerpo.set(x, y, 32 / Pixels, 32 / Pixels);
             }else

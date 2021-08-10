@@ -239,8 +239,9 @@ float timeDurationTouch;
                 y = Casa2.getFloat("Y13");
                 Cuerpo2.set(x, y, 110/Pixels,110/Pixels);
             }
-            if (!MenuBuild.CasasBuild) {
-
+            if (!MenuBuild.buildMaquinaComida&&!MenuBuild.isAlmacen&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isMenu&&!MenuBuild.isCorralGallinasBuild&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.gallinaBuild&&!MenuBuild.vacaBuild
+                    &&!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.Arbusto1Build&&!MenuBuild.Arbusto2Build
+                    &&!MenuBuild.CasasBuild&&!MenuBuild.CasasDosPisosBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build) {
                 Cuerpo.set(x, y, 110/Pixels,110/Pixels);
             } else {
                 Cuerpo.set(0, 0, 0, 0);
