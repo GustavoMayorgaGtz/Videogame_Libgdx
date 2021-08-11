@@ -163,6 +163,10 @@ public class MyGdxGame extends Game{
 	public static Preferences MaquinaComidaColocadas;
 	public static Preferences MaquinasComida1;
 	public static Preferences MaquinasComida2;
+	public static Preferences MaquinasComida1Year,MaquinasComida1Day,MaquinasComida1Hour,MaquinasComida1Minute,MaquinasComida1Iterator;
+	public static Preferences MaquinasComida2Year,MaquinasComida2Day,MaquinasComida2Hour,MaquinasComida2Minute,MaquinasComida2Iterator;
+	public static Preferences Maquina1Complete, Maquina2Complete;
+	public static Preferences Maquina1isGallina,Maquina1isVaca,Maquina2isGallina,Maquina2isVaca;
 	/**Almacen**/
 	public static Preferences ComidaVacaStocks;
 	public static Preferences ComidaGallinaStocks;
@@ -384,6 +388,22 @@ public class MyGdxGame extends Game{
 		Maquina2Gallina = Gdx.app.getPreferences("Maquina2Gallina");
 		Maquina1Vaca = Gdx.app.getPreferences("Maquina1Vaca");
 		Maquina2Vaca = Gdx.app.getPreferences("Maquina2Vaca");
+		Maquina1isGallina = Gdx.app.getPreferences("Maquina1isGallina");
+		Maquina2isGallina = Gdx.app.getPreferences("Maquina2isGallina");
+		Maquina1isVaca = Gdx.app.getPreferences("Maquina1isVaca");
+		Maquina2isVaca = Gdx.app.getPreferences("Maquina2isVaca");
+		MaquinasComida1Year = Gdx.app.getPreferences("MaquinasComida1Year");
+		MaquinasComida1Day = Gdx.app.getPreferences("MaquinasComida1Day");
+		MaquinasComida1Hour = Gdx.app.getPreferences("MaquinasComida1Hour");
+		MaquinasComida1Minute = Gdx.app.getPreferences("MaquinasComida1Minute");
+		MaquinasComida1Iterator = Gdx.app.getPreferences("MaquinasComida1Iterator");
+		MaquinasComida2Year = Gdx.app.getPreferences("MaquinasComida2Year");
+		MaquinasComida2Day = Gdx.app.getPreferences("MaquinasComida2Day");
+		MaquinasComida2Hour = Gdx.app.getPreferences("MaquinasComida2Hour");
+		MaquinasComida2Minute = Gdx.app.getPreferences("MaquinasComida2Minute");
+		MaquinasComida2Iterator = Gdx.app.getPreferences("MaquinasComida2Iterator");
+		Maquina1Complete = Gdx.app.getPreferences("Maquina1Complete");
+		Maquina2Complete = Gdx.app.getPreferences("Maquina2Complete");
 
 		/**Alamcen**/
 		ComidaVacaStocks = Gdx.app.getPreferences("ComidaVacaStocks");

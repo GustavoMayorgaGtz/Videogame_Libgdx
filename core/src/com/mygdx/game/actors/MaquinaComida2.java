@@ -12,7 +12,9 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.tiled.AddResources;
 
 import static com.mygdx.game.MyGdxGame.Maceta1_1;
+
 import static com.mygdx.game.MyGdxGame.MaquinasComida2;
+import static com.mygdx.game.MyGdxGame.MaquinasComida2Iterator;
 import static com.mygdx.game.MyGdxGame.Pixels;
 import static com.mygdx.game.actors.Tierra1.Build;
 import static com.mygdx.game.actors.Tierra1.noBuild;
@@ -54,7 +56,7 @@ public static boolean isActive;
                 Tmp1[index0++]=Frame1[i][j];
             }
         }
-        On = new Animation<TextureRegion>(0.4f,Tmp1);
+        On = new Animation<TextureRegion>(0.2f,Tmp1);
         /******/
     }
 
@@ -111,7 +113,68 @@ public static boolean isActive;
         {
             TextureRegion current = On.getKeyFrame(timeFree, true);
             batch.draw(current, x, y, 64 / Pixels, 64 / Pixels);
+            if(MaquinasComida2Iterator.getInteger("MaquinasComida2Iterator") == 0) {
+                TimeZone t = new TimeZone();
+                t.calcularHora = true;
+                if(MyGdxGame.Maquina2Vaca.getBoolean("Maquina2Vaca"))
+                {
+                    t.CalcularTiempo(5);
+                }
+                if(MyGdxGame.Maquina2Gallina.getBoolean("Maquina2Gallina"))
+                {
+                    t.CalcularTiempo(3);
+                }
 
+                MyGdxGame.MaquinasComida2Day.putInteger("MaquinasComida2Day", t.dayS);
+                MyGdxGame.MaquinasComida2Year.putInteger("MaquinasComida2Year", t.yearS);
+                MyGdxGame.MaquinasComida2Hour.putInteger("MaquinasComida2Hour", t.hourS);
+                MyGdxGame.MaquinasComida2Minute.putInteger("MaquinasComida2Minute", t.minuteS);
+                MyGdxGame.MaquinasComida2Day.flush();
+                MyGdxGame.MaquinasComida2Year.flush();
+                MyGdxGame.MaquinasComida2Hour.flush();
+                MyGdxGame.MaquinasComida2Minute.flush();
+                MaquinasComida2Iterator.putInteger("MaquinasComida2Iterator", 1);
+                MaquinasComida2Iterator.flush();
+                Gdx.app.log("TimeYear",""+t.yearS);
+                Gdx.app.log("TimeDay",""+t.dayS);
+                Gdx.app.log("TimeHour",""+t.hourS);
+                Gdx.app.log("TimeMinute",""+t.minuteS);
+            }
+            TimeZone t2 = new TimeZone();
+
+            if (t2.year > MyGdxGame.MaquinasComida2Year.getInteger("MaquinasComida2Year")) {
+                MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", false);
+                MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", false);
+                MyGdxGame.Maquina2Vaca.flush();
+                MyGdxGame.Maquina2Gallina.flush();
+                MaquinasComida2Iterator.putInteger("MaquinasComida2Iterator", 0);
+                MaquinasComida2Iterator.flush();
+                isActive = false;
+            } else if (t2.day > MyGdxGame.MaquinasComida2Day.getInteger("MaquinasComida2Day")) {
+                MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", false);
+                MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", false);
+                MyGdxGame.Maquina2Vaca.flush();
+                MyGdxGame.Maquina2Gallina.flush();
+                MaquinasComida2Iterator.putInteger("MaquinasComida2Iterator", 0);
+                MaquinasComida2Iterator.flush();
+                isActive = false;
+            } else if (t2.hour > MyGdxGame.MaquinasComida2Hour.getInteger("MaquinasComida2Hour")) {
+                MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", false);
+                MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", false);
+                MyGdxGame.Maquina2Vaca.flush();
+                MyGdxGame.Maquina2Gallina.flush();
+                MaquinasComida2Iterator.putInteger("MaquinasComida2Iterator", 0);
+                MaquinasComida2Iterator.flush();
+                isActive = false;
+            } else if (t2.minute > MyGdxGame.MaquinasComida2Minute.getInteger("MaquinasComida2Minute")) {
+                MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", false);
+                MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", false);
+                MyGdxGame.Maquina2Vaca.flush();
+                MyGdxGame.Maquina2Gallina.flush();
+                MaquinasComida2Iterator.putInteger("MaquinasComida2Iterator", 0);
+                MaquinasComida2Iterator.flush();
+                isActive = false;
+            }
         }else
         {
             batch.draw(off, x, y, 64 / Pixels, 64 / Pixels);
@@ -159,7 +222,7 @@ public static boolean isActive;
                 if (Jugador.jugador.overlaps(e)) {
                     y = (e.y + (2 / Pixels));
                     x = Jugador.body.getPosition().x;
-                    Cuerpo2.set(x, y, 32/Pixels,32/Pixels);
+                    Cuerpo2.set(x, y, 64 / Pixels, 64 / Pixels);
 
                 }
             }
@@ -167,13 +230,13 @@ public static boolean isActive;
             if (!cambiarPosicion) {
                 x = MaquinasComida2.getFloat("X31");
                 y = MaquinasComida2.getFloat("Y31");
-                Cuerpo2.set(x, y, 32/Pixels,32/Pixels);
+                Cuerpo2.set(x, y, 64 / Pixels, 64 / Pixels);
             }
             if (!MenuBuild.buildMaquinaComida&&!MenuBuild.isAlmacen&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isMenu&&!MenuBuild.isCorralGallinasBuild&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.gallinaBuild&&!MenuBuild.vacaBuild
                     &&!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.Arbusto1Build&&!MenuBuild.Arbusto2Build
                     &&!MenuBuild.CasasBuild&&!MenuBuild.CasasDosPisosBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build) {
 
-                Cuerpo.set(x, y, 32/Pixels,32/Pixels);
+                Cuerpo.set(x, y, 64 / Pixels, 64 / Pixels);
             } else {
                 Cuerpo.set(0, 0, 0, 0);
             }
@@ -196,7 +259,7 @@ public static boolean isActive;
                     if (Jugador.jugador.overlaps(e)) {
                         y = (e.y + (2 / Pixels));
                         x = Jugador.body.getPosition().x;
-                        Cuerpo2.set(x, y, 32/Pixels,32/Pixels);
+                        Cuerpo2.set(x, y, 64 / Pixels, 64 / Pixels);
 
                         MaquinasComida2.putFloat("X31", Jugador.body.getPosition().x);
                         if (AddResources.TouchConfirm) {

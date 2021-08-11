@@ -423,12 +423,12 @@ public class MenuBuild extends Actor implements Disposable
             MaquinaComida1.isActive = false;
             MaquinaComida2.isActive = false;
         }
-        if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>3&&MyGdxGame.TrigoStocks.getInteger("TrigoStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
+        if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>=3&&MyGdxGame.TrigoStocks.getInteger("TrigoStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
             alphaS5 = 1;
         }else {
             alphaS5 = 0.4f;
         }
-        if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>3&&MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
+        if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>=3&&MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
            alphas6 = 1;
         }else
         {
@@ -549,7 +549,7 @@ public class MenuBuild extends Actor implements Disposable
             MaquinaComida2.isActive = false;
             if(puntero.overlaps(ComidaGallinaR))
             {
-                if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>3&&MyGdxGame.TrigoStocks.getInteger("TrigoStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
+                if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>=3&&MyGdxGame.TrigoStocks.getInteger("TrigoStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
                 MyGdxGame.Maquina1Gallina.putBoolean("Maquina1Gallina",true);
                 MyGdxGame.Maquina1Vaca.putBoolean("Maquina1Vaca",false);
                 MyGdxGame.Maquina1Gallina.flush();
@@ -573,7 +573,7 @@ public class MenuBuild extends Actor implements Disposable
             }
             if(puntero.overlaps(ComidaVacaR))
             {
-                if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>3&&MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
+                if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>=3&&MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
                     MyGdxGame.Maquina1Gallina.putBoolean("Maquina1Gallina", false);
                     MyGdxGame.Maquina1Vaca.putBoolean("Maquina1Vaca", true);
                     MyGdxGame.Maquina1Gallina.flush();
@@ -602,7 +602,7 @@ public class MenuBuild extends Actor implements Disposable
             if(puntero.overlaps(ComidaGallinaR))
             {
                 Gdx.app.log("I","Touch");
-                if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>3&&MyGdxGame.TrigoStocks.getInteger("TrigoStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
+                if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>=3&&MyGdxGame.TrigoStocks.getInteger("TrigoStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
                     MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", true);
                     MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", false);
                     MyGdxGame.Maquina2Gallina.flush();
@@ -625,7 +625,7 @@ public class MenuBuild extends Actor implements Disposable
             }
             if(puntero.overlaps(ComidaVacaR))
             {
-                if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>3&&MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
+                if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>=3&&MyGdxGame.ZanahoriaStocks.getInteger("ZanahoriaStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
                     MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", false);
                     MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", true);
                     MyGdxGame.Maquina2Gallina.flush();
@@ -1962,6 +1962,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
         /***************************************************************************/
         if(isMenu3)
         {
+            timeMenu2 += 1 * Gdx.graphics.getDeltaTime();
             MenuBuild.timeCultivos = 0;
             if (MyGdxGame.CasasDosPisosColocadas.getInteger("Posiciones3") < 2) {
            } else {
@@ -2063,6 +2064,9 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
             Arbusto2S .setAlpha(alphaArbusto2);
             Arbusto2S.draw(batch);
 
+        }else
+        {
+            timeMenu2 = 0;
         }
         /***************************************************************************/
         /***************************************************************************/
