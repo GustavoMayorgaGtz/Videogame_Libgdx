@@ -13,6 +13,9 @@ import com.mygdx.game.tiled.AddResources;
 
 import static com.mygdx.game.MyGdxGame.Maceta1_1;
 
+import static com.mygdx.game.MyGdxGame.Maquina1Complete;
+import static com.mygdx.game.MyGdxGame.Maquina2Complete;
+import static com.mygdx.game.MyGdxGame.MaquinasComida1Iterator;
 import static com.mygdx.game.MyGdxGame.MaquinasComida2;
 import static com.mygdx.game.MyGdxGame.MaquinasComida2Iterator;
 import static com.mygdx.game.MyGdxGame.Pixels;
@@ -38,8 +41,13 @@ public static boolean isActive;
     float abs;
     Texture FlechaVerde;
     /***/
+    Texture CostalGallina,CostalVaca;
+    Rectangle Costales;
     public MaquinaComida2()
     {
+        CostalGallina = MyGdxGame.getManager().get("Almacen/ComidaGallina.png");
+        CostalVaca = MyGdxGame.getManager().get("Almacen/ComidaVaca.png");
+        Costales = new Rectangle();
         Cuerpo = new Rectangle();
         Cuerpo2 = new Rectangle();
         FlechaVerde = new Texture("FlechaVerde.png");
@@ -113,32 +121,40 @@ public static boolean isActive;
         {
             TextureRegion current = On.getKeyFrame(timeFree, true);
             batch.draw(current, x, y, 64 / Pixels, 64 / Pixels);
-            if(MaquinasComida2Iterator.getInteger("MaquinasComida2Iterator") == 0) {
+            if(MyGdxGame.MaquinasComida2Iterator.getInteger("MaquinasComida2Iterator") == 0) {
                 TimeZone t = new TimeZone();
                 t.calcularHora = true;
                 if(MyGdxGame.Maquina2Vaca.getBoolean("Maquina2Vaca"))
                 {
                     t.CalcularTiempo(5);
+                    MyGdxGame.Maquina2isVaca.putBoolean("Maquina2isVaca",true);
+                    MyGdxGame.Maquina2isGallina.putBoolean("Maquina2isGallina",false);
+                    MyGdxGame.Maquina2isVaca.flush();
+                    MyGdxGame.Maquina2isGallina.flush();
                 }
                 if(MyGdxGame.Maquina2Gallina.getBoolean("Maquina2Gallina"))
                 {
-                    t.CalcularTiempo(3);
+                    t.CalcularTiempo(4);
+                    MyGdxGame.Maquina2isVaca.putBoolean("Maquina2isVaca",false);
+                    MyGdxGame.Maquina2isGallina.putBoolean("Maquina2isGallina",true);
+                    MyGdxGame.Maquina2isVaca.flush();
+                    MyGdxGame.Maquina2isGallina.flush();
                 }
 
                 MyGdxGame.MaquinasComida2Day.putInteger("MaquinasComida2Day", t.dayS);
                 MyGdxGame.MaquinasComida2Year.putInteger("MaquinasComida2Year", t.yearS);
                 MyGdxGame.MaquinasComida2Hour.putInteger("MaquinasComida2Hour", t.hourS);
                 MyGdxGame.MaquinasComida2Minute.putInteger("MaquinasComida2Minute", t.minuteS);
+                Gdx.app.log("TimeYear",""+t.yearS);
+                Gdx.app.log("TimeDay",""+t.dayS);
+                Gdx.app.log("TimeHour",""+t.hourS);
+                Gdx.app.log("TimeMinute",""+t.minuteS);
                 MyGdxGame.MaquinasComida2Day.flush();
                 MyGdxGame.MaquinasComida2Year.flush();
                 MyGdxGame.MaquinasComida2Hour.flush();
                 MyGdxGame.MaquinasComida2Minute.flush();
                 MaquinasComida2Iterator.putInteger("MaquinasComida2Iterator", 1);
                 MaquinasComida2Iterator.flush();
-                Gdx.app.log("TimeYear",""+t.yearS);
-                Gdx.app.log("TimeDay",""+t.dayS);
-                Gdx.app.log("TimeHour",""+t.hourS);
-                Gdx.app.log("TimeMinute",""+t.minuteS);
             }
             TimeZone t2 = new TimeZone();
 
@@ -150,6 +166,8 @@ public static boolean isActive;
                 MaquinasComida2Iterator.putInteger("MaquinasComida2Iterator", 0);
                 MaquinasComida2Iterator.flush();
                 isActive = false;
+                Maquina2Complete.putInteger("Maquina2Complete",1);
+                Maquina2Complete.flush();
             } else if (t2.day > MyGdxGame.MaquinasComida2Day.getInteger("MaquinasComida2Day")) {
                 MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", false);
                 MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", false);
@@ -158,6 +176,8 @@ public static boolean isActive;
                 MaquinasComida2Iterator.putInteger("MaquinasComida2Iterator", 0);
                 MaquinasComida2Iterator.flush();
                 isActive = false;
+                Maquina2Complete.putInteger("Maquina2Complete",1);
+                Maquina2Complete.flush();
             } else if (t2.hour > MyGdxGame.MaquinasComida2Hour.getInteger("MaquinasComida2Hour")) {
                 MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", false);
                 MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", false);
@@ -166,6 +186,8 @@ public static boolean isActive;
                 MaquinasComida2Iterator.putInteger("MaquinasComida2Iterator", 0);
                 MaquinasComida2Iterator.flush();
                 isActive = false;
+                Maquina2Complete.putInteger("Maquina2Complete",1);
+                Maquina2Complete.flush();
             } else if (t2.minute > MyGdxGame.MaquinasComida2Minute.getInteger("MaquinasComida2Minute")) {
                 MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", false);
                 MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", false);
@@ -174,21 +196,68 @@ public static boolean isActive;
                 MaquinasComida2Iterator.putInteger("MaquinasComida2Iterator", 0);
                 MaquinasComida2Iterator.flush();
                 isActive = false;
+                Maquina2Complete.putInteger("Maquina2Complete",1);
+                Maquina2Complete.flush();
             }
         }else
         {
             batch.draw(off, x, y, 64 / Pixels, 64 / Pixels);
+            if(Maquina2Complete.getInteger("Maquina2Complete") == 1)
+            {
+                Costales.set(x+(24/Pixels),y + ((abs / Pixels)/2),40/Pixels,32/Pixels);
+                if(MyGdxGame.Maquina2isVaca.getBoolean("Maquina2isVaca"))
+                {
+                    batch.draw(CostalVaca,x+(24/Pixels),y + (((abs / Pixels)/2)*-1),15/Pixels,15/Pixels);
+                    batch.draw(CostalVaca,x+(32/Pixels),y + ((abs / Pixels)/2),15/Pixels,15/Pixels);
+                    if(Costales.overlaps(Jugador.jugador)) {
+                        MenuBuild.ComidaVacaB = true;
+                        MenuBuild.MandarAlmacen = true;
+                        MenuBuild.FiguraX =x + (30 / Pixels);
+                        MenuBuild.FiguraY = y + (32 / Pixels);
+                        int vaca = MyGdxGame.ComidaVacaStocks.getInteger("ComidaVacaStocks");
+                        vaca += 2;
+                        MyGdxGame.ComidaVacaStocks.putInteger("ComidaVacaStocks",vaca);
+                        MyGdxGame.ComidaVacaStocks.flush();
+                        Maquina2Complete.putInteger("Maquina2Complete",0);
+                        Maquina2Complete.flush();
+                    }
+                }
+                if(MyGdxGame.Maquina2isGallina.getBoolean("Maquina2isGallina"))
+                {
+                    batch.draw(CostalGallina,x+(24/Pixels),y + (((abs / Pixels)/2)*-1),15/Pixels,15/Pixels);
+                    batch.draw(CostalGallina,x+(32/Pixels),y + ((abs / Pixels)/2),15/Pixels,15/Pixels);
+                    if(Costales.overlaps(Jugador.jugador)) {
+                        MenuBuild.ComidaGallinaB = true;
+                        MenuBuild.MandarAlmacen = true;
+                        MenuBuild.FiguraX = x + (30 / Pixels);
+                        MenuBuild.FiguraY = y + (32 / Pixels);
+                        int gallina = MyGdxGame.ComidaGallinaStocks.getInteger("ComidaGallinaStocks");
+                        gallina += 2;
+                        MyGdxGame.ComidaGallinaStocks.putInteger("ComidaGallinaStocks",gallina);
+                        MyGdxGame.ComidaGallinaStocks.flush();
+                        Maquina2Complete.putInteger("Maquina2Complete",0);
+                        Maquina2Complete.flush();
+                    }
+                }
 
-            if (!isActive) {
-                if (Jugador.jugador.overlaps(Cuerpo) && !MenuBuild.isMenu) {
-                    batch.draw(FlechaVerde, x + (16 / Pixels), y + (32 / Pixels) + (abs / Pixels), 32 / Pixels, 32 / Pixels);
-                    if(AddResources.puntero.overlaps(Cuerpo2))
-                    {
-                        isActive = true;
+
+            }else
+            {
+                Costales.set(0,0,0,0);
+                if (!isActive) {
+                    if (Jugador.jugador.overlaps(Cuerpo) && !MenuBuild.isMenu) {
+                        batch.draw(FlechaVerde, x + (16 / Pixels), y + (32 / Pixels) + (abs / Pixels), 32 / Pixels, 32 / Pixels);
+                        if(AddResources.puntero.overlaps(Cuerpo2))
+                        {
+                            isActive = true;
+                        }
                     }
                 }
             }
+
         }
+
+
     }
 
     @Override

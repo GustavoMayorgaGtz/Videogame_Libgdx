@@ -153,11 +153,21 @@ public class MyGdxGame extends Game{
 	public static Preferences CorralVacaColocadas;
 	public static Preferences CorralVacas1;
 	public static Preferences CorralVacas2;
+	public static Preferences Corral1VacasAlimentadas;
+	public static Preferences Corral2VacasAlimentadas;
+	public static Preferences CorralVacas1Year,CorralVacas1Day,CorralVacas1Hour,CorralVacas1Minute;
+	public static Preferences CorralVacas2Year,CorralVacas2Day,CorralVacas2Hour,CorralVacas2Minute;
+	public static Preferences Corral1Iterator,Corral2Iterator;
 	/**CorralGallinas**/
 	public static Preferences Corral1Gallinas,Corral2Gallinas;
 	public static Preferences CorralGallinasColocadas;
 	public static Preferences CorralGallinas1;
 	public static Preferences CorralGallinas2;
+	public static Preferences Corral1GallinasAlimentadas;
+	public static Preferences Corral2GallinasAlimentadas;
+	public static Preferences CorralGallinas1Year,CorralGallinas1Day,CorralGallinas1Hour,CorralGallinas1Minute;
+	public static Preferences CorralGallinas2Year,CorralGallinas2Day,CorralGallinas2Hour,CorralGallinas2Minute;
+	public static Preferences Corral1GallinaIterator,Corral2GallinaIterator;
 	/**Maquina de Comida**/
 	public static Preferences Maquina1Gallina,Maquina1Vaca,Maquina2Gallina,Maquina2Vaca;
 	public static Preferences MaquinaComidaColocadas;
@@ -370,6 +380,19 @@ public class MyGdxGame extends Game{
 		CorralVacas2 = Gdx.app.getPreferences("Y27");
 		Corral1Vacas = Gdx.app.getPreferences("Corral1Vacas");
 		Corral2Vacas = Gdx.app.getPreferences("Corral2Vacas");
+		Corral1VacasAlimentadas = Gdx.app.getPreferences("Corral1VacasAlimentadas");
+		Corral2VacasAlimentadas = Gdx.app.getPreferences("Corral2VacasAlimentadas");
+		CorralVacas1Year = Gdx.app.getPreferences("CorralVacas1Year");
+		CorralVacas1Day= Gdx.app.getPreferences("CorralVacas1Day");
+		CorralVacas1Hour= Gdx.app.getPreferences("CorralVacas1Hour");
+		CorralVacas1Minute= Gdx.app.getPreferences("CorralVacas1Minute");
+		CorralVacas2Year= Gdx.app.getPreferences("CorralVacas2Year");
+		CorralVacas2Day= Gdx.app.getPreferences("CorralVacas2Day");
+		CorralVacas2Hour= Gdx.app.getPreferences("CorralVacas2Hour");
+		CorralVacas2Minute= Gdx.app.getPreferences("CorralVacas2Minute");
+		Corral1Iterator = Gdx.app.getPreferences("Corral1Iterator");
+		Corral2Iterator = Gdx.app.getPreferences("Corral2Iterator");
+
 		/**Corral Gallinas**/
 		CorralGallinasColocadas = Gdx.app.getPreferences("Posiciones10");
 		CorralGallinas1 = Gdx.app.getPreferences("X28");
@@ -378,6 +401,18 @@ public class MyGdxGame extends Game{
 		CorralGallinas2 = Gdx.app.getPreferences("Y29");
 		Corral1Gallinas = Gdx.app.getPreferences("Corral1Gallinas");
 		Corral2Gallinas = Gdx.app.getPreferences("Corral2Gallinas");
+		Corral1GallinasAlimentadas = Gdx.app.getPreferences("Corral1GallinasAlimentadas");
+		Corral2GallinasAlimentadas = Gdx.app.getPreferences("Corral2GallinasAlimentadas");
+		CorralGallinas1Year = Gdx.app.getPreferences("CorralGallinas1Year");
+		CorralGallinas1Day= Gdx.app.getPreferences("CorralGallinas1Day");
+		CorralGallinas1Hour= Gdx.app.getPreferences("CorralGallinas1Hour");
+		CorralGallinas1Minute= Gdx.app.getPreferences("CorralGallinas1Minute");
+		CorralGallinas2Year= Gdx.app.getPreferences("CorralGallinas2Year");
+		CorralGallinas2Day= Gdx.app.getPreferences("CorralGallinas2Day");
+		CorralGallinas2Hour= Gdx.app.getPreferences("CorralGallinas2Hour");
+		CorralGallinas2Minute= Gdx.app.getPreferences("CorralGallinas2Minute");
+		Corral1GallinaIterator = Gdx.app.getPreferences("Corral1GallinaIterator");
+		Corral2GallinaIterator = Gdx.app.getPreferences("Corral2GallinaIterator");
 		/**Maquinas**/
 		MaquinaComidaColocadas = Gdx.app.getPreferences("MaquinaComida");
 		MaquinasComida1 = Gdx.app.getPreferences("X30");

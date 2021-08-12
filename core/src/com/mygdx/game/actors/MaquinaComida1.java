@@ -41,7 +41,7 @@ public static boolean isActive;
 /***/
 Texture CostalGallina,CostalVaca;
 Rectangle Costales;
-boolean isVaca,isGallina;
+
     public MaquinaComida1()
     {
         CostalGallina = MyGdxGame.getManager().get("Almacen/ComidaGallina.png");
@@ -122,7 +122,7 @@ boolean isVaca,isGallina;
                 t.calcularHora = true;
                 if(MyGdxGame.Maquina1Vaca.getBoolean("Maquina1Vaca"))
                 {
-                    t.CalcularTiempo(1);
+                    t.CalcularTiempo(5);
                     MyGdxGame.Maquina1isVaca.putBoolean("Maquina1isVaca",true);
                     MyGdxGame.Maquina1isGallina.putBoolean("Maquina1isGallina",false);
                     MyGdxGame.Maquina1isVaca.flush();
@@ -130,7 +130,7 @@ boolean isVaca,isGallina;
                 }
                 if(MyGdxGame.Maquina1Gallina.getBoolean("Maquina1Gallina"))
                 {
-                    t.CalcularTiempo(1);
+                    t.CalcularTiempo(4);
                     MyGdxGame.Maquina1isVaca.putBoolean("Maquina1isVaca",false);
                     MyGdxGame.Maquina1isGallina.putBoolean("Maquina1isGallina",true);
                     MyGdxGame.Maquina1isVaca.flush();

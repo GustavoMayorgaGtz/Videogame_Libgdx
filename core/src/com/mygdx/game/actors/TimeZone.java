@@ -73,7 +73,7 @@ public class TimeZone extends Actor {
                 }
 
             }
-       /*     Gdx.app.log("year",""+year);
+            Gdx.app.log("year",""+year);
             Gdx.app.log("day",""+day);
             Gdx.app.log("hour",""+hour);
             Gdx.app.log("minute",""+minute);
@@ -81,7 +81,7 @@ public class TimeZone extends Actor {
             Gdx.app.log("yearS",""+yearS);
             Gdx.app.log("dayS",""+dayS);
             Gdx.app.log("hourS",""+hourS);
-            Gdx.app.log("mminuteS",""+minuteS);*/
+            Gdx.app.log("mminuteS",""+minuteS);
             calcularHora = false;
         }
     }

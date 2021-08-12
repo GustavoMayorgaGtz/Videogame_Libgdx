@@ -11,7 +11,11 @@ import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.tiled.AddResources;
 
+import static com.mygdx.game.MyGdxGame.Corral1Gallinas;
+import static com.mygdx.game.MyGdxGame.Corral1GallinasAlimentadas;
+import static com.mygdx.game.MyGdxGame.Corral1Vacas;
 import static com.mygdx.game.MyGdxGame.Corral2Gallinas;
+import static com.mygdx.game.MyGdxGame.Corral2GallinasAlimentadas;
 import static com.mygdx.game.MyGdxGame.CorralGallinas2;
 import static com.mygdx.game.MyGdxGame.Pixels;
 import static com.mygdx.game.actors.Tierra1.Build;
@@ -43,8 +47,14 @@ float timeDurationTouch;
     float timeFree;
 
 
+    Texture Costal;
+    Texture Huevos;
+    Rectangle HuevosR;
     public CorralGallinas2()
     {
+        Huevos = MyGdxGame.getManager().get("Almacen/Huevos.png");
+        HuevosR = new Rectangle();
+        Costal = MyGdxGame.getManager().get("Almacen/ComidaGallina.png");
         logo = new Texture("CorralGallinas.png");
         Cuerpo = new Rectangle();
         Cuerpo2 = new Rectangle();
@@ -163,6 +173,125 @@ float timeDurationTouch;
         if (Corral2Gallinas.getInteger("Corral2Gallinas") >= 2)
         {
             Gallina2(batch);
+        }
+        if(Corral2Gallinas.getInteger("Corral2Gallinas") >= 1)
+        {
+            if(!Corral2GallinasAlimentadas.getBoolean("Corral2GallinasAlimentadas"))
+            {
+                MyGdxGame.Corral2GallinaIterator.putInteger("Corral2GallinaIterator",0);
+                MyGdxGame.Corral2GallinaIterator.flush();
+                if(Jugador.jugador.overlaps(Cuerpo2)) {
+                    if (Corral2Gallinas.getInteger("Corral2Gallinas") == 1)
+                    {
+                        batch.draw(Costal, x + (65 / Pixels), y + (32 / Pixels) + (abs / Pixels), 25 / Pixels, 25 / Pixels);
+                    }else if(Corral2Gallinas.getInteger("Corral2Gallinas") == 2) {
+                        batch.draw(Costal, x + (65 / Pixels), y + (32 / Pixels) + (abs / Pixels), 25 / Pixels, 25 / Pixels);
+                        batch.draw(Costal, x + (85 / Pixels), y + (32 / Pixels) + (abs / Pixels), 25 / Pixels, 25 / Pixels);
+                    }
+
+
+                    if(AddResources.puntero.overlaps(Cuerpo2)&&MyGdxGame.ComidaGallinaStocks.getInteger("ComidaGallinaStocks") >=1&&Corral2Gallinas.getInteger("Corral2Gallinas") == 1)
+                    {
+                        int vaca = MyGdxGame.ComidaGallinaStocks.getInteger("ComidaGallinaStocks");
+                        vaca -= 1;
+                        MyGdxGame.ComidaGallinaStocks.putInteger("ComidaGallinaStocks",vaca);
+                        MyGdxGame.ComidaGallinaStocks.flush();
+                        Corral2GallinasAlimentadas.putBoolean("Corral2GallinasAlimentadas",true);
+                        Corral2GallinasAlimentadas.flush();
+                    }
+                    if(AddResources.puntero.overlaps(Cuerpo2)&&MyGdxGame.ComidaGallinaStocks.getInteger("ComidaGallinaStocks") >=2&&Corral2Gallinas.getInteger("Corral2Gallinas") == 2)
+                    {
+                        int gallina = MyGdxGame.ComidaGallinaStocks.getInteger("ComidaGallinaStocks");
+                        gallina -= 2;
+                        MyGdxGame.ComidaGallinaStocks.putInteger("ComidaGallinaStocks",gallina);
+                        MyGdxGame.ComidaGallinaStocks.flush();
+                        Corral2GallinasAlimentadas.putBoolean("Corral2GallinasAlimentadas",true);
+                        Corral2GallinasAlimentadas.flush();
+                    }
+                    HuevosR.set(0,0,0,0);
+                }
+            }else
+            {
+                if(MyGdxGame.Corral2GallinaIterator.getInteger("Corral2GallinaIterator")==0) {
+                    TimeZone t = new TimeZone();
+                    t.calcularHora = true;
+                    t.CalcularTiempo(10);
+                    MyGdxGame.CorralGallinas2Day.putInteger("CorralGallinas2Day",t.dayS);
+                    MyGdxGame.CorralGallinas2Year.putInteger("CorralGallinas2Year",t.yearS);
+                    MyGdxGame.CorralGallinas2Hour.putInteger("CorralGallinas2Hour",t.hourS);
+                    MyGdxGame.CorralGallinas2Minute.putInteger("CorralGallinas2Minute",t.minuteS);
+                    MyGdxGame.CorralGallinas2Year.flush();
+                    MyGdxGame.CorralGallinas2Hour.flush();
+                    MyGdxGame.CorralGallinas2Day.flush();
+                    MyGdxGame.CorralGallinas2Minute.flush();
+                   /* Gdx.app.log("Year",""+   MyGdxGame.CorralVacas1Year.getInteger("CorralVacas1Year"));
+                    Gdx.app.log("Day",""+   MyGdxGame.CorralVacas1Day.getInteger("CorralVacas1Day"));
+                    Gdx.app.log("Hour",""+   MyGdxGame.CorralVacas1Hour.getInteger("CorralVacas1Hour"));
+                    Gdx.app.log("Minute",""+   MyGdxGame.CorralVacas1Minute.getInteger("CorralVacas1Minute")+" Minutes"+t.minuteS);*/
+                    MyGdxGame.Corral2GallinaIterator.putInteger("Corral2GallinaIterator",1);
+                    MyGdxGame.Corral2GallinaIterator.flush();
+                }else if(MyGdxGame.Corral2GallinaIterator.getInteger("Corral2GallinaIterator")==1)
+                {
+                    TimeZone t = new TimeZone();
+                    if(t.year > MyGdxGame.CorralGallinas2Year.getInteger("CorralGallinas2Year"))
+                    {
+                        MyGdxGame.Corral2GallinaIterator.putInteger("Corral2GallinaIterator",2);
+                        MyGdxGame.Corral2GallinaIterator.flush();
+                    }else if(t.day > MyGdxGame.CorralGallinas2Day.getInteger("CorralGallinas2Day"))
+                    {
+                        MyGdxGame.Corral2GallinaIterator.putInteger("Corral2GallinaIterator",2);
+                        MyGdxGame.Corral2GallinaIterator.flush();
+                    }else if(t.hour > MyGdxGame.CorralGallinas2Hour.getInteger("CorralGallinas2Hour"))
+                    {
+                        MyGdxGame.Corral2GallinaIterator.putInteger("Corral2GallinaIterator",2);
+                        MyGdxGame.Corral2GallinaIterator.flush();
+                    }else if(t.minute > MyGdxGame.CorralGallinas2Minute.getInteger("CorralGallinas2Minute"))
+                    {
+                        MyGdxGame.Corral2GallinaIterator.putInteger("Corral2GallinaIterator",2);
+                        MyGdxGame.Corral2GallinaIterator.flush();
+                    }
+                }else if(MyGdxGame.Corral2GallinaIterator.getInteger("Corral2GallinaIterator")==2)
+                {
+                    if(MyGdxGame.Corral2Gallinas.getInteger("Corral2Gallinas")==1) {
+                        batch.draw(Huevos, x+(40/Pixels), y+((abs/Pixels)/2), 15 / Pixels, 15 / Pixels);
+                        HuevosR.set(x+(40/Pixels), y+((abs/Pixels)/2), 12 / Pixels, 12 / Pixels);
+                        if(HuevosR.overlaps(Jugador.jugador))
+                        {
+                            MenuBuild.HuevosB =  true;
+                            MenuBuild.FiguraX = x+(35/Pixels);
+                            MenuBuild.FiguraY = y+(32/Pixels);
+                            MenuBuild.MandarAlmacen = true;
+                            int huevos =  MyGdxGame.HuevosStocks.getInteger("HuevosStocks");
+                            huevos += 3;
+                            MyGdxGame.HuevosStocks.putInteger("HuevosStocks",huevos);
+                            MyGdxGame.HuevosStocks.flush();
+                            Corral2GallinasAlimentadas.putBoolean("Corral2GallinasAlimentadas",false);
+                            Corral2GallinasAlimentadas.flush();
+                        }
+                    }else if (MyGdxGame.Corral2Vacas.getInteger("Corral2Vacas")==2)
+                    {
+                        batch.draw(Huevos, x+(40/Pixels), y+((abs/Pixels)/2), 15 / Pixels, 15 / Pixels);
+                        batch.draw(Huevos, x+(50/Pixels), y+((abs/Pixels)/2), 15 / Pixels, 15 / Pixels);
+                        HuevosR.set(x+(40/Pixels), y+((abs/Pixels)/2), 20/ Pixels, 12 / Pixels);
+                        if(HuevosR.overlaps(Jugador.jugador))
+                        {
+                            MenuBuild.HuevosB =  true;
+                            MenuBuild.FiguraX = x+(35/Pixels);
+                            MenuBuild.FiguraY = y+(32/Pixels);
+                            MenuBuild.MandarAlmacen = true;
+                            int huevos =  MyGdxGame.HuevosStocks.getInteger("HuevosStocks");
+                            huevos += 6;
+                            MyGdxGame.HuevosStocks.putInteger("HuevosStocks",huevos);
+                            MyGdxGame.HuevosStocks.flush();
+                            Corral2GallinasAlimentadas.putBoolean("Corral2GallinasAlimentadas",false);
+                            Corral2GallinasAlimentadas.flush();
+
+                        }
+                    }
+                }
+
+
+            }
         }
         /************/
     }
