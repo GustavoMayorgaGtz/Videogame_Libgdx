@@ -47,6 +47,7 @@ public class CorralVaca extends Actor implements Disposable {
     Texture Costal;
     Texture Leche;
     Rectangle LecheR;
+    float tiempoEspera; //esta variable me dice si el tiempo de espera es menor a 1 segundo si es asi se regresa a la fase 0 del iterator o sea colocar el tiempo correcto
 
     public CorralVaca()
     {
@@ -175,7 +176,7 @@ public class CorralVaca extends Actor implements Disposable {
         {
             if(!MyGdxGame.Corral1VacasAlimentadas.getBoolean("Corral1VacasAlimentadas"))
             {
-
+   tiempoEspera = 0;
                 if(Jugador.jugador.overlaps(Cuerpo2)) {
                     if (Corral1Vacas.getInteger("Corral1Vacas") == 1)
                     {
@@ -212,7 +213,9 @@ public class CorralVaca extends Actor implements Disposable {
                 }
             }else
             {
+
                 if(MyGdxGame.Corral1Iterator.getInteger("Corral1Iterator")==0) {
+                    tiempoEspera = 0;
                     TimeZone t = new TimeZone();
                     t.calcularHora = true;
                     t.CalcularTiempo(30);
@@ -232,6 +235,7 @@ public class CorralVaca extends Actor implements Disposable {
                     MyGdxGame.Corral1Iterator.flush();
                 }else if(MyGdxGame.Corral1Iterator.getInteger("Corral1Iterator")==1)
                 {
+                    tiempoEspera += 1 * Gdx.graphics.getDeltaTime();
                     TimeZone t = new TimeZone();
                     if(t.year > MyGdxGame.CorralVacas1Year.getInteger("CorralVacas1Year"))
                     {
@@ -252,6 +256,12 @@ public class CorralVaca extends Actor implements Disposable {
                     }
                 }else if(MyGdxGame.Corral1Iterator.getInteger("Corral1Iterator")==2)
                 {
+                    if(tiempoEspera < 5)
+                    {
+                        MyGdxGame.Corral1Iterator.putInteger("Corral1Iterator",0);
+                        MyGdxGame.Corral1Iterator.flush();
+                    }else
+                    {
                     if(MyGdxGame.Corral1Vacas.getInteger("Corral1Vacas")==1) {
                         batch.draw(Leche, x+(40/Pixels), y+((abs/Pixels)/2), 15 / Pixels, 15 / Pixels);
                         LecheR.set(x+(40/Pixels), y+((abs/Pixels)/2), 12 / Pixels, 12 / Pixels);
@@ -268,25 +278,24 @@ public class CorralVaca extends Actor implements Disposable {
                             Corral1VacasAlimentadas.putBoolean("Corral1VacasAlimentadas",false);
                             Corral1VacasAlimentadas.flush();
                         }
-                    }else if (MyGdxGame.Corral1Vacas.getInteger("Corral1Vacas")==2)
-                    {
-                        batch.draw(Leche, x+(40/Pixels), y+((abs/Pixels)/2), 15 / Pixels, 15 / Pixels);
-                        batch.draw(Leche, x+(50/Pixels), y+((abs/Pixels)/2), 15 / Pixels, 15 / Pixels);
-                        LecheR.set(x+(40/Pixels), y+((abs/Pixels)/2), 20/ Pixels, 12 / Pixels);
-                        if(LecheR.overlaps(Jugador.jugador))
-                        {
-                            MenuBuild.LecheB =  true;
-                            MenuBuild.FiguraX = x+(35/Pixels);
-                            MenuBuild.FiguraY = y+(32/Pixels);
+                    }else if (MyGdxGame.Corral1Vacas.getInteger("Corral1Vacas")==2) {
+                        batch.draw(Leche, x + (40 / Pixels), y + ((abs / Pixels) / 2), 15 / Pixels, 15 / Pixels);
+                        batch.draw(Leche, x + (50 / Pixels), y + ((abs / Pixels) / 2), 15 / Pixels, 15 / Pixels);
+                        LecheR.set(x + (40 / Pixels), y + ((abs / Pixels) / 2), 20 / Pixels, 12 / Pixels);
+                        if (LecheR.overlaps(Jugador.jugador)) {
+                            MenuBuild.LecheB = true;
+                            MenuBuild.FiguraX = x + (35 / Pixels);
+                            MenuBuild.FiguraY = y + (32 / Pixels);
                             MenuBuild.MandarAlmacen = true;
-                           int leche =  MyGdxGame.LecheStocks.getInteger("LecheStocks");
-                           leche += 2;
-                           MyGdxGame.LecheStocks.putInteger("LecheStocks",leche);
-                           MyGdxGame.LecheStocks.flush();
-                            Corral1VacasAlimentadas.putBoolean("Corral1VacasAlimentadas",false);
+                            int leche = MyGdxGame.LecheStocks.getInteger("LecheStocks");
+                            leche += 2;
+                            MyGdxGame.LecheStocks.putInteger("LecheStocks", leche);
+                            MyGdxGame.LecheStocks.flush();
+                            Corral1VacasAlimentadas.putBoolean("Corral1VacasAlimentadas", false);
                             Corral1VacasAlimentadas.flush();
 
                         }
+                    }
                     }
                 }
 

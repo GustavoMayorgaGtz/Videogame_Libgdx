@@ -88,12 +88,13 @@
          renderer2.render();
          addR.addRender(delta);
          addR.stage.draw();
-         if(Gdx.input.isTouched(1)) {
+      /*   if(Gdx.input.isTouched(1)) {
              CrearBucle();
-         }
-         Gdx.app.log("FPS",""+Gdx.app.getGraphics().getFramesPerSecond());
+         }/*/
+     //    Gdx.app.log("FPS",""+Gdx.app.getGraphics().getFramesPerSecond());
          renderer.render();
          addR.batchFunctions();
+         addR.stage2.draw();
 
      }
      public void CrearBucle(){

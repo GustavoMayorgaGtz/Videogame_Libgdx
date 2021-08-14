@@ -97,6 +97,8 @@
          renderer.render();
 
          addR.batchFunctions();
+         addR.stage2.draw();
+
          if(!MyGdxGame.NoSeguirFondo&&!Jugador.Muerto) {
              if (Jugador.body.getLinearVelocity().x >= 0.60f) {
                  x -= 15f * Gdx.graphics.getDeltaTime();
