@@ -157,11 +157,11 @@ public class Tierra3 extends Actor implements Disposable {
             if(isOld == 0) {
                 if (t.year > MyGdxGame.tierra3Year2.getInteger("Year2Tierra3")) {
                     isOld = 1;
-                } else if (t.day > MyGdxGame.tierra3Day2.getInteger("Day2Tierra3")) {
+                } else if (t.day > MyGdxGame.tierra3Day2.getInteger("Day2Tierra3")&&t.year >= MyGdxGame.tierra3Year2.getInteger("Year2Tierra3")) {
                     isOld = 1;
-                } else if (t.hour > MyGdxGame.tierra3Hour2.getInteger("Hour2Tierra3")) {
+                } else if (t.hour > MyGdxGame.tierra3Hour2.getInteger("Hour2Tierra3")&&t.day >= MyGdxGame.tierra3Day2.getInteger("Day2Tierra3")&&t.year >= MyGdxGame.tierra3Year2.getInteger("Year2Tierra3")) {
                     isOld = 1;
-                } else if (t.minute > MyGdxGame.tierra3Minute2.getInteger("Minute2Tierra3")) {
+                } else if (t.minute > MyGdxGame.tierra3Minute2.getInteger("Minute2Tierra3")&&t.hour >= MyGdxGame.tierra3Hour2.getInteger("Hour2Tierra3")&&t.day >= MyGdxGame.tierra3Day2.getInteger("Day2Tierra3")&&t.year >= MyGdxGame.tierra3Year2.getInteger("Year2Tierra3")) {
                     isOld = 1;
                 }
 
@@ -170,13 +170,13 @@ public class Tierra3 extends Actor implements Disposable {
             if(t.year > MyGdxGame.tierra3Year.getInteger("YearTierra3"))
             {
                 isOld = 2;
-            }else if(t.day > MyGdxGame.tierra3Day.getInteger("DayTierra3"))
+            }else if(t.day > MyGdxGame.tierra3Day.getInteger("DayTierra3")&&t.year >= MyGdxGame.tierra3Year.getInteger("YearTierra3"))
             {
                 isOld = 2;
-            }else if(t.hour > MyGdxGame.tierra3Hour.getInteger("HourTierra3"))
+            }else if(t.hour > MyGdxGame.tierra3Hour.getInteger("HourTierra3")&&t.day >= MyGdxGame.tierra3Day.getInteger("DayTierra3")&&t.year >= MyGdxGame.tierra3Year.getInteger("YearTierra3"))
             {
                 isOld = 2;
-            }else if(t.minute > MyGdxGame.tierra3Minute.getInteger("MinuteTierra3"))
+            }else if(t.minute > MyGdxGame.tierra3Minute.getInteger("MinuteTierra3")&&t.hour >= MyGdxGame.tierra3Hour.getInteger("HourTierra3")&&t.day >= MyGdxGame.tierra3Day.getInteger("DayTierra3")&&t.year >= MyGdxGame.tierra3Year.getInteger("YearTierra3"))
             {
                 isOld = 2;
             }

@@ -168,7 +168,7 @@ public static boolean isActive;
                 isActive = false;
                 Maquina2Complete.putInteger("Maquina2Complete",1);
                 Maquina2Complete.flush();
-            } else if (t2.day > MyGdxGame.MaquinasComida2Day.getInteger("MaquinasComida2Day")) {
+            } else if (t2.day > MyGdxGame.MaquinasComida2Day.getInteger("MaquinasComida2Day")&&t2.year >= MyGdxGame.MaquinasComida2Year.getInteger("MaquinasComida2Year")) {
                 MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", false);
                 MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", false);
                 MyGdxGame.Maquina2Vaca.flush();
@@ -178,7 +178,7 @@ public static boolean isActive;
                 isActive = false;
                 Maquina2Complete.putInteger("Maquina2Complete",1);
                 Maquina2Complete.flush();
-            } else if (t2.hour > MyGdxGame.MaquinasComida2Hour.getInteger("MaquinasComida2Hour")) {
+            } else if (t2.hour > MyGdxGame.MaquinasComida2Hour.getInteger("MaquinasComida2Hour")&&t2.day >= MyGdxGame.MaquinasComida2Day.getInteger("MaquinasComida2Day")&&t2.year >= MyGdxGame.MaquinasComida2Year.getInteger("MaquinasComida2Year")) {
                 MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", false);
                 MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", false);
                 MyGdxGame.Maquina2Vaca.flush();
@@ -188,7 +188,7 @@ public static boolean isActive;
                 isActive = false;
                 Maquina2Complete.putInteger("Maquina2Complete",1);
                 Maquina2Complete.flush();
-            } else if (t2.minute > MyGdxGame.MaquinasComida2Minute.getInteger("MaquinasComida2Minute")) {
+            } else if (t2.minute > MyGdxGame.MaquinasComida2Minute.getInteger("MaquinasComida2Minute")&&t2.hour >= MyGdxGame.MaquinasComida2Hour.getInteger("MaquinasComida2Hour")&&t2.day >= MyGdxGame.MaquinasComida2Day.getInteger("MaquinasComida2Day")&&t2.year >= MyGdxGame.MaquinasComida2Year.getInteger("MaquinasComida2Year")) {
                 MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", false);
                 MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", false);
                 MyGdxGame.Maquina2Vaca.flush();

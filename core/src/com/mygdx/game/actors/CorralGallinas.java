@@ -236,25 +236,28 @@ float timeDurationTouch;
                     MyGdxGame.Corral1GallinaIterator.flush();
                 }else if(MyGdxGame.Corral1GallinaIterator.getInteger("Corral1GallinaIterator")==1)
                 {
+                    /**************/
                     tiempoEspera += 1 * Gdx.graphics.getDeltaTime();
                     TimeZone t = new TimeZone();
                     if(t.year > MyGdxGame.CorralGallinas1Year.getInteger("CorralGallinas1Year"))
                     {
                         MyGdxGame.Corral1GallinaIterator.putInteger("Corral1GallinaIterator",2);
                         MyGdxGame.Corral1GallinaIterator.flush();
-                    }else if(t.day > MyGdxGame.CorralGallinas1Day.getInteger("CorralGallinas1Day"))
+                    }else if(t.day > MyGdxGame.CorralGallinas1Day.getInteger("CorralGallinas1Day")&&t.year >= MyGdxGame.CorralGallinas1Year.getInteger("CorralGallinas1Year"))
                     {
                         MyGdxGame.Corral1GallinaIterator.putInteger("Corral1GallinaIterator",2);
                         MyGdxGame.Corral1GallinaIterator.flush();
-                    }else if(t.hour > MyGdxGame.CorralGallinas1Hour.getInteger("CorralGallinas1Hour"))
+                    }else if(t.hour > MyGdxGame.CorralGallinas1Hour.getInteger("CorralGallinas1Hour")&&t.day >= MyGdxGame.CorralGallinas1Day.getInteger("CorralGallinas1Day")&&t.year >= MyGdxGame.CorralGallinas1Year.getInteger("CorralGallinas1Year"))
                     {
                         MyGdxGame.Corral1GallinaIterator.putInteger("Corral1GallinaIterator",2);
                         MyGdxGame.Corral1GallinaIterator.flush();
-                    }else if(t.minute > MyGdxGame.CorralGallinas1Minute.getInteger("CorralGallinas1Minute"))
+                    }else if(t.minute > MyGdxGame.CorralGallinas1Minute.getInteger("CorralGallinas1Minute")&&t.hour >= MyGdxGame.CorralGallinas1Hour.getInteger("CorralGallinas1Hour")&&t.day >= MyGdxGame.CorralGallinas1Day.getInteger("CorralGallinas1Day")&&t.year >= MyGdxGame.CorralGallinas1Year.getInteger("CorralGallinas1Year"))
                     {
                         MyGdxGame.Corral1GallinaIterator.putInteger("Corral1GallinaIterator",2);
                         MyGdxGame.Corral1GallinaIterator.flush();
                     }
+
+                    /**************/
                 }else if(MyGdxGame.Corral1GallinaIterator.getInteger("Corral1GallinaIterator")==2) {
 
                     if(MyGdxGame.CorralGallinas1Year.getInteger("CorralGallinas1Year")== 0 )

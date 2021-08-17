@@ -160,11 +160,11 @@ TimeZone t2 = new TimeZone();
 if(isOld == 0) {
     if (t.year > MyGdxGame.tierra1Year2.getInteger("Year2Tierra1")) {
         isOld = 1;
-    } else if (t.day > MyGdxGame.tierra1Day2.getInteger("Day2Tierra1")) {
+    } else if (t.day > MyGdxGame.tierra1Day2.getInteger("Day2Tierra1")&&t.year >= MyGdxGame.tierra1Year2.getInteger("Year2Tierra1")) {
         isOld = 1;
-    } else if (t.hour > MyGdxGame.tierra1Hour2.getInteger("Hour2Tierra1")) {
+    } else if (t.hour > MyGdxGame.tierra1Hour2.getInteger("Hour2Tierra1")&&t.day >= MyGdxGame.tierra1Day2.getInteger("Day2Tierra1")&&t.year >= MyGdxGame.tierra1Year2.getInteger("Year2Tierra1")) {
         isOld = 1;
-    } else if (t.minute > MyGdxGame.tierra1Minute2.getInteger("Minute2Tierra1")) {
+    } else if (t.minute > MyGdxGame.tierra1Minute2.getInteger("Minute2Tierra1")&&t.hour >= MyGdxGame.tierra1Hour2.getInteger("Hour2Tierra1")&&t.day >= MyGdxGame.tierra1Day2.getInteger("Day2Tierra1")&&t.year >= MyGdxGame.tierra1Year2.getInteger("Year2Tierra1")) {
         isOld = 1;
     }
 
@@ -173,13 +173,13 @@ if(isOld == 0) {
             if(t.year > MyGdxGame.tierra1Year.getInteger("YearTierra1"))
             {
                 isOld = 2;
-            }else if(t.day > MyGdxGame.tierra1Day.getInteger("DayTierra1"))
+            }else if(t.day > MyGdxGame.tierra1Day.getInteger("DayTierra1")&&t.year >= MyGdxGame.tierra1Year.getInteger("YearTierra1"))
             {
                 isOld = 2;
-            }else if(t.hour > MyGdxGame.tierra1Hour.getInteger("HourTierra1"))
+            }else if(t.hour > MyGdxGame.tierra1Hour.getInteger("HourTierra1")&&t.day >= MyGdxGame.tierra1Day.getInteger("DayTierra1")&&t.year >= MyGdxGame.tierra1Year.getInteger("YearTierra1"))
             {
                 isOld = 2;
-            }else if(t.minute > MyGdxGame.tierra1Minute.getInteger("MinuteTierra1"))
+            }else if(t.minute > MyGdxGame.tierra1Minute.getInteger("MinuteTierra1")&&t.hour >= MyGdxGame.tierra1Hour.getInteger("HourTierra1")&&t.day >= MyGdxGame.tierra1Day.getInteger("DayTierra1")&&t.year >= MyGdxGame.tierra1Year.getInteger("YearTierra1"))
             {
                 isOld = 2;
             }

@@ -262,25 +262,35 @@ float timeDurationTouch;
                     MyGdxGame.Corral2Iterator.flush();
                 }else if(MyGdxGame.Corral2Iterator.getInteger("Corral2Iterator")==1)
                 {
-                    tiempoEspera += 1 * Gdx.graphics.getDeltaTime();
+                    /***********/
                     TimeZone t = new TimeZone();
+                  /*  Gdx.app.log("Year",""+  t.year);
+                    Gdx.app.log("Day",""+   t.day);
+                    Gdx.app.log("Hour",""+  t.hour);
+                    Gdx.app.log("Minute",""+t.minute);*/
                     if(t.year > MyGdxGame.CorralVacas2Year.getInteger("CorralVacas2Year"))
                     {
+                        Gdx.app.log("error time","time1");
                         MyGdxGame.Corral2Iterator.putInteger("Corral2Iterator",2);
                         MyGdxGame.Corral2Iterator.flush();
-                    }else if(t.day > MyGdxGame.CorralVacas2Day.getInteger("CorralVacas2Day"))
+                    }else if(t.day > MyGdxGame.CorralVacas2Day.getInteger("CorralVacas2Day") &&t.year >= MyGdxGame.CorralVacas2Year.getInteger("CorralVacas2Year") )
                     {
+                        Gdx.app.log("error time","time2");
                         MyGdxGame.Corral2Iterator.putInteger("Corral2Iterator",2);
                         MyGdxGame.Corral2Iterator.flush();
-                    }else if(t.hour > MyGdxGame.CorralVacas2Hour.getInteger("CorralVacas2Hour"))
+                    }else if(t.hour > MyGdxGame.CorralVacas2Hour.getInteger("CorralVacas2Hour")&&t.day >= MyGdxGame.CorralVacas2Day.getInteger("CorralVacas2Day") &&t.year >= MyGdxGame.CorralVacas2Year.getInteger("CorralVacas2Year") )
                     {
+                        Gdx.app.log("error time","time3");
                         MyGdxGame.Corral2Iterator.putInteger("Corral2Iterator",2);
                         MyGdxGame.Corral2Iterator.flush();
-                    }else if(t.minute > MyGdxGame.CorralVacas2Minute.getInteger("CorralVacas2Minute"))
+
+                    }else if(t.minute >= MyGdxGame.CorralVacas2Minute.getInteger("CorralVacas2Minute")&&t.hour >= MyGdxGame.CorralVacas2Hour.getInteger("CorralVacas2Hour")&&t.day >= MyGdxGame.CorralVacas2Day.getInteger("CorralVacas2Day") &&t.year >= MyGdxGame.CorralVacas2Year.getInteger("CorralVacas2Year") )
                     {
+                        Gdx.app.log("error time","time4");
                         MyGdxGame.Corral2Iterator.putInteger("Corral2Iterator",2);
                         MyGdxGame.Corral2Iterator.flush();
                     }
+                    /***********/
                 }else if(MyGdxGame.Corral2Iterator.getInteger("Corral2Iterator")==2)
                 {
                     if(MyGdxGame.CorralVacas2Year.getInteger("CorralVacas2Year")== 0 )

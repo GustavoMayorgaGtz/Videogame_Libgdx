@@ -236,38 +236,35 @@ public class CorralVaca extends Actor implements Disposable {
                     t.clear();
                 }else if(MyGdxGame.Corral1Iterator.getInteger("Corral1Iterator")==1)
                 {
-
+                    /***********/
                     TimeZone t = new TimeZone();
-                    Gdx.app.log("Year",""+  t.year);
+                  /*  Gdx.app.log("Year",""+  t.year);
                     Gdx.app.log("Day",""+   t.day);
                     Gdx.app.log("Hour",""+  t.hour);
-                    Gdx.app.log("Minute",""+t.minute);
+                    Gdx.app.log("Minute",""+t.minute);*/
                     if(t.year > MyGdxGame.CorralVacas1Year.getInteger("CorralVacas1Year"))
                     {
                         Gdx.app.log("error time","time1");
                         MyGdxGame.Corral1Iterator.putInteger("Corral1Iterator",2);
                         MyGdxGame.Corral1Iterator.flush();
-                    }else if(t.day > MyGdxGame.CorralVacas1Day.getInteger("CorralVacas1Day"))
+                    }else if(t.day > MyGdxGame.CorralVacas1Day.getInteger("CorralVacas1Day") &&t.year >= MyGdxGame.CorralVacas1Year.getInteger("CorralVacas1Year") )
                     {
                         Gdx.app.log("error time","time2");
                         MyGdxGame.Corral1Iterator.putInteger("Corral1Iterator",2);
                         MyGdxGame.Corral1Iterator.flush();
-                    }else if(t.hour > MyGdxGame.CorralVacas1Hour.getInteger("CorralVacas1Hour"))
+                    }else if(t.hour > MyGdxGame.CorralVacas1Hour.getInteger("CorralVacas1Hour")&&t.day >= MyGdxGame.CorralVacas1Day.getInteger("CorralVacas1Day") &&t.year >= MyGdxGame.CorralVacas1Year.getInteger("CorralVacas1Year") )
                     {
                         Gdx.app.log("error time","time3");
                         MyGdxGame.Corral1Iterator.putInteger("Corral1Iterator",2);
                         MyGdxGame.Corral1Iterator.flush();
 
-                    }else if(t.minute >= MyGdxGame.CorralVacas1Minute.getInteger("CorralVacas1Minute")&&t.hour >= MyGdxGame.CorralVacas1Hour.getInteger("CorralVacas1Hour"))
+                    }else if(t.minute >= MyGdxGame.CorralVacas1Minute.getInteger("CorralVacas1Minute")&&t.hour >= MyGdxGame.CorralVacas1Hour.getInteger("CorralVacas1Hour")&&t.day >= MyGdxGame.CorralVacas1Day.getInteger("CorralVacas1Day") &&t.year >= MyGdxGame.CorralVacas1Year.getInteger("CorralVacas1Year") )
                     {
                         Gdx.app.log("error time","time4");
                         MyGdxGame.Corral1Iterator.putInteger("Corral1Iterator",2);
                         MyGdxGame.Corral1Iterator.flush();
-                    }else
-                    {
-                        MyGdxGame.Corral1Iterator.putInteger("Corral1Iterator",1);
-                        MyGdxGame.Corral1Iterator.flush();
                     }
+                    /***********/
                 }else if(MyGdxGame.Corral1Iterator.getInteger("Corral1Iterator")==2)
                 {
                //     Gdx.app.log("Hora de la vaca 1",""+MyGdxGame.CorralVacas1Year.getInteger("CorralVacas1Year"));
