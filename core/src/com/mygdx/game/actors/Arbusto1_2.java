@@ -148,7 +148,7 @@ float timeDurationTouch;
             for (Rectangle e : Tierra1.rects) {
                 if (noToca) {
                     if (Jugador.jugador.overlaps(e)) {
-                        y = (e.y + (e.y + (2 / Pixels)));
+                        y =  (e.y + (2 / Pixels));
                         x = Jugador.body.getPosition().x;
                         Cuerpo2.set(x, y, 32/Pixels,32/Pixels);
 

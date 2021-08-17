@@ -8,8 +8,8 @@ public class TimeZone extends Actor {
     Calendar calendar;
     public static int year,day,hour,minute;
     public static int yearS,dayS,hourS,minuteS;
-    int minuteTotal = 0;
-    int dayinyear;
+    public static int minuteTotal = 0;
+    public static int dayinyear;
     public static boolean calcularHora = false;
     public TimeZone()
     {
@@ -26,7 +26,7 @@ public class TimeZone extends Actor {
 
     }
 
-    public void CalcularTiempo(int time)
+    public static void CalcularTiempo(int time)
     {
         if(calcularHora) {
             if (minute < (60 - time)) {
@@ -83,6 +83,9 @@ public class TimeZone extends Actor {
             Gdx.app.log("hourS",""+hourS);
             Gdx.app.log("mminuteS",""+minuteS);
             calcularHora = false;
+        }else
+        {
+
         }
     }
 }

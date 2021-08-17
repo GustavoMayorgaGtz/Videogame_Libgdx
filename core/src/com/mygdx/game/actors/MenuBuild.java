@@ -31,26 +31,26 @@ import static com.mygdx.game.tiled.AddResources.puntero;
 public class MenuBuild extends Actor implements Disposable
 {
    MyGdxGame game = new MyGdxGame();
-    Texture logo;
+    public static Texture logo;
      public static Sprite Logo;
     public static Rectangle Cuadro;
-    float time;
+    public static float time;
     public static boolean isMenu;
 
     /*****Menu****/
     public static float timeRetrasar; //retrasa la seleccion para no seleccionar un menu por accidente
     public static Texture equis;
-    Texture fondo,logo1,logo2,logo3,logo4;
+    public static Texture fondo,logo1,logo2,logo3,logo4;
     public static Rectangle Menu1,Menu2,Menu3,Menu4,Salir;
     public static Sprite Fondo,Fondo2,Fondo3,Logo1,Logo2,Logo3,Logo4;
     public static boolean isMenu1 = true,isMenu2,isMenu3,isMenu4;
-    float alpha1,alpha2,alpha3,alpha4;
+    public static float alpha1,alpha2,alpha3,alpha4;
 
     /***Menu1***/
-    float alphaTierra = 1,alphaAgua = 1,alphaTrigo = 1,alphaMaiz = 1,alphaSoja = 1,alphaZanahoria = 1,alphaCana = 1,alphaAlgodon = 1;
-    float alphaTrigo2 = 1,alphaMaiz2 = 1,alphaSoja2 = 1,alphaZanahoria2 = 1,alphaCana2 = 1,alphaAlgodon2 = 1;
-    Texture Tierra,Agua,Trigo,Maiz,Soja,Zanahoria,Cana,Algodon;
-    Sprite  TierraS,AguaS,TrigoS,MaizS,SojaS,ZanahoriaS,CanaS,AlgodonS;
+    public static float alphaTierra = 1,alphaAgua = 1,alphaTrigo = 1,alphaMaiz = 1,alphaSoja = 1,alphaZanahoria = 1,alphaCana = 1,alphaAlgodon = 1;
+    public static float alphaTrigo2 = 1,alphaMaiz2 = 1,alphaSoja2 = 1,alphaZanahoria2 = 1,alphaCana2 = 1,alphaAlgodon2 = 1;
+    public static Texture Tierra,Agua,Trigo,Maiz,Soja,Zanahoria,Cana,Algodon;
+    public static Sprite  TierraS,AguaS,TrigoS,MaizS,SojaS,ZanahoriaS,CanaS,AlgodonS;
     public static Rectangle tierraR,aguaR,trigoR,maizR,sojaR,zanahoriaR,canaR,algodonR;
     public static Rectangle trigoR2,maizR2,sojaR2,zanahoriaR2,canaR2,algodonR2;
     public static boolean BuildTierra;
@@ -58,32 +58,32 @@ public class MenuBuild extends Actor implements Disposable
     public static boolean BuildMover;
 
     /****MoverButton****/
-    Texture mover;
+    public static Texture mover;
     public static Rectangle moverR;
    public static Sprite moverS;
    public static boolean isMover;
-    float moverTime;
-    float alphaMover = 0f;
+    public static float moverTime;
+    public static float alphaMover = 0f;
     /****AlmacenButton****/
-    Texture Almacen;
+    public static Texture Almacen;
     public static Rectangle AlmacenR;
     public static Sprite AlmacenS;
     public static boolean isAlmacen;
-    float AlmacenTime;
-    float alphaAlmacen = 0f;
+   public static float AlmacenTime;
+   public static float alphaAlmacen = 0f;
     /******Cultivos******/
     public static float timeCultivos;
 
     public static Texture flechaVerde,flechaRoja;
     public static boolean isMenuSeedSelection;
-    float abs;
-    boolean sube= true,baja;
+    public static float abs;
+    public static boolean sube= true,baja;
     public static float timeQuitar;
 
     public static boolean isTierra1,isTierra2,isTierra3,isTierra4,isTierra5;
     /******Menu2******/
     public static float timeMenu2 = 0;
-    float alphaCasa2 = 1,alphaCasa1 = 1,alphaMaceta1 = 1,alphaMaceta2 = 1,alphaArbusto1 = 1,alphaArbusto2 = 1;
+    public static float alphaCasa2 = 1,alphaCasa1 = 1,alphaMaceta1 = 1,alphaMaceta2 = 1,alphaArbusto1 = 1,alphaArbusto2 = 1;
     public static boolean CasasDosPisosBuild;
     public static boolean CasasBuild;
     public static boolean Maceta1Build;
@@ -91,32 +91,32 @@ public class MenuBuild extends Actor implements Disposable
     public static boolean Arbusto1Build;
     public static boolean Arbusto2Build;
     public static Rectangle Casa2PisosR,CasaR,Maceta1R,Maceta2R,Arbusto1R,Arbusto2R;
-    Texture Arbusto1,Arbusto2;
-    Sprite Arbusto1S,Arbusto2S;
-    Texture Maceta1,Maceta2;
-    Sprite Maceta1S,Maceta2S;
-    Texture Casa2Pisos,Casa;
-    Sprite Casa2PisosS,CasaS;
-    Texture negro;
+    public static Texture Arbusto1,Arbusto2;
+    public static Sprite Arbusto1S,Arbusto2S;
+    public static Texture Maceta1,Maceta2;
+    public static Sprite Maceta1S,Maceta2S;
+    public static Texture Casa2Pisos,Casa;
+    public static Sprite Casa2PisosS,CasaS;
+    public static Texture negro;
     /******Menu3******/
     public static float timeMenu3 = 0;
     public static boolean isCorralVacasBuild,isCorralGallinasBuild;
-    Texture Flecha;
-    Rectangle FlechaR;
+    public static Texture Flecha;
+    public static Rectangle FlechaR;
     public static boolean isSelectMenu3;
     public static float timeFlecha;
-    Texture CorralVacas;
-    Sprite CorralVacasS;
-    Rectangle CorralVacasR;
-    Texture CorralGallinas;
-    Sprite CorralGallinasS;
-    Rectangle CorralGallinasR;
+    public static Texture CorralVacas;
+    public static Sprite CorralVacasS;
+    public static Rectangle CorralVacasR;
+    public static Texture CorralGallinas;
+    public static Sprite CorralGallinasS;
+    public static Rectangle CorralGallinasR;
     /**Menu4**/
     public static boolean buildMaquinaComida;
-    float alphaMaquina = 1;
-    Sprite MaquinaComidaS;
-    Texture MaquinaComida;
-    Rectangle MaquinaComidaR;
+    public static float alphaMaquina = 1;
+    public static Sprite MaquinaComidaS;
+    public static Texture MaquinaComida;
+    public static Rectangle MaquinaComidaR;
 
     /**ALmacen de Recursos**/
     public static Texture TrigoA,MaizA,SojaA,ZanahoriaA,CanaA,AlgodonA,LecheA,HuevosA,ComidaVaca,ComidaGallina;
@@ -129,13 +129,13 @@ public class MenuBuild extends Actor implements Disposable
 
     public static boolean vacaBuild = false,gallinaBuild = false;
 
-    Texture GallinitaUWU;
-    Sprite GallinaS;
-    Rectangle GallinaR;
+   public static Texture GallinitaUWU;
+   public static Sprite GallinaS;
+   public static Rectangle GallinaR;
 
-    Texture Vaca;
-    Sprite VacaS;
-    Rectangle VacaR;
+   public static Texture Vaca;
+   public static Sprite VacaS;
+   public static Rectangle VacaR;
 
     /**MandarAlmacen**/
     public static float FiguraX,FiguraY,diferencia,AlmacenX = 4, EY;
@@ -601,7 +601,7 @@ public class MenuBuild extends Actor implements Disposable
             MaquinaComida1.isActive = false;
             if(puntero.overlaps(ComidaGallinaR))
             {
-                Gdx.app.log("I","Touch");
+           //     Gdx.app.log("I","Touch");
                 if(MyGdxGame.MaizStocks.getInteger("MaizStocks")>=3&&MyGdxGame.TrigoStocks.getInteger("TrigoStocks")>=6&&MyGdxGame.SojaStocks.getInteger("SojaStocks")>=3) {
                     MyGdxGame.Maquina2Gallina.putBoolean("Maquina2Gallina", true);
                     MyGdxGame.Maquina2Vaca.putBoolean("Maquina2Vaca", false);
@@ -650,29 +650,25 @@ public class MenuBuild extends Actor implements Disposable
 
     }
 
-    public static void MandarAlmacen(Batch batch,float Iy)
-    {
-        if(MenuBuild.FiguraX < AddResources.cam.position.x +3)
-        {
-            MenuBuild.FiguraX += (180/Pixels)*Gdx.graphics.getDeltaTime();
-        }else
-        {
-            MenuBuild.FiguraX = AddResources.cam.position.x +3;
+    public static void MandarAlmacen(Batch batch,float Iy) {
+        if (MenuBuild.FiguraX < AddResources.cam.position.x + 3) {
+            MenuBuild.FiguraX += (180 / Pixels) * Gdx.graphics.getDeltaTime();
+        } else {
+            MenuBuild.FiguraX = AddResources.cam.position.x + 3;
         }
         MenuBuild.AlmacenX = AlmacenX + (Gdx.graphics.getDeltaTime());
-        MenuBuild.EY = (float) Math.pow(.90f*(MenuBuild.AlmacenX),2);
-          if(MenuBuild.iteratorAlmacen == 0) {
+        MenuBuild.EY = (float) Math.pow(.90f * (MenuBuild.AlmacenX), 2);
+        if (MenuBuild.iteratorAlmacen == 0) {
 
-              MenuBuild.diferencia = MenuBuild.EY - MenuBuild.FiguraY;
-              MenuBuild.iteratorAlmacen++;
-          }
+            MenuBuild.diferencia = MenuBuild.EY - MenuBuild.FiguraY;
+            MenuBuild.iteratorAlmacen++;
+        }
         MenuBuild.EY = MenuBuild.EY - MenuBuild.diferencia;
-          if(MenuBuild.EY < AddResources.cam.position.y+(25/Pixels) ) {
+        if (MenuBuild.EY < AddResources.cam.position.y + (25 / Pixels)) {
 
-          }else
-          {
-              EY = AddResources.cam.position.y+(25/Pixels);
-          }
+        } else {
+            EY = AddResources.cam.position.y + (25 / Pixels);
+        }
 
           /*if(Gdx.input.isTouched()) {
               Gdx.app.log("EY", "" + EY);
@@ -680,49 +676,37 @@ public class MenuBuild extends Actor implements Disposable
               Gdx.app.log("resources", "" + AddResources.cam.position.y + (25 / Pixels));
               Gdx.app.log("Diferencia", "" + MenuBuild.diferencia);
           }*/
-          Figura.set(FiguraX,EY,5/Pixels,5/Pixels);
-          if(TrigoB)
-          {
-              batch.draw(MenuBuild. TrigoA,FiguraX,EY,15/Pixels,15/Pixels);
-          }else if(MaizB)
-          {
-              batch.draw(MenuBuild. MaizA,FiguraX,EY,15/Pixels,15/Pixels);
-          }else if(SojaB)
-          {
-              batch.draw(MenuBuild. SojaA,FiguraX,EY,15/Pixels,15/Pixels);
-          }else if(ZanahoriaB)
-          {
-              batch.draw(MenuBuild. ZanahoriaA,FiguraX,EY,15/Pixels,15/Pixels);
-          }else if(CanaB)
-          {
-              batch.draw(MenuBuild. CanaA,FiguraX,EY,15/Pixels,15/Pixels);
-          }else if(AlgodonB)
-          {
-              batch.draw(MenuBuild. AlgodonA,FiguraX,EY,15/Pixels,15/Pixels);
-          }
-          else if(LecheB)
-          {
-              batch.draw(MenuBuild. LecheA,FiguraX,EY,15/Pixels,15/Pixels);
-          }
-          else if(HuevosB)
-          {
-              batch.draw(MenuBuild. HuevosA,FiguraX,EY,15/Pixels,15/Pixels);
-          }
-          else if(ComidaVacaB)
-          {
-              batch.draw(MenuBuild. ComidaVaca,FiguraX,EY,15/Pixels,15/Pixels);
-          }
-          else if(ComidaGallinaB)
-          {
-              batch.draw(MenuBuild. ComidaGallina,FiguraX,EY,15/Pixels,15/Pixels);
-          }
+        Figura.set(FiguraX, EY, 5 / Pixels, 5 / Pixels);
+        if (TrigoB) {
+            batch.draw(MenuBuild.TrigoA, FiguraX, EY, 15 / Pixels, 15 / Pixels);
+        } else if (MaizB) {
+            batch.draw(MenuBuild.MaizA, FiguraX, EY, 15 / Pixels, 15 / Pixels);
+        } else if (SojaB) {
+            batch.draw(MenuBuild.SojaA, FiguraX, EY, 15 / Pixels, 15 / Pixels);
+        } else if (ZanahoriaB) {
+            batch.draw(MenuBuild.ZanahoriaA, FiguraX, EY, 15 / Pixels, 15 / Pixels);
+        } else if (CanaB) {
+            batch.draw(MenuBuild.CanaA, FiguraX, EY, 15 / Pixels, 15 / Pixels);
+        } else if (AlgodonB) {
+            batch.draw(MenuBuild.AlgodonA, FiguraX, EY, 15 / Pixels, 15 / Pixels);
+        } else if (LecheB) {
+            batch.draw(MenuBuild.LecheA, FiguraX, EY, 15 / Pixels, 15 / Pixels);
+        } else if (HuevosB) {
+            batch.draw(MenuBuild.HuevosA, FiguraX, EY, 15 / Pixels, 15 / Pixels);
+        } else if (ComidaVacaB) {
+            batch.draw(MenuBuild.ComidaVaca, FiguraX, EY, 15 / Pixels, 15 / Pixels);
+        } else if (ComidaGallinaB) {
+            batch.draw(MenuBuild.ComidaGallina, FiguraX, EY, 15 / Pixels, 15 / Pixels);
+        }
 
-if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
-{
-    MenuBuild.MandarAlmacen = false;
-}
+        if (MenuBuild.Figura.overlaps(MenuBuild.AlmacenR)) {
+            MenuBuild.MandarAlmacen = false;
+        }
     }
-    public void MenuSeeds(Batch batch) {
+
+
+
+    public static void MenuSeeds(Batch batch) {
         if(sube) {
             if (abs < 5) {
                 abs += 15 * Gdx.graphics.getDeltaTime();
@@ -1015,7 +999,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
                     if (Tierra4.Cuerpo.overlaps(Jugador.jugador)) {
                         float x = Tierra4.Cuerpo.x;
                         float y = (Tierra4.Cuerpo.y + Tierra4.Cuerpo.height) + (abs / Pixels);
-                        Gdx.app.log("y",""+Tierra4.Cuerpo.height+" Y2: "+Tierra4.Cuerpo2.y);
+                      //  Gdx.app.log("y",""+Tierra4.Cuerpo.height+" Y2: "+Tierra4.Cuerpo2.y);
                         batch.draw(flechaVerde, x, y, 32 / Pixels, 32 / Pixels);
                         if (Tierra4.reiniciarTime > 1) {
                             if (puntero.overlaps(Tierra4.Cuerpo)) {
@@ -1187,7 +1171,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
 
         }
     }
-    public void MenuSeedsSelection(Batch batch)
+    public static void MenuSeedsSelection(Batch batch)
     {
         if(isMenuSeedSelection) {
             MenuBuild.isMenu = false;
@@ -1635,7 +1619,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
     }
 
 
-    public void MenuDraw(Batch batch, OrthographicCamera cam)
+    public static void MenuDraw(Batch batch, OrthographicCamera cam)
     {
 
         if(isMenu) {
@@ -1703,7 +1687,7 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
         }
     }
 
-    public void MenuItems(Batch batch,Rectangle puntero)
+    public static void MenuItems(Batch batch,Rectangle puntero)
     {
         Fondo.setBounds(AddResources.cam.position.x - 3.8f+ (30 / Pixels), AddResources.cam.position.y - 2 + (5 / Pixels), 190 / Pixels, 100 / Pixels);
         Fondo.setAlpha(0.8f);
@@ -2136,8 +2120,8 @@ if(MenuBuild.Figura.overlaps(MenuBuild.AlmacenR))
         {
             MenuBuild.timeCultivos = 0;
 
-            MaquinaComidaR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (50 / Pixels), 50/ Pixels, 35 / Pixels);
-            MaquinaComidaS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (50 / Pixels), 50/ Pixels, 35 / Pixels);
+            MaquinaComidaR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50/ Pixels, 50/ Pixels);
+            MaquinaComidaS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50/ Pixels, 50 / Pixels);
             MaquinaComidaS.setAlpha(alphaMaquina);
             MaquinaComidaS.draw(batch);
             if(MaquinaComidaR.overlaps(puntero))

@@ -166,7 +166,7 @@ public class Casa2Pisos2 extends Actor implements Disposable {
             {
                 if(iterator2 == 0) {
                     int a = random.nextInt(2);
-                    Gdx.app.log("valor a",""+a);
+                   // Gdx.app.log("valor a",""+a);
                     if (a == 0) {
                         isLeft = true;
                         isRight = false;

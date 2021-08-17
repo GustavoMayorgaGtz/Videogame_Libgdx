@@ -99,7 +99,7 @@ float timeDurationTouch;
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-
+       timeFree += Gdx.graphics.getDeltaTime();
         batch.draw(logo,x,y,100/Pixels,32/Pixels);
         for(Rectangle no: noBuild) {
             if (no.overlaps(Jugador.jugador)) {
@@ -259,7 +259,8 @@ float timeDurationTouch;
                         MyGdxGame.Corral2GallinaIterator.flush();
                     }
                 }else if(MyGdxGame.Corral2GallinaIterator.getInteger("Corral2GallinaIterator")==2) {
-                    if (tiempoEspera < 3) {
+                    if(MyGdxGame.CorralGallinas2Year.getInteger("CorralGallinas2Year")== 0 )
+                    {
                         MyGdxGame.Corral2GallinaIterator.putInteger("Corral2GallinaIterator", 0);
                         MyGdxGame.Corral2GallinaIterator.flush();
                     } else {

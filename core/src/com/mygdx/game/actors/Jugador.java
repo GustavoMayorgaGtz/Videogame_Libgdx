@@ -826,10 +826,10 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
                         Vector2 position = body.getPosition();
                         if (timeJump > .5f) {
                             if (jumpDouble == 0) {
-                                Gdx.app.log("JumpDouble", "Salto Aire");
+                          //      Gdx.app.log("JumpDouble", "Salto Aire");
                                 body.applyLinearImpulse(0, 5.80f/*65*/, position.x, position.y, true);
                                 jumpDouble++;
-                                Gdx.app.log("JumpDouble", " " + jumpDouble);
+                          //      Gdx.app.log("JumpDouble", " " + jumpDouble);
                             }
                         }
 

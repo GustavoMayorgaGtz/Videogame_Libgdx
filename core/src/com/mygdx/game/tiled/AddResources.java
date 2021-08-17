@@ -627,9 +627,12 @@ batch.begin();
 
                 if (!MenuBuild.BuildTierra&&!MenuBuild.BuildAgua&&!MenuBuild.BuildMover&&!MenuBuild.CasasDosPisosBuild
                         &&!MenuBuild.CasasBuild&&!MenuBuild.Maceta1Build&&!MenuBuild.Maceta2Build&&!MenuBuild.Arbusto1Build
-                        &&!MenuBuild.Arbusto2Build&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.isCorralGallinasBuild&&!MenuBuild.buildMaquinaComida) {
-                    if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isAlmacen&&!MaquinaComida1.isActive&&!MaquinaComida2.isActive) {
+                        &&!MenuBuild.Arbusto2Build&&!MenuBuild.isCorralVacasBuild&&!MenuBuild.isCorralGallinasBuild&&!MenuBuild.buildMaquinaComida)
+                {
+                    if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isAlmacen&&!MaquinaComida1.isActive&&!MaquinaComida2.isActive)
+                    {
                         if(isIsNivelProgress2) {
+
                             if(MyGdxGame.TrigoStocks.getInteger("TrigoStocks") > 999)
                             {
                                 MyGdxGame.TrigoStocks.putInteger("TrigoStocks",999);
@@ -872,8 +875,8 @@ batch.begin();
                             MenuBuild.Almacen(batch);
                         }
                         if (MenuBuild.isMenu) {
-                            MenuBuild m = new MenuBuild();
-                            m.MenuDraw(batch, cam);
+                            //MenuBuild m = new MenuBuild();
+                            MenuBuild.MenuDraw(batch, cam);
                             MenuBuild.moverR.set(0, 0, 0, 0);
                             MenuBuild.AlmacenR.set(0,0,0,0);
                             if (AddResources.puntero.overlaps(MenuBuild.Menu1)) {
@@ -916,9 +919,10 @@ batch.begin();
                     }
                     if (MenuBuild.isMenuSeedSelection) {
                         MenuBuild.Cuadro.set(0,0,0,0);
-                        MenuBuild m = new MenuBuild();
-                        m.isMenu = false;
-                        m.MenuSeedsSelection(batch);
+                        /*MenuBuild m = new MenuBuild();
+                        m.isMenu = false;*/
+                        MenuBuild.isMenu = false;
+                        MenuBuild.MenuSeedsSelection(batch);
                         MenuBuild.moverR.set(0, 0, 0, 0);
                         MenuBuild.AlmacenR.set(0,0,0,0);
                         DereRect.set(0, 0, 0, 0);
@@ -936,6 +940,37 @@ batch.begin();
                 }else {
 /**********TIERRAS**************/
                    MenuBuild.timeMenu2=0;
+                    if(Gdx.input.isTouched(1))
+                    {
+                        Gdx.app.log("-----","-------");
+                        Gdx.app.log("val1:",""+isFreeSpace1);
+                        Gdx.app.log("val2:",""+isFreeSpace2);
+                        Gdx.app.log("val3:",""+isFreeSpace3);
+                        Gdx.app.log("val4:",""+isFreeSpace4);
+                        Gdx.app.log("val5:",""+isFreeSpace5);
+                        Gdx.app.log("val6:",""+isFreeSpace6);
+                        Gdx.app.log("val7:",""+isFreeSpace7);
+                        Gdx.app.log("val8:",""+isFreeSpace8);
+                        Gdx.app.log("val9:",""+isFreeSpace9);
+                        Gdx.app.log("val10:",""+isFreeSpaceTop1);
+                        Gdx.app.log("val11:",""+isFreeSpaceTop2);
+                        Gdx.app.log("val12:",""+isFreeSpaceTop3);
+                        Gdx.app.log("val13:",""+isFreeSpaceTop4);
+                        Gdx.app.log("val14:",""+isFreeSpaceTop5);
+                        Gdx.app.log("val15:",""+isFreeSpaceTop6);
+                        Gdx.app.log("val16:",""+isFreeSpaceTop7);
+                        Gdx.app.log("val17:",""+free1);
+                        Gdx.app.log("val18:",""+free2);
+                        Gdx.app.log("val19:",""+free3);
+                        Gdx.app.log("val20:",""+free4);
+                        Gdx.app.log("val:21",""+free5);
+                        Gdx.app.log("val:22",""+free6);
+                        Gdx.app.log("val:23",""+freeCorral1);
+                        Gdx.app.log("val:24",""+freeCorral2);
+                        Gdx.app.log("val:25",""+freeCorral3);
+                        Gdx.app.log("val:26",""+freeCorral4);
+                        Gdx.app.log("-----","-------");
+                    }
                    botonesConfirm();
                 }
 /*****************************/
@@ -996,46 +1031,7 @@ batch.begin();
             batch.draw(PantallaSend, cam.position.x - 4.2f, cam.position.y - 2.3f - (posicionY / Pixels), 440 / Pixels, 340 / Pixels);
         }
         /*********MENUUUUUUUUUUUUUUUUUUUUUUUUUUU********/
-        if(MyGdxGame.isNivelProgress1) {
-            try {
-
-                if (Jugador.isMenu) {
-                    timeHome = 0;
-                    Jugador.fondoMenu.setBounds(AddResources.cam.position.x - 3, AddResources.cam.position.y - 2, (AddResources.cam.viewportWidth / 2) + 2, (AddResources.cam.viewportHeight / 2) + 1.5f);
-                    Jugador.fondoMenu.setAlpha(0.5f);
-                    Jugador.fondoMenu.draw(batch);
-
-                    blancoS.setBounds(AddResources.cam.position.x - 3 + (10 / Pixels), (AddResources.cam.position.y - 2) + ((AddResources.cam.viewportHeight / 2) + .5f) - (10 / Pixels), 30 / Pixels, 30 / Pixels);
-                    blancoS.setAlpha(0.1f);
-                    blancoS.draw(batch);
-                    batch.draw(x, cam.position.x + 2f + (15 / Pixels), cam.position.y + 1.3f, 15 / Pixels, 15 / Pixels);
-                    salir.set(cam.position.x + 2f + (15 / Pixels), cam.position.y + 1.3f, 15 / Pixels, 15 / Pixels);
-                    if (salir.overlaps(puntero)) {
-                        Jugador.isMenu = false;
-                        Gdx.input.vibrate(100);
-                    }
-
-                    if (MyGdxGame.coins.getInteger("Coins") > 99) {
-                        MyGdxGame.coins.putInteger("Coins", 99);
-                        MyGdxGame.coins.flush();
-                    }
-
-
-                    //   Gdx.app.log("Monedas",""+recoleccion[1]+" "+recoleccion[2]+" "+recoleccion[3]);
-                    batch.draw(moneda, cam.position.x + 2f - (10 / Pixels), cam.position.y - 1.9f, 10 / Pixels, 10 / Pixels);
-
-                } else {
-
-                    timeHome += .2f *Gdx.graphics.getDeltaTime();
-                }
-
-            } catch (Exception e) {
-                Gdx.app.log("Error en resources", "" + e.getMessage());
-            }
-        }else
-        {
-            timeHome += 1f *Gdx.graphics.getDeltaTime();
-        }
+      timeHome += 1 * Gdx.graphics.getDeltaTime();
         batch.end();
         monedasLabel.setText(""+MyGdxGame.coins.getInteger("Coins"));
         monedasLabel.setWrap(true);
@@ -1239,38 +1235,8 @@ freeSpace();
 
     public void freeSpace()
     {
-        if(Gdx.input.isTouched(1))
-        {
-            Gdx.app.log("-----","-------");
-            Gdx.app.log("val1:",""+isFreeSpace1);
-            Gdx.app.log("val2:",""+isFreeSpace2);
-            Gdx.app.log("val3:",""+isFreeSpace3);
-            Gdx.app.log("val4:",""+isFreeSpace4);
-            Gdx.app.log("val5:",""+isFreeSpace5);
-            Gdx.app.log("val6:",""+isFreeSpace6);
-            Gdx.app.log("val7:",""+isFreeSpace7);
-            Gdx.app.log("val8:",""+isFreeSpace8);
-            Gdx.app.log("val9:",""+isFreeSpace9);
-            Gdx.app.log("val10:",""+isFreeSpaceTop1);
-            Gdx.app.log("val11:",""+isFreeSpaceTop2);
-            Gdx.app.log("val12:",""+isFreeSpaceTop3);
-            Gdx.app.log("val13:",""+isFreeSpaceTop4);
-            Gdx.app.log("val14:",""+isFreeSpaceTop5);
-            Gdx.app.log("val15:",""+isFreeSpaceTop6);
-            Gdx.app.log("val16:",""+isFreeSpaceTop7);
-            Gdx.app.log("val17:",""+free1);
-            Gdx.app.log("val18:",""+free2);
-            Gdx.app.log("val19:",""+free3);
-            Gdx.app.log("val20:",""+free4);
-            Gdx.app.log("val:21",""+free5);
-            Gdx.app.log("val:22",""+free6);
-            Gdx.app.log("val:23",""+freeCorral1);
-            Gdx.app.log("val:24",""+freeCorral2);
-            Gdx.app.log("val:25",""+freeCorral3);
-            Gdx.app.log("val:26",""+freeCorral4);
-            Gdx.app.log("-----","-------");
-        }
-     /*/   if(Agua1.var1&&Agua2.var2&&Agua3.var3&&Agua4.var4&& com.mygdx.game.actors.Arbusto1_1.var5&& Arbusto1_2.var6&& Arbusto1_3.var7
+
+    /*    if(Agua1.var1&&Agua2.var2&&Agua3.var3&&Agua4.var4&& com.mygdx.game.actors.Arbusto1_1.var5&& Arbusto1_2.var6&& Arbusto1_3.var7
         && Arbusto2_1.var8&& Arbusto2_2.var9&& Arbusto2_3.var10
         && Casa1.var11&& Casa2.var12&& Casa2Pisos.var13&& Casa2Pisos2.var14
         && CorralGallinas.var15&& CorralGallinas2.var16
@@ -1285,14 +1251,17 @@ freeSpace();
                 ||!isFreeSpaceTop8||!isFreeSpaceTop9||!isFreeSpaceTop10
                 ||!free1||!free2||!free3||!free4||!free5||!free6
                 ||!freeMaquina1||!freeMaquina2
-                ||!freeCorral1||!freeCorral2||!freeCorral3||!freeCorral4||!Agua1.var1||!Agua2.var2||!Agua3.var3||!Agua4.var4||! com.mygdx.game.actors.Arbusto1_1.var5||!Arbusto1_2.var6||!Arbusto1_3.var7
+                ||!freeCorral1||!freeCorral2||!freeCorral3||!freeCorral4||!Agua1.var1||!Agua2.var2||!Agua3.var3||!Agua4.var4
+                ||! com.mygdx.game.actors.Arbusto1_1.var5||!Arbusto1_2.var6||! Arbusto1_3.var7
                 ||! Arbusto2_1.var8||!Arbusto2_2.var9||! Arbusto2_3.var10
                 ||! Casa1.var11||! Casa2.var12||! Casa2Pisos.var13||! Casa2Pisos2.var14
                 ||! CorralGallinas.var15||! CorralGallinas2.var16
                 ||! CorralVaca.var17||!CorralVaca2.var18
                 ||! Maceta1_1.var19||! com.mygdx.game.actors.Maceta1_2.var20||!Maceta1_3.var21
                 ||! Maceta2_1.var22||!Maceta2_2.var23||! Maceta2_3.var24
-                ||!Tierra1.var25||!Tierra2.var26||!Tierra3.var27||!Tierra4.var28||!Tierra5.var29||!MaquinaComida1.var30||!MaquinaComida2.var31){
+                ||!Tierra1.var25||!Tierra2.var26||!Tierra3.var27||!Tierra4.var28||!Tierra5.var29
+                ||!MaquinaComida1.var30||!MaquinaComida2.var31)
+        {
 
             confirm.set(0,0,0,0);
             ConfirmarS.setBounds(0,0,0,0);

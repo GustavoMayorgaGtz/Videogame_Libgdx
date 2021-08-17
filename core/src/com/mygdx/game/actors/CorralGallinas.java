@@ -257,7 +257,8 @@ float timeDurationTouch;
                     }
                 }else if(MyGdxGame.Corral1GallinaIterator.getInteger("Corral1GallinaIterator")==2) {
 
-                    if (tiempoEspera < 3) {
+                    if(MyGdxGame.CorralGallinas1Year.getInteger("CorralGallinas1Year")== 0 )
+                    {
                         MyGdxGame.Corral1GallinaIterator.putInteger("Corral1GallinaIterator", 0);
                         MyGdxGame.Corral1GallinaIterator.flush();
                     } else {

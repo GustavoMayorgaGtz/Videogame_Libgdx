@@ -142,10 +142,10 @@ numeros.getData().scale(1/Pixels);
         render.render(world, cam.combined);
         batch.begin();
         batch.draw(Menu.puntero,PunteroPosition.x-(5f/Pixels),PunteroPosition.y-(5f/Pixels),10/Pixels,10/Pixels);
-        c1.setBounds(cam.position.x+4f+(10/Pixels)*2,  cam.position.y+2f,30/Pixels,30/Pixels);
-        c1.setScale(.02f);
+        c1.setBounds(cam.position.x+4f+(2/Pixels)*2,  cam.position.y+2.45f,30/Pixels,30/Pixels);
+        c1.setScale(.08f);
         l1.setWrap(true);
-        l1.setText(""+MyGdxGame.coins.getInteger("coins"));
+        l1.setText(""+MyGdxGame.coins.getInteger("Coins"));
         stage.addActor(c1);
         batch.draw(Menu.Monedas,cam.position.x+4f+(35/Pixels)*2,  cam.position.y+2f,30/Pixels,30/Pixels);
 
