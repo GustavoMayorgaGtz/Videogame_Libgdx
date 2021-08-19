@@ -24,6 +24,7 @@ import com.mygdx.game.Nivel1;
 import com.mygdx.game.Nivel2;
 import com.mygdx.game.Nivel5;
 import com.mygdx.game.Nivel6;
+import com.mygdx.game.Nivel7;
 import com.mygdx.game.Niveo1T;
 
 import static com.mygdx.game.MyGdxGame.Pixels;
@@ -32,18 +33,19 @@ import static com.mygdx.game.tiled.AddActors.player;
 public abstract class InteractiveNiveles extends Actor implements Disposable {
 
     Rectangle rect;
-    Texture uno,dos,tres,cuatro,cinco;
+    Texture uno,dos,tres,cuatro,cinco,seis;
     Texture white,black;
     Sprite Select;
     float X,Y;
     int id;
 
-    public InteractiveNiveles(Texture uno,Texture dos,Texture tres, Texture cuatro, Texture cinco,Rectangle bounds)    {
+    public InteractiveNiveles(Texture uno,Texture dos,Texture tres, Texture cuatro, Texture cinco,Texture seis,Rectangle bounds)    {
         this.uno = uno;
         this.dos = dos;
         this.tres = tres;
         this.cuatro = cuatro;
         this.cinco = cinco;
+        this.seis = seis;
 
       setSize(bounds.getWidth()/Pixels,bounds.getHeight()/Pixels);
       this.X = bounds.getX();
@@ -83,6 +85,12 @@ public abstract class InteractiveNiveles extends Actor implements Disposable {
             case 5: {
                 if (levelComplete >= 4) {
                     batch.draw(cinco, getX(), getY(), getWidth(), getHeight());
+                }
+                break;
+            }
+            case 6:{
+                if (levelComplete >= 5) {
+                    batch.draw(seis, getX(), getY(), getWidth(), getHeight());
                 }
                 break;
             }
@@ -150,6 +158,14 @@ if(Menu.Puntero.overlaps(rect))
                 }
                 break;
             }
+            case 6:
+            {
+                if(levelComplete >= 5) {
+                    AddResourcesOfMenu.game.setScreen(new Nivel7(AddResourcesOfMenu.game));
+                    MyGdxGame.isNivelProgress1 = false;
+                }
+                break;
+            }
         }
 
 }
@@ -164,6 +180,7 @@ if(Menu.Puntero.overlaps(rect))
      tres.dispose();
      cuatro.dispose();
      cinco.dispose();
+     seis.dispose();
     }
 
 }

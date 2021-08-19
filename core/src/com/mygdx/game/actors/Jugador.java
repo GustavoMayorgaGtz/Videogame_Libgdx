@@ -35,6 +35,7 @@ import com.mygdx.game.Nivel1Progresion;
 import com.mygdx.game.Nivel2;
 import com.mygdx.game.Nivel5;
 import com.mygdx.game.Nivel6;
+import com.mygdx.game.Nivel7;
 import com.mygdx.game.Niveo1T;
 import com.mygdx.game.tiled.AddActors;
 import com.mygdx.game.tiled.AddResources;
@@ -1066,6 +1067,11 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
                 }
                 case 5: {
                     add.game.setScreen(new Nivel6(add.game));
+                    break;
+                }
+                case 6:
+                {
+                    add.game.setScreen(new Nivel7(add.game));
                     break;
                 }
                 default:
