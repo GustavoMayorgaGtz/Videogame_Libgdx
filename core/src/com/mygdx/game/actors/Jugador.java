@@ -42,6 +42,7 @@ import com.mygdx.game.tiled.AddResources;
 import com.mygdx.game.tiled.AddResourcesOfMenu;
 import com.mygdx.game.tiled.Cajas;
 import com.mygdx.game.tiled.EnemigoWalk;
+import com.mygdx.game.tiled.InteractivePlataformaMov;
 import com.mygdx.game.tiled.InteractiveTileCoins;
 import com.mygdx.game.tiled.InteractiveTileObjectEnemies;
 import com.mygdx.game.tiled.InteractiveTilePortal;
@@ -943,21 +944,7 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
     }
     if (!Espadazo&& time1 >= 3) {
         if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_B) || AttackButton) {
-
-            if (izquierda) {
-                if (saltar) {
-                    body.applyForceToCenter(-25, 0, true);//-15
-                } else {
-                    body.applyForceToCenter(-20, 0, true);//-10
-                }
-
-            } else if (derecha) {
-                if (saltar) {
-                    body.applyForceToCenter(25, 0, true);//15
-                } else {
-                    body.applyForceToCenter(20f, 0, true);//10
-                }
-            }
+                body.setLinearVelocity(0,body.getLinearVelocity().y);
             Espadazo = true;
 
         }
@@ -972,7 +959,14 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
         Gdx.input.vibrate(100);
         body.setLinearVelocity(velocidades.x, maxVelocidadY*-1);
     }
-
+    for(Rectangle r : InteractivePlataformaMov.r) {
+        if (velocidades.y < -0.5f && !r.overlaps(Jugador.jugador)) {
+            saltar = false;
+        } else if (isTouchPlataformaMov1 || isTouchPlataformaMov2) {
+            saltar = true;
+            SaltoUp = false;
+        }
+    }
     if(!Espadazo) {
         body.setGravityScale(gravity);
         if (speedactive) {

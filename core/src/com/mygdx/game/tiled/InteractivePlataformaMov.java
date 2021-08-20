@@ -65,7 +65,8 @@ public abstract class InteractivePlataformaMov extends Actor implements Disposab
         setSize(48/Pixels, 12/Pixels);//3
         cuerpo = new Rectangle();
         setPosition(body.getPosition().x-(24)/Pixels,body.getPosition().y-(6)/Pixels);
-        r.add( new Rectangle(getX(), getY(), getWidth(), getHeight()));
+
+        r.add(iterator, new Rectangle(getX(), getY(), getWidth(), getHeight()+50));
         white = new Texture("White.png");
     }
 
@@ -74,15 +75,15 @@ public abstract class InteractivePlataformaMov extends Actor implements Disposab
         setPosition(body.getPosition().x-(24)/Pixels,body.getPosition().y-(6)/Pixels);
         cuerpo.set(getX(), getY(),getWidth(),getHeight()+(10/Pixels));//+(10/Pixels) - (20/Pixels)
         batch.draw (texture, getX(), getY(),getWidth(),getHeight());
-      /*  if(Gdx.input.isTouched()) {
-            batch.draw(white, cuerpo.getX(), cuerpo.getY(), cuerpo.getWidth(), cuerpo.getHeight());
-        }*/
+       if(Gdx.input.isTouched()) {
+            batch.draw(white, r.get(iterator).getX(),r.get(iterator).getY(), r.get(iterator).getWidth(),r.get(iterator).getHeight());
+        }
     }
 
     @Override
     public void act(float delta) {
         cuerpo.set(getX(), getY(),getWidth(),getHeight()+(10/Pixels));
-        r.get(iterator).set(getX(), getY(), getWidth(), getHeight());
+        r.get(iterator).set(getX(), getY(), getWidth(), getHeight()+(10/Pixels));
         if (RD) {
             body.setLinearVelocity(new Vector2(-velocidad, 0));//Izquierda
             if (cuerpo.overlaps(Jugador.jugador)) {
