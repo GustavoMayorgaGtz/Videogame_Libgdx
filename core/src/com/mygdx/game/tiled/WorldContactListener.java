@@ -322,6 +322,14 @@ try {
             ((InteractiveTileObjectEnemies) object2.getUserData()).Death();
         }
     }
+    if (fixA.getUserData() == "Jugador" || fixB.getUserData() == "Jugador") {
+        Fixture Sierra2 = fixA.getUserData() == "Jugador" ? fixA : fixB;
+        Fixture object2 = Sierra2 == fixA ? fixB : fixA;
+
+        if (object2.getUserData() != null && InteractiveTileObjectNemesis1.class.isAssignableFrom(object2.getUserData().getClass())) {
+            ((InteractiveTileObjectNemesis1) object2.getUserData()).Death();
+        }
+    }
     //////////////////////////////////////////enemigo volador
     if (fixA.getUserData() == "left" || fixB.getUserData() == "left") {
         Fixture Sierra2 = fixA.getUserData() == "left" ? fixA : fixB;

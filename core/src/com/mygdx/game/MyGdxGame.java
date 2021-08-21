@@ -715,8 +715,7 @@ Gdx.app.getGraphics().getFramesPerSecond();
 		manager.load("HojaAzulCartel.png", Texture.class);
 		manager.load("EspadazoEffect.png",Texture.class);
 		manager.load("EspadazoEffectIzq.png",Texture.class);
-		/***/
-		manager.load("White.png",Texture.class);//
+		manager.load("White.png",Texture.class);
 		manager.load("X.png",Texture.class);
 		manager.load("Inicia.png",Texture.class);
 		manager.load("Logo1.png",Texture.class);
@@ -759,6 +758,12 @@ Gdx.app.getGraphics().getFramesPerSecond();
 		manager.load("Almacen/ComidaVaca.png",Texture.class);
 		manager.load("Almacen/ComidaGallina.png",Texture.class);
 		manager.load("Blanco.png",Texture.class);
+		manager.load("Nemesis1/DereAttack.png",Texture.class);
+		manager.load("Nemesis1/Derecha.png",Texture.class);
+		manager.load("Nemesis1/IzqAttack.png",Texture.class);
+		manager.load("Nemesis1/Izquierda.png",Texture.class);
+		manager.load("Nemesis1/MuerteIzq.png",Texture.class);
+		manager.load("Nemesis1/MuerteDere.png",Texture.class);
 		manager.finishLoading();
 
 		this.setScreen(new Intro(this));

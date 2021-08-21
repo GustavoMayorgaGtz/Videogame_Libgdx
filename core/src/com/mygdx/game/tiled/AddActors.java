@@ -67,6 +67,7 @@ public class AddActors {
     private List<PisoTime> pisoTime = new ArrayList<PisoTime>();
     private List<particulas> p = new ArrayList<particulas>();
     private List<Fuego> fuego = new ArrayList<Fuego>();
+    private List<Nemesis1> nemesis1 = new ArrayList<>();
     private List<EnemigoWalk> enemy1 = new ArrayList<EnemigoWalk>();
     private List<EnemigoJump> enemy2 = new ArrayList<EnemigoJump>();
     private List<EnemigoVolador> enemy3 = new ArrayList<EnemigoVolador>();
@@ -100,9 +101,9 @@ public class AddActors {
     int iteratorNoCamY = 0;
     int iteratorNoCamX = 0;
     int iteratorCamX = 0;
-    int iteratorArboles = 0;//cuenta los arboles y si hay mas de uno se añade el personaje sino marca error
     int iteratorNoBuild = 0;
     int iteratorBuild = 0;
+    int itereratorNemesis1 = 0;
    public static int iteratorpisos = 0;
     List<Cajas> cajas = new ArrayList<Cajas>();
     public AddActors(World world, TiledMap map, MyGdxGame game, Stage stage)
@@ -127,46 +128,7 @@ public class AddActors {
             /////Cosas hechas para los niveles de progresion
             Texture arbolVerde = game.getManager().get("HojaVerdeCartel.png");
 
-               if(MyGdxGame.isNivelProgress1) {
-                   for (MapObject object : map.getLayers().get(51).getObjects().getByType(RectangleMapObject.class)) {
-                       Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                       arbolV = new ArbolVerde(world, arbolVerde, rect.x, rect.y);
-                       iteratorArboles++;
-                   }
 
-
-                   Texture arbolRosa = game.getManager().get("HojaRosaCartel.png");
-
-                   for (MapObject object : map.getLayers().get(52).getObjects().getByType(RectangleMapObject.class)) {
-                       Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                       arbolR = new ArbolRosa(world, arbolRosa, rect.x, rect.y);
-                       iteratorArboles++;
-                   }
-
-                   Texture arbolAzul = game.getManager().get("HojaAzulCartel.png");
-
-                   for (MapObject object : map.getLayers().get(53).getObjects().getByType(RectangleMapObject.class)) {
-                       Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                       arbolA = new ArbolAzul(world, arbolAzul, rect.x, rect.y);
-                       iteratorArboles++;
-                   }
-
-
-                   Texture animation = game.getManager().get("Tienda.png");
-                   for (MapObject object : map.getLayers().get(49).getObjects().getByType(RectangleMapObject.class)) {
-                       Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                       tienda.add(new Tienda(world, rect, animation));
-
-                   }
-
-
-                   for (Tienda t5 : tienda) {
-                       stage.addActor(t5);
-                   }
-                   stage.addActor(arbolV);
-                   stage.addActor(arbolA);
-                   stage.addActor(arbolR);
-               }
            for (MapObject object : map.getLayers().get(50).getObjects().getByType(RectangleMapObject.class)) {
                Rectangle rect = ((RectangleMapObject) object).getRectangle();
                cameraNoX.add(new CamaraNoX(world, map, rect, iteratorNoCamX));
@@ -223,7 +185,21 @@ public class AddActors {
                    iteratorBuild++;
                }
            }
-
+           Texture Nemesis1,Nemesis2,Nemesis3,Nemesis4,Nemesis5,Nemesis6;
+           Nemesis1 = MyGdxGame.getManager().get("Nemesis1/Derecha.png");
+           Nemesis2= MyGdxGame.getManager().get("Nemesis1/Izquierda.png");
+           Nemesis3 = MyGdxGame.getManager().get("Nemesis1/IzqAttack.png");
+           Nemesis4 = MyGdxGame.getManager().get("Nemesis1/DereAttack.png");
+           Nemesis5 = MyGdxGame.getManager().get("Nemesis1/MuerteIzq.png");
+           Nemesis6 = MyGdxGame.getManager().get("Nemesis1/MuerteDere.png");
+           for (MapObject object : map.getLayers().get(57).getObjects().getByType(RectangleMapObject.class)) {
+               Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                nemesis1.add(new Nemesis1(world,map,rect,Nemesis2,Nemesis1,Nemesis3,Nemesis4,Nemesis5,Nemesis6,itereratorNemesis1));
+           }
+           for(Nemesis1 nemesis1: nemesis1)
+           {
+               stage.addActor(nemesis1);
+           }
             for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 new Techo(world, map, rect);

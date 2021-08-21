@@ -210,14 +210,6 @@ public class AddResources {
     ShaderProgram shader;
 
     Sprite progress;
- 
-   
-
-    String[] numeros2 = new String[3];
-    String[] recoleccion2 = new String[2];
-    int iteratorSplit2;
-    boolean is02,is12,is22;
-    int valoractual2;
 
     /**Labels**/
     public static Label monedasLabel;

@@ -456,12 +456,12 @@ BotonA = new Texture("A.png");
 
 ////////////////////////////Dibujar///////////////////////////////////
        // batch.draw(negro,espadaRec.x,espadaRec.y,espadaRec.width,espadaRec.height);
-        if(Espadazo) {
+       /* if(Espadazo) {
             batch.setShader(shader);
         }else
         {
             batch.setShader(shader2);
-        }
+        }*/
         if(MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
             if (!Muerto) {
 
@@ -696,7 +696,7 @@ BotonA = new Texture("A.png");
             isMenu = true;
         }
         /**********************************************************************************/
-
+ //      batch.draw(negro,var1,var2,var3,var4);
     }
 
     @Override
@@ -715,9 +715,9 @@ BotonA = new Texture("A.png");
         izqD = izquierda;
 
         /*********Probar rectangle**************/
-        var1 = body.getPosition().x-(15f)/Pixels;
+        var1 = body.getPosition().x-(10f)/Pixels;
         var2 = body.getPosition().y-(1.5f)/Pixels;
-        var3 = 30/Pixels;
+        var3 = 20/Pixels;
         var4 = 10/Pixels;
         espadaRec.set(var1,var2,var3,var4);
 
@@ -988,14 +988,14 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
     }else
     {
         body.setGravityScale(gravity-.5f);
-        if(impulsoEspadaDere)
+     /*   if(impulsoEspadaDere)
         {
 
         }
         if(impulsoEspadaIzq)
         {
 
-        }
+        }*/
     }
 
 
