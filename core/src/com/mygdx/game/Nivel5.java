@@ -39,7 +39,7 @@
          map2 = mapLoader2.load("Nivel(2)Fondo.tmx");
          ///////////////////////////////////////////////////////////////////////////////////////////////
          addR = new AddResources();
-         add = new AddActors(addR.world,map,game,addR.stage);
+         add = new AddActors(addR.world,map,game);
          //  add = new AddActors(addR.world,map2,game,addR.stage);
          renderer = new OrthogonalTiledMapRenderer(map,1/Pixels);
          renderer2 = new OrthogonalTiledMapRenderer(map2,1/Pixels);

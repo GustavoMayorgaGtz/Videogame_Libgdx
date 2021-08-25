@@ -106,6 +106,12 @@ public abstract class InteractiveTileObjectEnemies extends Actor implements Disp
         fixture2 = body.createFixture(fdef);
         fixture.setSensor(true);
         fixture2.setUserData("Enemigo");
+        fixture.setDensity(0);
+        fixture.setFriction(0);
+        fixture.setRestitution(0);
+        fixture2.setDensity(0);
+        fixture2.setFriction(0);
+        fixture2.setRestitution(0);
         EdgeShape LineaDeMuerte = new EdgeShape();
         LineaDeMuerte.set(new Vector2(bounds.getX(),bounds.getY()),new Vector2(bounds.getX()+bounds.getWidth(),bounds.getY()+bounds.getHeight()));
         fdef.shape = LineaDeMuerte;
@@ -350,12 +356,12 @@ if(iterator2 ==  0)
         }
 
             if (izquierda) {
-                body.applyLinearImpulse(-.1f, 0, body.getPosition().x, body.getPosition().y, true);
+                body.setLinearVelocity(-1f, 0);
             } else {
                 derecha = true;
             }
             if (derecha) {
-                body.applyLinearImpulse(.1f, 0, body.getPosition().x, body.getPosition().y, true);
+                body.setLinearVelocity(1f, 0);
             } else {
                 izquierda = true;
             }

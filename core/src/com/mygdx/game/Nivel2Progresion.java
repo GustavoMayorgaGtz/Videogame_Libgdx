@@ -47,7 +47,7 @@
          ///////////////////////////////////////////////////////////////////////////////////////////////
          addR = new AddResources();
          add2 = new addActors2(addR.stage);
-         add = new AddActors(addR.world,map,game,addR.stage);
+         add = new AddActors(addR.world,map,game);
 
          renderer = new OrthogonalTiledMapRenderer(map,1/Pixels);
          renderer2 = new OrthogonalTiledMapRenderer(map2,1/Pixels);

@@ -33,6 +33,7 @@ import com.mygdx.game.Nivel0;
 import com.mygdx.game.Nivel1;
 import com.mygdx.game.Nivel1Progresion;
 import com.mygdx.game.Nivel2;
+import com.mygdx.game.Nivel2Progresion;
 import com.mygdx.game.Nivel5;
 import com.mygdx.game.Nivel6;
 import com.mygdx.game.Nivel7;
@@ -455,7 +456,8 @@ BotonA = new Texture("A.png");
         }
 
 ////////////////////////////Dibujar///////////////////////////////////
-       // batch.draw(negro,espadaRec.x,espadaRec.y,espadaRec.width,espadaRec.height);
+       // batch.draw(negro,var1,var2,var3,var4);
+        batch.draw(negro,espadaRec.x,espadaRec.y,espadaRec.width,espadaRec.height);
        /* if(Espadazo) {
             batch.setShader(shader);
         }else
@@ -614,7 +616,7 @@ BotonA = new Texture("A.png");
                         TextureRegion current = EspadazoEffect.getKeyFrame(timeEspadazoEffect,false);
                         timeEspadazoEffect += Gdx.graphics.getDeltaTime();
                         batch.draw(EspadaDerecha, getX(), getY(), getWidth(), getHeight());
-                        batch.draw(current, getX()-(60/Pixels), getY(), getWidth()+(64/Pixels), getHeight());
+                        batch.draw(current, getX()-(60/Pixels), getY()+(.5f/Pixels), getWidth()+(64/Pixels), getHeight());
 
                         if (EspadazoDereAnimation.isAnimationFinished(time4)&&EspadazoEffect.isAnimationFinished(timeEspadazoEffect)) {
 
@@ -636,7 +638,7 @@ BotonA = new Texture("A.png");
                         TextureRegion current = EspadazoEffectI.getKeyFrame(timeEspadazoEffect2,false);
                         timeEspadazoEffect2 += Gdx.graphics.getDeltaTime();
                         batch.draw(EspadaIzquierda, getX(), getY(), getWidth(), getHeight());
-                        batch.draw(current, getX()-(4.5f/Pixels), getY(), getWidth()+(64/Pixels), getHeight());
+                        batch.draw(current, getX()-(4.2f/Pixels), getY()+(.5f/Pixels), getWidth()+(64/Pixels), getHeight());
                         if (EspadazoIzqAnimation.isAnimationFinished(time4)) {
                             iterator = 0;
                             time4 = 0;
@@ -689,14 +691,7 @@ BotonA = new Texture("A.png");
             particulaSalto2.reset();
             particulaSalto2.scaleEffect(.2f/Pixels);
         }
-/***********************************menu*****************************************************/
 
-        if(Jugador.istouchTienda  && SaltoUp)
-        {
-            isMenu = true;
-        }
-        /**********************************************************************************/
- //      batch.draw(negro,var1,var2,var3,var4);
     }
 
     @Override
@@ -942,7 +937,7 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
         /////////////////////////////////////////
         /////////////////////////////////////////
     }
-    if (!Espadazo&& time1 >= 3) {
+    if (!Espadazo) {
         if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_B) || AttackButton) {
                 body.setLinearVelocity(0,body.getLinearVelocity().y);
             Espadazo = true;
@@ -1044,33 +1039,40 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
 
             switch (AddResourcesOfMenu.SelectLevel) {
                 case 1: {
+                    AddResources.ConfigurarCamara = 0;
                     add.game.setScreen(new Nivel0(add.game));
                     break;
                 }
                 case 2: {
+                    AddResources.ConfigurarCamara = 0;
                     add.game.setScreen(new Nivel1(add.game));
                     break;
                 }
                 case 3: {
+                    AddResources.ConfigurarCamara = 0;
                     add.game.setScreen(new Nivel2(add.game));
                     break;
                 }
                 case 4: {
+                    AddResources.ConfigurarCamara = 0;
                     add.game.setScreen(new Nivel5(add.game));
                     break;
                 }
                 case 5: {
+                    AddResources.ConfigurarCamara = 0;
                     add.game.setScreen(new Nivel6(add.game));
                     break;
                 }
                 case 6:
                 {
+                    AddResources.ConfigurarCamara = 0;
                     add.game.setScreen(new Nivel7(add.game));
                     break;
                 }
                 default:
                 {
-                    add.game.setScreen(new Nivel1Progresion(add.game));
+                    AddResources.ConfigurarCamara = 0;
+                    add.game.setScreen(new Nivel2Progresion(add.game));
                 }
             }
 

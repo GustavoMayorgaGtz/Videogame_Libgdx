@@ -32,7 +32,7 @@ public class Niveo1T implements Screen {
         map = mapLoader.load("Nivel2.tmx");
 ///////////////////////////////////////////////////////////////////////////////////////////////
         addR = new AddResources();
-        add = new AddActors(addR.world,map,game,addR.stage);
+        add = new AddActors(addR.world,map,game);
         renderer = new OrthogonalTiledMapRenderer(map,1/Pixels);
 
 }

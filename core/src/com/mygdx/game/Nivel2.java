@@ -38,7 +38,7 @@
          batch = new SpriteBatch();
  ///////////////////////////////////////////////////////////////////////////////////////////////
          addR = new AddResources();
-         add = new AddActors(addR.world,map,game,addR.stage);
+         add = new AddActors(addR.world,map,game);
          renderer = new OrthogonalTiledMapRenderer(map,1/Pixels);
          fondoAnimado = new Texture("FondoAnimado1.png");
          TextureRegion[][] TmpFondo = TextureRegion.split(fondoAnimado,fondoAnimado.getWidth()/c,fondoAnimado.getHeight()/r);
@@ -58,13 +58,10 @@
      public void show() {
  Gdx.input.setCatchBackKey(true);
      }
-     public void handleInput(float d)
-     {
-     }
 
      public void update(float d) {
 
-         addR.cam.update();
+         AddResources.cam.update();
          renderer.setView(addR.cam.combined,addR.cam.position.x-((240/Pixels)),addR.cam.position.y-(140/Pixels),(240/ Pixels)*2, (140/Pixels)*2);
         // renderer2.setView(addR.cam.combined,addR.cam.position.x-((240/Pixels)),addR.cam.position.y-(140/Pixels),(240/ Pixels)*2, (140/Pixels)*2);
 
@@ -83,16 +80,16 @@
          batch.end();
          update(delta);
        //  renderer2.render();
-         addR.addRender(delta);
-         addR.stage.draw();
+         AddResources.addRender(delta);
+         AddResources.stage.draw();
          renderer.render();
          addR.batchFunctions();
-         addR.stage2.draw();
+         AddResources.stage2.draw();
 
          if(!MyGdxGame.NoSeguirFondo&&!Jugador.Muerto) {
-             if (Jugador.body.getLinearVelocity().x >= 0.60f) {
+             if (Jugador.body.getLinearVelocity().x >= 0.60f&&Jugador.derecha) {
                  x -= 15f * Gdx.graphics.getDeltaTime();
-             } else if (Jugador.body.getLinearVelocity().x <= -0.60f) {
+             } else if (Jugador.body.getLinearVelocity().x <= -0.60f&&Jugador.izquierda) {
                  x += 15f * Gdx.graphics.getDeltaTime();
              }
          }

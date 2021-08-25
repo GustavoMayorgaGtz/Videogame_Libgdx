@@ -121,7 +121,7 @@ if(Menu.Puntero.overlaps(rect))
         {
             case 1:
             {
-
+                AddResources.ConfigurarCamara = 0;
                 AddResourcesOfMenu.game.setScreen(new Nivel0(AddResourcesOfMenu.game));
                 MyGdxGame.isNivelProgress1 = false;
                 break;
@@ -129,6 +129,7 @@ if(Menu.Puntero.overlaps(rect))
             case 2:
             {
                 if(levelComplete >= 1) {
+                    AddResources.ConfigurarCamara = 0;
                     AddResourcesOfMenu.game.setScreen(new Nivel1(AddResourcesOfMenu.game));
                     MyGdxGame.isNivelProgress1 = false;
                 }
@@ -137,6 +138,7 @@ if(Menu.Puntero.overlaps(rect))
             case 3:
             {
                 if(levelComplete >= 2) {
+                    AddResources.ConfigurarCamara = 0;
                     AddResourcesOfMenu.game.setScreen(new Nivel2(AddResourcesOfMenu.game));
                     MyGdxGame.isNivelProgress1 = false;
                 }
@@ -145,6 +147,7 @@ if(Menu.Puntero.overlaps(rect))
             case 4:
             {
                 if(levelComplete >= 3) {
+                    AddResources.ConfigurarCamara = 0;
                     AddResourcesOfMenu.game.setScreen(new Nivel5(AddResourcesOfMenu.game));
                     MyGdxGame.isNivelProgress1 = false;
                 }
@@ -153,6 +156,7 @@ if(Menu.Puntero.overlaps(rect))
             case 5:
             {
                 if(levelComplete >= 4) {
+                    AddResources.ConfigurarCamara = 0;
                     AddResourcesOfMenu.game.setScreen(new Nivel6(AddResourcesOfMenu.game));
                     MyGdxGame.isNivelProgress1 = false;
                 }
@@ -161,6 +165,7 @@ if(Menu.Puntero.overlaps(rect))
             case 6:
             {
                 if(levelComplete >= 5) {
+                    AddResources.ConfigurarCamara = 0;
                     AddResourcesOfMenu.game.setScreen(new Nivel7(AddResourcesOfMenu.game));
                     MyGdxGame.isNivelProgress1 = false;
                 }

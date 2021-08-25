@@ -91,7 +91,7 @@ float timeCaer;
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition(body.getPosition().x-(6)/Pixels,body.getPosition().y-6/Pixels);
+
         batch.draw(texture, getX()+(x/Pixels), getY(), getWidth(), getHeight());
 
      //   polvo.scaleEffect(.8f/Pixels);
@@ -106,6 +106,7 @@ float timeCaer;
 }
 
     @Override public void act(float delta) {
+        setPosition(body.getPosition().x-(6)/Pixels,body.getPosition().y-6/Pixels);
         Movimientos();
         polvo.update(delta);
 

@@ -41,7 +41,7 @@
          ///////////////////////////////////////////////////////////////////////////////////////////////
          addR = new AddResources();
 
-         add = new AddActors(addR.world,map,game,addR.stage);
+         add = new AddActors(addR.world,map,game);
          // add = new AddActors(addR.world,map2,game,addR.stage);
          renderer = new OrthogonalTiledMapRenderer(map,1/Pixels);
          renderer2 = new OrthogonalTiledMapRenderer(map2,1/Pixels);
@@ -86,8 +86,8 @@
          batch.end();
          update(delta);
         renderer2.render();
-         addR.addRender(delta);
-         addR.stage.draw();
+         AddResources.addRender(delta);
+         AddResources.stage.draw();
 
          renderer.render();
          addR.batchFunctions();

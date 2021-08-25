@@ -40,7 +40,7 @@
          map2 = mapLoader2.load("Nivel(1)Fondo.tmx");
  ///////////////////////////////////////////////////////////////////////////////////////////////
          addR = new AddResources();
-         add = new AddActors(addR.world,map,game,addR.stage);
+         add = new AddActors(addR.world,map,game);
          renderer = new OrthogonalTiledMapRenderer(map,1/Pixels);
          renderer2 = new OrthogonalTiledMapRenderer(map2,1/Pixels);
          batch = new SpriteBatch();

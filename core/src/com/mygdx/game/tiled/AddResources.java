@@ -97,23 +97,23 @@ public class AddResources {
     public static OrthographicCamera cam;
     public static Stage stage,stage2;
     public static World world;
-    private Box2DDebugRenderer render;
-    private int iterator2 = 0;
-    private RayHandler ray;
-    private ShapeRenderer shape;
+    public static  Box2DDebugRenderer render;
+    public static  int iterator2 = 0;
+    public static  RayHandler ray;
+    public static  ShapeRenderer shape;
     public static PointLight point1;
     public static Viewport viewport;
     AddActors add;
-    Random r;
-    boolean iterator = true;
-    int random;
-    Texture relleno,contorno,Blanco;
-    Sprite whiteSprite;
-    float alpha = 1;
+   public static  Random r;
+   public static  boolean iterator = true;
+   public static  int random;
+   public static  Texture relleno,contorno,Blanco;
+   public static  Sprite whiteSprite;
+   public static  float alpha = 1;
     public static boolean ScreenWhite = true;
     float width,widthEntero = 50;
 
-    int itcam = 0;
+    public static int itcam = 0;
     public static Texture white;
     Texture moneda,monedas;
 
@@ -149,8 +149,8 @@ public class AddResources {
     public static Rectangle SpeedRect;
     public static Texture BtnPause,BtnPauseHover;
     public static Rectangle PauseRect;
-    boolean dere,izq,salto,attack,speed,pause;
-    Sprite dereS,dereHoverS,izqS,izqHoverS,saltoS,saltoHoverS,speedS,speedHoverS,attackS,attackHoverS,pauseS,pauseHoverS;
+    public static boolean dere,izq,salto,attack,speed,pause;
+    public static Sprite dereS,dereHoverS,izqS,izqHoverS,saltoS,saltoHoverS,speedS,speedHoverS,attackS,attackHoverS,pauseS,pauseHoverS;
 
     //Controles Escondidos
     public static boolean TouchConfirm,TouchCancel;
@@ -179,34 +179,19 @@ public class AddResources {
     public static ArrayList<Rectangle> rectangulosX;
 
     public static boolean tocoPiso = false;
-    int ConfigurarCamara = 0;
-    boolean camaraPersonaje = false;
+   public static int ConfigurarCamara = 0;
+   public static boolean camaraPersonaje = false;
 
 
 
 
 
     /*****************MENU DE TIENDA*****************/
-    float timeHome = 0;
-    Texture costo1,costo2;
-    Sprite costo2S;
-    Texture fertilizante;
-    Rectangle fertilizanteRect;
-    Texture HojaVerde;
-    Rectangle HojaVerdeRec;
-    Sprite HojaV;
-    float alphaHV = 1;
-    int iteratorBuyHV;
-    Texture HojaRosa;
-    Rectangle HojaRosaRec;
-    Sprite HojaR;
+    public static float timeHome = 0;
 
 
-    Sprite blancoS;
-    Texture tcero,tuno,tdos,ttres,tcuatro,tcinco,tseis,tsiete,tocho,tnueve;
-    int iteratorBuy;
-    Texture x;
-    Rectangle salir;
+
+
     ShaderProgram shader;
 
     Sprite progress;
@@ -246,7 +231,7 @@ public class AddResources {
 
         contorno= new Texture("ProgressBar2.png");
         Blanco = new Texture("Blanco.png");
-        blancoS = new Sprite(Blanco);
+
         moneda = new Texture("MonedaR.png");
         monedas = new Texture("Monedas.png");
         whiteSprite = new Sprite(Blanco);
@@ -390,29 +375,7 @@ public class AddResources {
         /**************/
 
 
-        /*****************Menu tienda*************/
-        costo1 = new Texture("3Moneda.png");
-        costo2 = new Texture("99Moneda.png");
-        fertilizante = new Texture("Fertilizante.png");
-        fertilizanteRect = new Rectangle();
-        tcero = new Texture("cero.png");
-        tuno = new Texture("uno.png");
-        tdos = new Texture("dos.png");
-        ttres = new Texture("tres.png");
-        tcuatro = new Texture("cuatro.png");
-        tcinco = new Texture("cinco.png");
-        tseis = new Texture("seis.png");
-        tsiete = new Texture("siete.png");
-        tocho = new Texture("ocho.png");
-        tnueve = new Texture("nueve.png");
-        x = new Texture("X.png");
-        salir = new Rectangle();
-        HojaVerde = new Texture("HojaVerde.png");
-        HojaVerdeRec = new Rectangle();
-        HojaV = new Sprite(HojaVerde);
-        HojaRosa = new Texture("HojaRosa.png");
-        HojaRosaRec = new Rectangle();
-        HojaR = new Sprite(HojaRosa);
+
         progress = new Sprite(relleno);
 
 
@@ -427,7 +390,8 @@ public class AddResources {
 
 
     }
-    public void addRender(float delta)
+
+    public static void addRender(float delta)
     {
 
        // batch.enableBlending();
@@ -466,17 +430,17 @@ public class AddResources {
             PunteroPosition2.y = -10000;
         }
 
-        if(ConfigurarCamara <= 50) {
+        if(ConfigurarCamara <= 1) {
             try {
-                cam.position.x = (add.player.getX() + .4f);
-                cam.position.y = add.player.getY() + .5f;
+                cam.position.x = (AddActors.player.getX() + .4f);
+                cam.position.y = AddActors.player.getY() + .5f;
                 ConfigurarCamara++;
             }catch(Exception e)
             {
 
             }
         }
-        if(!add.player.Muerto) {
+        if(!Jugador.Muerto) {
 
                 for (Rectangle camnoX : rectangulosNoX) {
 
@@ -488,7 +452,7 @@ public class AddResources {
                 {
                     if(camX.overlaps(Jugador.jugador)){
                         MyGdxGame.NoSeguirFondo = false;
-                    cam.position.x = (add.player.getX() + .4f);
+                    cam.position.x = (AddActors.player.getX() + .4f);
                 }
                 }
 
@@ -497,21 +461,21 @@ public class AddResources {
                 if (camy.overlaps(Jugador.jugador)) {
 
                     if(!camaraPersonaje) {
-                        if (cam.position.y > add.player.getY() + .7f) {//.5f
+                        if (cam.position.y > AddActors.player.getY() + .7f) {//.5f
                             cam.position.y -= 5f * Gdx.graphics.getDeltaTime();
-                        } else if (cam.position.y < add.player.getY() + .3f) {
+                        } else if (cam.position.y < AddActors.player.getY() + .3f) {
                             cam.position.y += 3f * Gdx.graphics.getDeltaTime();
                         }
                     }
                     if(!camaraPersonaje) {
-                        if (cam.position.y == add.player.getY() + .5f) {
+                        if (cam.position.y == AddActors.player.getY() + .5f) {
 
                             camaraPersonaje = true;
-                            cam.position.y = add.player.getY() + .5f;
+                            cam.position.y = AddActors.player.getY() + .5f;
                         }
                     }else
                     {
-                        cam.position.y = add.player.getY() + .5f;
+                        cam.position.y = AddActors.player.getY() + .5f;
                     }
                 }
 
@@ -523,13 +487,13 @@ public class AddResources {
                         camaraPersonaje = false;
 if(tocoPiso) {
     itcam = 0;
-    if (cam.position.y > add.player.getY() + .7f) {
+    if (cam.position.y > AddActors.player.getY() + .7f) {
         cam.position.y -= .5f * Gdx.graphics.getDeltaTime();
-    } else if (cam.position.y < add.player.getY() + .3f) {
+    } else if (cam.position.y < AddActors.player.getY() + .3f) {
         cam.position.y += .5f * Gdx.graphics.getDeltaTime();
     } else {
         if (itcam == 0) {
-            cam.position.y = add.player.getY() + .5f;
+            cam.position.y = AddActors.player.getY() + .5f;
             tocoPiso = false;
             itcam = 1;
         }
@@ -541,39 +505,32 @@ if(tocoPiso) {
             }
         }
 /******/
-        batch.setProjectionMatrix(stage.getCamera().combined);
-        world.step(delta,6,10);//2 in position iterations
+        //batch.setProjectionMatrix(stage.getCamera().combined);
+
 
 
 /******/
 
-            if (!Jugador.isMenu) {
-                over();
-            } else {
-                AddActors.player.setRightActive(false);
-                AddActors.player.setLeftActive(false);
-                AddActors.player.setSaltoUp(false);
-                AddActors.player.setAttackButton(false);
-                AddActors.player.setSpeedButton(false);
-            }
-            ray.update();
-            ray.setCombinedMatrix(cam.combined);
-            ray.render();
-          //  render.render(world, cam.combined);
-            batch.begin();
-            //batch.setShader(shader);
-            if (add.player.Muerto) {
-                random = (int) Math.random() * 50 + 1;
-                if (iterator) {
-                    iterator = false;
-                } else {
-                    iterator = true;
-                }
-            }
 
-       puntero.set(PunteroPosition.x-(5/Pixels),PunteroPosition.y-(5/Pixels),10/Pixels,10/Pixels);
-        puntero2.set(PunteroPosition2.x-(5f/Pixels),PunteroPosition2.y-(5f/Pixels),10/Pixels,10/Pixels);
-        batch.end();
+
+            //batch.setShader(shader);
+
+       AddResources. world.step(delta,6,10);//2 in position iterations
+        over();
+        if (AddActors.player.Muerto) {
+            random = (int) Math.random() * 50 + 1;
+            if (iterator) {
+                iterator = false;
+            } else {
+                iterator = true;
+            }
+        }
+        puntero.set(PunteroPosition.x-(5/Pixels),PunteroPosition.y-(5/Pixels),10/Pixels,10/Pixels);
+        AddResources.puntero2.set(PunteroPosition2.x-(5f/Pixels),PunteroPosition2.y-(5f/Pixels),10/Pixels,10/Pixels);
+        ray.update();
+        ray.setCombinedMatrix(stage.getCamera().combined);
+        ray.render();
+        //render.render(world,stage.getCamera().combined);
         stage.act(delta);
         stage2.act(delta);
 
@@ -724,10 +681,10 @@ batch.begin();
                             TouchConfirm = false;
 
                             if (!add.player.Muerto) {
-                                if (add.player.Espadazo) {
+                              /*  if (add.player.Espadazo) {
                                     add.player.time1 = 0;
                                     widthEntero = 0;
-                                }
+                                }*/
                                 if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT) && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || add.player.rightActive && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || add.player.rightActive && add.player.SpeedButton) {
                                     width = (add.player.time3 * 50) / 1;
                                     widthEntero = widthEntero - (width * Gdx.graphics.getDeltaTime() * 2);
@@ -1062,27 +1019,12 @@ batch.begin();
         BtnPauseHover.dispose();
         ScreenTexture.dispose();
         PantallaSend.dispose();
-        fertilizante.dispose();
-        HojaVerde.dispose();
-        HojaRosa.dispose();
-        tcero.dispose();
-        tuno.dispose();
-        tdos.dispose();
-        ttres.dispose();
-        tcuatro.dispose();
-        tcinco.dispose();
-        tseis.dispose();
-        tsiete.dispose();
-        tocho.dispose();
-        tnueve.dispose();
         shader.dispose();
-        costo1.dispose();
-        costo2.dispose();
         Confirmar.dispose();
         Cancelar.dispose();
 
     }
-    public void over() {
+    public static void over() {
         try {
             Gdx.input.setInputProcessor(stage);
             if (puntero.overlaps(DereRect) || puntero2.overlaps(DereRect)) {

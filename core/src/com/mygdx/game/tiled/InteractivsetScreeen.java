@@ -124,8 +124,10 @@ public abstract class InteractivsetScreeen extends Actor implements Disposable {
             AddActors.button2.isTouch2 = false;
             if(AddResourcesOfMenu.SelectLevel == 0) {
                 MyGdxGame.isIsNivelProgress2 = true;
+                AddResources.ConfigurarCamara = 0;
                 AddActors.game.setScreen(new Nivel2Progresion(AddActors.game));
             }else {
+                AddResources.ConfigurarCamara = 0;
                 AddActors.game.setScreen(new Menu(AddActors.game));
             }
             Send = false;

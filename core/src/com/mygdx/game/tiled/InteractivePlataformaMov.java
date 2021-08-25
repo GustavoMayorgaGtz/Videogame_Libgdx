@@ -75,9 +75,9 @@ public abstract class InteractivePlataformaMov extends Actor implements Disposab
         setPosition(body.getPosition().x-(24)/Pixels,body.getPosition().y-(6)/Pixels);
         cuerpo.set(getX(), getY(),getWidth(),getHeight()+(10/Pixels));//+(10/Pixels) - (20/Pixels)
         batch.draw (texture, getX(), getY(),getWidth(),getHeight());
-       if(Gdx.input.isTouched()) {
+      /* if(Gdx.input.isTouched()) {
             batch.draw(white, r.get(iterator).getX(),r.get(iterator).getY(), r.get(iterator).getWidth(),r.get(iterator).getHeight());
-        }
+        }*/
     }
 
     @Override

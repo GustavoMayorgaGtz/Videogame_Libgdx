@@ -18,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
@@ -96,6 +97,13 @@ public abstract class InteractiveTileObjectNemesis1 extends Actor implements Dis
     boolean esperar;
     float esperaTime;
 
+    Texture Contorno,Relleno;
+    Texture BarrasNegras;
+    boolean Active = false;
+    Fixture fix1,fix2;
+    Body pared1,pared2;
+    BodyDef pared1def,pared2def;
+
     public InteractiveTileObjectNemesis1(World world, TiledMap map, Rectangle bounds, Texture WalkLeft, Texture WalkRight, Texture AttackL, Texture AttackR,Texture deadL,Texture deadR,int iterator)    {
         this.world = world;
         this.map = map;
@@ -128,7 +136,7 @@ public abstract class InteractiveTileObjectNemesis1 extends Actor implements Dis
         negro = new Texture("White.png");
         rojo = new Texture("Rojo.png");
         sound = Gdx.audio.newMusic(Gdx.files.internal("Fuego.mp3"));
-        sound.play();
+        //sound.play();
         sound.setLooping(true);
         /************Animaciones*****************/
         ProximidadIzq = new Rectangle();
@@ -198,7 +206,7 @@ public abstract class InteractiveTileObjectNemesis1 extends Actor implements Dis
                 FramesMuerteLeft[index5++] = TmpMuerteLeft[i][j];
             }
         }
-        Dead1 = new Animation<TextureRegion>(0.2f,FramesMuerteLeft);
+        Dead1 = new Animation<TextureRegion>(0.05f,FramesMuerteLeft);
         ////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////
         TextureRegion[][] TmpMuerteRight = TextureRegion.split(DeadR,DeadR.getWidth()/c6,DeadR.getHeight()/r6);
@@ -211,7 +219,7 @@ public abstract class InteractiveTileObjectNemesis1 extends Actor implements Dis
                 FramesMuerteRight[index6++] = TmpMuerteRight[i][j];
             }
         }
-        Dead2 = new Animation<TextureRegion>(0.2f,FramesMuerteRight);
+        Dead2 = new Animation<TextureRegion>(0.05f,FramesMuerteRight);
         ////////////////////////////////////////////////////////
         /************Animaciones*****************/
         setSize((bounds.getWidth()+30)/Pixels,(bounds.getHeight()+10)/Pixels);
@@ -221,6 +229,43 @@ public abstract class InteractiveTileObjectNemesis1 extends Actor implements Dis
         pop = Gdx.audio.newSound(Gdx.files.internal("Pop.mp3"));
         Dano = new Sprite();
         Muerte = new Rectangle();
+        /********************************/
+        Contorno = new Texture("cuboP.png");
+        Relleno = new Texture("Cubo.png");
+        pared1def = new BodyDef();
+        pared1def.type = BodyDef.BodyType.KinematicBody;
+        pared1def.position.set((((bounds.getX() + bounds.getWidth()/2))/Pixels)-(150/Pixels),( bounds.getY()+bounds.getHeight()/2)/Pixels);
+        pared1 = world.createBody(pared1def);
+
+        PolygonShape pared1Shape = new PolygonShape();
+        pared1Shape.setAsBox(.25f,3);
+        FixtureDef sh = new FixtureDef();
+        sh.shape = pared1Shape;
+        fix1 = pared1.createFixture(sh);
+        fix1.setFriction(0);
+        fix1.setRestitution(0);
+        fix1.setDensity(0);
+        fix1.setUserData("desMov");
+        pared1Shape.dispose();
+        pared1.setActive(false);
+/**********/
+        pared2def = new BodyDef();
+        pared2def.type = BodyDef.BodyType.KinematicBody;
+        pared2def.position.set((((bounds.getX() + bounds.getWidth()/2))/Pixels)+(100/Pixels),( bounds.getY()+bounds.getHeight()/2)/Pixels);
+        pared2 = world.createBody(pared2def);
+
+        PolygonShape pared2Shape = new PolygonShape();
+        pared2Shape.setAsBox(.25f,3);
+        FixtureDef sh2= new FixtureDef();
+        sh2.shape = pared1Shape;
+        fix2 = pared2.createFixture(sh2);
+        fix2.setFriction(0);
+        fix2.setRestitution(0);
+        fix2.setDensity(0);
+        fix2.setUserData("desMov");
+        pared2Shape.dispose();
+        pared2.setActive(false);
+        /********************************/
             }
 
     @Override
@@ -232,7 +277,31 @@ public abstract class InteractiveTileObjectNemesis1 extends Actor implements Dis
         batch.draw(rojo,PI.x,PI.y,PI.width,PI.height);
         batch.draw(rojo,PD.x,PD.y,PD.width,PD.height);
         batch.draw(negro,Muerte.x,Muerte.y,Muerte.width,Muerte.height);*/
+       if(Active)
+        {
+            pared1.setActive(true);
+            pared2.setActive(true);
+            batch.draw(Relleno,pared1.getPosition().x-.25f,pared1.getPosition().y-1,.5f,1.3f);
+            batch.draw(Relleno,pared1.getPosition().x-.25f,pared1.getPosition().y-1+(1.3f),.5f,1.3f);
+            batch.draw(Contorno,pared1.getPosition().x-.25f,pared1.getPosition().y-1,.5f,1.3f);
+            batch.draw(Contorno,pared1.getPosition().x-.25f,pared1.getPosition().y-1+(1.3f),.5f,1.3f);
+
+            batch.draw(Relleno,pared2.getPosition().x-.25f,pared2.getPosition().y-1,.5f,1.3f);
+            batch.draw(Relleno,pared2.getPosition().x-.25f,pared2.getPosition().y-1+(1.3f),.5f,1.3f);
+            batch.draw(Contorno,pared2.getPosition().x-.25f,pared2.getPosition().y-1,.5f,1.3f);
+            batch.draw(Contorno,pared2.getPosition().x-.25f,pared2.getPosition().y-1+(1.3f),.5f,1.3f);
+
+        }else
+        {
+            pared1.setActive(false);
+            pared2.setActive(false);
+            batch.draw(Contorno,pared1.getPosition().x-.25f,pared1.getPosition().y-1,.5f,1.3f);
+            batch.draw(Contorno,pared1.getPosition().x-.25f,pared1.getPosition().y+.3f,.5f,1.3f);
+            batch.draw(Contorno,pared2.getPosition().x-.25f,pared2.getPosition().y-1,.5f,1.3f);
+            batch.draw(Contorno,pared2.getPosition().x-.25f,pared2.getPosition().y+.3f,.5f,1.3f);
+        }
           if(body.isActive()) {
+
               Gdx.app.log("Vidas",""+vidas);
               TextureRegion WL = WalkLeftA.getKeyFrame(time, true);
               TextureRegion WR = WalkRightA.getKeyFrame(time, true);
@@ -339,10 +408,12 @@ public abstract class InteractiveTileObjectNemesis1 extends Actor implements Dis
                   if (ProximidadIzq.overlaps(Jugador.jugador)) {
                       izquierda = true;
                       derecha = false;
+                      Active = true;
                   }
                   if (ProximidadDere.overlaps(Jugador.jugador)) {
                       derecha = true;
                       izquierda = false;
+                      Active = true;
                   }
               }
             /*  if(!ProximidadIzq.overlaps(Jugador.jugador)&&!ProximidadIzq.overlaps(Jugador.jugador))
@@ -383,7 +454,7 @@ public abstract class InteractiveTileObjectNemesis1 extends Actor implements Dis
             ProximidadDere.set(getX()+(15/Pixels)+(getWidth()-(30/Pixels)),getY(),100/Pixels,getHeight());
             PD.set(getX()+(15/Pixels)+(getWidth()-(30/Pixels)),getY(),20/Pixels,getHeight());
             PI.set(getX()+(15/Pixels)-(20/Pixels),getY(),20/Pixels,getHeight());
-            r.get(iterator).set(getX()+(15/Pixels), getY(), getWidth()-(30/Pixels) ,getHeight());
+            r.get(iterator).set(getX()+(20/Pixels), getY(), getWidth()-(40/Pixels) ,getHeight());
             if(timeMuerte > .8f&& timeMuerte < 1) {
                 if (derecha) {
                Muerte.set(getX()+(15/Pixels)+(getWidth()-(30/Pixels)),getY(),20/Pixels,getHeight()-(10/Pixels));
@@ -410,6 +481,7 @@ public abstract class InteractiveTileObjectNemesis1 extends Actor implements Dis
                         } else {
                             time = 0;
                             body.setActive(false);
+                            Active = false;
                         }
                     }
 
@@ -542,6 +614,9 @@ if(pan < -.8f)
 
     @Override
     public void dispose() {
+        sound.dispose();
+        Contorno.dispose();
+        Relleno.dispose();
         negro.dispose();
         rojo.dispose();
         Right.dispose();

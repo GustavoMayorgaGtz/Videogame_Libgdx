@@ -80,7 +80,7 @@ public abstract class InteractiveTileObjectCajas extends Actor implements  Dispo
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition(body.getPosition().x-(12)/Pixels,body.getPosition().y-(12)/Pixels);
+
         batch.draw(texture, getX(),getY(),getWidth(),getHeight());
         caja.set(getX(),getY(),getWidth(),getHeight());
        // batch.draw(negro,r.get(iterator).getX(),r.get(iterator).getY(),r.get(iterator).getWidth(),r.get(iterator).getHeight());
@@ -88,6 +88,7 @@ public abstract class InteractiveTileObjectCajas extends Actor implements  Dispo
 
     @Override
     public void act(float delta) {
+        setPosition(body.getPosition().x-(12)/Pixels,body.getPosition().y-(12)/Pixels);
 xbody = body.getLinearVelocity().x;
         r.get(iterator).set(getX(), getY(), getWidth(), getHeight());
         float velocidad = body.getLinearVelocity().x;
