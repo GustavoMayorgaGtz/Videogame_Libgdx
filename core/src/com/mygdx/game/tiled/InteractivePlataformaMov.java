@@ -36,6 +36,7 @@ public abstract class InteractivePlataformaMov extends Actor implements Disposab
     public static ArrayList<Rectangle> r = new ArrayList<Rectangle>();
     int iterator;
     Texture white;
+    protected int i1,i2;
 
     public InteractivePlataformaMov(World world, Texture texture, float x, float y,int iterator)
     {
@@ -66,37 +67,47 @@ public abstract class InteractivePlataformaMov extends Actor implements Disposab
         cuerpo = new Rectangle();
         setPosition(body.getPosition().x-(24)/Pixels,body.getPosition().y-(6)/Pixels);
 
-        r.add(iterator, new Rectangle(getX(), getY(), getWidth(), getHeight()+50));
+        r.add(iterator, new Rectangle(getX(), getY(), getWidth(), getHeight()+10));
         white = new Texture("White.png");
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         setPosition(body.getPosition().x-(24)/Pixels,body.getPosition().y-(6)/Pixels);
+       // batch.draw(white, r.get(iterator).getX(),r.get(iterator).getY(), r.get(iterator).getWidth(),r.get(iterator).getHeight());
         cuerpo.set(getX(), getY(),getWidth(),getHeight()+(10/Pixels));//+(10/Pixels) - (20/Pixels)
         batch.draw (texture, getX(), getY(),getWidth(),getHeight());
       /* if(Gdx.input.isTouched()) {
-            batch.draw(white, r.get(iterator).getX(),r.get(iterator).getY(), r.get(iterator).getWidth(),r.get(iterator).getHeight());
+
         }*/
+
     }
 
     @Override
     public void act(float delta) {
+
         cuerpo.set(getX(), getY(),getWidth(),getHeight()+(10/Pixels));
-        r.get(iterator).set(getX(), getY(), getWidth(), getHeight()+(10/Pixels));
+        r.get(iterator).set(getX(), getY(), getWidth(), getHeight()+(2/Pixels));
         if (RD) {
+
             body.setLinearVelocity(new Vector2(-velocidad, 0));//Izquierda
             if (cuerpo.overlaps(Jugador.jugador)) {
+
+                if (Jugador.Espadazo) {
+                    Jugador.body.setLinearVelocity(-velocidad, Jugador.body.getLinearVelocity().y);
+                }
                 ////////////////////////////////////
                 if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) || Jugador.leftActive) {
-                    if(Jugador.body.getLinearVelocity().x < -1.3f)
+                    if(Jugador.body.getLinearVelocity().x < -1.5f)
                     {
-                        Jugador.body.setLinearVelocity(-1.3f,Jugador.body.getLinearVelocity().y);
+                        Jugador.body.setLinearVelocity(-1.5f,Jugador.body.getLinearVelocity().y);
                     }
                 }
                 /////////////////////////////////////////
                 if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT) || Jugador.rightActive) {
-                    Jugador.body.setLinearVelocity(Jugador.body.getLinearVelocity().x + 1.5f/*.2f*/, Jugador.body.getLinearVelocity().y);
+                    if(Jugador.body.getLinearVelocity().x < 1f) {
+                        Jugador.body.setLinearVelocity(Jugador.body.getLinearVelocity().x + 1f/*.2f*/, Jugador.body.getLinearVelocity().y);
+                    }
                 }
                 /*******************************/
                 if (!Jugador.Espadazo) {
@@ -115,17 +126,21 @@ public abstract class InteractivePlataformaMov extends Actor implements Disposab
 
             body.setLinearVelocity(new Vector2(velocidad, 0));//Derecha
             if (cuerpo.overlaps(Jugador.jugador)) {
+                if (Jugador.Espadazo) {
+                    Jugador.body.setLinearVelocity(velocidad, Jugador.body.getLinearVelocity().y);
+                }
                 ////////////////////////////////////////
                 if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT) || Jugador.rightActive) {
-                      if(Jugador.body.getLinearVelocity().x > 1.3f)
+                      if(Jugador.body.getLinearVelocity().x > 1.5f)
                       {
-                          Jugador.body.setLinearVelocity(1.3f,Jugador.body.getLinearVelocity().y);
+                          Jugador.body.setLinearVelocity(1.5f,Jugador.body.getLinearVelocity().y);
                       }
                 }
                 ////////////////////////////////////////
                 if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) || Jugador.leftActive) {
-
-                    Jugador.body.setLinearVelocity(Jugador.body.getLinearVelocity().x - 1.5f/*.2f*/, Jugador.body.getLinearVelocity().y);
+                    if(Jugador.body.getLinearVelocity().x < -1f) {
+                        Jugador.body.setLinearVelocity(Jugador.body.getLinearVelocity().x - 1f/*.2f*/, Jugador.body.getLinearVelocity().y);
+                    }
                 }
                 /******************************/
                 if (!Jugador.Espadazo) {
@@ -136,16 +151,39 @@ public abstract class InteractivePlataformaMov extends Actor implements Disposab
                         Jugador.body.setLinearVelocity(Jugador.body.getLinearVelocity().x + velocidad, Jugador.body.getLinearVelocity().y);
                     }
                 }
+
                 /*********************************/
             }
         }
         if (LU) {
-            body.setLinearVelocity(new Vector2(0,velocidad));//Izquierda
+            body.setLinearVelocity(new Vector2(0,velocidad));//arriba
 
+          /*  if (r.get(iterator).overlaps(Jugador.jugador)) {
+
+                if(i1 == 0)
+                {
+                    Jugador.saltar = false;
+                    i1++;
+                }
+            }else
+            {
+                i1 = 0;
+            }*/
         }
 
         if (RU) {
-            body.setLinearVelocity(new Vector2(0,-velocidad));//Derecha
+            body.setLinearVelocity(new Vector2(0,-velocidad));//abajo
+
+          /* //
+
+                if (i2 == 0) {
+                    Jugador.saltar = false;
+                    i2++;
+                }
+            }else
+            {
+                i2 = 0;
+            }*/
         }
 
     }

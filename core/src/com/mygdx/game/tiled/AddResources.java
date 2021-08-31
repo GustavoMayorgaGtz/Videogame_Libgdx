@@ -488,9 +488,9 @@ public class AddResources {
 if(tocoPiso) {
     itcam = 0;
     if (cam.position.y > AddActors.player.getY() + .7f) {
-        cam.position.y -= .5f * Gdx.graphics.getDeltaTime();
+        cam.position.y -= .9f * Gdx.graphics.getDeltaTime();
     } else if (cam.position.y < AddActors.player.getY() + .3f) {
-        cam.position.y += .5f * Gdx.graphics.getDeltaTime();
+        cam.position.y += .9f * Gdx.graphics.getDeltaTime();
     } else {
         if (itcam == 0) {
             cam.position.y = AddActors.player.getY() + .5f;

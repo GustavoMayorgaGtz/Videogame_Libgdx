@@ -101,6 +101,21 @@ public abstract class InteractivsetScreeen extends Actor implements Disposable {
                         MyGdxGame.NivelisComplete.flush();
                         break;
                     }
+                    case 7: {
+                        MyGdxGame.NivelisComplete.putInteger("Level", 7);
+                        MyGdxGame.NivelisComplete.flush();
+                        break;
+                    }
+                    case 8: {
+                        MyGdxGame.NivelisComplete.putInteger("Level", 8);
+                        MyGdxGame.NivelisComplete.flush();
+                        break;
+                    }
+                    case 9: {
+                        MyGdxGame.NivelisComplete.putInteger("Level", 9);
+                        MyGdxGame.NivelisComplete.flush();
+                        break;
+                    }
                 }
             }
             Menu.id = 1;

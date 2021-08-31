@@ -251,7 +251,7 @@ public abstract class InteractiveTileObjectNemesis1 extends Actor implements Dis
 /**********/
         pared2def = new BodyDef();
         pared2def.type = BodyDef.BodyType.KinematicBody;
-        pared2def.position.set((((bounds.getX() + bounds.getWidth()/2))/Pixels)+(100/Pixels),( bounds.getY()+bounds.getHeight()/2)/Pixels);
+        pared2def.position.set((((bounds.getX() + bounds.getWidth()/2))/Pixels)+(140/Pixels),( bounds.getY()+bounds.getHeight()/2)/Pixels);
         pared2 = world.createBody(pared2def);
 
         PolygonShape pared2Shape = new PolygonShape();
@@ -281,24 +281,24 @@ public abstract class InteractiveTileObjectNemesis1 extends Actor implements Dis
         {
             pared1.setActive(true);
             pared2.setActive(true);
-            batch.draw(Relleno,pared1.getPosition().x-.25f,pared1.getPosition().y-1,.5f,1.3f);
-            batch.draw(Relleno,pared1.getPosition().x-.25f,pared1.getPosition().y-1+(1.3f),.5f,1.3f);
-            batch.draw(Contorno,pared1.getPosition().x-.25f,pared1.getPosition().y-1,.5f,1.3f);
-            batch.draw(Contorno,pared1.getPosition().x-.25f,pared1.getPosition().y-1+(1.3f),.5f,1.3f);
+            batch.draw(Relleno,pared1.getPosition().x-.25f,pared1.getPosition().y-1,.5f,1.2f);
+            batch.draw(Relleno,pared1.getPosition().x-.25f,pared1.getPosition().y-1+(1.2f),.5f,1.2f);
+            batch.draw(Contorno,pared1.getPosition().x-.25f,pared1.getPosition().y-1,.5f,1.2f);
+            batch.draw(Contorno,pared1.getPosition().x-.25f,pared1.getPosition().y-1+(1.2f),.5f,1.2f);
 
-            batch.draw(Relleno,pared2.getPosition().x-.25f,pared2.getPosition().y-1,.5f,1.3f);
-            batch.draw(Relleno,pared2.getPosition().x-.25f,pared2.getPosition().y-1+(1.3f),.5f,1.3f);
-            batch.draw(Contorno,pared2.getPosition().x-.25f,pared2.getPosition().y-1,.5f,1.3f);
-            batch.draw(Contorno,pared2.getPosition().x-.25f,pared2.getPosition().y-1+(1.3f),.5f,1.3f);
+            batch.draw(Relleno,pared2.getPosition().x-.25f,pared2.getPosition().y-1,.5f,1.2f);
+            batch.draw(Relleno,pared2.getPosition().x-.25f,pared2.getPosition().y-1+(1.2f),.5f,1.2f);
+            batch.draw(Contorno,pared2.getPosition().x-.25f,pared2.getPosition().y-1,.5f,1.2f);
+            batch.draw(Contorno,pared2.getPosition().x-.25f,pared2.getPosition().y-1+(1.2f),.5f,1.2f);
 
         }else
         {
             pared1.setActive(false);
             pared2.setActive(false);
-            batch.draw(Contorno,pared1.getPosition().x-.25f,pared1.getPosition().y-1,.5f,1.3f);
-            batch.draw(Contorno,pared1.getPosition().x-.25f,pared1.getPosition().y+.3f,.5f,1.3f);
-            batch.draw(Contorno,pared2.getPosition().x-.25f,pared2.getPosition().y-1,.5f,1.3f);
-            batch.draw(Contorno,pared2.getPosition().x-.25f,pared2.getPosition().y+.3f,.5f,1.3f);
+            batch.draw(Contorno,pared1.getPosition().x-.25f,pared1.getPosition().y-1,.5f,1.2f);
+            batch.draw(Contorno,pared1.getPosition().x-.25f,pared1.getPosition().y+.2f,.5f,1.2f);
+            batch.draw(Contorno,pared2.getPosition().x-.25f,pared2.getPosition().y-1,.5f,1.2f);
+            batch.draw(Contorno,pared2.getPosition().x-.25f,pared2.getPosition().y+.2f,.5f,1.2f);
         }
           if(body.isActive()) {
 

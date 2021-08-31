@@ -27,6 +27,8 @@ public class PlataformaMovimiento extends InteractivePlataformaMov {
 
     @Override
     public void setRU() {
+        i1 = -3;
+        i2 =  -3;
         RU = true;
         LU = false;
         RD = false;
@@ -35,6 +37,8 @@ public class PlataformaMovimiento extends InteractivePlataformaMov {
 
     @Override
     public void setLU() {
+        i1 =  -3;
+        i2 =  -3;
         LU = true;
         RU = false;
         RD = false;

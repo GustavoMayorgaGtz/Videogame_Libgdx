@@ -31,7 +31,7 @@ public class Menu implements Screen {
     AddResourcesOfMenu addR;
 
     public static Texture  puntero;
-    Texture uno, dos,tres,cuatro,cinco,seis;
+    Texture uno, dos,tres,cuatro,cinco,seis,siete,ocho,nueve;
     public static Texture Home;
     public static Texture Monedas;
     private ArrayList<Niveles> NivelesMenu = new ArrayList<Niveles>();
@@ -61,6 +61,9 @@ public class Menu implements Screen {
         cuatro = new Texture("Menu4.png");
         cinco = new Texture("Menu5.png");
         seis = new Texture("Menu6.png");
+        siete = new Texture("Menu7.png");
+      //  ocho = new Texture("Menu8.png");
+        //nueve = new Texture("Menu9.png");
         Home = new Texture("MenuHome.png");
         Monedas = new Texture("MonedaR.png");
         puntero = new Texture("Punto.png");
@@ -69,7 +72,7 @@ public class Menu implements Screen {
 
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            NivelesMenu.add(new Niveles(uno, dos,tres,cuatro,cinco,seis, rect));
+            NivelesMenu.add(new Niveles(uno, dos,tres,cuatro,cinco,seis,siete, rect));
         }
         for (Niveles NivelesMenu : NivelesMenu) {
             addR.stage.addActor(NivelesMenu);
