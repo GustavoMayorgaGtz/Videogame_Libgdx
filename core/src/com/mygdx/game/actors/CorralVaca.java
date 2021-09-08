@@ -144,19 +144,29 @@ public class CorralVaca extends Actor implements Disposable {
         /*************/
         Izq.set(x,y,5/Pixels,32/Pixels);
         Dere.set(x+(128/Pixels),y,10/Pixels,32/Pixels);
-        if(Jugador.jugador.overlaps(Cuerpo2)&&MenuBuild.vacaBuild&&!MenuBuild.isMenu&&Corral1Vacas.getInteger("Corral1Vacas")!=2)
+        if(Jugador.jugador.overlaps(Cuerpo2)&&MenuBuild.vacaBuild&&!MenuBuild.isMenu&&Corral1Vacas.getInteger("Corral1Vacas")!=2 &&MyGdxGame.coins.getInteger("Coins") >= 30)
         {
             batch.draw(FlechaVerde,x+(50/Pixels),y+(32/Pixels)+(abs/Pixels),32/Pixels,32/Pixels);
             if(AddResources.puntero.overlaps(Cuerpo2)) {
                 if(MenuBuild.vacaBuild) {
+
                     if (Corral1Vacas.getInteger("Corral1Vacas") == 0) {
+                        int monedas = MyGdxGame.coins.getInteger("Coins");
+                        monedas -= 30;
+                        MyGdxGame.coins.putInteger("Coins", monedas);
+                        MyGdxGame.coins.flush();
                         Corral1Vacas.putInteger("Corral1Vacas", 1);
                         Corral1Vacas.flush();
                         MenuBuild.vacaBuild = false;
                     }
                 }
                 if(MenuBuild.vacaBuild) {
+
                     if (Corral1Vacas.getInteger("Corral1Vacas") == 1) {
+                        int monedas = MyGdxGame.coins.getInteger("Coins");
+                        monedas -= 30;
+                        MyGdxGame.coins.putInteger("Coins", monedas);
+                        MyGdxGame.coins.flush();
                         Corral1Vacas.putInteger("Corral1Vacas", 2);
                         Corral1Vacas.flush();
                         MenuBuild.vacaBuild = false;
@@ -167,6 +177,7 @@ public class CorralVaca extends Actor implements Disposable {
         if (Corral1Vacas.getInteger("Corral1Vacas") >= 1)
         {
              Vaca1(batch);
+
         }
         if (Corral1Vacas.getInteger("Corral1Vacas") >= 2)
         {
@@ -445,6 +456,10 @@ public class CorralVaca extends Actor implements Disposable {
                         }
                         CorralVacas1.putFloat("Y26", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
+                            int monedas = MyGdxGame.coins.getInteger("Coins");
+                            monedas -= 100;
+                            MyGdxGame.coins.putInteger("Coins", monedas);
+                            MyGdxGame.coins.flush();
                             CorralVacas1.flush();
                             MyGdxGame.CorralVacaColocadas.flush();
                             MenuBuild.isCorralVacasBuild = false;

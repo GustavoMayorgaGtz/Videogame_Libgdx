@@ -206,6 +206,10 @@ Random random;
                         Casa1.putFloat("Y12", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
                             Casa1.flush();
+                            int monedas = MyGdxGame.coins.getInteger("Coins");
+                            monedas -= 150;
+                            MyGdxGame.coins.putInteger("Coins", monedas);
+                            MyGdxGame.coins.flush();
                             MyGdxGame.CasasColocadas.flush();
 
                             MenuBuild.CasasBuild = false;

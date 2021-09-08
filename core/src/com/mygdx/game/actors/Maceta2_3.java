@@ -78,6 +78,10 @@ float timeDurationTouch;
                         MyGdxGame.Maceta2_3.putFloat("Y19", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
                             MyGdxGame.Maceta2_3.flush();
+                            int monedas = MyGdxGame.coins.getInteger("Coins");
+                            monedas -= 5;
+                            MyGdxGame.coins.putInteger("Coins", monedas);
+                            MyGdxGame.coins.flush();
                             MyGdxGame.Maceta2Colocadas.flush();
                             MenuBuild.Maceta2Build = false;
                             AddResources.TouchConfirm = false;

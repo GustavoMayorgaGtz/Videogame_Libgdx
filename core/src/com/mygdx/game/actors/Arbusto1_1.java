@@ -98,6 +98,10 @@ int c = 1, r = 3;
                         Arbusto1_1.putFloat("Y20", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
                             Arbusto1_1.flush();
+                            int monedas = MyGdxGame.coins.getInteger("Coins");
+                            monedas -= 5;
+                            MyGdxGame.coins.putInteger("Coins", monedas);
+                            MyGdxGame.coins.flush();
                             MyGdxGame.Arbusto1Colocadas.flush();
                             MenuBuild.Arbusto1Build = false;
                             AddResources.TouchConfirm = false;

@@ -78,6 +78,10 @@ float timeDurationTouch;
                         Arbusto2_3.putFloat("Y25",  (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
                             Arbusto2_3.flush();
+                            int monedas = MyGdxGame.coins.getInteger("Coins");
+                            monedas -= 5;
+                            MyGdxGame.coins.putInteger("Coins", monedas);
+                            MyGdxGame.coins.flush();
                             MyGdxGame.Arbusto2Colocadas.flush();
                             MenuBuild.Arbusto2Build = false;
                             AddResources.TouchConfirm = false;

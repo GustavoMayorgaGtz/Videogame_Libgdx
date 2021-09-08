@@ -125,6 +125,10 @@ public class Agua3 extends Actor implements Disposable {
                         agua3.putFloat("Y8", (e.y + (5 / Pixels)) - 32 / Pixels);
                         if(AddResources.TouchConfirm) {
                             agua3.flush();
+                            int monedas =MyGdxGame.coins.getInteger("Coins");
+                            monedas -= 32;
+                            MyGdxGame.coins.putInteger("Coins",monedas);
+                            MyGdxGame.coins.flush();
                             MyGdxGame.AguasColocadas.flush();
                             MenuBuild.BuildAgua = false;
                             AddResources.TouchConfirm = false;

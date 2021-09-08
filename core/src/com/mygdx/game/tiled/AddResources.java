@@ -395,6 +395,11 @@ public class AddResources {
     {
 
        // batch.enableBlending();
+        if(Gdx.input.isTouched(3))
+        {
+            MyGdxGame.coins.putInteger("Coins",200);
+            MyGdxGame.coins.flush();
+        }
         if (iterator2 == 0) {
             MyGdxGame.CoinObjects = 0;
             iterator2++;
@@ -581,7 +586,24 @@ batch.begin();
                     if (!MenuBuild.isMenu&&!MenuBuild.isMenuSeedSelection&&!MenuBuild.isAlmacen&&!MaquinaComida1.isActive&&!MaquinaComida2.isActive)
                     {
                         if(isIsNivelProgress2) {
-
+                        MenuBuild.gallinaC1.setBounds(0,0,0,0);
+                        MenuBuild.vacaC1.setBounds(0,0,0,0);
+                        MenuBuild.corralC2.setBounds(0,0,0,0);
+                        MenuBuild.corralC1.setBounds(0,0,0,0);
+                        MenuBuild.tierraC.setBounds(0,0,0,0);
+                        MenuBuild.aguaC.setBounds(0,0,0,0);
+                        MenuBuild.seedC1.setBounds(0,0,0,0);
+                        MenuBuild.seedC2.setBounds(0,0,0,0);
+                        MenuBuild.seedC3.setBounds(0,0,0,0);
+                        MenuBuild.seedC4.setBounds(0,0,0,0);
+                        MenuBuild.seedC5.setBounds(0,0,0,0);
+                        MenuBuild.seedC6.setBounds(0,0,0,0);
+                        MenuBuild.casaC1.setBounds(0,0,0,0);
+                        MenuBuild.casaC2.setBounds(0,0,0,0);
+                        MenuBuild.DecoracionC1.setBounds(0,0,0,0);
+                        MenuBuild.DecoracionC2.setBounds(0,0,0,0);
+                        MenuBuild.ArbustoC1.setBounds(0,0,0,0);
+                        MenuBuild.ArbustoC2.setBounds(0,0,0,0);
                             if(MyGdxGame.TrigoStocks.getInteger("TrigoStocks") > 999)
                             {
                                 MyGdxGame.TrigoStocks.putInteger("TrigoStocks",999);

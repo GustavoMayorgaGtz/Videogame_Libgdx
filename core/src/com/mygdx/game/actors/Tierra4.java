@@ -309,20 +309,27 @@ colisiones();
         if(MyGdxGame.TierrasColocadas.getInteger("Posiciones") == 3 && MenuBuild.BuildTierra) {
             for (Rectangle e :  Tierra1.rects) {
                 if (Jugador.jugador.overlaps(e)) {
+                    if(MyGdxGame.coins.getInteger("Coins") >= 32)
+                    {
                     if (noToca) {
-                        MyGdxGame.TierrasColocadas.putInteger("Posiciones",4);
+                        MyGdxGame.TierrasColocadas.putInteger("Posiciones", 4);
                         tierra4.putFloat("X4", Jugador.body.getPosition().x);
-                        if(AddResources.TouchConfirm) {
+                        if (AddResources.TouchConfirm) {
                             tierra4.flush();
                         }
                         tierra4.putFloat("Y4", (e.y + (5 / Pixels)) - 32 / Pixels);
-                        if(AddResources.TouchConfirm) {
+                        if (AddResources.TouchConfirm) {
                             tierra4.flush();
+                            int monedas = MyGdxGame.coins.getInteger("Coins");
+                            monedas -= 32;
+                            MyGdxGame.coins.putInteger("Coins", monedas);
+                            MyGdxGame.coins.flush();
                             MyGdxGame.TierrasColocadas.flush();
                             MenuBuild.BuildTierra = false;
                             AddResources.TouchConfirm = false;
                             AddResources.TouchCancel = false;
                         }
+                    }
                     }
                 }
             }

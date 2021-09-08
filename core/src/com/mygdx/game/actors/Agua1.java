@@ -119,20 +119,27 @@ public class Agua1 extends Actor implements Disposable {
         if(MyGdxGame.AguasColocadas.getInteger("Posiciones2") == 0 && MenuBuild.BuildAgua) {
             for (Rectangle e : Tierra1.rects) {
                 if (Jugador.jugador.overlaps(e)) {
+                    if(MyGdxGame.coins.getInteger("Coins") >= 32)
+                    {
                     if (noToca) {
-                        MyGdxGame.AguasColocadas.putInteger("Posiciones2",1);
+                        MyGdxGame.AguasColocadas.putInteger("Posiciones2", 1);
                         agua1.putFloat("X6", Jugador.body.getPosition().x);
-                        if(AddResources.TouchConfirm) {
+                        if (AddResources.TouchConfirm) {
                             agua1.flush();
                         }
                         agua1.putFloat("Y6", (e.y + (5 / Pixels)) - 32 / Pixels);
-                        if(AddResources.TouchConfirm) {
+                        if (AddResources.TouchConfirm) {
                             agua1.flush();
+                            int monedas = MyGdxGame.coins.getInteger("Coins");
+                            monedas -= 32;
+                            MyGdxGame.coins.putInteger("Coins", monedas);
+                            MyGdxGame.coins.flush();
                             MyGdxGame.AguasColocadas.flush();
                             MenuBuild.BuildAgua = false;
                             AddResources.TouchConfirm = false;
                             AddResources.TouchCancel = false;
                         }
+                    }
                     }
                 }
             }

@@ -207,6 +207,10 @@ public class Casa2Pisos2 extends Actor implements Disposable {
                         CasaDosPisos2.putFloat("Y11", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
                             CasaDosPisos2.flush();
+                            int monedas = MyGdxGame.coins.getInteger("Coins");
+                            monedas -= 150;
+                            MyGdxGame.coins.putInteger("Coins", monedas);
+                            MyGdxGame.coins.flush();
                             MyGdxGame.CasasDosPisosColocadas.flush();
                             isCasa2Pisos1Activate = true;
                             MenuBuild.CasasDosPisosBuild = false;

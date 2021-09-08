@@ -27,6 +27,7 @@ import static com.mygdx.game.MyGdxGame.Pixels;
 import static com.mygdx.game.MyGdxGame.agua1;
 import static com.mygdx.game.MyGdxGame.tierra1Maiz;
 import static com.mygdx.game.tiled.AddResources.puntero;
+import static com.mygdx.game.tiled.AddResources.stage2;
 
 public class MenuBuild extends Actor implements Disposable
 {
@@ -146,9 +147,20 @@ public class MenuBuild extends Actor implements Disposable
     public static Rectangle ComidaGallinaR,ComidaVacaR;
     public static float alphaS1,alphaS2,alphaS3,alphaS4,alphaS5,alphas6;
 
+    /**Precios**/
+    public static Container tierraC,aguaC,seedC1,seedC2,seedC3,seedC4,seedC5,seedC6;
+    public static Label t1,a1,sl1,sl2,sl3,sl4,sl5,sl6;
+
+    public static Container corralC1,corralC2,vacaC1,gallinaC1;
+    public static Label corralL1,corralL2,vacaL1,gallinaL1;
+    public static Container casaC1,casaC2,ArbustoC1,ArbustoC2,DecoracionC1,DecoracionC2;
+    public static Label casaL1,casaL2,ArbustoL1,ArbustoL2,DecoracionL1,DecoracionL2;
+    public static Texture m;
+    public static Sprite moneda;
     public MenuBuild()
     {
-
+        m = new Texture("MonedaR.png");
+        moneda = new Sprite(m);
         negro = MyGdxGame.getManager().get("White.png");
         equis= MyGdxGame.getManager().get("X.png");
         logo =MyGdxGame.getManager().get("Inicia.png");
@@ -330,6 +342,67 @@ public class MenuBuild extends Actor implements Disposable
        //MandarAlmacen//
         Figura = new Rectangle();
 
+        /**Precios**/
+        a1 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        t1 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        sl1 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        sl2 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        sl3 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        sl4 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        sl5 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        sl6 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        tierraC  = new Container<Label>(t1);
+        aguaC    = new Container<Label>(a1);
+        seedC1   = new Container<Label>(sl1);
+        seedC2   = new Container<Label>(sl2);
+        seedC3   = new Container<Label>(sl3);
+        seedC4   = new Container<Label>(sl4);
+        seedC5   = new Container<Label>(sl5);
+        seedC6   = new Container<Label>(sl6);
+        tierraC.setTransform(true);
+        aguaC.setTransform(true);
+        seedC1.setTransform(true);
+        seedC2.setTransform(true);
+        seedC3.setTransform(true);
+        seedC4.setTransform(true);
+        seedC5.setTransform(true);
+        seedC6.setTransform(true);
+
+        corralL1  = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        corralL2  = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        vacaL1  = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        gallinaL1  = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+        corralC1  = new Container<Label>(corralL1);
+        corralC2 = new Container<Label>(corralL2);
+        vacaC1  = new Container<Label>(vacaL1);
+        gallinaC1 = new Container<Label>(gallinaL1);
+
+        corralC1.setTransform(true);
+        corralC2.setTransform(true);
+        vacaC1.setTransform(true);
+        gallinaC1.setTransform(true);
+
+        casaL1 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        casaL2 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        ArbustoL1 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        ArbustoL2 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        DecoracionL1 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        DecoracionL2 = new Label("",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+        casaC1  = new Container<Label>(casaL1);
+        casaC2   = new Container<Label>(casaL2);
+        ArbustoC1  = new Container<Label>(ArbustoL1);
+        ArbustoC2  = new Container<Label>(ArbustoL2);
+        DecoracionC1   = new Container<Label>(DecoracionL1);
+        DecoracionC2  = new Container<Label>(DecoracionL2);
+
+        casaC1.setTransform(true);
+        casaC2.setTransform(true);
+        ArbustoC1.setTransform(true);
+        ArbustoC2.setTransform(true);
+        DecoracionC1.setTransform(true);
+        DecoracionC2.setTransform(true);
     }
 
     @Override
@@ -1707,6 +1780,12 @@ public class MenuBuild extends Actor implements Disposable
             }
 
             TierraS.setAlpha(alphaTierra);
+            tierraC.setBounds(AddResources.cam.position.x - 3.8f+ (54 / Pixels), AddResources.cam.position.y - 2 + (10/ Pixels), 30 / Pixels, 30 / Pixels);
+            t1.setText("32");
+            tierraC.setScale(0.02f);
+            stage2.addActor(tierraC);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f+ (60 / Pixels), AddResources.cam.position.y - 2 + (7/ Pixels), 7 / Pixels, 7 / Pixels);
+            moneda.draw(batch);
             TierraS.setBounds(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (20 / Pixels), 30 / Pixels, 30 / Pixels);
             TierraS.draw(batch);
             if(MyGdxGame.AguasColocadas.getInteger("Posiciones2") < 4) {
@@ -1717,99 +1796,181 @@ public class MenuBuild extends Actor implements Disposable
                 aguaR.set(0,0,0,0);
             }
                 AguaS.setAlpha(alphaAgua);
+            aguaC.setBounds(AddResources.cam.position.x - 3.8f+ (94 / Pixels), AddResources.cam.position.y - 2 + (10/ Pixels), 30 / Pixels, 30 / Pixels);
+            a1.setText("32");
+            aguaC.setScale(0.02f);
+            stage2.addActor(aguaC);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f+ (100/ Pixels), AddResources.cam.position.y - 2 + (7/ Pixels), 7 / Pixels, 7 / Pixels);
+            moneda.draw(batch);
                 AguaS.setBounds(AddResources.cam.position.x - 3.8f + (80 / Pixels), AddResources.cam.position.y - 2 + (20 / Pixels), 30 / Pixels, 30 / Pixels);
                 AguaS.draw(batch);
 
             trigoR.set(AddResources.cam.position.x - 3.8f+ (120/ Pixels), AddResources.cam.position.y - 2 + (20 / Pixels), 30 / Pixels, 30 / Pixels);
             TrigoS.setAlpha(alphaTrigo);
+            seedC1.setBounds(AddResources.cam.position.x - 3.8f+ (134 / Pixels), AddResources.cam.position.y - 2 + (10/ Pixels), 30 / Pixels, 30 / Pixels);
+            sl1.setText("10");
+            seedC1.setScale(0.02f);
+            stage2.addActor(seedC1);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f+ (140/ Pixels), AddResources.cam.position.y - 2 + (7/ Pixels), 7 / Pixels, 7 / Pixels);
+            moneda.draw(batch);
             TrigoS.setBounds(AddResources.cam.position.x - 3.8f+ (120/ Pixels), AddResources.cam.position.y - 2 + (20 / Pixels), 30 / Pixels, 30 / Pixels);
             TrigoS.draw(batch);
+
             maizR.set(AddResources.cam.position.x - 3.8f+ (160/ Pixels), AddResources.cam.position.y - 2 + (20 / Pixels), 30 / Pixels, 30 / Pixels);
             MaizS.setAlpha(alphaMaiz);
+            seedC2.setBounds(AddResources.cam.position.x - 3.8f+ (174 / Pixels), AddResources.cam.position.y - 2 + (10/ Pixels), 30 / Pixels, 30 / Pixels);
+            sl2.setText("10");
+            seedC2.setScale(0.02f);
+            stage2.addActor(seedC2);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f+ (180/ Pixels), AddResources.cam.position.y - 2 + (7/ Pixels), 7 / Pixels, 7 / Pixels);
+            moneda.draw(batch);
             MaizS.setBounds(AddResources.cam.position.x - 3.8f+ (160/ Pixels), AddResources.cam.position.y - 2 + (20 / Pixels), 30 / Pixels, 30 / Pixels);
             MaizS.draw(batch);
+
+
             sojaR.set(AddResources.cam.position.x - 3.8f+ (40/ Pixels), AddResources.cam.position.y - 2 + (65 / Pixels), 30 / Pixels, 30 / Pixels);
             SojaS.setAlpha(alphaSoja);
+            seedC3.setBounds(AddResources.cam.position.x - 3.8f+ (54 / Pixels), AddResources.cam.position.y - 2 + (55/ Pixels), 30 / Pixels, 30 / Pixels);
+            sl3.setText("10");
+            seedC3.setScale(0.02f);
+            stage2.addActor(seedC3);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f+ (60/ Pixels), AddResources.cam.position.y - 2 + ((65-13)/ Pixels), 7 / Pixels, 7 / Pixels);
+            moneda.draw(batch);
             SojaS.setBounds(AddResources.cam.position.x - 3.8f+ (40/ Pixels), AddResources.cam.position.y - 2 + (65 / Pixels), 30 / Pixels, 30 / Pixels);
             SojaS.draw(batch);
+
             zanahoriaR.set(AddResources.cam.position.x - 3.8f+ (80/ Pixels), AddResources.cam.position.y - 2 + (65 / Pixels), 30 / Pixels, 30 / Pixels);
             ZanahoriaS.setAlpha(alphaZanahoria);
+            seedC4.setBounds(AddResources.cam.position.x - 3.8f+ (94 / Pixels), AddResources.cam.position.y - 2 + (55/ Pixels), 30 / Pixels, 30 / Pixels);
+            sl4.setText("10");
+            seedC4.setScale(0.02f);
+            stage2.addActor(seedC4);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f+ (100/ Pixels), AddResources.cam.position.y - 2 + ((65-13)/ Pixels), 7 / Pixels, 7 / Pixels);
+            moneda.draw(batch);
             ZanahoriaS.setBounds(AddResources.cam.position.x - 3.8f+ (80/ Pixels), AddResources.cam.position.y - 2 + (65 / Pixels), 30 / Pixels, 30 / Pixels);
             ZanahoriaS.draw(batch);
+
             canaR.set(AddResources.cam.position.x - 3.8f+ (120/ Pixels), AddResources.cam.position.y - 2 + (65 / Pixels), 30 / Pixels, 30 / Pixels);
             CanaS.setAlpha(alphaCana);
+            seedC5.setBounds(AddResources.cam.position.x - 3.8f+ (134 / Pixels), AddResources.cam.position.y - 2 + (55/ Pixels), 30 / Pixels, 30 / Pixels);
+            sl5.setText("10");
+            seedC5.setScale(0.02f);
+            stage2.addActor(seedC5);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f+ (140/ Pixels), AddResources.cam.position.y - 2 + ((65-13)/ Pixels), 7 / Pixels, 7 / Pixels);
+            moneda.draw(batch);
             CanaS.setBounds(AddResources.cam.position.x - 3.8f+ (120/ Pixels), AddResources.cam.position.y - 2 + (65 / Pixels), 30 / Pixels, 30 / Pixels);
             CanaS.draw(batch);
+
             algodonR.set(AddResources.cam.position.x - 3.8f+ (160/ Pixels), AddResources.cam.position.y - 2 + (65 / Pixels), 30 / Pixels, 30 / Pixels);
             AlgodonS.setAlpha(alphaAlgodon);
+            seedC6.setBounds(AddResources.cam.position.x - 3.8f+ (174 / Pixels), AddResources.cam.position.y - 2 + (55/ Pixels), 30 / Pixels, 30 / Pixels);
+            sl6.setText("10");
+            seedC6.setScale(0.02f);
+            stage2.addActor(seedC6);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f+ (180/ Pixels), AddResources.cam.position.y - 2 + ((65-13)/ Pixels), 7 / Pixels, 7 / Pixels);
+            moneda.draw(batch);
             AlgodonS.setBounds(AddResources.cam.position.x - 3.8f+ (160/ Pixels), AddResources.cam.position.y - 2 + (65 / Pixels), 30 / Pixels, 30 / Pixels);
             AlgodonS.draw(batch);
+            if(MyGdxGame.coins.getInteger("Coins") >= 32) {
+                if (aguaR.overlaps(puntero)) {
+                    BuildAgua = true;
+                    BuildTierra = false;
+                }
 
-            if(aguaR.overlaps(puntero))
-            {
-                BuildAgua = true;
-                BuildTierra = false;
+                if (tierraR.overlaps(puntero)) {
+                    BuildTierra = true;
+                    BuildAgua = false;
+                }
             }
+            if(MyGdxGame.coins.getInteger("Coins") >= 10) {
+                if (MenuBuild.timeCultivos > 1) {
 
-            if(tierraR.overlaps(puntero))
-            {
-               BuildTierra = true;
-                BuildAgua = false;
-            }
-            if(MenuBuild.timeCultivos > 1) {
-
-                if (trigoR.overlaps(puntero)) {
-                    int valorActual = MyGdxGame.Trigo.getInteger("Trigo");
-                    valorActual++;
-                    MyGdxGame.Trigo.putInteger("Trigo", valorActual);
-                    MyGdxGame.Trigo.flush();
-                    Gdx.app.log("Valor de trigo",""+MyGdxGame.Trigo.getInteger("Trigo"));
-                    MenuBuild.timeCultivos=0;
-                }
-                if (maizR.overlaps(puntero)) {
-                    int valorActual = MyGdxGame.Maiz.getInteger("Maiz");
-                    valorActual++;
-                    MyGdxGame.Maiz.putInteger("Maiz", valorActual);
-                    MyGdxGame.Maiz.flush();
-                    Gdx.app.log("Valor de maiz",""+MyGdxGame.Maiz.getInteger("Maiz"));
-                    MenuBuild.timeCultivos=0;
-                }
-                if (sojaR.overlaps(puntero)) {
-                    int valorActual = MyGdxGame.Soja.getInteger("Soja");
-                    valorActual++;
-                    MyGdxGame.Soja.putInteger("Soja", valorActual);
-                    MyGdxGame.Soja.flush();
-                    Gdx.app.log("Valor de soja",""+MyGdxGame.Soja.getInteger("Soja"));
-                    MenuBuild.timeCultivos=0;
-                }
-                if (zanahoriaR.overlaps(puntero)) {
-                    int valorActual = MyGdxGame.Zanahoria.getInteger("Zanahoria");
-                    valorActual++;
-                    MyGdxGame.Zanahoria.putInteger("Zanahoria", valorActual);
-                    MyGdxGame.Zanahoria.flush();
-                    Gdx.app.log("Valor de zanahoria",""+MyGdxGame.Zanahoria.getInteger("Zanahoria"));
-                    MenuBuild.timeCultivos=0;
-                }
-                if (canaR.overlaps(puntero)) {
-                    int valorActual = MyGdxGame.Cana.getInteger("Cana");
-                    valorActual++;
-                    MyGdxGame.Cana.putInteger("Cana", valorActual);
-                    MyGdxGame.Cana.flush();
-                    Gdx.app.log("Valor de cana",""+MyGdxGame.Cana.getInteger("Cana"));
-                    MenuBuild.timeCultivos=0;
-                }
-                if (algodonR.overlaps(puntero)) {
-                    int valorActual = MyGdxGame.Algodon.getInteger("Algodon");
-                    valorActual++;
-                    MyGdxGame.Algodon.putInteger("Algodon", valorActual);
-                    MyGdxGame.Algodon.flush();
-                    Gdx.app.log("Valor de Algodon",""+MyGdxGame.Algodon.getInteger("Algodon"));
-                    MenuBuild.timeCultivos=0;
+                    if (trigoR.overlaps(puntero)) {
+                        int monedas = MyGdxGame.coins.getInteger("Coins");
+                        monedas -= 10;
+                        MyGdxGame.coins.putInteger("Coins", monedas);
+                        MyGdxGame.coins.flush();
+                        int valorActual = MyGdxGame.Trigo.getInteger("Trigo");
+                        valorActual++;
+                        MyGdxGame.Trigo.putInteger("Trigo", valorActual);
+                        MyGdxGame.Trigo.flush();
+                        Gdx.app.log("Valor de trigo", "" + MyGdxGame.Trigo.getInteger("Trigo"));
+                        MenuBuild.timeCultivos = 0;
+                    }
+                    if (maizR.overlaps(puntero)) {
+                        int monedas = MyGdxGame.coins.getInteger("Coins");
+                        monedas -= 10;
+                        MyGdxGame.coins.putInteger("Coins", monedas);
+                        MyGdxGame.coins.flush();
+                        int valorActual = MyGdxGame.Maiz.getInteger("Maiz");
+                        valorActual++;
+                        MyGdxGame.Maiz.putInteger("Maiz", valorActual);
+                        MyGdxGame.Maiz.flush();
+                        Gdx.app.log("Valor de maiz", "" + MyGdxGame.Maiz.getInteger("Maiz"));
+                        MenuBuild.timeCultivos = 0;
+                    }
+                    if (sojaR.overlaps(puntero)) {
+                        int monedas = MyGdxGame.coins.getInteger("Coins");
+                        monedas -= 10;
+                        MyGdxGame.coins.putInteger("Coins", monedas);
+                        MyGdxGame.coins.flush();
+                        int valorActual = MyGdxGame.Soja.getInteger("Soja");
+                        valorActual++;
+                        MyGdxGame.Soja.putInteger("Soja", valorActual);
+                        MyGdxGame.Soja.flush();
+                        Gdx.app.log("Valor de soja", "" + MyGdxGame.Soja.getInteger("Soja"));
+                        MenuBuild.timeCultivos = 0;
+                    }
+                    if (zanahoriaR.overlaps(puntero)) {
+                        int monedas = MyGdxGame.coins.getInteger("Coins");
+                        monedas -= 10;
+                        MyGdxGame.coins.putInteger("Coins", monedas);
+                        MyGdxGame.coins.flush();
+                        int valorActual = MyGdxGame.Zanahoria.getInteger("Zanahoria");
+                        valorActual++;
+                        MyGdxGame.Zanahoria.putInteger("Zanahoria", valorActual);
+                        MyGdxGame.Zanahoria.flush();
+                        Gdx.app.log("Valor de zanahoria", "" + MyGdxGame.Zanahoria.getInteger("Zanahoria"));
+                        MenuBuild.timeCultivos = 0;
+                    }
+                    if (canaR.overlaps(puntero)) {
+                        int monedas = MyGdxGame.coins.getInteger("Coins");
+                        monedas -= 10;
+                        MyGdxGame.coins.putInteger("Coins", monedas);
+                        MyGdxGame.coins.flush();
+                        int valorActual = MyGdxGame.Cana.getInteger("Cana");
+                        valorActual++;
+                        MyGdxGame.Cana.putInteger("Cana", valorActual);
+                        MyGdxGame.Cana.flush();
+                        Gdx.app.log("Valor de cana", "" + MyGdxGame.Cana.getInteger("Cana"));
+                        MenuBuild.timeCultivos = 0;
+                    }
+                    if (algodonR.overlaps(puntero)) {
+                        int monedas = MyGdxGame.coins.getInteger("Coins");
+                        monedas -= 10;
+                        MyGdxGame.coins.putInteger("Coins", monedas);
+                        MyGdxGame.coins.flush();
+                        int valorActual = MyGdxGame.Algodon.getInteger("Algodon");
+                        valorActual++;
+                        MyGdxGame.Algodon.putInteger("Algodon", valorActual);
+                        MyGdxGame.Algodon.flush();
+                        Gdx.app.log("Valor de Algodon", "" + MyGdxGame.Algodon.getInteger("Algodon"));
+                        MenuBuild.timeCultivos = 0;
+                    }
                 }
             }
 
         }else
         {
+            tierraC.setBounds(0,0,0,0);
+            aguaC.setBounds(0,0,0,0);
+            seedC1.setBounds(0,0,0,0);
+            seedC2.setBounds(0,0,0,0);
+            seedC3.setBounds(0,0,0,0);
+            seedC4.setBounds(0,0,0,0);
+            seedC5.setBounds(0,0,0,0);
+            seedC6.setBounds(0,0,0,0);
+
             tierraR.set(0,0,0,0);
             aguaR.set(0,0,0,0);
             trigoR.set(0,0,0,0);
@@ -1848,9 +2009,15 @@ public class MenuBuild extends Actor implements Disposable
                 Fondo.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 150 / Pixels, 50 / Pixels);
                 Fondo.setAlpha(0.8f);
                 Fondo.draw(batch);
+                corralC1.setBounds(AddResources.cam.position.x - 3.8f + (110 / Pixels), AddResources.cam.position.y - 2 + (30 / Pixels), 150 / Pixels, 50 / Pixels);
+                corralC1.setScale(0.04f);
+                corralL1.setText("100");
+                stage2.addActor(corralC1);
                 CorralVacasS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 150 / Pixels, 50 / Pixels);
                 CorralVacasS.setAlpha(alphacorralVacas);
                 CorralVacasS.draw(batch);
+                moneda.setBounds(AddResources.cam.position.x - 3.8f + (130 / Pixels), AddResources.cam.position.y - 2 + (23 / Pixels), 15 / Pixels, 15 / Pixels);
+                moneda.draw(batch);
 
                 Fondo.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (60 / Pixels), 110 / Pixels, 40 / Pixels);
                 Fondo.setAlpha(0.8f);
@@ -1858,8 +2025,30 @@ public class MenuBuild extends Actor implements Disposable
                 CorralGallinasS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (60 / Pixels), 110 / Pixels, 50 / Pixels);
                 CorralGallinasS.setAlpha(alphacorralGallinas);
                 CorralGallinasS.draw(batch);
+                corralC2.setBounds(AddResources.cam.position.x - 3.8f + (90 / Pixels), AddResources.cam.position.y - 2 + (80 / Pixels), 110 / Pixels, 50 / Pixels);
+                corralC2.setScale(0.04f);
+                corralL2.setText("80");
+                stage2.addActor(corralC2);
+                moneda.setBounds(AddResources.cam.position.x - 3.8f + (105 / Pixels), AddResources.cam.position.y - 2 + (73 / Pixels), 15 / Pixels, 15 / Pixels);
+                moneda.draw(batch);
+                gallinaC1.setBounds(0,0,0,0);
+                vacaC1.setBounds(0,0,0,0);
+                if(timeMenu3 >= 1) {
+                    if (CorralVacasR.overlaps(puntero)&&MyGdxGame.coins.getInteger("Coins")>= 100) {
+                        MenuBuild.isCorralVacasBuild = true;
+                        MenuBuild.timeMenu3 = 0;
+
+                    }
+                    if (CorralGallinasR.overlaps(puntero)) {
+                        MenuBuild.isCorralGallinasBuild = true;
+                        MenuBuild.timeMenu3 = 0;
+                    }
+                }
             }else
             {
+                corralC2.setBounds(0,0,0,0);
+                corralC1.setBounds(0,0,0,0);
+
                 float alphaGallina = 1;
                 float alphaVaca;
                 if(vacaBuild)
@@ -1883,18 +2072,30 @@ public class MenuBuild extends Actor implements Disposable
                 GallinaS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32/ Pixels, 32 / Pixels);
                 GallinaS.setAlpha(alphaGallina);
                 GallinaS.draw(batch);
+                gallinaC1.setBounds(AddResources.cam.position.x - 3.8f + (80 / Pixels), AddResources.cam.position.y - 2 + (20 / Pixels), 32/ Pixels, 32 / Pixels);
+                gallinaC1.setScale(0.025f);
+                gallinaL1.setText("20");
+                stage2.addActor(gallinaC1);
+                moneda.setBounds(AddResources.cam.position.x - 3.8f + (88 / Pixels), AddResources.cam.position.y - 2 + (15 / Pixels),10 / Pixels, 10 / Pixels);
+                moneda.draw(batch);
 
                 VacaS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (50 / Pixels), 50/ Pixels, 35 / Pixels);
                 VacaR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (50 / Pixels), 50/ Pixels, 35 / Pixels);
                 VacaS.setAlpha(alphaVaca);
                 VacaS.draw(batch);
+                vacaC1.setBounds(AddResources.cam.position.x - 3.8f + (95 / Pixels), AddResources.cam.position.y - 2 + (60 / Pixels), 32/ Pixels, 32 / Pixels);
+                vacaC1.setScale(0.025f);
+                vacaL1.setText("30");
+                stage2.addActor(vacaC1);
+                moneda.setBounds(AddResources.cam.position.x - 3.8f + (103 / Pixels), AddResources.cam.position.y - 2 + (60 / Pixels),10 / Pixels, 10 / Pixels);
+                moneda.draw(batch);
 
-                if(VacaR.overlaps(puntero))
+                if(VacaR.overlaps(puntero)&& MyGdxGame.coins.getInteger("Coins") >= 30)
                 {
                     MenuBuild.vacaBuild = true;
                 }
 
-                if(GallinaR.overlaps(puntero))
+                if(GallinaR.overlaps(puntero)&& MyGdxGame.coins.getInteger("Coins") >=20)
                 {
                     MenuBuild.gallinaBuild = true;
                 }
@@ -1913,20 +2114,12 @@ public class MenuBuild extends Actor implements Disposable
                     MenuBuild.timeFlecha= 0;
                 }
             }
-
-
-            if(timeMenu3 >= 1) {
-                if (CorralVacasR.overlaps(puntero)) {
-                    MenuBuild.isCorralVacasBuild = true;
-                    MenuBuild.timeMenu3 = 0;
-
-                }
-                if (CorralGallinasR.overlaps(puntero)) {
-                    MenuBuild.isCorralGallinasBuild = true;
-                    MenuBuild.timeMenu3 = 0;
-                }
-            }
-
+        }else
+        {
+            MenuBuild.gallinaC1.setBounds(0,0,0,0);
+            MenuBuild.vacaC1.setBounds(0,0,0,0);
+            MenuBuild.corralC2.setBounds(0,0,0,0);
+            MenuBuild.corralC1.setBounds(0,0,0,0);
         }
         /***************************************************************************/
         /***************************************************************************/
@@ -1944,8 +2137,7 @@ public class MenuBuild extends Actor implements Disposable
         /***************************************************************************/
         /***************************************************************************/
         /***************************************************************************/
-        if(isMenu3)
-        {
+        if(isMenu3) {
             MenuBuild.timeCultivos = 0;
             if (MyGdxGame.CasasDosPisosColocadas.getInteger("Posiciones3") < 2) {
             } else {
@@ -1977,7 +2169,7 @@ public class MenuBuild extends Actor implements Disposable
                 alphaArbusto2 = 0.4f;
             }
 
-            if(timeMenu2 > 1f) {
+            if (timeMenu2 > 1f) {
                 if (MyGdxGame.CasasDosPisosColocadas.getInteger("Posiciones3") < 2) {
                     Casa2PisosR.set(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
                 } else {
@@ -2020,88 +2212,127 @@ public class MenuBuild extends Actor implements Disposable
                 }
             }
             Casa2PisosS.setAlpha(alphaCasa2);
-            Casa2PisosS.setBounds(AddResources.cam.position.x - 3.8f+ (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
+            Casa2PisosS.setBounds(AddResources.cam.position.x - 3.8f + (40 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 90 / Pixels);
             Casa2PisosS.draw(batch);
+            casaC1.setBounds(AddResources.cam.position.x - 3.8f + (60 / Pixels), AddResources.cam.position.y - 2 + (40 / Pixels), 50 / Pixels, 90 / Pixels);
+            casaC1.setScale(0.025f);
+            casaL1.setText("150");
+            stage2.addActor(casaC1);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f + (70 / Pixels), AddResources.cam.position.y - 2 + (36 / Pixels), 10 / Pixels, 10 / Pixels);
+            moneda.draw(batch);
 
 
             CasaS.setAlpha(alphaCasa1);
-            CasaS.setBounds(AddResources.cam.position.x - 3.8f+ (105 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 60 / Pixels);
-            CasaR.set(AddResources.cam.position.x - 3.8f+ (105 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 40 / Pixels);
+            CasaS.setBounds(AddResources.cam.position.x - 3.8f + (105 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 60 / Pixels);
+            CasaR.set(AddResources.cam.position.x - 3.8f + (105 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 50 / Pixels, 40 / Pixels);
             CasaS.draw(batch);
+            casaC2.setBounds(AddResources.cam.position.x - 3.8f + (125 / Pixels), AddResources.cam.position.y - 2 + (30 / Pixels), 50 / Pixels, 90 / Pixels);
+            casaC2.setScale(0.025f);
+            casaL2.setText("150");
+            stage2.addActor(casaC2);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f + (135 / Pixels), AddResources.cam.position.y - 2 + (26 / Pixels), 10 / Pixels, 10 / Pixels);
+            moneda.draw(batch);
 
-            Maceta1S.setBounds(AddResources.cam.position.x - 3.8f+ (95 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
+            Maceta1S.setBounds(AddResources.cam.position.x - 3.8f + (95 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
             Maceta1S.setAlpha(alphaMaceta1);
             Maceta1S.draw(batch);
+            ArbustoC1.setBounds(AddResources.cam.position.x - 3.8f + (105 / Pixels), AddResources.cam.position.y - 2 + (80 / Pixels), 50 / Pixels, 90 / Pixels);
+            ArbustoC1.setScale(0.025f);
+            ArbustoL1.setText("5");
+            stage2.addActor(ArbustoC1);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f + (110 / Pixels), AddResources.cam.position.y - 2 + (76 / Pixels), 10 / Pixels, 10 / Pixels);
+            moneda.draw(batch);
 
             Maceta2S.setAlpha(alphaMaceta2);
-            Maceta2S.setBounds(AddResources.cam.position.x - 3.8f+ (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
-            Maceta2R.set(AddResources.cam.position.x - 3.8f+ (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
+            Maceta2S.setBounds(AddResources.cam.position.x - 3.8f + (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
+            Maceta2R.set(AddResources.cam.position.x - 3.8f + (130 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 32 / Pixels, 32 / Pixels);
             Maceta2S.draw(batch);
+            ArbustoC2.setBounds(AddResources.cam.position.x - 3.8f + (140 / Pixels), AddResources.cam.position.y - 2 + (80 / Pixels), 50 / Pixels, 90 / Pixels);
+            ArbustoC2.setScale(0.025f);
+            ArbustoL2.setText("5");
+            stage2.addActor(ArbustoC2);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f + (145 / Pixels), AddResources.cam.position.y - 2 + (76 / Pixels), 10 / Pixels, 10 / Pixels);
+            moneda.draw(batch);
 
-            Arbusto1S.setBounds(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32 / Pixels, 32 / Pixels);
+            Arbusto1S.setBounds(AddResources.cam.position.x - 3.8f + (160 / Pixels), AddResources.cam.position.y - 2 + (10 / Pixels), 32 / Pixels, 32 / Pixels);
             Arbusto1S.setAlpha(alphaArbusto1);
             Arbusto1S.draw(batch);
+            DecoracionC1.setBounds(AddResources.cam.position.x - 3.8f + (170 / Pixels), AddResources.cam.position.y - 2 + (20 / Pixels), 50 / Pixels, 90 / Pixels);
+            DecoracionC1.setScale(0.025f);
+            DecoracionL1.setText("5");
+            stage2.addActor(DecoracionC1);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f + (175 / Pixels), AddResources.cam.position.y - 2 + (16 / Pixels), 10 / Pixels, 10 / Pixels);
+            moneda.draw(batch);
 
-            Arbusto2S.setBounds(AddResources.cam.position.x - 3.8f+ (160 / Pixels), AddResources.cam.position.y - 2 + (64 / Pixels), 50/ Pixels, 50/ Pixels);
-
-            Arbusto2S .setAlpha(alphaArbusto2);
+            Arbusto2S.setBounds(AddResources.cam.position.x - 3.8f + (160 / Pixels), AddResources.cam.position.y - 2 + (64 / Pixels), 50 / Pixels, 50 / Pixels);
+            Arbusto2S.setAlpha(alphaArbusto2);
             Arbusto2S.draw(batch);
+            DecoracionC2.setBounds(AddResources.cam.position.x - 3.8f + (180 / Pixels), AddResources.cam.position.y - 2 + (74 / Pixels), 50 / Pixels, 90 / Pixels);
+            DecoracionC2.setScale(0.025f);
+            DecoracionL2.setText("5");
+            stage2.addActor(DecoracionC2);
+            moneda.setBounds(AddResources.cam.position.x - 3.8f + (185 / Pixels), AddResources.cam.position.y - 2 + (70 / Pixels), 10 / Pixels, 10 / Pixels);
+            moneda.draw(batch);
+            if(MyGdxGame.coins.getInteger("Coins")>= 150) {
+                if (Casa2PisosR.overlaps(puntero)) {
+                    MenuBuild.CasasDosPisosBuild = true;
+                    MenuBuild.CasasBuild = false;
+                    MenuBuild.Maceta1Build = false;
+                    MenuBuild.Maceta2Build = false;
+                    MenuBuild.Arbusto1Build = false;
+                    MenuBuild.Arbusto2Build = false;
+                }
+                if (CasaR.overlaps(puntero)) {
+                    MenuBuild.CasasDosPisosBuild = false;
+                    MenuBuild.CasasBuild = true;
+                    MenuBuild.Maceta1Build = false;
+                    MenuBuild.Maceta2Build = false;
+                    MenuBuild.Arbusto1Build = false;
+                    MenuBuild.Arbusto2Build = false;
+                }
+            }
+            if(MyGdxGame.coins.getInteger("Coins")>= 5) {
+                if (Maceta1R.overlaps(puntero)) {
+                    MenuBuild.CasasDosPisosBuild = false;
+                    MenuBuild.CasasBuild = false;
+                    MenuBuild.Maceta1Build = true;
+                    MenuBuild.Maceta2Build = false;
+                    MenuBuild.Arbusto1Build = false;
+                    MenuBuild.Arbusto2Build = false;
+                }
+                if (Maceta2R.overlaps(puntero)) {
+                    MenuBuild.CasasDosPisosBuild = false;
+                    MenuBuild.CasasBuild = false;
+                    MenuBuild.Maceta1Build = false;
+                    MenuBuild.Maceta2Build = true;
+                    MenuBuild.Arbusto1Build = false;
+                    MenuBuild.Arbusto2Build = false;
+                }
 
-            if(Casa2PisosR.overlaps(puntero))
-            {
-                MenuBuild.CasasDosPisosBuild = true;
-                MenuBuild.CasasBuild = false;
-                MenuBuild.Maceta1Build = false;
-                MenuBuild.Maceta2Build = false;
-                MenuBuild.Arbusto1Build = false;
-                MenuBuild.Arbusto2Build = false;
+                if (Arbusto1R.overlaps(puntero)) {
+                    MenuBuild.CasasDosPisosBuild = false;
+                    MenuBuild.CasasBuild = false;
+                    MenuBuild.Maceta1Build = false;
+                    MenuBuild.Maceta2Build = false;
+                    MenuBuild.Arbusto1Build = true;
+                    MenuBuild.Arbusto2Build = false;
+                }
+                if (Arbusto2R.overlaps(puntero)) {
+                    MenuBuild.CasasDosPisosBuild = false;
+                    MenuBuild.CasasBuild = false;
+                    MenuBuild.Maceta1Build = false;
+                    MenuBuild.Maceta2Build = false;
+                    MenuBuild.Arbusto1Build = false;
+                    MenuBuild.Arbusto2Build = true;
+                }
             }
-            if(CasaR.overlaps(puntero))
-            {
-                MenuBuild.CasasDosPisosBuild = false;
-                MenuBuild.CasasBuild = true;
-                MenuBuild.Maceta1Build = false;
-                MenuBuild.Maceta2Build = false;
-                MenuBuild.Arbusto1Build = false;
-                MenuBuild.Arbusto2Build = false;
-            }
-            if(Maceta1R.overlaps(puntero))
-            {
-                MenuBuild.CasasDosPisosBuild = false;
-                MenuBuild.CasasBuild = false;
-                MenuBuild.Maceta1Build = true;
-                MenuBuild.Maceta2Build = false;
-                MenuBuild.Arbusto1Build = false;
-                MenuBuild.Arbusto2Build = false;
-            }
-            if(Maceta2R.overlaps(puntero))
-            {
-                MenuBuild.CasasDosPisosBuild = false;
-                MenuBuild.CasasBuild = false;
-                MenuBuild.Maceta1Build = false;
-                MenuBuild.Maceta2Build = true;
-                MenuBuild.Arbusto1Build = false;
-                MenuBuild.Arbusto2Build = false;
-            }
-
-            if(Arbusto1R.overlaps(puntero))
-            {
-                MenuBuild.CasasDosPisosBuild = false;
-                MenuBuild.CasasBuild = false;
-                MenuBuild.Maceta1Build = false;
-                MenuBuild.Maceta2Build = false;
-                MenuBuild.Arbusto1Build = true;
-                MenuBuild.Arbusto2Build = false;
-            }
-            if(Arbusto2R.overlaps(puntero))
-            {
-                MenuBuild.CasasDosPisosBuild = false;
-                MenuBuild.CasasBuild = false;
-                MenuBuild.Maceta1Build = false;
-                MenuBuild.Maceta2Build = false;
-                MenuBuild.Arbusto1Build = false;
-                MenuBuild.Arbusto2Build = true;
-            }
+        }else {
+            casaC1.setBounds(0,0,0,0);
+            casaC2.setBounds(0,0,0,0);
+            DecoracionC1.setBounds(0,0,0,0);
+            DecoracionC2.setBounds(0,0,0,0);
+            ArbustoC1.setBounds(0,0,0,0);
+            ArbustoC2.setBounds(0,0,0,0);
         }
         /***************************************************************************/
         /***************************************************************************/
@@ -2177,5 +2408,6 @@ public class MenuBuild extends Actor implements Disposable
         ComidaVaca.dispose();
         ComidaGallina.dispose();
         Blanco.dispose();
+        m.dispose();
     }
 }

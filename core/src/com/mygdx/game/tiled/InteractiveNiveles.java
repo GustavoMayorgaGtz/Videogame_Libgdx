@@ -26,6 +26,7 @@ import com.mygdx.game.Nivel5;
 import com.mygdx.game.Nivel6;
 import com.mygdx.game.Nivel7;
 import com.mygdx.game.Nivel8;
+import com.mygdx.game.Nivel9;
 import com.mygdx.game.Niveo1T;
 
 import static com.mygdx.game.MyGdxGame.Pixels;
@@ -34,13 +35,13 @@ import static com.mygdx.game.tiled.AddActors.player;
 public abstract class InteractiveNiveles extends Actor implements Disposable {
 
     Rectangle rect;
-    Texture uno,dos,tres,cuatro,cinco,seis,siete;
+    Texture uno,dos,tres,cuatro,cinco,seis,siete,ocho;
     Texture white,black;
     Sprite Select;
     float X,Y;
     int id;
 
-    public InteractiveNiveles(Texture uno,Texture dos,Texture tres, Texture cuatro, Texture cinco,Texture seis,Texture siete,Rectangle bounds)    {
+    public InteractiveNiveles(Texture uno,Texture dos,Texture tres, Texture cuatro, Texture cinco,Texture seis,Texture siete,Texture ocho,Rectangle bounds)    {
         this.uno = uno;
         this.dos = dos;
         this.tres = tres;
@@ -48,6 +49,7 @@ public abstract class InteractiveNiveles extends Actor implements Disposable {
         this.cinco = cinco;
         this.seis = seis;
         this.siete = siete;
+        this.ocho = ocho;
 
       setSize(bounds.getWidth()/Pixels,bounds.getHeight()/Pixels);
       this.X = bounds.getX();
@@ -99,6 +101,12 @@ public abstract class InteractiveNiveles extends Actor implements Disposable {
             case 7:{
                 if (levelComplete >= 6) {
                     batch.draw(siete, getX(), getY(), getWidth(), getHeight());
+                }
+                break;
+            }
+            case 8:{
+                if (levelComplete >= 7) {
+                    batch.draw(ocho, getX(), getY(), getWidth(), getHeight());
                 }
                 break;
             }
@@ -184,6 +192,15 @@ if(Menu.Puntero.overlaps(rect))
                 if(levelComplete >= 6) {
                     AddResources.ConfigurarCamara = 0;
                     AddResourcesOfMenu.game.setScreen(new Nivel8(AddResourcesOfMenu.game));
+                    MyGdxGame.isIsNivelProgress2 = false;
+                }
+                break;
+            }
+            case 8:
+            {
+                if(levelComplete >= 7) {
+                    AddResources.ConfigurarCamara = 0;
+                    AddResourcesOfMenu.game.setScreen(new Nivel9(AddResourcesOfMenu.game));
                     MyGdxGame.isIsNivelProgress2 = false;
                 }
                 break;

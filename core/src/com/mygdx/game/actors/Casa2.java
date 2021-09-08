@@ -212,6 +212,10 @@ float timeDurationTouch;
                         Casa2.putFloat("Y13", (e.y + (2 / Pixels)) );
                         if (AddResources.TouchConfirm) {
                             Casa2.flush();
+                            int monedas = MyGdxGame.coins.getInteger("Coins");
+                            monedas -= 150;
+                            MyGdxGame.coins.putInteger("Coins", monedas);
+                            MyGdxGame.coins.flush();
                             MyGdxGame.CasasColocadas.flush();
 
                             MenuBuild.CasasBuild = false;

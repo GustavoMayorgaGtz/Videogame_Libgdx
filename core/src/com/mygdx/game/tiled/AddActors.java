@@ -257,7 +257,7 @@ public class AddActors {
             //music1.play();
             music1.setVolume(0.5f);
             music1.setLooping(true);
-       /* for(MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class))
+       for(MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class))
         {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             p.add(new particulas("particles/ambiente.p","images",rect.x, rect.y,0.15f));
@@ -265,8 +265,8 @@ public class AddActors {
         }
         for(particulas p : p)
         {
-          stage.addActor(p);
-        }*/
+          AddResources.stage.addActor(p);
+        }
             //////////////////
 
             Texture sierraTexture = MyGdxGame.getManager().get("sierra.png");

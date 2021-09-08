@@ -62,7 +62,7 @@ public class Menu implements Screen {
         cinco = new Texture("Menu5.png");
         seis = new Texture("Menu6.png");
         siete = new Texture("Menu7.png");
-      //  ocho = new Texture("Menu8.png");
+        ocho = new Texture("Menu8.png");
         //nueve = new Texture("Menu9.png");
         Home = new Texture("MenuHome.png");
         Monedas = new Texture("MonedaR.png");
@@ -72,7 +72,7 @@ public class Menu implements Screen {
 
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            NivelesMenu.add(new Niveles(uno, dos,tres,cuatro,cinco,seis,siete, rect));
+            NivelesMenu.add(new Niveles(uno, dos,tres,cuatro,cinco,seis,siete,ocho, rect));
         }
         for (Niveles NivelesMenu : NivelesMenu) {
             addR.stage.addActor(NivelesMenu);
@@ -146,5 +146,7 @@ public class Menu implements Screen {
         cuatro.dispose();
         cinco.dispose();
         seis.dispose();
+        siete.dispose();
+        ocho.dispose();
     }
 }

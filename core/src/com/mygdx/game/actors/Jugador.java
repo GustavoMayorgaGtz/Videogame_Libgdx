@@ -38,6 +38,7 @@ import com.mygdx.game.Nivel5;
 import com.mygdx.game.Nivel6;
 import com.mygdx.game.Nivel7;
 import com.mygdx.game.Nivel8;
+import com.mygdx.game.Nivel9;
 import com.mygdx.game.Niveo1T;
 import com.mygdx.game.tiled.AddActors;
 import com.mygdx.game.tiled.AddResources;
@@ -846,7 +847,7 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
                     izquierda = false;
                     impuls = true;
                     speedactive = true;
-                    for(Rectangle r: InteractivePlataformaMov.r)
+                    /*for(Rectangle r: InteractivePlataformaMov.r)
                     {
                         if(r.overlaps(jugador))
                         {
@@ -855,8 +856,8 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
                         {
                             body.setLinearVelocity(body.getLinearVelocity().x+3, body.getLinearVelocity().y);
                         }
-                    }
-                  //  body.setLinearVelocity(body.getLinearVelocity().x+3, body.getLinearVelocity().y);
+                    }*/
+                  body.setLinearVelocity(body.getLinearVelocity().x+3, body.getLinearVelocity().y);
 
                 } else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || leftActive && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || leftActive && SpeedButton) {
 
@@ -864,7 +865,7 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
                     izquierda = true;
                     impuls = true;
                     speedactive = true;
-                    for(Rectangle r: InteractivePlataformaMov.r)
+                   /* for(Rectangle r: InteractivePlataformaMov.r)
                     {
                         if(r.overlaps(jugador))
                         {
@@ -873,9 +874,9 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
                         {
                             body.setLinearVelocity(body.getLinearVelocity().x-3, body.getLinearVelocity().y);
                         }
-                    }
+                    }*/
 
-
+                    body.setLinearVelocity(body.getLinearVelocity().x-3, body.getLinearVelocity().y);
                 }
                 else
                 {
@@ -1103,6 +1104,12 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
                 {
                     AddResources.ConfigurarCamara = 0;
                     add.game.setScreen(new Nivel8(add.game));
+                    break;
+                }
+                case 8:
+                {
+                    AddResources.ConfigurarCamara = 0;
+                    add.game.setScreen(new Nivel9(add.game));
                     break;
                 }
                 default:

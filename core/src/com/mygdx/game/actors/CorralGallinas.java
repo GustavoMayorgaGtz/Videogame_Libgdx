@@ -147,19 +147,29 @@ float timeDurationTouch;
         /*************/
         Izq.set(x,y,5/Pixels,32/Pixels);
         Dere.set(x+(100/Pixels),y,10/Pixels,32/Pixels);
-        if(Jugador.jugador.overlaps(Cuerpo2)&&MenuBuild.gallinaBuild&&!MenuBuild.isMenu&&Corral1Gallinas.getInteger("Corral1Gallinas")!=2)
+        if(Jugador.jugador.overlaps(Cuerpo2)&&MenuBuild.gallinaBuild&&!MenuBuild.isMenu&&Corral1Gallinas.getInteger("Corral1Gallinas")!=2  &&MyGdxGame.coins.getInteger("Coins") >= 20)
         {
             batch.draw(FlechaVerde,x+(60/Pixels),y+(32/Pixels)+(abs/Pixels),32/Pixels,32/Pixels);
             if(AddResources.puntero.overlaps(Cuerpo2)) {
                 if(MenuBuild.gallinaBuild) {
+
                     if (Corral1Gallinas.getInteger("Corral1Gallinas") == 0) {
+                        int monedas = MyGdxGame.coins.getInteger("Coins");
+                        monedas -= 20;
+                        MyGdxGame.coins.putInteger("Coins", monedas);
+                        MyGdxGame.coins.flush();
                         Corral1Gallinas.putInteger("Corral1Gallinas", 1);
                         Corral1Gallinas.flush();
                         MenuBuild.gallinaBuild = false;
                     }
                 }
                 if(MenuBuild.gallinaBuild) {
+
                     if (Corral1Gallinas.getInteger("Corral1Gallinas") == 1) {
+                        int monedas = MyGdxGame.coins.getInteger("Coins");
+                        monedas -= 20;
+                        MyGdxGame.coins.putInteger("Coins", monedas);
+                        MyGdxGame.coins.flush();
                         Corral1Gallinas.putInteger("Corral1Gallinas", 2);
                         Corral1Gallinas.flush();
                         MenuBuild.gallinaBuild = false;
@@ -167,12 +177,14 @@ float timeDurationTouch;
                 }
             }
         }
-        if (Corral1Gallinas.getInteger("Corral1Gallinas") >= 1)
+        if (Corral1Gallinas.getInteger("Corral1Gallinas") >= 1 )
         {
+
             Gallina1(batch);
         }
-        if (Corral1Gallinas.getInteger("Corral1Gallinas") >= 2)
+        if (Corral1Gallinas.getInteger("Corral1Gallinas") >= 2 )
         {
+
             Gallina2(batch);
         }
         if(Corral1Gallinas.getInteger("Corral1Gallinas") >= 1)
@@ -427,6 +439,7 @@ float timeDurationTouch;
         if (MyGdxGame.CorralGallinasColocadas.getInteger("Posiciones10") == 0 && MenuBuild.isCorralGallinasBuild) {
             for (Rectangle e : Tierra1.rects) {
                 if (Jugador.jugador.overlaps(e)) {
+                    
                     if (noToca) {
                         MyGdxGame.CorralGallinasColocadas.putInteger("Posiciones10", 1);
                         CorralGallinas1.putFloat("X28", Jugador.body.getPosition().x);
@@ -436,6 +449,10 @@ float timeDurationTouch;
                         CorralGallinas1.putFloat("Y28", (e.y + (2 / Pixels)));
                         if (AddResources.TouchConfirm) {
                             CorralGallinas1.flush();
+                            int monedas = MyGdxGame.coins.getInteger("Coins");
+                            monedas -= 80;
+                            MyGdxGame.coins.putInteger("Coins", monedas);
+                            MyGdxGame.coins.flush();
                             MyGdxGame.CorralGallinasColocadas.flush();
                             MenuBuild.isCorralGallinasBuild = false;
                             AddResources.TouchConfirm = false;
