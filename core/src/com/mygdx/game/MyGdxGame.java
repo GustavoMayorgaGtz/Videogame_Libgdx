@@ -34,6 +34,7 @@ public class MyGdxGame extends Game{
     public static Preferences Alpha;
     public static boolean NoSeguirFondo;
     public static boolean isIsNivelProgress2;
+    public static boolean isAldeaCinematica;
 
     /*Tierras*/
 	public static Preferences TierrasColocadas;
@@ -764,6 +765,7 @@ Gdx.app.getGraphics().getFramesPerSecond();
 		manager.load("Nemesis1/Izquierda.png",Texture.class);
 		manager.load("Nemesis1/MuerteIzq.png",Texture.class);
 		manager.load("Nemesis1/MuerteDere.png",Texture.class);
+		manager.load("Negro.png",Texture.class);
 		manager.finishLoading();
 
 		this.setScreen(new Intro(this));

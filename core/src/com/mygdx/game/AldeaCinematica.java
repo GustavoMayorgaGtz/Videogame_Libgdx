@@ -10,14 +10,12 @@
  import com.badlogic.gdx.maps.tiled.TiledMap;
  import com.badlogic.gdx.maps.tiled.TmxMapLoader;
  import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
- import com.badlogic.gdx.math.Rectangle;
- import com.mygdx.game.actors.Jugador;
  import com.mygdx.game.tiled.AddActors;
  import com.mygdx.game.tiled.AddResources;
 
  import static com.mygdx.game.MyGdxGame.Pixels;
 
- public class Nivel9 implements Screen {
+ public class AldeaCinematica implements Screen {
 
      MyGdxGame game;
      private TmxMapLoader mapLoader,mapLoader2;
@@ -32,13 +30,13 @@
      int c = 1, r = 3;
 
 
-     public Nivel9(MyGdxGame game) {
+     public AldeaCinematica(MyGdxGame game) {
 
          this.game = game;
          mapLoader = new TmxMapLoader();
-         map = mapLoader.load("Nivel(8).tmx");
+         map = mapLoader.load("AldeaCinematica.tmx");
          mapLoader2 = new TmxMapLoader();
-         map2 = mapLoader2.load("Nivel(8)Fondo.tmx");
+         map2 = mapLoader2.load("AldeaCinematicaFondo.tmx");
          ///////////////////////////////////////////////////////////////////////////////////////////////
          addR = new AddResources();
 
@@ -76,7 +74,7 @@
 
      @Override
      public void render(float delta) {
-
+         MyGdxGame.isAldeaCinematica = true;
          update(delta);
          Gdx.gl.glClearColor(.05f,.05f,.05f,1);
          Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

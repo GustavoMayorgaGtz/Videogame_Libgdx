@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Nivel2;
+import com.mygdx.game.Nivel9;
 import com.mygdx.game.actors.Agarradera;
 import com.mygdx.game.actors.ArbolAzul;
 import com.mygdx.game.actors.ArbolRosa;
@@ -89,6 +90,7 @@ public class AddActors {
     private List<RU2> ru2 = new ArrayList<RU2>();
     private List<PisoButton2> piso2 = new ArrayList<PisoButton2>();
     private List<ParedesButton2> pared2 = new ArrayList<ParedesButton2>();
+    private List<Lava> lava = new ArrayList<Lava>();
 
 
     public static int i = 0;
@@ -157,6 +159,19 @@ public class AddActors {
             for (MapObject object : map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 new Paredes(world, map, rect);
+            }
+            try {
+                for (MapObject object : map.getLayers().get(58).getObjects().getByType(RectangleMapObject.class)) {
+                    Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                    lava.add(new Lava(rect));
+                }
+                for(Lava l : lava)
+                {
+                    AddResources.stage.addActor(l);
+                }
+            }catch(Exception e)
+            {
+
             }
             for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();

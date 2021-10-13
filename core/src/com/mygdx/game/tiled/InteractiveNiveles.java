@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
+import com.mygdx.game.AldeaCinematica;
 import com.mygdx.game.Menu;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Nivel0;
@@ -135,6 +136,13 @@ if(Menu.Puntero.overlaps(rect))
 
         switch(AddResourcesOfMenu.SelectLevel)
         {
+            case -2:
+            {
+                AddResources.ConfigurarCamara = 0;
+                AddResourcesOfMenu.game.setScreen(new AldeaCinematica(AddResourcesOfMenu.game));
+                MyGdxGame.isIsNivelProgress2 = false;
+                break;
+            }
             case 1:
             {
                 AddResources.ConfigurarCamara = 0;

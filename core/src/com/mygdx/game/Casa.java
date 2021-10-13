@@ -149,7 +149,7 @@
 
                  if(Puntero.overlaps(play))
                  {
-                     game.setScreen(new Menu(game));
+                     game.setScreen(new AldeaCinematicaCasa(game));
                  }
                  if(Puntero.overlaps(confi))
                  {

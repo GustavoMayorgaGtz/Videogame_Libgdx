@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
+import com.mygdx.game.AldeaCinematica;
 import com.mygdx.game.Menu;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Nivel1Progresion;
@@ -137,13 +138,21 @@ public abstract class InteractivsetScreeen extends Actor implements Disposable {
             MyGdxGame.CoinObjects = 0;
             AddActors.button.activeCaja = false;
             AddActors.button2.isTouch2 = false;
-            if(AddResourcesOfMenu.SelectLevel == 0) {
-                MyGdxGame.isIsNivelProgress2 = true;
+            if(AddResourcesOfMenu.SelectLevel == -2)
+            {
+                MyGdxGame.isIsNivelProgress2 = false;
                 AddResources.ConfigurarCamara = 0;
-                AddActors.game.setScreen(new Nivel2Progresion(AddActors.game));
+                AddActors.game.setScreen(new AldeaCinematica(AddActors.game));
             }else {
-                AddResources.ConfigurarCamara = 0;
-                AddActors.game.setScreen(new Menu(AddActors.game));
+
+                if (AddResourcesOfMenu.SelectLevel == 0) {
+                    MyGdxGame.isIsNivelProgress2 = true;
+                    AddResources.ConfigurarCamara = 0;
+                    AddActors.game.setScreen(new Nivel2Progresion(AddActors.game));
+                } else {
+                    AddResources.ConfigurarCamara = 0;
+                    AddActors.game.setScreen(new Menu(AddActors.game));
+                }
             }
             Send = false;
         }

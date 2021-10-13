@@ -91,6 +91,8 @@ import static com.mygdx.game.MyGdxGame.isIsNivelProgress2;
 import static com.mygdx.game.tiled.AddActors.game;
 
 public class AddResources {
+    public static boolean EsconderControles = false;
+
     boolean confirmbool;
     public static boolean CamaraY = false;
     public static SpriteBatch batch;
@@ -391,6 +393,7 @@ public class AddResources {
 
     }
 
+
     public static void addRender(float delta)
     {
 
@@ -554,8 +557,9 @@ batch.begin();
                     MyGdxGame.coins.putInteger("Coins", 999);
                     MyGdxGame.coins.flush();
                 }
-                
-                batch.draw(moneda, cam.position.x - 2f + (20 / Pixels), cam.position.y + 1.76f, 10 / Pixels, 10 / Pixels);
+                if(!MyGdxGame.isAldeaCinematica) {
+                    batch.draw(moneda, cam.position.x - 2f + (20 / Pixels), cam.position.y + 1.76f, 10 / Pixels, 10 / Pixels);
+                }
 /************************************************/
                 switch (MyGdxGame.Alpha.getInteger("Alpha")) {
                     case 0: {
@@ -723,13 +727,16 @@ batch.begin();
                                     widthEntero = 50;
                                 }
 
-                                progress.setAlpha(MyGdxGame.alpha);
-                                progress.setBounds(cam.position.x - 3.8f, cam.position.y + 1.7f, widthEntero / Pixels, 15 / Pixels);
-                                progress.draw(batch);
-                                batch.draw(contorno, cam.position.x - 3.8f, cam.position.y + 1.7f, 50 / Pixels, 15 / Pixels);
+                                if(!MyGdxGame.isAldeaCinematica) {
+                                    progress.setAlpha(MyGdxGame.alpha);
+                                    progress.setBounds(cam.position.x - 3.8f, cam.position.y + 1.7f, widthEntero / Pixels, 15 / Pixels);
+                                    progress.draw(batch);
+                                    batch.draw(contorno, cam.position.x - 3.8f, cam.position.y + 1.7f, 50 / Pixels, 15 / Pixels);
+                                }
                             }
                         }
-
+if(!EsconderControles)
+{
                         DereRect.set(cam.position.x - 2.5f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
                         IzqRect.set(cam.position.x - 3.8f, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
                         SaltoRect.set(cam.position.x + 3, cam.position.y - 2, 30 / Pixels, 30 / Pixels);
@@ -797,17 +804,21 @@ batch.begin();
                             speedHoverS.draw(batch);
                         }
                         if (!pause) {
-                            // batch.draw(BtnPause, cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
-                            pauseS.setAlpha(MyGdxGame.alpha);
-                            pauseS.setBounds(cam.position.x + 3, cam.position.y + 1.8f, 15 / Pixels, 15 / Pixels);
-                            pauseS.draw(batch);
+                            if(!MyGdxGame.isAldeaCinematica) {
+                                // batch.draw(BtnPause, cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
+                                pauseS.setAlpha(MyGdxGame.alpha);
+                                pauseS.setBounds(cam.position.x + 3, cam.position.y + 1.8f, 15 / Pixels, 15 / Pixels);
+                                pauseS.draw(batch);
+                            }
                         } else {
                             //  batch.draw(BtnPauseHover, cam.position.x + 3, cam.position.y + 1.5f, 15 / Pixels, 15 / Pixels);
-                            pauseHoverS.setAlpha(MyGdxGame.alpha);
-                            pauseHoverS.setBounds(cam.position.x + 3, cam.position.y + 1.8f, 15 / Pixels, 15 / Pixels);
-                            pauseHoverS.draw(batch);
-
+                            if(!MyGdxGame.isAldeaCinematica) {
+                                pauseHoverS.setAlpha(MyGdxGame.alpha);
+                                pauseHoverS.setBounds(cam.position.x + 3, cam.position.y + 1.8f, 15 / Pixels, 15 / Pixels);
+                                pauseHoverS.draw(batch);
+                            }
                         }
+}
 
                         if (MyGdxGame.isIsNivelProgress2) {
                             MenuBuild.Logo.draw(batch);
@@ -1004,12 +1015,14 @@ batch.begin();
         /*********MENUUUUUUUUUUUUUUUUUUUUUUUUUUU********/
       timeHome += 1 * Gdx.graphics.getDeltaTime();
         batch.end();
-        monedasLabel.setText(""+MyGdxGame.coins.getInteger("Coins"));
-        monedasLabel.setWrap(true);
-        container1.setDebug(true);
-        container1.setBounds(stage.getCamera().position.x - 2, stage.getCamera().position.y + 1.9f,10/Pixels,10/Pixels);
-        container1.setScale(.03f);
-        stage2.addActor(container1);
+        if(!MyGdxGame.isAldeaCinematica) {
+            monedasLabel.setText("" + MyGdxGame.coins.getInteger("Coins"));
+            monedasLabel.setWrap(true);
+            container1.setDebug(true);
+            container1.setBounds(stage.getCamera().position.x - 2, stage.getCamera().position.y + 1.9f, 10 / Pixels, 10 / Pixels);
+            container1.setScale(.03f);
+            stage2.addActor(container1);
+        }
     }
 
     public void detachResources()
@@ -1047,63 +1060,67 @@ batch.begin();
 
     }
     public static void over() {
-        try {
-            Gdx.input.setInputProcessor(stage);
-            if (puntero.overlaps(DereRect) || puntero2.overlaps(DereRect)) {
-                AddActors.player.setRightActive(true);
-                dere = true;
-            } else {
+        if(!AddResources.EsconderControles) {
 
-                AddActors.player.setRightActive(false);
-                dere = false;
-            }
-            if (puntero.overlaps(IzqRect) || puntero2.overlaps(IzqRect)) {
-                AddActors.player.setLeftActive(true);
-                izq = true;
-            } else {
-                AddActors.player.setLeftActive(false);
-                izq = false;
-            }
-            if (puntero.overlaps(SaltoRect) || puntero2.overlaps(SaltoRect)) {
-                AddActors.player.setSaltoUp(true);
-                salto = true;
-            } else {
-                AddActors.player.setSaltoUp(false);
-                salto = false;
-            }
-            if (puntero.overlaps(AttackRect) || puntero2.overlaps(AttackRect)) {
-                AddActors.player.setAttackButton(true);
-                attack = true;
-            } else {
-                AddActors.player.setAttackButton(false);
-                attack = false;
-            }
-            if (puntero.overlaps(SpeedRect) || puntero2.overlaps(SpeedRect)) {
-                AddActors.player.setSpeedButton(true);
-                speed = true;
-            } else {
-                AddActors.player.setSpeedButton(false);
-                speed = false;
-            }
-            if(timeHome >= 1) {
-                if (puntero.overlaps(PauseRect) || puntero2.overlaps(PauseRect)) {
-                    Jugador.isMenu = false;
-                    Jugador.istouchTienda = false;
-                    Jugador.istouchTienda2 = false;
-                    Jugador.istouchTienda3 = false;
-                    Jugador.istouchTienda4 = false;
-
-                    Menu.id = 1;
-                    MyGdxGame.isNivelProgress1 = false;
-                    isIsNivelProgress2 = false;
-                    Tienda.stop = true;
-                    AddResourcesOfMenu.game.setScreen(new Menu(AddResourcesOfMenu.game));
-                    pause = true;
+            try {
+                Gdx.input.setInputProcessor(stage);
+                if (puntero.overlaps(DereRect) || puntero2.overlaps(DereRect)) {
+                    AddActors.player.setRightActive(true);
+                    dere = true;
                 } else {
-                    pause = false;
+
+                    AddActors.player.setRightActive(false);
+                    dere = false;
                 }
+                if (puntero.overlaps(IzqRect) || puntero2.overlaps(IzqRect)) {
+                    AddActors.player.setLeftActive(true);
+                    izq = true;
+                } else {
+                    AddActors.player.setLeftActive(false);
+                    izq = false;
+                }
+                if (puntero.overlaps(SaltoRect) || puntero2.overlaps(SaltoRect)) {
+                    AddActors.player.setSaltoUp(true);
+                    salto = true;
+                } else {
+                    AddActors.player.setSaltoUp(false);
+                    salto = false;
+                }
+                if (puntero.overlaps(AttackRect) || puntero2.overlaps(AttackRect)) {
+                    AddActors.player.setAttackButton(true);
+                    attack = true;
+                } else {
+                    AddActors.player.setAttackButton(false);
+                    attack = false;
+                }
+                if (puntero.overlaps(SpeedRect) || puntero2.overlaps(SpeedRect)) {
+                    AddActors.player.setSpeedButton(true);
+                    speed = true;
+                } else {
+                    AddActors.player.setSpeedButton(false);
+                    speed = false;
+                }
+                if (timeHome >= 1) {
+                    if (puntero.overlaps(PauseRect) || puntero2.overlaps(PauseRect)) {
+                        Jugador.isMenu = false;
+                        Jugador.istouchTienda = false;
+                        Jugador.istouchTienda2 = false;
+                        Jugador.istouchTienda3 = false;
+                        Jugador.istouchTienda4 = false;
+
+                        Menu.id = 1;
+                        MyGdxGame.isNivelProgress1 = false;
+                        isIsNivelProgress2 = false;
+                        Tienda.stop = true;
+                        AddResourcesOfMenu.game.setScreen(new Menu(AddResourcesOfMenu.game));
+                        pause = true;
+                    } else {
+                        pause = false;
+                    }
+                }
+            } catch (Exception e) {
             }
-        }catch(Exception e){}
+        }
     }
 
     public void botonesConfirm()

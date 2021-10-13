@@ -11,7 +11,7 @@ public class Paredes extends InteractiveTileObject{
         fixture.setDensity(0);
         fixture.setFriction(0);
 
-        fixture.setUserData("desMov");
+      //  fixture.setUserData("desMov");
     }
 
     @Override

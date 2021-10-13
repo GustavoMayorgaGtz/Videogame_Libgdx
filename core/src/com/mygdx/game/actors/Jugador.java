@@ -195,7 +195,7 @@ public static boolean isTouchPlataformaMov2;
 ShaderProgram shader;
     ShaderProgram shader2;
 
-
+public static boolean noDibujar = false;
     
     public Jugador(World world,Texture dere,Texture izq,Texture SaltoDere,Texture SaltoIzq,Texture StaticDere, Texture StaticIzq,Texture EspadazoDerecho,Texture EspadazoIzquierdo,Texture Kill,Texture dormir,Texture sword,Texture sword2,float x, float y)
     {
@@ -433,7 +433,7 @@ BotonA = new Texture("A.png");
         impulsoIzq.update(tempo);
         tempo = Gdx.graphics.getDeltaTime();
         setPosition(body.getPosition().x-(10.5f)/Pixels,body.getPosition().y-(8)/Pixels);
-      
+
         TextureRegion StaticDere = estaticoDerecha.getKeyFrame(time,true);
         TextureRegion StaticIzq = estaticoIzquierda.getKeyFrame(time,true);
         TextureRegion dere = caminarDerecha.getKeyFrame(time,true);
@@ -467,96 +467,110 @@ BotonA = new Texture("A.png");
         {
             batch.setShader(shader2);
         }*/
-        if(MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
-            if (!Muerto) {
+        if(!noDibujar) {
+            if (MyGdxGame.Cinematica.getInteger("Cinematica") == 1) {
+                if (!Muerto) {
 
 
-                if(istouchTienda)
-                {
-                    batch.draw(BotonA, getX()+.5f, getY()+1, getWidth()*.5f, getHeight()*.5f);
-                }
-                /******************************************************/
-                if(istouchTienda2)
-                {
-                    batch.draw(BotonA, getX()+.5f, getY()+1, getWidth()*.5f, getHeight()*.5f);
-                    batch.draw(CostoMoneda, getX()+1f, getY()+1, getWidth()*.8f, getHeight()*.5f);
-                }
-                if(istouchTienda3)
-                {
-                    batch.draw(BotonA, getX()+.5f, getY()+1, getWidth()*.5f, getHeight()*.5f);
-                    batch.draw(CostoMoneda, getX()+1f, getY()+1, getWidth()*.8f, getHeight()*.5f);
-                }
-                /******************************************************/
-                if(istouchTienda4)
-                {
-                    batch.draw(BotonA, getX()+.5f, getY()+1, getWidth()*.5f, getHeight()*.5f);
-                    batch.draw(CostoMoneda, getX()+1f, getY()+1, getWidth()*.8f, getHeight()*.5f);
-                }
+                    if (istouchTienda) {
+                        batch.draw(BotonA, getX() + .5f, getY() + 1, getWidth() * .5f, getHeight() * .5f);
+                    }
+                    /******************************************************/
+                    if (istouchTienda2) {
+                        batch.draw(BotonA, getX() + .5f, getY() + 1, getWidth() * .5f, getHeight() * .5f);
+                        batch.draw(CostoMoneda, getX() + 1f, getY() + 1, getWidth() * .8f, getHeight() * .5f);
+                    }
+                    if (istouchTienda3) {
+                        batch.draw(BotonA, getX() + .5f, getY() + 1, getWidth() * .5f, getHeight() * .5f);
+                        batch.draw(CostoMoneda, getX() + 1f, getY() + 1, getWidth() * .8f, getHeight() * .5f);
+                    }
+                    /******************************************************/
+                    if (istouchTienda4) {
+                        batch.draw(BotonA, getX() + .5f, getY() + 1, getWidth() * .5f, getHeight() * .5f);
+                        batch.draw(CostoMoneda, getX() + 1f, getY() + 1, getWidth() * .8f, getHeight() * .5f);
+                    }
 
 
-                if (!Espadazo) { /***/
-                    if (saltar) {
-                        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT) || rightActive) {
+                    if (!Espadazo) { /***/
+                        if (saltar) {
+                            if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT) || rightActive) {
 
-                            if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP) || Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || SaltoUp) {
-                                if (derecha) {
-                                    batch.draw(SaltoDere, getX(), getY(), getWidth(), getHeight());
+                                if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP) || Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || SaltoUp) {
+                                    if (derecha) {
+                                        batch.draw(SaltoDere, getX(), getY(), getWidth(), getHeight());
 
-                                } else if (izquierda) {
-                                    batch.draw(SaltoIzq, getX(), getY(), getWidth(), getHeight());
+                                    } else if (izquierda) {
+                                        batch.draw(SaltoIzq, getX(), getY(), getWidth(), getHeight());
 
+                                    }
+                                } else {
+                                    if (!isCajaTouch) {
+
+                                        batch.draw(dere, getX(), getY(), getWidth() + .08f, getHeight() + .08f);
+
+                                    } else {
+                                        //   Walk.stop();
+                                        if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || SpeedButton) {
+                                            Cajas.maxV = 2;
+                                        } else {
+                                            Cajas.maxV = 0.5f;
+                                        }
+                                        /*************************/
+                                        /*************************/   /*************************/
+                                        /*************************/
+                                        /*************************/
+                                        /*************************/
+                                        /*************************/
+                                        /*************************/
+                                        batch.draw(EmpujarDere, getX(), getY(), getWidth(), getHeight());
+                                    }
+                                }
+                            } else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) || leftActive) {
+
+                                if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP) || Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || SaltoUp) {
+                                    if (derecha) {
+                                        time2 += Gdx.graphics.getDeltaTime();
+                                        batch.draw(SaltoDere, getX(), getY(), getWidth(), getHeight());
+                                    } else if (izquierda) {
+                                        time2 += Gdx.graphics.getDeltaTime();
+                                        batch.draw(SaltoIzq, getX(), getY(), getWidth(), getHeight());
+
+                                    }
+                                } else {
+                                    if (!isCajaTouch) {
+                                        batch.draw(izq, getX(), getY(), getWidth() + .08f, getHeight() + .08f);
+
+                                    } else {
+                                        if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || SpeedButton) {
+                                            Cajas.minV = -2;
+                                        } else {
+                                            Cajas.minV = -0.5f;
+                                        }
+                                        batch.draw(EmpujarIzq, getX(), getY(), getWidth(), getHeight());
+                                    }
                                 }
                             } else {
-                                if(!isCajaTouch) {
-
-                                        batch.draw(dere, getX(), getY(), getWidth()+.08f, getHeight()+.08f);
-
-                                }else
-                                {
-                                 //   Walk.stop();
-                                    if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) ||  SpeedButton) {
-                                        Cajas.maxV = 2;
-                                    }else
-                                    {
-                                        Cajas.maxV = 0.5f;
+                                if (!saltar) {
+                                    if (derecha) {
+                                        time2 += Gdx.graphics.getDeltaTime();
+                                        batch.draw(SaltoDere, getX(), getY(), getWidth(), getHeight());
+                                    } else if (izquierda) {
+                                        time2 += Gdx.graphics.getDeltaTime();
+                                        batch.draw(SaltoIzq, getX(), getY(), getWidth(), getHeight());
                                     }
-                                    /*************************/
-                                    /*************************/   /*************************/
-                                    /*************************/
-                                    /*************************/
-                                    /*************************/
-                                    /*************************/
-                                    /*************************/
-                                    batch.draw(EmpujarDere, getX(), getY(), getWidth(), getHeight());
+                                } else {
+                                    if (derecha) {
+                                        batch.draw(StaticDere, getX(), getY(), getWidth(), getHeight());
+
+                                    } else if (izquierda) {
+                                        batch.draw(StaticIzq, getX(), getY(), getWidth(), getHeight());
+
+                                    }
                                 }
                             }
-                        } else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) || leftActive) {
 
-                            if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP) || Gdx.input.isKeyPressed(Input.Keys.BUTTON_A) || SaltoUp) {
-                                if (derecha) {
-                                    time2 += Gdx.graphics.getDeltaTime();
-                                    batch.draw(SaltoDere, getX(), getY(), getWidth(), getHeight());
-                                } else if (izquierda) {
-                                    time2 += Gdx.graphics.getDeltaTime();
-                                    batch.draw(SaltoIzq, getX(), getY(), getWidth(), getHeight());
-
-                                }
-                            } else {
-                                if(!isCajaTouch) {
-                                    batch.draw(izq, getX(), getY(),getWidth()+.08f, getHeight()+.08f);
-
-                                }else
-                                {
-                                    if (Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) ||  SpeedButton) {
-                                        Cajas.minV = -2;
-                                    }else
-                                    {
-                                        Cajas.minV = -0.5f;
-                                    }
-                                    batch.draw(EmpujarIzq, getX(), getY(), getWidth(), getHeight());
-                                }
-                            }
                         } else {
+
                             if (!saltar) {
                                 if (derecha) {
                                     time2 += Gdx.graphics.getDeltaTime();
@@ -565,136 +579,109 @@ BotonA = new Texture("A.png");
                                     time2 += Gdx.graphics.getDeltaTime();
                                     batch.draw(SaltoIzq, getX(), getY(), getWidth(), getHeight());
                                 }
-                            } else {
-                                if (derecha) {
-                                    batch.draw(StaticDere, getX(), getY(), getWidth(), getHeight());
+                            }
+                        }
+                        if (time1 > 3) {
+                            if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || leftActive && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || leftActive && SpeedButton) {
+                                impulsoIzq.setFlip(false, false);
 
-                                } else if (izquierda) {
-                                    batch.draw(StaticIzq, getX(), getY(), getWidth(), getHeight());
+                                // tempo = Gdx.graphics.getDeltaTime();
+                                Gdx.input.vibrate(100);
+                                impulsoIzq.setPosition(getX() + .6f, getY() + .1f);
+                                impulsoIzq.draw(batch, tempo);
+                            } else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT) && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || rightActive && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || rightActive && SpeedButton) {
+                                impulsoIzq.setFlip(true, false);
 
-                                }
+                                //tempo = Gdx.graphics.getDeltaTime();
+                                Gdx.input.vibrate(100);
+                                impulsoIzq.setPosition(getX() + .1f, getY() + .1f);
+                                impulsoIzq.draw(batch, tempo);
+                            }
+                        } else {
+                        }
+                    } else /***/ //espadazo
+                    {
+
+                        if (derecha) {
+                            impulsoEspadaDere = true;
+                            if (iterator == 1) {
+                                espadazoSound.play(0.5f);
+                            }
+                            iterator++;
+                            TextureRegion EspadaDerecha = EspadazoDereAnimation.getKeyFrame(time4, true);
+                            TextureRegion current = EspadazoEffect.getKeyFrame(timeEspadazoEffect, false);
+                            timeEspadazoEffect += Gdx.graphics.getDeltaTime();
+                            batch.draw(EspadaDerecha, getX(), getY(), getWidth(), getHeight());
+                            batch.draw(current, getX() - (60 / Pixels), getY() + (.5f / Pixels), getWidth() + (64 / Pixels), getHeight());
+
+                            if (EspadazoDereAnimation.isAnimationFinished(time4) && EspadazoEffect.isAnimationFinished(timeEspadazoEffect)) {
+
+                                iterator = 0;
+                                time4 = 0;
+                                timeEspadazoEffect = 0;
+                                impulsoEspadaDere = false;
+                                Espadazo = false;
+
+                            }
+                        }
+                        if (izquierda) {
+                            impulsoEspadaIzq = true;
+                            if (iterator == 1) {
+
+                                espadazoSound.play(0.5f);
+                            }
+                            iterator++;
+                            TextureRegion current = EspadazoEffectI.getKeyFrame(timeEspadazoEffect2, false);
+                            timeEspadazoEffect2 += Gdx.graphics.getDeltaTime();
+                            batch.draw(EspadaIzquierda, getX(), getY(), getWidth(), getHeight());
+                            batch.draw(current, getX() - (4.2f / Pixels), getY() + (.5f / Pixels), getWidth() + (64 / Pixels), getHeight());
+                            if (EspadazoIzqAnimation.isAnimationFinished(time4)) {
+                                iterator = 0;
+                                time4 = 0;
+                                timeEspadazoEffect2 = 0;
+                                impulsoEspadaIzq = false;
+                                Espadazo = false;
                             }
                         }
 
-                    } else {
-
-                        if (!saltar) {
-                            if (derecha) {
-                                time2 += Gdx.graphics.getDeltaTime();
-                                batch.draw(SaltoDere, getX(), getY(), getWidth(), getHeight());
-                            } else if (izquierda) {
-                                time2 += Gdx.graphics.getDeltaTime();
-                                batch.draw(SaltoIzq, getX(), getY(), getWidth(), getHeight());
-                            }
-                        }
                     }
-                    if (time1 > 3) {
-                        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || leftActive && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || leftActive && SpeedButton) {
-                            impulsoIzq.setFlip(false, false);
-
-                            // tempo = Gdx.graphics.getDeltaTime();
-                            Gdx.input.vibrate(100);
-                            impulsoIzq.setPosition(getX() + .6f, getY() + .1f);
-                            impulsoIzq.draw(batch, tempo);
-                        } else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT) && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || rightActive && Gdx.input.isKeyPressed(Input.Keys.BUTTON_R2) || rightActive && SpeedButton) {
-                            impulsoIzq.setFlip(true, false);
-
-                            //tempo = Gdx.graphics.getDeltaTime();
-                            Gdx.input.vibrate(100);
-                            impulsoIzq.setPosition(getX() + .1f, getY() + .1f);
-                            impulsoIzq.draw(batch, tempo);
-                        }
-                    } else {
-                    }
-                } else /***/ //espadazo
-                {
-
-                    if (derecha) {
-                        impulsoEspadaDere = true;
-                        if (iterator == 1) {
-                            espadazoSound.play(0.5f);
-                        }
-                        iterator++;
-                        TextureRegion EspadaDerecha = EspadazoDereAnimation.getKeyFrame(time4,true);
-                        TextureRegion current = EspadazoEffect.getKeyFrame(timeEspadazoEffect,false);
-                        timeEspadazoEffect += Gdx.graphics.getDeltaTime();
-                        batch.draw(EspadaDerecha, getX(), getY(), getWidth(), getHeight());
-                        batch.draw(current, getX()-(60/Pixels), getY()+(.5f/Pixels), getWidth()+(64/Pixels), getHeight());
-
-                        if (EspadazoDereAnimation.isAnimationFinished(time4)&&EspadazoEffect.isAnimationFinished(timeEspadazoEffect)) {
-
-                            iterator = 0;
-                            time4 = 0;
-                            timeEspadazoEffect = 0;
-                            impulsoEspadaDere = false;
-                            Espadazo = false;
-
-                        }
-                    }
-                    if (izquierda) {
-                        impulsoEspadaIzq = true;
-                        if (iterator == 1) {
-
-                            espadazoSound.play(0.5f);
-                        }
-                        iterator++;
-                        TextureRegion current = EspadazoEffectI.getKeyFrame(timeEspadazoEffect2,false);
-                        timeEspadazoEffect2 += Gdx.graphics.getDeltaTime();
-                        batch.draw(EspadaIzquierda, getX(), getY(), getWidth(), getHeight());
-                        batch.draw(current, getX()-(4.2f/Pixels), getY()+(.5f/Pixels), getWidth()+(64/Pixels), getHeight());
-                        if (EspadazoIzqAnimation.isAnimationFinished(time4)) {
-                            iterator = 0;
-                            time4 = 0;
-                            timeEspadazoEffect2 = 0;
-                            impulsoEspadaIzq = false;
-                            Espadazo = false;
-                        }
-                    }
-
+                } else {
+                    batch.draw(Kill, getX(), getY(), getWidth(), getHeight());
                 }
+                //   batch.draw(negro,var1,var2,var3,var4);
             } else {
-                batch.draw(Kill, getX(), getY(), getWidth(), getHeight());
+                if (Casa.alpha == 0) {
+                    dormirtime = true;
+                } else {
+                    dormirtime = false;
+                }
+                batch.draw(Dormir, getX(), getY(), getWidth(), getHeight());
+                if (dormirtime) {
+                    MyGdxGame.Cinematica.putInteger("Cinematica", 1);
+                    MyGdxGame.Cinematica.flush();
+                } else {
+                    MyGdxGame.Cinematica.putInteger("Cinematica", 0);
+                    MyGdxGame.Cinematica.flush();
+                }
             }
-            //   batch.draw(negro,var1,var2,var3,var4);
-        }else
-        {
-            if(Casa.alpha == 0) {
-                dormirtime = true;
-            }else
-            {
-                dormirtime = false;
-            }
-            batch.draw(Dormir, getX(), getY(), getWidth(), getHeight());
-            if(dormirtime)
-            {
-                MyGdxGame.Cinematica.putInteger("Cinematica",1);
-                MyGdxGame.Cinematica.flush();
-            }else
-            {
-                MyGdxGame.Cinematica.putInteger("Cinematica",0);
-                MyGdxGame.Cinematica.flush();
-            }
-        }
 
 //////////////////////////////////////////Acabar de dibujar////////////////////////////////////
 
-        if(tempoSalto != 0) {
-            particulaSalto.draw(batch, tempoSalto);
-        }else
-        {
-            particulaSalto.reset();
-            particulaSalto.scaleEffect(.2f/Pixels);
+            if (tempoSalto != 0) {
+                particulaSalto.draw(batch, tempoSalto);
+            } else {
+                particulaSalto.reset();
+                particulaSalto.scaleEffect(.2f / Pixels);
 
+            }
+
+            if (tempoSalto2 != 0) {
+                particulaSalto2.draw(batch, tempoSalto2);
+            } else {
+                particulaSalto2.reset();
+                particulaSalto2.scaleEffect(.2f / Pixels);
+            }
         }
-
-        if(tempoSalto2 != 0) {
-            particulaSalto2.draw(batch, tempoSalto2);
-        }else
-        {
-            particulaSalto2.reset();
-            particulaSalto2.scaleEffect(.2f/Pixels);
-        }
-
     }
 
     @Override
@@ -994,12 +981,14 @@ if(!isTouchPlataformaMov1&&!isTouchPlataformaMov2) {
         body.setLinearVelocity(velocidades.x, maxVelocidadY*-1);
     }
 
-
-    for(Rectangle r : InteractivePlataformaMov.r) {
+    if (velocidades.y < -0.5f) {
+        saltar = false;
+    }
+ /*   for(Rectangle r : InteractivePlataformaMov.r) {
         if (velocidades.y < -0.5f && !r.overlaps(Jugador.jugador)) {
             saltar = false;
         }
-    }
+    }*/
     if(!Espadazo) {
         body.setGravityScale(gravity);
         if (speedactive) {
