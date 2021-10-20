@@ -201,7 +201,7 @@ public class AddResources {
     /**Labels**/
     public static Label monedasLabel;
     public static Container<Label> container1;
-
+    public static int iteratorAldeaCasaCam = 0;
 
 
     public AddResources()
@@ -440,9 +440,10 @@ public class AddResources {
 
         if(ConfigurarCamara <= 1) {
             try {
-                cam.position.x = (AddActors.player.getX() + .4f);
-                cam.position.y = AddActors.player.getY() + .5f;
-                ConfigurarCamara++;
+
+                    cam.position.x = (AddActors.player.getX() + .4f);
+                    cam.position.y = AddActors.player.getY() + .5f;
+                    ConfigurarCamara++;
             }catch(Exception e)
             {
 
@@ -454,6 +455,12 @@ public class AddResources {
 
                     if (camnoX.overlaps(Jugador.jugador)) {
                        MyGdxGame.NoSeguirFondo = true;
+                        if(MyGdxGame.isAldeaCinematica && iteratorAldeaCasaCam == 0)
+                        {
+                            cam.position.x = (AddActors.player.getX() + 1.3f);
+                            cam.position.y = AddActors.player.getY() + 1.5f;
+                            iteratorAldeaCasaCam++;
+                        }
                     }
                 }
                 for(Rectangle camX : rectangulosX)

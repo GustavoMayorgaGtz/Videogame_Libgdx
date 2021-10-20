@@ -316,38 +316,7 @@
  <objectgroup id="8" name="agarraderaDere" visible="0"/>
  <objectgroup id="9" name="agarraderaIzq" visible="0"/>
  <objectgroup id="10" name="pisoTime" visible="0"/>
- <objectgroup color="#aa0000" id="11" name="particulas">
-  <object id="379" x="591" y="537.25">
-   <point/>
-  </object>
-  <object id="380" x="763.5" y="570.75">
-   <point/>
-  </object>
-  <object id="381" x="852.75" y="526.75">
-   <point/>
-  </object>
-  <object id="382" x="426" y="554.75">
-   <point/>
-  </object>
-  <object id="383" x="1029" y="513">
-   <point/>
-  </object>
-  <object id="385" x="1134" y="557.25">
-   <point/>
-  </object>
-  <object id="386" x="1240.5" y="515.75">
-   <point/>
-  </object>
-  <object id="387" x="1387.5" y="481.25">
-   <point/>
-  </object>
-  <object id="388" x="1375.25" y="393.5">
-   <point/>
-  </object>
-  <object id="389" x="1442.75" y="350.5">
-   <point/>
-  </object>
- </objectgroup>
+ <objectgroup color="#aa0000" id="11" name="particulas"/>
  <objectgroup id="12" name="espacio" visible="0"/>
  <objectgroup id="13" name="sierra" visible="0"/>
  <objectgroup id="14" name="sierraRD">
@@ -385,10 +354,10 @@
  <objectgroup id="38" name="Coins">
   <object id="326" x="750.5" y="518.5" width="21.5" height="21"/>
   <object id="327" x="1167.5" y="447.5" width="19" height="20.5"/>
-  <object id="328" x="1344.5" y="410.5" width="19.5" height="20.5"/>
+  <object id="328" x="1345.5" y="409.5" width="19.5" height="20.5"/>
   <object id="424" x="1140" y="447.333" width="19.3333" height="20.6667"/>
-  <object id="425" x="1346" y="384.667" width="22" height="20.6667"/>
-  <object id="427" x="1349.67" y="354.333" width="22" height="20.6667"/>
+  <object id="425" x="1345" y="384.667" width="18.6667" height="20.6667"/>
+  <object id="427" x="1345.67" y="356.333" width="20.6667" height="20.6667"/>
   <object id="428" x="731.667" y="548.333" width="22" height="20.6667"/>
   <object id="429" x="759" y="565.667" width="22" height="20.6667"/>
  </objectgroup>
@@ -408,14 +377,14 @@
  <objectgroup id="49" name="piso2"/>
  <objectgroup id="50" name="pared2"/>
  <objectgroup id="51" name="enemigoVolador"/>
- <objectgroup id="52" name="CamaraY">
+ <objectgroup id="52" name="CamaraY" locked="1">
   <object id="391" x="714.333" y="494.667" width="98.3333" height="65.3333"/>
   <object id="393" x="1105.67" y="432.667" width="125.667" height="127.667"/>
   <object id="395" x="1344" y="304" width="86.6667" height="223.667"/>
  </objectgroup>
- <objectgroup id="53" name="CamaraNoY">
+ <objectgroup id="53" name="CamaraNoY" locked="1">
   <object id="390" x="864.333" y="463.333" width="239.333" height="65"/>
-  <object id="392" x="813" y="494.667" width="49.6667" height="64.3333"/>
+  <object id="392" x="813.667" y="494.667" width="49.6667" height="64.3333"/>
   <object id="394" x="1232.67" y="433" width="79" height="94.6667"/>
   <object id="396" x="1420.66" y="300.334" width="88" height="51"/>
  </objectgroup>
@@ -425,7 +394,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="56" name="CamaranoX">
+ <objectgroup id="56" name="CamaranoX" locked="1">
   <object id="399" x="1313" y="797">
    <point/>
   </object>

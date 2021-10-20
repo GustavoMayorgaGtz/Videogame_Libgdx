@@ -112,7 +112,10 @@
          ray.setCombinedMatrix(cam.combined);
          ray.render();
          batch.begin();
-         
+         if(Gdx.input.isTouched(2))
+         {
+             game.setScreen(new Menu(game));
+         }
          if(y < 49)
          {
              Alpha2 = 0;

@@ -10,8 +10,13 @@
  import com.badlogic.gdx.maps.tiled.TiledMap;
  import com.badlogic.gdx.maps.tiled.TmxMapLoader;
  import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+ import com.badlogic.gdx.math.Rectangle;
+ import com.mygdx.game.actors.Jugador;
+ import com.mygdx.game.actors.Tierra1;
  import com.mygdx.game.tiled.AddActors;
  import com.mygdx.game.tiled.AddResources;
+
+ import java.util.Random;
 
  import static com.mygdx.game.MyGdxGame.Pixels;
 
@@ -58,6 +63,7 @@
          }
          fondoAnimation = new Animation<TextureRegion>(0.6f,FramesFondo);
 
+
  }
 
      @Override
@@ -82,6 +88,8 @@
          MyGdxGame.isNivelProgress1 = false;
          MyGdxGame.isIsNivelProgress2 = false;
          batch.draw(fondoAnimado,(addR.cam.position.x-100),addR.cam.position.y-50,Gdx.graphics.getWidth()+150,Gdx.graphics.getHeight()+50);
+
+
         batch.end();
 
          update(delta);

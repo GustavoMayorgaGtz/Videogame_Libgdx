@@ -13,9 +13,11 @@
  import com.badlogic.gdx.maps.tiled.TiledMap;
  import com.badlogic.gdx.maps.tiled.TmxMapLoader;
  import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+ import com.badlogic.gdx.math.Rectangle;
  import com.badlogic.gdx.scenes.scene2d.ui.Container;
  import com.badlogic.gdx.scenes.scene2d.ui.Label;
  import com.mygdx.game.actors.Jugador;
+ import com.mygdx.game.actors.Tierra1;
  import com.mygdx.game.tiled.AddActors;
  import com.mygdx.game.tiled.AddResources;
  import com.mygdx.game.tiled.AddResourcesOfMenu;
@@ -50,8 +52,8 @@
      public static Container container;
      public static Label label;
      BitmapFont b = new BitmapFont();
+     BitmapFont b2 = new BitmapFont();
      float charla;
-     int seleccionarCharla;
 
 
      public AldeaCinematicaCasa(MyGdxGame game) {
@@ -100,6 +102,8 @@
          container.setTransform(true);
          b.setColor(Color.WHITE);
          b.getData().setScale(2);
+         b2.setColor(Color.WHITE);
+         b2.getData().setScale(3);
  }
 
      @Override
@@ -140,31 +144,28 @@
 
 
              if (dormirAnimation.isAnimationFinished(time)) {
-                 //Gdx.app.log("Tiempo","false");
                  Jugador.noDibujar = false;
-                 AddResources.EsconderControles = false;
-              /*   label.setText("Desperte...");
-                 label.setWrap(true);
-                 //label.setPosition(x,y);
-                 //container.setBounds(x,y,28,10);
-                 container.setPosition(x + 175, y - 40);//+5,+3,7,5
-                 container.setScale(.5f);
-                 addR.stage2.addActor(container);*/
+
+
                  charla += 1 * Gdx.graphics.getDeltaTime();
                  if(charla <= 1.5f)
                  {
-                     b.draw(batch,"Desperté...",x + 175, y+150);
+                     b.draw(batch,"Desperté...",x, y);
                  }else if(charla <= 3)
                  {
-                     b.draw(batch,"¿Estoy solo en casa?",x + 175, y+150);
-                 } else if (charla <= 4.5f) {
+                     b.draw(batch,"¿Estoy solo en casa?",x, y);
+                 } else if (charla <= 5.5f) {
 
-                     b.draw(batch,"Debería salir a buscar a Olivia, puede que necesite ayuda",x + 100, y+150);
+                     b.draw(batch,"Debería salir a buscar a Olivia, puede que necesite ayuda",x, y);
+
+                 }else
+                 {
+                     AddResources.EsconderControles = false;
                  }
 
 
              } else {
-                 batch.draw(current, x + 175, y - 75, 160f, 120);
+                 batch.draw(current, x, y-210, 160f, 120);
                  Jugador.noDibujar = true;
                  AddResources.EsconderControles = true;
              }
@@ -179,9 +180,19 @@
 
          }else
          {
-             empezar += .90 * Gdx.graphics.getDeltaTime();
+             empezar += .50 * Gdx.graphics.getDeltaTime();
              batch.draw(Negro,0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-         } 
+             float x = Jugador.body.getPosition().x * 30;
+             float y = Jugador.body.getPosition().y * 30;
+
+
+             if(empezar >= 1 && empezar <= 5) {
+                     b.draw(batch,"Vivo en Alejandria, un pueblo entre las montañas", x - 100, y + 50);
+             }else if(empezar >= 5 && empezar <= 9)
+             {
+                 b.draw(batch, "Vivo junto a mi pareja Olivia.... si una vida feliz", x-100 , y + 50);
+             }
+         }
 
          batch.end();
          addR.stage2.draw();
