@@ -290,6 +290,26 @@ try {
         }
     }*/
     /////////////////////////////////////////////////////////////
+    /***************************NPC**********************************/
+    if (fixA.getUserData() == "left" || fixB.getUserData() == "left") {
+        Fixture Sierra2 = fixA.getUserData() == "left" ? fixA : fixB;
+        Fixture object2 = Sierra2 == fixA ? fixB : fixA;
+
+        if (object2.getUserData() != null && CinematicaNPC.class.isAssignableFrom(object2.getUserData().getClass())) {
+            ((CinematicaNPC) object2.getUserData()).Reverse();
+        }
+    }
+    //////////////////////////////////////////
+    if (fixA.getUserData() == "right" || fixB.getUserData() == "right") {
+        Fixture Sierra2 = fixA.getUserData() == "right" ? fixA : fixB;
+        Fixture object2 = Sierra2 == fixA ? fixB : fixA;
+
+        if (object2.getUserData() != null && CinematicaNPC.class.isAssignableFrom(object2.getUserData().getClass())) {
+            ((CinematicaNPC) object2.getUserData()).Reverse();
+        }
+    }
+    /*************************************************************/
+    /////////////////////////////////////////////////////////////
     if (fixA.getUserData() == "Caja" || fixB.getUserData() == "Caja") {
         Fixture Sierra2 = fixA.getUserData() == "Caja" ? fixA : fixB;
         Fixture object2 = Sierra2 == fixA ? fixB : fixA;

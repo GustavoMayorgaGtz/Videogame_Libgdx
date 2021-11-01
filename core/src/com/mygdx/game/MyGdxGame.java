@@ -765,6 +765,14 @@ Gdx.app.getGraphics().getFramesPerSecond();
 		manager.load("Nemesis1/Izquierda.png",Texture.class);
 		manager.load("Nemesis1/MuerteIzq.png",Texture.class);
 		manager.load("Nemesis1/MuerteDere.png",Texture.class);
+		manager.load("Cinematica/A1L.png",Texture.class);
+		manager.load("Cinematica/A2L.png",Texture.class);
+		manager.load("Cinematica/A3L.png",Texture.class);
+		manager.load("Cinematica/A4L.png",Texture.class);
+		manager.load("Cinematica/A1R.png",Texture.class);
+		manager.load("Cinematica/A2R.png",Texture.class);
+		manager.load("Cinematica/A3R.png",Texture.class);
+		manager.load("Cinematica/A4R.png",Texture.class);
 		manager.load("Negro.png",Texture.class);
 		manager.finishLoading();
 

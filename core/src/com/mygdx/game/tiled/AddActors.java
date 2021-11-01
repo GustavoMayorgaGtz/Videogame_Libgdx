@@ -91,7 +91,8 @@ public class AddActors {
     private List<PisoButton2> piso2 = new ArrayList<PisoButton2>();
     private List<ParedesButton2> pared2 = new ArrayList<ParedesButton2>();
     private List<Lava> lava = new ArrayList<Lava>();
-
+    private List<NPC> npc = new ArrayList<NPC>();
+    List<Cajas> cajas = new ArrayList<Cajas>();
 
     public static int i = 0;
     public static  MyGdxGame game;
@@ -108,7 +109,8 @@ public class AddActors {
     int iteratorBuild = 0;
     int itereratorNemesis1 = 0;
    public static int iteratorpisos = 0;
-    List<Cajas> cajas = new ArrayList<Cajas>();
+   int iteratorNPC = 0;
+
     public AddActors(World world, TiledMap map,MyGdxGame game)
     {
         this.game = game;
@@ -652,8 +654,25 @@ public class AddActors {
             for (CamaraNoY cam: cameraNoY) {
                 AddResources. stage.addActor(cam);
             }
-
-
+            /***NPC***/
+            Texture A1L,A1R,A2L,A2R,A3L,A3R,A4L,A4R;
+            A1L = MyGdxGame.getManager().get("Cinematica/A1L.png");
+            A2L = MyGdxGame.getManager().get("Cinematica/A2L.png");
+            A3L = MyGdxGame.getManager().get("Cinematica/A3L.png");
+            A4L = MyGdxGame.getManager().get("Cinematica/A4L.png");
+            A1R = MyGdxGame.getManager().get("Cinematica/A1R.png");
+            A2R = MyGdxGame.getManager().get("Cinematica/A2R.png");
+            A3R = MyGdxGame.getManager().get("Cinematica/A3R.png");
+            A4R = MyGdxGame.getManager().get("Cinematica/A4R.png");
+           for (MapObject object : map.getLayers().get(59).getObjects().getByType(RectangleMapObject.class)) {
+               Rectangle rect = ((RectangleMapObject) object).getRectangle();
+               npc.add(new NPC(world,rect, A1L,A1R,A2L,A2R,A3L,A3R,A4L,A4R,iteratorNPC));
+               iteratorNPC++;
+           }
+           for(NPC n: npc)
+           {
+               AddResources.stage.addActor(n);
+           }
 
 
 
